@@ -1,0 +1,45 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up()
+    {
+        Schema::create('items', function (Blueprint $table) {
+            $table->string('id_item')->primary();
+            $table->string('id_catitem')->nullable();
+            $table->string('id_unit')->nullable();
+            $table->string('id_pro')->nullable();
+            $table->string('name');
+            $table->string('description');
+            $table->date('date')->nullable();
+            $table->timestamps();
+
+            // Índices adicionales
+            $table->index('id_pro');
+            $table->index('id_catitem');
+            $table->index('id_unit');
+
+            // Relaciones
+            $table->foreign('id_catitem')->references('id_catitem')->on('categories_items')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('id_pro')->references('id_pro')->on('projects')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('id_unit')->references('id_unit')->on('measurement_units')->onDelete('restrict')->onUpdate('restrict');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('items');
+    }
+};
