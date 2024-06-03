@@ -63,28 +63,37 @@
                                 <div class="card-body">
                                     <form role="form" method="POST" action="sign-up">
                                         @csrf
-                                        <label>Name</label>
+                                        <label>Nombre</label>
                                         <div class="mb-3">
                                             <input type="text" id="name" name="name" class="form-control"
-                                                placeholder="Enter your name" value="{{old("name")}}" aria-label="Name"
-                                                aria-describedby="name-addon">
+                                                placeholder="Escriba su nombre" value="{{ old('name') }}"
+                                                aria-label="Name" aria-describedby="name-addon">
                                             @error('name')
                                                 <span class="text-danger text-sm">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <label>Email Address</label>
+                                        <label>Apellido</label>
+                                        <div class="mb-3">
+                                            <input type="text" id="last_name" name="last_name" class="form-control"
+                                                placeholder="Escriba su apellido" value="{{ old('last_name') }}"
+                                                aria-label="Last-Name" aria-describedby="name-addon">
+                                            @error('name')
+                                                <span class="text-danger text-sm">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <label>Correo electrónico</label>
                                         <div class="mb-3">
                                             <input type="email" id="email" name="email" class="form-control"
-                                                placeholder="Enter your email address" value="{{old("email")}}" aria-label="Email"
-                                                aria-describedby="email-addon">
+                                                placeholder="Ingrese su correo" value="{{ old('email') }}"
+                                                aria-label="Email" aria-describedby="email-addon">
                                             @error('email')
                                                 <span class="text-danger text-sm">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <label>Password</label>
+                                        <label>Contraseña</label>
                                         <div class="mb-3">
                                             <input type="password" id="password" name="password" class="form-control"
-                                                placeholder="Create a password" aria-label="Password"
+                                                placeholder="Crea una contraseña" aria-label="Password"
                                                 aria-describedby="password-addon">
                                             @error('password')
                                                 <span class="text-danger text-sm">{{ $message }}</span>
@@ -94,15 +103,16 @@
                                             <input class="form-check-input" type="checkbox" name="terms"
                                                 id="terms" required>
                                             <label class="font-weight-normal text-dark mb-0" for="terms">
-                                                I agree the <a href="javascript:;"
-                                                    class="text-dark font-weight-bold">Terms and Conditions</a>.
+                                                Estoy de acuerdo <a href="javascript:;"
+                                                    class="text-dark font-weight-bold">Términos y condiciones</a>.
                                             </label>
                                             @error('terms')
                                                 <span class="text-danger text-sm">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-dark w-100 mt-4 mb-3">Sign up</button>
+                                            <button type="submit"
+                                                class="btn btn-dark w-100 mt-4 mb-3">Registrarse</button>
                                             <button type="button" class="btn btn-white btn-icon w-100 mb-3">
                                                 <span class="btn-inner--icon me-1">
                                                     <img class="w-5" src="../assets/img/logos/google-logo.svg"

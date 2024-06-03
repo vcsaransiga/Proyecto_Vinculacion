@@ -23,12 +23,14 @@ class ProfileController extends Controller
 
         $request->validate([
             'name' => 'required|min:3|max:255',
+            'last_name' => 'required|min:3|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
             'location' => 'max:255',
             'phone' => 'numeric|digits:10',
             'about' => 'max:255',
         ], [
             'name.required' => 'Name is required',
+            'last_name.required' => 'Last name is required',
             'email.required' => 'Email is required',
         ]);
 
@@ -36,6 +38,7 @@ class ProfileController extends Controller
 
         $user->update([
             'name' => $request->name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'location' => $request->location,
             'phone' => $request->phone,
