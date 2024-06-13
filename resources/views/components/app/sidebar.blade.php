@@ -124,15 +124,15 @@
                 </div>
             </li>
             <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('users.profile') ? 'active' : '' }}"
-                    href="{{ route('users.profile') }}">
-                    <span class="nav-link-text ms-1">Perfil de Usuario</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
                 <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('users.index') ? 'active' : '' }}"
                     href="{{ route('users.index') }}">
                     <span class="nav-link-text ms-1">Usuarios</span>
+                </a>
+            </li>
+            <li class="nav-item border-start my-0 pt-2">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('students.index') ? 'active' : '' }}"
+                    href="{{ route('students.index') }}">
+                    <span class="nav-link-text ms-1">Estudiantes</span>
                 </a>
             </li>
             <li class="nav-item mt-2">
@@ -149,7 +149,7 @@
             <li class="nav-item border-start my-0 pt-2">
                 <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('users.profile') ? 'active' : '' }}"
                     href="{{ route('users.profile') }}">
-                    <span class="nav-link-text ms-1">Perfil</span>
+                    <span class="nav-link-text ms-1">Perfil de Usuario</span>
                 </a>
             </li>
             <li class="nav-item border-start my-0 pt-2">
