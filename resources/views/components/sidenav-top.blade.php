@@ -38,7 +38,7 @@
                         </div>
                     </a>
                 </li>
-                {{-- <li class="nav-item px-3 d-flex align-items-center">
+                <li class="nav-item px-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0">
                         <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
                             class="fixed-plugin-button-nav cursor-pointer" viewBox="0 0 24 24" fill="currentColor">
@@ -47,7 +47,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </a>
-                </li> --}}
+                </li>
                 <li class="nav-item dropdown pe-2 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
