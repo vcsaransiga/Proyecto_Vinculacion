@@ -8,13 +8,13 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="">Administración de Usuarios</h5>
-                                    <p class="mb-0 text-sm">Here you can manage users.</p>
+                                    <h5 class="">Administración de Periodos</h5>
+                                    <p class="mb-0 text-sm">Aquí puedes gestionar los periodos.</p>
                                 </div>
                                 <div class="col-6 text-end">
                                     <button type="button" class="btn btn-dark btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#createUserModal">
-                                        <i class="fas fa-user-plus me-2"></i> Agregar usuario
+                                        data-bs-target="#createPeriodModal">
+                                        <i class="fas fa-plus me-2"></i> Agregar periodo
                                     </button>
                                 </div>
                             </div>
@@ -34,45 +34,7 @@
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-flex-column tw-flex-wrap md:tw-flex-row tw-space-y-4 md:tw-space-y-0 tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
-                                <div>
-                                    <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction"
-                                        class="tw-inline-flex tw-items-center tw-text-gray-500 tw-bg-white tw-border tw-border-gray-300 focus:tw-outline-none hover:tw-bg-gray-100 focus:tw-ring-4 focus:tw-ring-gray-100 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-1.5 dark:tw-bg-gray-800 dark:tw-text-gray-400 dark:tw-border-gray-600 dark:hover:tw-bg-gray-700 dark:hover:tw-border-gray-600 dark:focus:tw-ring-gray-700"
-                                        type="button">
-                                        <span class="tw-sr-only">Action button</span>
-                                        Action
-                                        <svg class="tw-w-2.5 tw-h-2.5 tw-ms-2.5" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m1 1 4 4 4-4" />
-                                        </svg>
-                                    </button>
-                                    <!-- Dropdown menu -->
-                                    <div id="dropdownAction"
-                                        class="tw-z-10 tw-hidden tw-bg-white tw-divide-y tw-divide-gray-100 tw-rounded-lg tw-shadow tw-w-44 dark:tw-bg-gray-700 dark:tw-divide-gray-600">
-                                        <ul class="tw-py-1 tw-text-sm tw-text-gray-700 dark:tw-text-gray-200"
-                                            aria-labelledby="dropdownActionButton">
-                                            <li>
-                                                <a href="#"
-                                                    class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">Reward</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">Promote</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">Activate
-                                                    account</a>
-                                            </li>
-                                        </ul>
-                                        <div class="tw-py-1">
-                                            <a href="#"
-                                                class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:tw-text-gray-200 dark:hover:tw-text-white">Delete
-                                                User</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label for="table-search" class="tw-sr-only">Search</label>
+                                <label for="table-search" class="tw-sr-only">Buscar</label>
                                 <div class="tw-relative">
                                     <div
                                         class="tw-absolute tw-inset-y-0 tw-rtl:tw-inset-r-0 tw-start-0 tw-flex tw-items-center tw-ps-3 tw-pointer-events-none">
@@ -83,9 +45,9 @@
                                                 stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                         </svg>
                                     </div>
-                                    <input type="text" id="table-search-users"
+                                    <input type="text" id="table-search-periods"
                                         class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500"
-                                        placeholder="Buscar usuario...">
+                                        placeholder="Buscar periodo...">
                                 </div>
                             </div>
                             <table
@@ -104,13 +66,13 @@
                                             Nombre
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
-                                            Apellido
+                                            Año Académico
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
-                                            Email
+                                            Fecha de Inicio
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
-                                            Estado
+                                            Fecha de Finalización
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
                                             Acción
@@ -118,62 +80,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($periods as $period)
                                         <tr
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
-                                            {{-- <td class="tw-w-4 tw-p-4">
-                                                <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $user->id }}"
-                                                        type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $user->id }}"
-                                                        class="tw-sr-only">checkbox</label>
-                                                </div>
-                                            </td> --}}
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $user->id }}"
+                                                    <input id="checkbox-table-search-{{ $period->id_period }}"
                                                         type="checkbox"
                                                         class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $user->id }}"
+                                                    <label for="checkbox-table-search-{{ $period->id_period }}"
                                                         class="tw-sr-only">checkbox</label>
                                                 </div>
                                             </td>
-                                            {{-- <th scope="row"
-                                                class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
-                                                <img class="tw-w-10 tw-h-10 tw-rounded-full"
-                                                    src="/docs/images/people/profile-picture-1.jpg"
-                                                    alt="{{ $user->name }} image">
-                                                <div class="tw-ps-3">
-                                                    <div class="tw-text-base">{{ $user->name }}
-                                                    </div>
-                                                </div>
-                                            </th> --}}
                                             <td class="tw-px-6 tw-py-4">
-                                                {{ $user->name }}
+                                                {{ $period->name }}
                                             </td>
                                             <td class="tw-px-6 tw-py-4">
-                                                {{ $user->last_name }}
+                                                {{ $period->academic_year }}
                                             </td>
                                             <td class="tw-px-6 tw-py-4">
-                                                {{ $user->email }}
+                                                {{ $period->start_date }}
                                             </td>
                                             <td class="tw-px-6 tw-py-4">
-                                                <div class="tw-flex tw-items-center">
-                                                    <div
-                                                        class="tw-h-2.5 tw-w-2.5 tw-rounded-full {{ $user->status ? 'tw-bg-green-500' : 'tw-bg-red-500' }} tw-me-2">
-                                                    </div> {{ $user->status ? 'Active' : 'Inactive' }}
-                                                </div>
+                                                {{ $period->end_date }}
                                             </td>
                                             <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
                                                 <a href="#"
                                                     class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"
-                                                    data-bs-toggle="modal" data-bs-target="#editUserModal"
-                                                    data-user-id="{{ $user->id }}"
-                                                    data-user-name="{{ $user->name }}"
-                                                    data-user-last_name="{{ $user->last_name }}"
-                                                    data-user-email="{{ $user->email }}"
-                                                    data-user-status="{{ $user->status }}">
+                                                    data-bs-toggle="modal" data-bs-target="#editPeriodModal"
+                                                    data-period-id="{{ $period->id_period }}"
+                                                    data-period-name="{{ $period->name }}"
+                                                    data-period-academic_year="{{ $period->academic_year }}"
+                                                    data-period-start_date="{{ $period->start_date }}"
+                                                    data-period-end_date="{{ $period->end_date }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="currentColor"
@@ -183,13 +122,13 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </a>
-                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                    style="display:inline-block;">
+                                                <form action="{{ route('periods.destroy', $period->id_period) }}"
+                                                    method="POST" style="display:inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="tw-font-medium tw-text-red-600 dark:tw-text-red-500 hover:tw-underline"
-                                                        onclick="return confirm('Are you sure you want to delete this user?')">
+                                                        onclick="return confirm('¿Está seguro de que desea eliminar este periodo?')">
                                                         <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" fill="currentColor"
@@ -201,7 +140,6 @@
                                                     </button>
                                                 </form>
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -214,40 +152,34 @@
         <x-app.footer />
     </main>
 
-    <!-- Create User Modal -->
-    <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel"
+    <!-- Create Period Modal -->
+    <div class="modal fade" id="createPeriodModal" tabindex="-1" aria-labelledby="createPeriodModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createUserModalLabel">Agregar usuario</h5>
+                    <h5 class="modal-title" id="createPeriodModalLabel">Agregar periodo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="createUserForm" method="POST" action="{{ route('users.store') }}">
+                    <form id="createPeriodForm" method="POST" action="{{ route('periods.store') }}">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="last_name" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name">
+                            <label for="academic_year" class="form-label">Año Académico</label>
+                            <input type="number" class="form-control" id="academic_year" name="academic_year"
+                                required>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <label for="start_date" class="form-label">Fecha de Inicio</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-control" id="status" name="status">
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
+                            <label for="end_date" class="form-label">Fecha de Finalización</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -256,17 +188,17 @@
         </div>
     </div>
 
-    <!-- Edit User Modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel"
+    <!-- Edit Period Modal -->
+    <div class="modal fade" id="editPeriodModal" tabindex="-1" aria-labelledby="editPeriodModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+                    <h5 class="modal-title" id="editPeriodModalLabel">Editar Periodo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editUserForm" method="POST" action="">
+                    <form id="editPeriodForm" method="POST" action="">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
@@ -274,19 +206,18 @@
                             <input type="text" class="form-control" id="edit_name" name="name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_last_name" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="edit_last_name" name="last_name">
+                            <label for="edit_academic_year" class="form-label">Año Académico</label>
+                            <input type="number" class="form-control" id="edit_academic_year" name="academic_year"
+                                required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="edit_email" name="email" required>
+                            <label for="edit_start_date" class="form-label">Fecha de Inicio</label>
+                            <input type="date" class="form-control" id="edit_start_date" name="start_date"
+                                required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_status" class="form-label">Estado</label>
-                            <select class="form-control" id="edit_status" name="status">
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
+                            <label for="edit_end_date" class="form-label">Fecha de Finalización</label>
+                            <input type="date" class="form-control" id="edit_end_date" name="end_date" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
@@ -294,35 +225,32 @@
             </div>
         </div>
     </div>
-
-    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
-
 </x-app-layout>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit user form
-        var editUserModal = document.getElementById('editUserModal');
-        editUserModal.addEventListener('show.bs.modal', function(event) {
+        // Logic to populate and handle the edit period form
+        var editPeriodModal = document.getElementById('editPeriodModal');
+        editPeriodModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
-            var userId = button.getAttribute('data-user-id');
-            var userName = button.getAttribute('data-user-name');
-            var userLastName = button.getAttribute('data-user-last_name');
-            var userEmail = button.getAttribute('data-user-email');
-            var userStatus = button.getAttribute('data-user-status');
+            var periodId = button.getAttribute('data-period-id');
+            var periodName = button.getAttribute('data-period-name');
+            var periodAcademicYear = button.getAttribute('data-period-academic_year');
+            var periodStartDate = button.getAttribute('data-period-start_date');
+            var periodEndDate = button.getAttribute('data-period-end_date');
 
-            var modalForm = editUserModal.querySelector('form');
-            modalForm.action = '/users/' + userId;
+            var modalForm = editPeriodModal.querySelector('form');
+            modalForm.action = '/periods/' + periodId;
 
-            var modalNameInput = editUserModal.querySelector('#edit_name');
-            var modalLastNameInput = editUserModal.querySelector('#edit_last_name');
-            var modalEmailInput = editUserModal.querySelector('#edit_email');
-            var modalStatusInput = editUserModal.querySelector('#edit_status');
+            var modalNameInput = editPeriodModal.querySelector('#edit_name');
+            var modalAcademicYearInput = editPeriodModal.querySelector('#edit_academic_year');
+            var modalStartDateInput = editPeriodModal.querySelector('#edit_start_date');
+            var modalEndDateInput = editPeriodModal.querySelector('#edit_end_date');
 
-            modalNameInput.value = userName;
-            modalLastNameInput.value = userLastName;
-            modalEmailInput.value = userEmail;
-            modalStatusInput.value = userStatus;
+            modalNameInput.value = periodName;
+            modalAcademicYearInput.value = periodAcademicYear;
+            modalStartDateInput.value = periodStartDate;
+            modalEndDateInput.value = periodEndDate;
         });
     });
 </script>

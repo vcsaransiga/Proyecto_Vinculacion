@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\PeriodController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -102,8 +103,12 @@ Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('users
 
 
 Route::resource('users', UserController::class);
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
 Route::get('/search-users', [UserController::class, 'search'])->name('users.search');
 
 Route::resource('students', StudentController::class);
 Route::get('/students', [StudentController::class, 'index'])->name('students.index')->middleware('auth');
+
+
+Route::resource('periods', PeriodController::class);
+Route::get('/periods', [PeriodController::class, 'index'])->name('periods.index')->middleware('auth');

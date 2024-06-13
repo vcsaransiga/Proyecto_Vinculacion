@@ -135,6 +135,12 @@
                     <span class="nav-link-text ms-1">Estudiantes</span>
                 </a>
             </li>
+            <li class="nav-item border-start my-0 pt-2">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('periods.index') ? 'active' : '' }}"
+                    href="{{ route('periods.index') }}">
+                    <span class="nav-link-text ms-1">Periodos</span>
+                </a>
+            </li>
             <li class="nav-item mt-2">
                 <div class="d-flex align-items-center nav-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="ms-2"
