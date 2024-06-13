@@ -13,14 +13,14 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="">User Management</h5>
+                                    <h5 class="">Gestion de Usuarios</h5>
                                     <p class="mb-0 text-sm">
-                                        Here you can manage users.
+                                        Aqui puedes administrar los usuarios.
                                     </p>
                                 </div>
                                 <div class="col-6 text-end">
                                     <a href="#" class="btn btn-dark btn-primary">
-                                        <i class="fas fa-user-plus me-2"></i> Add Member
+                                        <i class="fas fa-user-plus me-2"></i> Agregar Usuario
                                     </a>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                                         class="tw-inline-flex tw-items-center tw-text-gray-500 tw-bg-white tw-border tw-border-gray-300 focus:tw-outline-none hover:tw-bg-gray-100 focus:tw-ring-4 focus:tw-ring-gray-100 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-1.5 dark:tw-bg-gray-800 dark:tw-text-gray-400 dark:tw-border-gray-600 dark:hover:tw-bg-gray-700 dark:hover:tw-border-gray-600 dark:focus:tw-ring-gray-700"
                                         type="button">
                                         <span class="tw-sr-only">Action button</span>
-                                        Action
+                                        Accion
                                         <svg class="tw-w-2.5 tw-h-2.5 tw-ms-2.5" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -196,11 +196,11 @@
                                         <div class="tw-py-1">
                                             <a href="#"
                                                 class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:tw-text-gray-200 dark:hover:tw-text-white">Delete
-                                                User</a>
+                                                Usuario</a>
                                         </div>
                                     </div>
                                 </div>
-                                <label for="table-search" class="tw-sr-only">Search</label>
+                                <label for="table-search" class="tw-sr-only">Buscar</label>
                                 <div class="tw-relative">
                                     <div
                                         class="tw-absolute tw-inset-y-0 tw-rtl:tw-inset-r-0 tw-start-0 tw-flex tw-items-center tw-ps-3 tw-pointer-events-none">
@@ -213,7 +213,7 @@
                                     </div>
                                     <input type="text" id="table-search-users"
                                         class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500"
-                                        placeholder="Search for users">
+                                        placeholder="Buscar Usuarios">
                                 </div>
                             </div>
                             <table
@@ -229,16 +229,16 @@
                                             </div>
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
-                                            Name
+                                            Nombre
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
-                                            Position
+                                            Rol
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
-                                            Status
+                                            Estado
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
-                                            Action
+                                            Accion
                                         </th>
                                     </tr>
                                 </thead>
@@ -273,8 +273,8 @@
                                         </td>
                                         <td class="tw-px-6 tw-py-4">
                                             <a href="#"
-                                                class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Edit
-                                                user</a>
+                                                class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Editar
+                                                Usuario</a>
                                         </td>
                                     </tr>
                                     <tr
@@ -307,8 +307,8 @@
                                         </td>
                                         <td class="tw-px-6 tw-py-4">
                                             <a href="#"
-                                                class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Edit
-                                                user</a>
+                                                class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Editar
+                                                Usuario</a>
                                         </td>
                                     </tr>
                                     <tr
@@ -341,8 +341,8 @@
                                         </td>
                                         <td class="tw-px-6 tw-py-4">
                                             <a href="#"
-                                                class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Edit
-                                                user</a>
+                                                class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Editar
+                                                Usuario</a>
                                         </td>
                                     </tr>
                                     <tr
@@ -375,8 +375,8 @@
                                         </td>
                                         <td class="tw-px-6 tw-py-4">
                                             <a href="#"
-                                                class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Edit
-                                                user</a>
+                                                class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Editar
+                                                Usuario</a>
                                         </td>
                                     </tr>
                                     <tr
@@ -409,8 +409,8 @@
                                         </td>
                                         <td class="tw-px-6 tw-py-4">
                                             <a href="#"
-                                                class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Edit
-                                                user</a>
+                                                class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Editar
+                                                Usuario</a>
                                         </td>
                                     </tr>
                                 </tbody>
