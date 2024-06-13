@@ -11,11 +11,10 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
-
-        return view('laravel-examples.user-profile', compact('user'));
+        return view('modules.users.profile', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
         if (config('app.is_demo') && in_array(Auth::id(), [1])) {
             return back()->with('error', "You are in a demo version. You are not allowed to change the email for default users.");
@@ -24,7 +23,7 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|min:3|max:255',
             'last_name' => 'required|min:3|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'location' => 'max:255',
             'phone' => 'numeric|digits:10',
             'about' => 'max:255',
@@ -33,8 +32,6 @@ class ProfileController extends Controller
             'last_name.required' => 'Last name is required',
             'email.required' => 'Email is required',
         ]);
-
-        $user = User::find(Auth::id());
 
         $user->update([
             'name' => $request->name,
