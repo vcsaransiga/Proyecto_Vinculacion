@@ -15,7 +15,7 @@
                         <div class="col-md-6">
                             <div class="position-absolute w-40 top-0 start-0 h-100 d-md-block d-none">
                                 <div class="oblique-image position-absolute d-flex fixed-top ms-auto h-100 z-index-0 bg-cover me-n8"
-                                    style="background-image:url('../assets/img/logoUEP.png'); background-position:center; background-size:100%; background-repeat: no-repeat;" >
+                                    style="background-image:url('../assets/img/logoVertical.png'); background-position:center; background-size:100%; background-repeat: no-repeat;" >
                                 </div>
                             </div>
                         </div>

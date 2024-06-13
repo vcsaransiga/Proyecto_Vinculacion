@@ -1,13 +1,8 @@
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start " id="sidenav-main">
-    <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-            aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand d-flex align-items-center m-0"
-            href=" https://demos.creative-tim.com/corporate-ui-dashboard/pages/dashboard.html " target="_blank">
-            <span class="font-weight-bold text-lg">UEPS</span>
-        </a>
+<aside class="overflow-hidden sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start " id="sidenav-main">
+    <div class="sidenav-header" style="margin-bottom:60px;">
+        <img src="../assets/img/logoDash.png" alt="logo" style="height:150px;">
     </div>
-    <div class="collapse navbar-collapse px-4  w-auto " id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse px-4 overflow-hidden  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link  {{ is_current_route('dashboard') ? 'active' : '' }}"
@@ -141,7 +136,7 @@
                     <span class="nav-link-text ms-1">Periodos</span>
                 </a>
             </li>
-            <li class="nav-item mt-2">
+            {{-- <li class="nav-item mt-2">
                 <div class="d-flex align-items-center nav-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="ms-2"
                         viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -151,14 +146,14 @@
                     </svg>
                     <span class="font-weight-normal text-md ms-2">Campo 2</span>
                 </div>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
+            </li> --}}
+            {{-- <li class="nav-item border-start my-0 pt-2">
                 <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('users.profile') ? 'active' : '' }}"
                     href="{{ route('users.profile') }}">
                     <span class="nav-link-text ms-1">Perfil de Usuario</span>
                 </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
+            </li> --}}
+            {{-- <li class="nav-item border-start my-0 pt-2">
                 <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('signin') ? 'active' : '' }}"
                     href="{{ route('signin') }}">
                     <span class="nav-link-text ms-1">Sign In</span>
@@ -169,7 +164,7 @@
                     href="{{ route('signup') }}">
                     <span class="nav-link-text ms-1">Sign Up</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
     {{-- <div class="sidenav-footer mx-4 ">
