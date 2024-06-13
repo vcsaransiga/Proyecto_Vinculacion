@@ -42,7 +42,7 @@
                                             <input type="text" id="last_name" name="last_name" class="form-control"
                                                 placeholder="Escriba su apellido" value="{{ old('last_name') }}"
                                                 aria-label="Last-Name" aria-describedby="name-addon">
-                                            @error('name')
+                                            @error('last_name')
                                                 <span class="text-danger text-sm">{{ $message }}</span>
                                             @enderror
                                         </div>
