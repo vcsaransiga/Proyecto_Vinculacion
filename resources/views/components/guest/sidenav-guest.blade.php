@@ -2,7 +2,7 @@
     class="navbar navbar-expand-lg blur border-radius-sm top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
     <div class="container-fluid px-1">
         <a class="navbar-brand font-weight-bolder ms-lg-0 " href="../pages/dashboard.html">
-            UEP "SARANCE"
+            <img src="../assets/img/logohorizontal.png" alt="" style="height: 5rem; padding:0;">
         </a>
         <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
             data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav mx-auto ms-xl-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center me-2 {{ is_current_route('sign-up') ? 'active' : '' }}"
+                    <a class="nav-link d-flex align-items-center me-2 {{ is_current_route('sign-up') ? 'active' : '' }}" style="color:#4a59a4!important;"
                         href="{{ route('sign-up') }}">
                         <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                             fill="currentColor" class="me-1">
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center me-2 {{ is_current_route('sign-in') ? 'active' : '' }}"
+                    <a class="nav-link d-flex align-items-center me-2 {{ is_current_route('sign-in') ? 'active' : '' }}" style="color:#4a59a4!important;"
                         href="{{ route('sign-in') }}">
                         <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                             fill="currentColor" class="me-1">

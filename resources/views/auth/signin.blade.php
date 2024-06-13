@@ -14,9 +14,9 @@
                         <div class="col-xl-4 col-md-6 d-flex flex-column mx-auto">
                             <div class="card card-plain mt-8">
                                 <div class="card-header pb-0 text-left bg-transparent text-center">
-                                    <h3 class="font-weight-black text-dark display-6">Bienvenido de Nuevo</h3>
-                                    <p class="mb-0">Crea una nueva cuenta<br></p>
-                                    <p class="mb-0">O inicia sesion con tus credenciales</p>
+                                    <h3 class="font-weight-black text-dark display-6" style="color:#4a59a4!important;">Bienvenido de Nuevo</h3>
+                                    <p class="mb-0" style=color:#4a59a4!important;">Crea una nueva cuenta<br></p>
+                                    <p class="mb-0" style="color:#4a59a4!important;">O inicia sesion con tus credenciales</p>
                                 </div>
                                 <div class="text-center">
                                     @if (session('status'))
@@ -33,14 +33,14 @@
                                 <div class="card-body">
                                     <form role="form" class="text-start" method="POST" action="sign-in">
                                         @csrf
-                                        <label>Correo Electronico</label>
+                                        <label style="color:#4a59a4!important;" >Correo Electronico</label>
                                         <div class="mb-3">
                                             <input type="email" id="email" name="email" class="form-control"
                                                 placeholder="Ingresa tu Correo Electronico"
                                                 value="{{ old('email') ? old('email') : '' }}"
                                                 aria-label="Email" aria-describedby="email-addon">
                                         </div>
-                                        <label>Contraseña</label>
+                                        <label style="color:#4a59a4!important;" >Contraseña</label>
                                         <div class="mb-3">
                                             <input type="password" id="password" name="password"
                                                 value="{{ old('password') ? old('password') : '' }}"
@@ -49,24 +49,24 @@
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <a href="{{ route('password.request') }}"
-                                                class="text-xs font-weight-bold ms-auto">Olvide mi contraseña</a>
+                                                class="text-xs font-weight-bold ms-auto" style="color:#4a59a4!important;" >Olvide mi contraseña</a>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-dark w-100 mt-4 mb-3">Iniciar Sesion</button>
-                                            <button type="button" class="btn btn-white btn-icon w-100 mb-3">
+                                            <button type="submit" class="btn btn-dark w-100 mt-4 mb-3" style="background-color:#84be51!important; border-color:#84be51; " >Iniciar Sesion</button>
+                                            {{-- <button type="button" class="btn btn-white btn-icon w-100 mb-3">
                                                 <span class="btn-inner--icon me-1">
                                                     <img class="w-5" src="../assets/img/logos/google-logo.svg"
                                                         alt="google-logo" />
                                                 </span>
                                                 <span class="btn-inner--text">Iniciar sesion con Google</span>
-                                            </button>
+                                            </button> --}}
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                    <p class="mb-4 text-xs mx-auto">
+                                    <p class="mb-4 text-xs mx-auto" style="color:#4a59a4!important;">
                                         No tienes una cuenta Aun?
-                                        <a href="{{ route('sign-up') }}" class="text-dark font-weight-bold">Registrarse Ahora </a>
+                                        <a href="{{ route('sign-up') }}" class="text-dark font-weight-bold" style="color:#4a59a4!important;" >Registrarse Ahora </a>
                                     </p>
                                 </div>
                             </div>
