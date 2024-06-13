@@ -15,7 +15,7 @@
                             <div class="card card-plain mt-8">
                                 <div class="card-header pb-0 text-left bg-transparent">
                                     <h3 class="font-weight-black text-dark display-6 text-center">Olvidaste tu Contraseña?</h3>
-                                    <p class="mb-0 text-center">Ingresa tu Correo Electronico!</p>
+                                    <p class="mb-0 text-center">Ingresa tu Correo Electrónico!</p>
                                 </div>
                                 @if ($errors->any())
                                     <div class="alert alert-danger text-sm" role="alert">
