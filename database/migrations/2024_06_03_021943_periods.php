@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('periods', function (Blueprint $table) {
             $table->increments('id_period');
-            $table->string('name')->nullable();
-            $table->date('academic_year')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
+            $table->string('name');
+            $table->tinyInteger('academic_year');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

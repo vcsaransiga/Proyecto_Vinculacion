@@ -39,7 +39,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <title>
-        Corporate UI by Creative Tim & UPDIVISION
+        UEPS
     </title>
     <!--     Fonts and icons     -->
     <link
@@ -76,7 +76,7 @@
 
     {{ $slot }}
 
-    <div class="fixed-plugin">
+    {{-- <div class="fixed-plugin">
         <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
             <i class="fa fa-cog py-2"></i>
         </a>
@@ -156,7 +156,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!--   Core JS Files   -->
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>

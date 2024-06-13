@@ -14,8 +14,8 @@
                         <div class="col-xl-4 col-md-6 d-flex flex-column mx-auto">
                             <div class="card card-plain mt-8">
                                 <div class="card-header pb-0 text-left bg-transparent">
-                                    <h3 class="font-weight-black text-dark display-6 text-center">Forgot password?</h3>
-                                    <p class="mb-0 text-center">Enter your email below!</p>
+                                    <h3 class="font-weight-black text-dark display-6 text-center">Olvidaste tu Contraseña?</h3>
+                                    <p class="mb-0 text-center">Ingresa tu Correo Electrónico!</p>
                                 </div>
                                 @if ($errors->any())
                                     <div class="alert alert-danger text-sm" role="alert">
@@ -43,8 +43,7 @@
                                                 value="{{ old('email') }}" required autofocus>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="my-4 mb-2 btn btn-dark btn-lg w-100">Email
-                                                password reset link</button>
+                                            <button type="submit" class="my-4 mb-2 btn btn-dark btn-lg w-100">Recuperar mi contraseña</button>
                                         </div>
                                     </form>
                                 </div>
@@ -53,14 +52,7 @@
                         <div class="col-md-6">
                             <div class="position-absolute w-40 top-0 end-0 h-100 d-md-block d-none">
                                 <div class="oblique-image position-absolute fixed-top ms-auto h-100 z-index-0 bg-cover ms-n8"
-                                    style="background-image:url('../assets/img/image-sign-in.jpg')">
-                                    <div
-                                        class="blur mt-12 p-4 text-center border border-white border-radius-md position-absolute fixed-bottom m-4">
-                                        <h2 class="mt-3 text-dark font-weight-bold">Enter our global community of
-                                            developers.</h2>
-                                        <h6 class="text-dark text-sm mt-5">Copyright © 2022 Corporate UI Design System
-                                            by Creative Tim.</h6>
-                                    </div>
+                                    style="background-image:url('../assets/img/logoUEP.png')">
                                 </div>
                             </div>
                         </div>

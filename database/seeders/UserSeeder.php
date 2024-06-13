@@ -16,7 +16,6 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'id_user' => 'USR-01',
                 'name' => 'Diego',
                 'last_name' => 'Recalde',
                 'email' => 'diegodavidrecalde@gmail.com',
@@ -26,7 +25,6 @@ class UserSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id_user' => 'USR-02',
                 'name' => 'John',
                 'last_name' => 'Doe',
                 'email' => 'john.doe@example.com',
@@ -36,7 +34,6 @@ class UserSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id_user' => 'USR-03',
                 'name' => 'Jane',
                 'last_name' => 'Doe',
                 'email' => 'jane.doe@example.com',
@@ -46,7 +43,6 @@ class UserSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id_user' => 'USR-04',
                 'name' => 'Michael',
                 'last_name' => 'Smith',
                 'email' => 'michael.smith@example.com',
@@ -56,11 +52,19 @@ class UserSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'id_user' => 'USR-05',
                 'name' => 'Emily',
                 'last_name' => 'Johnson',
                 'email' => 'emily.johnson@example.com',
                 'password' => Hash::make('password123'),
+                'status' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Alec',
+                'last_name' => 'Thompson',
+                'email' => 'admin@corporateui.com ',
+                'password' => Hash::make('secret'),
                 'status' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
