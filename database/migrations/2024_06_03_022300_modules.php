@@ -12,11 +12,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('modules', function (Blueprint $table) {
-            $table->string('id_mod')->primary();
-            $table->string('id_responsible')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->integer('bonding_hours')->nullable();
+            $table->string('id_mod');
+            $table->string('id_responsible');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->integer('vinculation_hours');
             $table->timestamps();
 
             // Índices adicionales

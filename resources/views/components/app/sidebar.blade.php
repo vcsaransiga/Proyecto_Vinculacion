@@ -108,53 +108,57 @@
                     <span class="nav-link-text ms-1">RTL</span>
                 </a>
             </li> --}}
-            <li class="nav-item mt-2">
-                <div class="d-flex align-items-center nav-link">
+            <li class="nav-item mt-2 dropdown">
+                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="informationDropdown"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="ms-2"
-                        viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        viewBox="0 0 24 24" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
                             clip-rule="evenodd" />
                     </svg>
-                    <span class="font-weight-normal text-md ms-2">Informacion</span>
-                </div>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('users.index') ? 'active' : '' }}"
-                    href="{{ route('users.index') }}">
-                    <span class="nav-link-text ms-1">Usuarios</span>
+                    <span class="font-weight-normal text-md ms-2">Información</span>
                 </a>
+                <ul class="dropdown-menu" aria-labelledby="informationDropdown">
+                    <li class="nav-item border-start my-0">
+                        <a class="dropdown-item nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('users.index') ? 'active text-dark bg-light' : 'text-dark' }}"
+                            href="{{ route('users.index') }}">
+                            <span class="nav-link-text ms-1">Usuarios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item border-start my-0 pt-2">
+                        <a class="dropdown-item nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('students.index') ? 'active text-dark bg-light' : 'text-dark' }}"
+                            href="{{ route('students.index') }}">
+                            <span class="nav-link-text ms-1">Estudiantes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item border-start my-0 pt-2">
+                        <a class="dropdown-item nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('periods.index') ? 'active text-dark bg-light' : 'text-dark' }}"
+                            href="{{ route('periods.index') }}">
+                            <span class="nav-link-text ms-1">Periodos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item border-start my-0 pt-2">
+                        <a class="dropdown-item nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('categories_warehouse.index') ? 'active text-dark bg-light' : 'text-dark' }}"
+                            href="{{ route('categories_warehouse.index') }}">
+                            <span class="nav-link-text ms-1">Categorías de Bodega</span>
+                        </a>
+                    </li>
+                    <li class="nav-item border-start my-0 pt-2">
+                        <a class="dropdown-item nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('warehouses.index') ? 'active text-dark bg-light' : 'text-dark' }}"
+                            href="{{ route('warehouses.index') }}">
+                            <span class="nav-link-text ms-1">Bodegas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item border-start my-0 pt-2">
+                        <a class="dropdown-item nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('responsibles.index') ? 'active text-dark bg-light' : 'text-dark' }}"
+                            href="{{ route('responsibles.index') }}">
+                            <span class="nav-link-text ms-1">Responsables</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('students.index') ? 'active' : '' }}"
-                    href="{{ route('students.index') }}">
-                    <span class="nav-link-text ms-1">Estudiantes</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('periods.index') ? 'active' : '' }}"
-                    href="{{ route('periods.index') }}">
-                    <span class="nav-link-text ms-1">Periodos</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('categories_warehouse.index') ? 'active' : '' }}"
-                    href="{{ route('categories_warehouse.index') }}">
-                    <span class="nav-link-text ms-1">Categorías de Bodega</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('warehouses.index') ? 'active' : '' }}"
-                    href="{{ route('warehouses.index') }}">
-                    <span class="nav-link-text ms-1">Bodegas</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('responsibles.index') ? 'active' : '' }}"
-                    href="{{ route('responsibles.index') }}">
-                    <span class="nav-link-text ms-1">Responsables</span>
-                </a>
-            </li>
+
             {{-- <li class="nav-item mt-2">
                 <div class="d-flex align-items-center nav-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="ms-2"

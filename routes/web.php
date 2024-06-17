@@ -131,3 +131,5 @@ Route::resource('warehouses', WarehouseController::class)->middleware('auth');
 Route::resource('warehouses', WarehouseController::class)->middleware('auth');
 
 Route::resource('responsibles', ResponsibleController::class)->middleware('auth');
+
+Route::resource('modules', ResponsibleController::class)->middleware('auth');
