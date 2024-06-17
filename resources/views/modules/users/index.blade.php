@@ -224,7 +224,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createUserModalLabel">Agregar usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
                     <form id="createUserForm" method="POST" action="{{ route('users.store') }}">
@@ -266,7 +267,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
                     <form id="editUserForm" method="POST" action="">

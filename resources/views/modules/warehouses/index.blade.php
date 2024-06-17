@@ -181,7 +181,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createWarehouseModalLabel">Agregar bodega</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
                     <form id="createWarehouseForm" method="POST" action="{{ route('warehouses.store') }}">
@@ -216,7 +217,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editWarehouseModalLabel">Editar Bodega</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
                     <form id="editWarehouseForm" method="POST" action="">

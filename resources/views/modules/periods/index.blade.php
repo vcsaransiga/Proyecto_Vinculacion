@@ -179,7 +179,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createPeriodModalLabel">Agregar periodo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
                     <form id="createPeriodForm" method="POST" action="{{ route('periods.store') }}">
@@ -215,7 +216,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editPeriodModalLabel">Editar Periodo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
                     <form id="editPeriodForm" method="POST" action="">

@@ -182,7 +182,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createModuleModalLabel">Agregar módulo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class=" btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
                     <form id="createModuleForm" method="POST" action="{{ route('modules.store') }}">
@@ -227,7 +228,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editModuleModalLabel">Editar Módulo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
                     <form id="editModuleForm" method="POST" action="">

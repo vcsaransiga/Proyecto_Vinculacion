@@ -185,7 +185,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createCategoryModalLabel">Agregar categoría</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
                     <form id="createCategoryForm" method="POST" action="{{ route('categories_warehouse.store') }}">
@@ -208,7 +209,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editCategoryModalLabel">Editar Categoría</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
                     <form id="editCategoryForm" method="POST" action="">
