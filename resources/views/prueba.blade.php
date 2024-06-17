@@ -7,271 +7,259 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <!-- Tailwind CSS -->
     @vite(['resources/css/app.css'])
+
+
+
 </head>
 
 <body>
-
-    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button"
-        class="tw-inline-flex tw-items-center tw-p-2 tw-mt-2 tw-ms-3 tw-text-sm tw-text-gray-500 tw-rounded-lg sm:tw-hidden tw-hover:bg-gray-100 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-gray-200 dark:tw-text-gray-400 dark:tw-hover:bg-gray-700 dark:focus:tw-ring-gray-600">
-        <span class="tw-sr-only">Open sidebar</span>
-        <svg class="tw-w-6 tw-h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path clip-rule="evenodd" fill-rule="evenodd"
-                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-            </path>
-        </svg>
-    </button>
-
-    <aside id="logo-sidebar"
-        class="tw-fixed tw-top-0 tw-left-0 tw-z-40 tw-w-64 tw-h-screen tw-transition-transform -tw-translate-x-full sm:tw-translate-x-0"
-        aria-label="Sidebar">
-        <div class="tw-h-full tw-px-3 tw-py-4 tw-overflow-y-auto tw-bg-gray-50 dark:tw-bg-gray-800">
-            <a href="https://flowbite.com/" class="tw-flex tw-items-center tw-ps-2.5 tw-mb-5">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="tw-h-6 tw-me-3 sm:tw-h-7"
-                    alt="Flowbite Logo" />
-                <span
-                    class="tw-self-center tw-text-xl tw-font-semibold tw-whitespace-nowrap dark:tw-text-white">Flowbite</span>
-            </a>
-            <ul class="tw-space-y-2 tw-font-medium">
-                <li>
-                    <a href="#"
-                        class="tw-flex tw-items-center tw-p-2 tw-text-gray-900 tw-rounded-lg dark:tw-text-white tw-hover:bg-gray-100 dark:tw-hover:bg-gray-700 group">
-                        <svg class="tw-w-5 tw-h-5 tw-text-gray-500 tw-transition tw-duration-75 dark:tw-text-gray-400 group-hover:tw-text-gray-900 dark:group-hover:tw-text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 22 21">
-                            <path
-                                d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                            <path
-                                d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
-                        </svg>
-                        <span class="tw-ms-3">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="tw-flex tw-items-center tw-p-2 tw-text-gray-900 tw-rounded-lg dark:tw-text-white tw-hover:bg-gray-100 dark:tw-hover:bg-gray-700 group">
-                        <svg class="tw-flex-shrink-0 tw-w-5 tw-h-5 tw-text-gray-500 tw-transition tw-duration-75 dark:tw-text-gray-400 group-hover:tw-text-gray-900 dark:group-hover:tw-text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 18 18">
-                            <path
-                                d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
-                        </svg>
-                        <span class="tw-flex-1 tw-ms-3 tw-whitespace-nowrap">Kanban</span>
-                        <span
-                            class="tw-inline-flex tw-items-center tw-justify-center tw-px-2 tw-ms-3 tw-text-sm tw-font-medium tw-text-gray-800 tw-bg-gray-100 tw-rounded-full dark:tw-bg-gray-700 dark:tw-text-gray-300">Pro</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="tw-flex tw-items-center tw-p-2 tw-text-gray-900 tw-rounded-lg dark:tw-text-white tw-hover:bg-gray-100 dark:tw-hover:bg-gray-700 group">
-                        <svg class="tw-flex-shrink-0 tw-w-5 tw-h-5 tw-text-gray-500 tw-transition tw-duration-75 dark:tw-text-gray-400 group-hover:tw-text-gray-900 dark:group-hover:tw-text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 20 20">
-                            <path
-                                d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z" />
-                        </svg>
-                        <span class="tw-flex-1 tw-ms-3 tw-whitespace-nowrap">Inbox</span>
-                        <span
-                            class="tw-inline-flex tw-items-center tw-justify-center tw-w-3 tw-h-3 tw-p-3 tw-ms-3 tw-text-sm tw-font-medium tw-text-blue-800 tw-bg-blue-100 tw-rounded-full dark:tw-bg-blue-900 dark:tw-text-blue-300">3</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="tw-flex tw-items-center tw-p-2 tw-text-gray-900 tw-rounded-lg dark:tw-text-white tw-hover:bg-gray-100 dark:tw-hover:bg-gray-700 group">
-                        <svg class="tw-flex-shrink-0 tw-w-5 tw-h-5 tw-text-gray-500 tw-transition tw-duration-75 dark:tw-text-gray-400 group-hover:tw-text-gray-900 dark:group-hover:tw-text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 20 18">
-                            <path
-                                d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
-                        </svg>
-                        <span class="tw-flex-1 tw-ms-3 tw-whitespace-nowrap">Users</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="tw-flex tw-items-center tw-p-2 tw-text-gray-900 tw-rounded-lg dark:tw-text-white tw-hover:bg-gray-100 dark:tw-hover:bg-gray-700 group">
-                        <svg class="tw-flex-shrink-0 tw-w-5 tw-h-5 tw-text-gray-500 tw-transition tw-duration-75 dark:tw-text-gray-400 group-hover:tw-text-gray-900 dark:group-hover:tw-text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 18 20">
-                            <path
-                                d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2Z" />
-                        </svg>
-                        <span class="tw-flex-1 tw-ms-3 tw-whitespace-nowrap">Products</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="tw-flex tw-items-center tw-p-2 tw-text-gray-900 tw-rounded-lg dark:tw-text-white tw-hover:bg-gray-100 dark:tw-hover:bg-gray-700 group">
-                        <svg class="tw-flex-shrink-0 tw-w-5 tw-h-5 tw-text-gray-500 tw-transition tw-duration-75 dark:tw-text-gray-400 group-hover:tw-text-gray-900 dark:group-hover:tw-text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
-                        </svg>
-                        <span class="tw-flex-1 tw-ms-3 tw-whitespace-nowrap">Sign In</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="tw-flex tw-items-center tw-p-2 tw-text-gray-900 tw-rounded-lg dark:tw-text-white tw-hover:bg-gray-100 dark:tw-hover:bg-gray-700 group">
-                        <svg class="tw-flex-shrink-0 tw-w-5 tw-h-5 tw-text-gray-500 tw-transition tw-duration-75 dark:tw-text-gray-400 group-hover:tw-text-gray-900 dark:group-hover:tw-text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 20 20">
-                            <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
-                            <path
-                                d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
-                            <path
-                                d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
-                        </svg>
-                        <span class="tw-flex-1 tw-ms-3 tw-whitespace-nowrap">Sign Up</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </aside>
-
-    <div class="tw-p-4 sm:tw-ml-64">
-        <div class="tw-p-4 tw-border-2 tw-border-gray-200 tw-border-dashed tw-rounded-lg dark:tw-border-gray-700">
-            <div class="tw-grid tw-grid-cols-3 tw-gap-4 tw-mb-4">
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-h-24 tw-rounded tw-bg-gray-50 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
-                </div>
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-h-24 tw-rounded tw-bg-gray-50 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
-                </div>
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-h-24 tw-rounded tw-bg-gray-50 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
-                </div>
-            </div>
-            <div
-                class="tw-flex tw-items-center tw-justify-center tw-h-48 tw-mb-4 tw-rounded tw-bg-gray-50 dark:tw-bg-gray-800">
-                <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                    <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 18 18">
+    <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg">
+        <div
+            class="tw-flex tw-items-center tw-justify-between tw-flex-column tw-flex-wrap md:tw-flex-row tw-space-y-4 md:tw-space-y-0 tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
+            <div>
+                <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction"
+                    class="tw-inline-flex tw-items-center tw-text-gray-500 tw-bg-white tw-border tw-border-gray-300 focus:tw-outline-none hover:tw-bg-gray-100 focus:tw-ring-4 focus:tw-ring-gray-100 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-1.5 dark:tw-bg-gray-800 dark:tw-text-gray-400 dark:tw-border-gray-600 dark:hover:tw-bg-gray-700 dark:hover:tw-border-gray-600 dark:focus:tw-ring-gray-700"
+                    type="button">
+                    <span class="tw-sr-only">Action button</span>
+                    Action
+                    <svg class="tw-w-2.5 tw-h-2.5 tw-ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 1v16M1 9h16" />
+                            d="m1 1 4 4 4-4" />
                     </svg>
-                </p>
-            </div>
-            <div class="tw-grid tw-grid-cols-2 tw-gap-4 tw-mb-4">
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-rounded tw-bg-gray-50 tw-h-28 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
-                </div>
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-rounded tw-bg-gray-50 tw-h-28 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
-                </div>
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-rounded tw-bg-gray-50 tw-h-28 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
-                </div>
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-rounded tw-bg-gray-50 tw-h-28 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdownAction"
+                    class="tw-z-10 tw-hidden tw-bg-white tw-divide-y tw-divide-gray-100 tw-rounded-lg tw-shadow tw-w-44 dark:tw-bg-gray-700 dark:tw-divide-gray-600">
+                    <ul class="tw-py-1 tw-text-sm tw-text-gray-700 dark:tw-text-gray-200"
+                        aria-labelledby="dropdownActionButton">
+                        <li>
+                            <a href="#"
+                                class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">Reward</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">Promote</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">Activate
+                                account</a>
+                        </li>
+                    </ul>
+                    <div class="tw-py-1">
+                        <a href="#"
+                            class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:tw-text-gray-200 dark:hover:tw-text-white">Delete
+                            User</a>
+                    </div>
                 </div>
             </div>
-            <div
-                class="tw-flex tw-items-center tw-justify-center tw-h-48 tw-mb-4 tw-rounded tw-bg-gray-50 dark:tw-bg-gray-800">
-                <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                    <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 18 18">
+            <label for="table-search" class="tw-sr-only">Search</label>
+            <div class="tw-relative">
+                <div
+                    class="tw-absolute tw-inset-y-0 rtl:tw-inset-r-0 tw-start-0 tw-flex tw-items-center tw-ps-3 tw-pointer-events-none">
+                    <svg class="tw-w-4 tw-h-4 tw-text-gray-500 dark:tw-text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 1v16M1 9h16" />
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
-                </p>
-            </div>
-            <div class="tw-grid tw-grid-cols-2 tw-gap-4">
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-rounded tw-bg-gray-50 tw-h-28 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
                 </div>
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-rounded tw-bg-gray-50 tw-h-28 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
-                </div>
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-rounded tw-bg-gray-50 tw-h-28 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
-                </div>
-                <div
-                    class="tw-flex tw-items-center tw-justify-center tw-rounded tw-bg-gray-50 tw-h-28 dark:tw-bg-gray-800">
-                    <p class="tw-text-2xl tw-text-gray-400 dark:tw-text-gray-500">
-                        <svg class="tw-w-3.5 tw-h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 1v16M1 9h16" />
-                        </svg>
-                    </p>
-                </div>
+                <input type="text" id="table-search-users"
+                    class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500"
+                    placeholder="Search for users">
             </div>
         </div>
+        <table class="tw-w-full tw-text-sm tw-text-left rtl:tw-text-right tw-text-gray-500 dark:tw-text-gray-400">
+            <thead
+                class="tw-text-xs tw-text-gray-700 tw-uppercase tw-bg-gray-50 dark:tw-bg-gray-700 dark:tw-text-gray-400">
+                <tr>
+                    <th scope="col" class="tw-p-4">
+                        <div class="tw-flex tw-items-center">
+                            <input id="checkbox-all-search" type="checkbox"
+                                class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                            <label for="checkbox-all-search" class="tw-sr-only">checkbox</label>
+                        </div>
+                    </th>
+                    <th scope="col" class="tw-px-6 tw-py-3">
+                        Name
+                    </th>
+                    <th scope="col" class="tw-px-6 tw-py-3">
+                        Position
+                    </th>
+                    <th scope="col" class="tw-px-6 tw-py-3">
+                        Status
+                    </th>
+                    <th scope="col" class="tw-px-6 tw-py-3">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
+                    <td class="tw-w-4 tw-p-4">
+                        <div class="tw-flex tw-items-center">
+                            <input id="checkbox-table-search-1" type="checkbox"
+                                class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                            <label for="checkbox-table-search-1" class="tw-sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <th scope="row"
+                        class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
+                        <img class="tw-w-10 tw-h-10 tw-rounded-full" src="/docs/images/people/profile-picture-1.jpg"
+                            alt="Jese image">
+                        <div class="tw-ps-3">
+                            <div class="tw-text-base tw-font-semibold">Neil Sims</div>
+                            <div class="tw-font-normal tw-text-gray-500">neil.sims@flowbite.com</div>
+                        </div>
+                    </th>
+                    <td class="tw-px-6 tw-py-4">
+                        React Developer
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
+                        <div class="tw-flex tw-items-center">
+                            <div class="tw-h-2.5 tw-w-2.5 tw-rounded-full tw-bg-green-500 tw-me-2"></div> Online
+                        </div>
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
+                        <a href="#"
+                            class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Edit
+                            user</a>
+                    </td>
+                </tr>
+                <tr
+                    class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
+                    <td class="tw-w-4 tw-p-4">
+                        <div class="tw-flex tw-items-center">
+                            <input id="checkbox-table-search-2" type="checkbox"
+                                class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                            <label for="checkbox-table-search-2" class="tw-sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <th scope="row"
+                        class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-font-medium tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
+                        <img class="tw-w-10 tw-h-10 tw-rounded-full" src="/docs/images/people/profile-picture-3.jpg"
+                            alt="Jese image">
+                        <div class="tw-ps-3">
+                            <div class="tw-text-base tw-font-semibold">Bonnie Green</div>
+                            <div class="tw-font-normal tw-text-gray-500">bonnie@flowbite.com</div>
+                        </div>
+                    </th>
+                    <td class="tw-px-6 tw-py-4">
+                        Designer
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
+                        <div class="tw-flex tw-items-center">
+                            <div class="tw-h-2.5 tw-w-2.5 tw-rounded-full tw-bg-green-500 tw-me-2"></div> Online
+                        </div>
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
+                        <a href="#"
+                            class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Edit
+                            user</a>
+                    </td>
+                </tr>
+                <tr
+                    class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
+                    <td class="tw-w-4 tw-p-4">
+                        <div class="tw-flex tw-items-center">
+                            <input id="checkbox-table-search-2" type="checkbox"
+                                class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                            <label for="checkbox-table-search-2" class="tw-sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <th scope="row"
+                        class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-font-medium tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
+                        <img class="tw-w-10 tw-h-10 tw-rounded-full" src="/docs/images/people/profile-picture-2.jpg"
+                            alt="Jese image">
+                        <div class="tw-ps-3">
+                            <div class="tw-text-base tw-font-semibold">Jese Leos</div>
+                            <div class="tw-font-normal tw-text-gray-500">jese@flowbite.com</div>
+                        </div>
+                    </th>
+                    <td class="tw-px-6 tw-py-4">
+                        Vue JS Developer
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
+                        <div class="tw-flex tw-items-center">
+                            <div class="tw-h-2.5 tw-w-2.5 tw-rounded-full tw-bg-green-500 tw-me-2"></div> Online
+                        </div>
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
+                        <a href="#"
+                            class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Edit
+                            user</a>
+                    </td>
+                </tr>
+                <tr
+                    class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
+                    <td class="tw-w-4 tw-p-4">
+                        <div class="tw-flex tw-items-center">
+                            <input id="checkbox-table-search-2" type="checkbox"
+                                class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                            <label for="checkbox-table-search-2" class="tw-sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <th scope="row"
+                        class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-font-medium tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
+                        <img class="tw-w-10 tw-h-10 tw-rounded-full" src="/docs/images/people/profile-picture-5.jpg"
+                            alt="Jese image">
+                        <div class="tw-ps-3">
+                            <div class="tw-text-base tw-font-semibold">Thomas Lean</div>
+                            <div class="tw-font-normal tw-text-gray-500">thomes@flowbite.com</div>
+                        </div>
+                    </th>
+                    <td class="tw-px-6 tw-py-4">
+                        UI/UX Engineer
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
+                        <div class="tw-flex tw-items-center">
+                            <div class="tw-h-2.5 tw-w-2.5 tw-rounded-full tw-bg-green-500 tw-me-2"></div> Online
+                        </div>
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
+                        <a href="#"
+                            class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Edit
+                            user</a>
+                    </td>
+                </tr>
+                <tr class="tw-bg-white dark:tw-bg-gray-800 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
+                    <td class="tw-w-4 tw-p-4">
+                        <div class="tw-flex tw-items-center">
+                            <input id="checkbox-table-search-3" type="checkbox"
+                                class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                            <label for="checkbox-table-search-3" class="tw-sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <th scope="row"
+                        class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-font-medium tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
+                        <img class="tw-w-10 tw-h-10 tw-rounded-full" src="/docs/images/people/profile-picture-4.jpg"
+                            alt="Jese image">
+                        <div class="tw-ps-3">
+                            <div class="tw-text-base tw-font-semibold">Leslie Livingston</div>
+                            <div class="tw-font-normal tw-text-gray-500">leslie@flowbite.com</div>
+                        </div>
+                    </th>
+                    <td class="tw-px-6 tw-py-4">
+                        SEO Specialist
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
+                        <div class="tw-flex tw-items-center">
+                            <div class="tw-h-2.5 tw-w-2.5 tw-rounded-full tw-bg-red-500 tw-me-2"></div> Offline
+                        </div>
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
+                        <a href="#"
+                            class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline">Edit
+                            user</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
 </body>
+
 
 </html>

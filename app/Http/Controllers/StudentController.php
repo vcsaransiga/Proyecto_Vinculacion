@@ -57,6 +57,19 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with('success', 'Estudiante actualizado exitosamente.');
     }
 
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        $users = Student::where('id_stud', 'LIKE', "%$searchTerm%")
+            ->orWhere('name', 'LIKE', "%$searchTerm%")
+            ->orWhere('last_name', 'LIKE', "%$searchTerm%")
+            ->orWhere('course', 'LIKE', "%$searchTerm%")
+            ->get();
+
+        return view('modules.students.index', compact('student'));
+    }
     public function destroy($id_stud)
     {
         $student = Student::findOrFail($id_stud);

@@ -52,6 +52,16 @@ class PeriodController extends Controller
         return redirect()->route('periods.index')->with('success', 'Periodo actualizado exitosamente.');
     }
 
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        $users = Period::where('id_period', 'LIKE', "%$searchTerm%")
+            ->orWhere('academic_year', 'LIKE', "%$searchTerm%")
+            ->get();
+
+        return view('modules.periods.index', compact('periods'));
+    }
     public function destroy(Period $period)
     {
         $period->delete();

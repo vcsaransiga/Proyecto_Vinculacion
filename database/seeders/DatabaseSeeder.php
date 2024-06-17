@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             StudentSeeder::class,
             PeriodSeeder::class,
+            CategoriesWarehouseSeeder::class,
+            WarehouseSeeder::class,
             // ClientSeeder::class,
             // AnalystSeeder::class,
             // InterviewSeeder::class,

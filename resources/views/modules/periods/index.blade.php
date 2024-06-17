@@ -144,6 +144,26 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div
+                                class="tw-flex tw-items-center tw-justify-between tw-px-4 tw-py-3 tw-bg-white tw-border-t tw-border-gray-200 sm:tw-px-6">
+                                <div class="tw-flex tw-items-center">
+                                    <span class="tw-text-sm tw-text-gray-700 tw-mr-2">Mostrar</span>
+                                    <select id="records-per-page"
+                                        class="tw-form-select tw-rounded-md tw-shadow-sm tw-text-sm tw-font-medium tw-text-gray-700 tw-bg-white hover:tw-bg-gray-50 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-offset-gray-100 focus:tw-ring-indigo-500">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                    </select>
+                                    <span class="tw-text-sm tw-text-gray-700 tw-ml-2">registros</span>
+                                </div>
+                                <div class="tw-flex tw-items-center">
+                                    <span class="tw-text-sm tw-text-gray-700 tw-mr-2">Página</span>
+                                    <div id="pagination-numbers" class="tw-flex tw-space-x-2">
+                                        <!-- Los números de página se renderizarán aquí -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

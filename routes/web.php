@@ -8,7 +8,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\PeriodController; 
+use App\Http\Controllers\PeriodController;
+use App\Http\Controllers\CategoriesWarehouseController;
+use App\Http\Controllers\WarehouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,13 +107,21 @@ Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('users
 
 
 
-Route::resource('users', UserController::class);
+Route::resource('users', UserController::class)->middleware('auth');
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
-Route::get('/search-users', [UserController::class, 'search'])->name('users.search');
+Route::get('/users/search', [UserController::class, 'search'])->name('users.search');
+Route::delete('/users/delete', [UserController::class, 'deleteSelectedUsers']);
+
 
 Route::resource('students', StudentController::class);
 Route::get('/students', [StudentController::class, 'index'])->name('students.index')->middleware('auth');
+Route::get('/students/search', [StudentController::class, 'search'])->name('students.search');
 
 
 Route::resource('periods', PeriodController::class);
 Route::get('/periods', [PeriodController::class, 'index'])->name('periods.index')->middleware('auth');
+
+Route::resource('categories_warehouse', CategoriesWarehouseController::class);
+// Route::get('/categories_warehouse', [CategoriesWarehouseController::class, 'index'])->name('categories_warehouse.index')->middleware('auth');
+
+Route::resource('warehouses', WarehouseController::class);

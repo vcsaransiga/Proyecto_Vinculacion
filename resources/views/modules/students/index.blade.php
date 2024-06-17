@@ -33,45 +33,22 @@
 
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
-                                class="tw-flex tw-items-center tw-justify-between tw-flex-column tw-flex-wrap md:tw-flex-row tw-space-y-4 md:tw-space-y-0 tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
-                                <div>
-                                    <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction"
-                                        class="tw-inline-flex tw-items-center tw-text-gray-500 tw-bg-white tw-border tw-border-gray-300 focus:tw-outline-none hover:tw-bg-gray-100 focus:tw-ring-4 focus:tw-ring-gray-100 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-1.5 dark:tw-bg-gray-800 dark:tw-text-gray-400 dark:tw-border-gray-600 dark:hover:tw-bg-gray-700 dark:hover:tw-border-gray-600 dark:focus:tw-ring-gray-700"
-                                        type="button">
-                                        <span class="tw-sr-only">Action button</span>
-                                        Action
-                                        <svg class="tw-w-2.5 tw-h-2.5 tw-ms-2.5" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m1 1 4 4 4-4" />
-                                        </svg>
-                                    </button>
-                                    <!-- Dropdown menu -->
-                                    <div id="dropdownAction"
-                                        class="tw-z-10 tw-hidden tw-bg-white tw-divide-y tw-divide-gray-100 tw-rounded-lg tw-shadow tw-w-44 dark:tw-bg-gray-700 dark:tw-divide-gray-600">
-                                        <ul class="tw-py-1 tw-text-sm tw-text-gray-700 dark:tw-text-gray-200"
-                                            aria-labelledby="dropdownActionButton">
-                                            <li>
-                                                <a href="#"
-                                                    class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">Reward</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">Promote</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:hover:tw-text-white">Activate
-                                                    account</a>
-                                            </li>
-                                        </ul>
-                                        <div class="tw-py-1">
-                                            <a href="#"
-                                                class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:tw-text-gray-200 dark:hover:tw-text-white">Delete
-                                                User</a>
+                                class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
+
+
+                                <div class="tw-flex-1">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Acción
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Eliminar</a>
                                         </div>
                                     </div>
                                 </div>
+
                                 <label for="table-search" class="tw-sr-only">Search</label>
                                 <div class="tw-relative">
                                     <div
@@ -166,6 +143,26 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div
+                                class="tw-flex tw-items-center tw-justify-between tw-px-4 tw-py-3 tw-bg-white tw-border-t tw-border-gray-200 sm:tw-px-6">
+                                <div class="tw-flex tw-items-center">
+                                    <span class="tw-text-sm tw-text-gray-700 tw-mr-2">Mostrar</span>
+                                    <select id="records-per-page"
+                                        class="tw-form-select tw-rounded-md tw-shadow-sm tw-text-sm tw-font-medium tw-text-gray-700 tw-bg-white hover:tw-bg-gray-50 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-offset-gray-100 focus:tw-ring-indigo-500">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                    </select>
+                                    <span class="tw-text-sm tw-text-gray-700 tw-ml-2">registros</span>
+                                </div>
+                                <div class="tw-flex tw-items-center">
+                                    <span class="tw-text-sm tw-text-gray-700 tw-mr-2">Página</span>
+                                    <div id="pagination-numbers" class="tw-flex tw-space-x-2">
+                                        <!-- Los números de página se renderizarán aquí -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

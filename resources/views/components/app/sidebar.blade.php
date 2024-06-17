@@ -1,4 +1,5 @@
-<aside class="overflow-hidden sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start " id="sidenav-main">
+<aside class="overflow-hidden sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start "
+    id="sidenav-main">
     <div class="sidenav-header" style="margin-bottom:60px;">
         <img src="../assets/img/logoDash.png" alt="logo" style="height:150px;">
     </div>
@@ -134,6 +135,18 @@
                 <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('periods.index') ? 'active' : '' }}"
                     href="{{ route('periods.index') }}">
                     <span class="nav-link-text ms-1">Periodos</span>
+                </a>
+            </li>
+            <li class="nav-item border-start my-0 pt-2">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('categories_warehouse.index') ? 'active' : '' }}"
+                    href="{{ route('categories_warehouse.index') }}">
+                    <span class="nav-link-text ms-1">Categorías de Bodega</span>
+                </a>
+            </li>
+            <li class="nav-item border-start my-0 pt-2">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('warehouses.index') ? 'active' : '' }}"
+                    href="{{ route('warehouses.index') }}">
+                    <span class="nav-link-text ms-1">Bodegas</span>
                 </a>
             </li>
             {{-- <li class="nav-item mt-2">

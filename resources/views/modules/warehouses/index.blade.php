@@ -8,13 +8,13 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="">Administración de Usuarios</h5>
-                                    <p class="mb-0 text-sm">Here you can manage users.</p>
+                                    <h5 class="">Administración de Bodegas</h5>
+                                    <p class="mb-0 text-sm">Aquí puedes gestionar las bodegas.</p>
                                 </div>
                                 <div class="col-6 text-end">
                                     <button type="button" class="btn btn-dark btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#createUserModal">
-                                        <i class="fas fa-user-plus me-2"></i> Agregar usuario
+                                        data-bs-target="#createWarehouseModal">
+                                        <i class="fas fa-plus me-2"></i> Agregar bodega
                                     </button>
                                 </div>
                             </div>
@@ -63,14 +63,14 @@
                                                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                             </svg>
                                         </div>
-                                        <input type="text" id="table-search-users"
+                                        <input type="text" id="table-search-warehouses"
                                             class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500"
-                                            placeholder="Buscar usuario..." onkeyup="searchUsers()">
+                                            placeholder="Buscar bodega..." onkeyup="searchWarehouses()">
                                     </div>
                                 </div>
                             </div>
 
-                            <table id="users-table"
+                            <table id="warehouses-table"
                                 class="tw-w-full tw-text-sm tw-text-left tw-rtl:tw-text-right tw-text-gray-500 dark:tw-text-gray-400">
                                 <thead
                                     class="tw-text-xs tw-text-gray-700 tw-uppercase tw-bg-gray-50 dark:tw-bg-gray-700 dark:tw-text-gray-400">
@@ -82,80 +82,38 @@
                                                 <label for="checkbox-all-search" class="tw-sr-only">checkbox</label>
                                             </div>
                                         </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Nombre
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Apellido
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Email
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Estado
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Acción
-                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">ID</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Categoría</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Descripción</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($warehouses as $warehouse)
                                         <tr
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
-                                            {{-- <td class="tw-w-4 tw-p-4">
-                                                <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $user->id }}"
-                                                        type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $user->id }}"
-                                                        class="tw-sr-only">checkbox</label>
-                                                </div>
-                                            </td> --}}
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $user->id }}"
+                                                    <input id="checkbox-table-search-{{ $warehouse->id_ware }}"
                                                         type="checkbox"
                                                         class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $user->id }}"
+                                                    <label for="checkbox-table-search-{{ $warehouse->id_ware }}"
                                                         class="tw-sr-only">checkbox</label>
                                                 </div>
                                             </td>
-                                            {{-- <th scope="row"
-                                                class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
-                                                <img class="tw-w-10 tw-h-10 tw-rounded-full"
-                                                    src="/docs/images/people/profile-picture-1.jpg"
-                                                    alt="{{ $user->name }} image">
-                                                <div class="tw-ps-3">
-                                                    <div class="tw-text-base">{{ $user->name }}
-                                                    </div>
-                                                </div>
-                                            </th> --}}
-                                            <td class="tw-px-6 tw-py-4">
-                                                {{ $user->name }}
-                                            </td>
-                                            <td class="tw-px-6 tw-py-4">
-                                                {{ $user->last_name }}
-                                            </td>
-                                            <td class="tw-px-6 tw-py-4">
-                                                {{ $user->email }}
-                                            </td>
-                                            <td class="tw-px-6 tw-py-4">
-                                                <div class="tw-flex tw-items-center">
-                                                    <div
-                                                        class="tw-h-2.5 tw-w-2.5 tw-rounded-full {{ $user->status ? 'tw-bg-green-500' : 'tw-bg-red-500' }} tw-me-2">
-                                                    </div> {{ $user->status ? 'Active' : 'Inactive' }}
-                                                </div>
-                                            </td>
+                                            <td class="tw-px-6 tw-py-4">{{ $warehouse->id_ware }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $warehouse->category->name }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $warehouse->name }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $warehouse->description }}</td>
                                             <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
                                                 <a href="#"
                                                     class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"
-                                                    data-bs-toggle="modal" data-bs-target="#editUserModal"
-                                                    data-user-id="{{ $user->id }}"
-                                                    data-user-name="{{ $user->name }}"
-                                                    data-user-last_name="{{ $user->last_name }}"
-                                                    data-user-email="{{ $user->email }}"
-                                                    data-user-status="{{ $user->status }}">
+                                                    data-bs-toggle="modal" data-bs-target="#editWarehouseModal"
+                                                    data-warehouse-id="{{ $warehouse->id_ware }}"
+                                                    data-warehouse-cat="{{ $warehouse->id_catware }}"
+                                                    data-warehouse-name="{{ $warehouse->name }}"
+                                                    data-warehouse-description="{{ $warehouse->description }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="currentColor"
@@ -165,13 +123,13 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </a>
-                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                    style="display:inline-block;">
+                                                <form action="{{ route('warehouses.destroy', $warehouse->id_ware) }}"
+                                                    method="POST" style="display:inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="tw-font-medium tw-text-red-600 dark:tw-text-red-500 hover:tw-underline"
-                                                        onclick="return confirm('Are you sure you want to delete this user?')">
+                                                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta bodega?')">
                                                         <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" fill="currentColor"
@@ -183,7 +141,6 @@
                                                     </button>
                                                 </form>
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -217,40 +174,33 @@
         <x-app.footer />
     </main>
 
-    <!-- Create User Modal -->
-    <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel"
+    <!-- Create Warehouse Modal -->
+    <div class="modal fade" id="createWarehouseModal" tabindex="-1" aria-labelledby="createWarehouseModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createUserModalLabel">Agregar usuario</h5>
+                    <h5 class="modal-title" id="createWarehouseModalLabel">Agregar bodega</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="createUserForm" method="POST" action="{{ route('users.store') }}">
+                    <form id="createWarehouseForm" method="POST" action="{{ route('warehouses.store') }}">
                         @csrf
+                        <div class="mb-3">
+                            <label for="id_catware" class="form-label">Categoría</label>
+                            <select class="form-control" id="id_catware" name="id_catware" required>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id_catware }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="last_name" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Estado</label>
-                            <select class="form-control" id="status" name="status">
-                                <option value="1">Activo</option>
-                                <option value="0">Inactivo</option>
-                            </select>
+                            <label for="description" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -259,37 +209,34 @@
         </div>
     </div>
 
-    <!-- Edit User Modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel"
+    <!-- Edit Warehouse Modal -->
+    <div class="modal fade" id="editWarehouseModal" tabindex="-1" aria-labelledby="editWarehouseModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+                    <h5 class="modal-title" id="editWarehouseModalLabel">Editar Bodega</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editUserForm" method="POST" action="">
+                    <form id="editWarehouseForm" method="POST" action="">
                         @csrf
                         @method('PUT')
+                        <div class="mb-3">
+                            <label for="edit_id_catware" class="form-label">Categoría</label>
+                            <select class="form-control" id="edit_id_catware" name="id_catware" required>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id_catware }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="mb-3">
                             <label for="edit_name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="edit_name" name="name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_last_name" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="edit_last_name" name="last_name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="edit_email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_status" class="form-label">Estado</label>
-                            <select class="form-control" id="edit_status" name="status">
-                                <option value="1">Activo</option>
-                                <option value="0">Inactivo</option>
-                            </select>
+                            <label for="edit_description" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="edit_description" name="description"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
@@ -297,41 +244,70 @@
             </div>
         </div>
     </div>
-
 </x-app-layout>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit user form
-        var editUserModal = document.getElementById('editUserModal');
-        editUserModal.addEventListener('show.bs.modal', function(event) {
+        // Logic to populate and handle the edit warehouse form
+        var editWarehouseModal = document.getElementById('editWarehouseModal');
+        editWarehouseModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
-            var userId = button.getAttribute('data-user-id');
-            var userName = button.getAttribute('data-user-name');
-            var userLastName = button.getAttribute('data-user-last_name');
-            var userEmail = button.getAttribute('data-user-email');
-            var userStatus = button.getAttribute('data-user-status');
+            var warehouseId = button.getAttribute('data-warehouse-id');
+            var warehouseCat = button.getAttribute('data-warehouse-cat');
+            var warehouseName = button.getAttribute('data-warehouse-name');
+            var warehouseDescription = button.getAttribute('data-warehouse-description');
 
-            var modalForm = editUserModal.querySelector('form');
-            modalForm.action = '/users/' + userId;
+            var modalForm = editWarehouseModal.querySelector('form');
+            modalForm.action = '/warehouses/' + warehouseId;
 
-            var modalNameInput = editUserModal.querySelector('#edit_name');
-            var modalLastNameInput = editUserModal.querySelector('#edit_last_name');
-            var modalEmailInput = editUserModal.querySelector('#edit_email');
-            var modalStatusInput = editUserModal.querySelector('#edit_status');
+            var modalCatInput = editWarehouseModal.querySelector('#edit_id_catware');
+            var modalNameInput = editWarehouseModal.querySelector('#edit_name');
+            var modalDescriptionInput = editWarehouseModal.querySelector('#edit_description');
 
-            modalNameInput.value = userName;
-            modalLastNameInput.value = userLastName;
-            modalEmailInput.value = userEmail;
-            modalStatusInput.value = userStatus;
+            modalCatInput.value = warehouseCat;
+            modalNameInput.value = warehouseName;
+            modalDescriptionInput.value = warehouseDescription;
+        });
+
+        const checkboxAll = document.getElementById('checkbox-all-search');
+        const checkboxes = document.querySelectorAll('input[id^="checkbox-table-search-"]');
+
+        checkboxAll.addEventListener('change', function() {
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = checkboxAll.checked;
+            });
+        });
+
+        document.getElementById('deleteSelected').addEventListener('click', function() {
+            const checkedCheckboxes = document.querySelectorAll(
+                'input[id^="checkbox-table-search-"]:checked');
+            const idsToDelete = Array.from(checkedCheckboxes).map(cb => cb.id.split('-').pop());
+
+            if (idsToDelete.length > 0) {
+                fetch('/warehouses/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        ids: idsToDelete
+                    })
+                }).then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert('Hubo un problema al eliminar las bodegas.');
+                    }
+                });
+            }
         });
     });
 
-    function searchUsers() {
-        let input = document.getElementById('table-search-users');
+    function searchWarehouses() {
+        let input = document.getElementById('table-search-warehouses');
         let filter = input.value.toUpperCase();
-        let table = document.getElementById('users-table');
+        let table = document.getElementById('warehouses-table');
         let tr = table.getElementsByTagName('tr');
 
         // Obtener la fila th
@@ -362,16 +338,15 @@
         }
     }
 </script>
-
 <script>
     let currentPage = 1;
     let recordsPerPage = 10;
-    let totalRecords = {{ $users->count() }};
+    let totalRecords = {{ $warehouses->count() }};
 
     function displayRecords() {
         const startIndex = (currentPage - 1) * recordsPerPage;
         const endIndex = startIndex + recordsPerPage;
-        const tableRows = document.querySelectorAll('#users-table tbody tr');
+        const tableRows = document.querySelectorAll('#warehouses-table tbody tr');
 
         tableRows.forEach((row, index) => {
             if (index >= startIndex && index < endIndex) {
@@ -425,20 +400,5 @@
         const recordsPerPageSelect = document.getElementById('records-per-page');
         recordsPerPageSelect.value = recordsPerPage;
         recordsPerPageSelect.addEventListener('change', handleRecordsPerPageChange);
-
-
-    });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const checkboxAll = document.getElementById('checkbox-all-search');
-        const checkboxes = document.querySelectorAll('input[id^="checkbox-table-search-"]');
-
-        checkboxAll.addEventListener('change', function() {
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = checkboxAll.checked;
-            });
-        });
     });
 </script>

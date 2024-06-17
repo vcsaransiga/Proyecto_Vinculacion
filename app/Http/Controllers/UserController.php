@@ -44,19 +44,33 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->input('query');
-        $users = User::where('id', 'like', "%{$query}%")
-            ->orWhere('name', 'like', "%{$query}%")
-            ->orWhere('last_name', 'like', "%{$query}%")
-            ->orWhere('email', 'like', "%{$query}%")
+        $searchTerm = $request->input('search');
+
+        $users = User::where('id', 'LIKE', "%$searchTerm%")
+            ->orWhere('name', 'LIKE', "%$searchTerm%")
+            ->orWhere('last_name', 'LIKE', "%$searchTerm%")
+            ->orWhere('email', 'LIKE', "%$searchTerm%")
             ->get();
 
-        return response()->json($users);
+        return view('modules.users.index', compact('users'));
     }
 
     public function destroy(User $user)
     {
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+    }
+
+    public function deleteSelectedUsers(Request $request)
+    {
+        $userIds = $request->input('userIds');
+
+        // Eliminar los usuarios seleccionados de la base de datos
+        $users = User::whereIn('id', $userIds)->get();
+        foreach ($users as $user) {
+            $user->delete();
+        }
+
+        return response()->json(['message' => 'Usuarios eliminados correctamente.']);
     }
 }
