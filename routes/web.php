@@ -12,6 +12,7 @@ use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\CategoriesWarehouseController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ResponsibleController;
+use App\Http\Controllers\ModuleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,4 +133,4 @@ Route::resource('warehouses', WarehouseController::class)->middleware('auth');
 
 Route::resource('responsibles', ResponsibleController::class)->middleware('auth');
 
-Route::resource('modules', ResponsibleController::class)->middleware('auth');
+Route::resource('modules', ModuleController::class)->middleware('auth');

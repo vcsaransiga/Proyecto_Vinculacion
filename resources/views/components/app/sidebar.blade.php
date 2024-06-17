@@ -156,6 +156,12 @@
                             <span class="nav-link-text ms-1">Responsables</span>
                         </a>
                     </li>
+                    <li class="nav-item border-start my-0 pt-2">
+                        <a class="dropdown-item nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('modules.index') ? 'active text-dark bg-light' : 'text-dark' }}"
+                            href="{{ route('modules.index') }}">
+                            <span class="nav-link-text ms-1">Módulos</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

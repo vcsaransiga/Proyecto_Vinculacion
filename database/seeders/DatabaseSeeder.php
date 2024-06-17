@@ -18,13 +18,7 @@ class DatabaseSeeder extends Seeder
             CategoriesWarehouseSeeder::class,
             WarehouseSeeder::class,
             ResponsibleSeeder::class,
-            // ClientSeeder::class,
-            // AnalystSeeder::class,
-            // InterviewSeeder::class,
-            // ProjectSeeder::class,
-            // TaskSeeder::class,
-            // RolePermissionSeeder::class,
-            // UserRoleSeeder::class,
+            ModuleSeeder::class,
         ]);
     }
 }

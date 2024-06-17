@@ -12,8 +12,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('modules', function (Blueprint $table) {
-            $table->string('id_mod');
+            $table->string('id_mod')->primary();
             $table->string('id_responsible');
+            $table->string('name');
             $table->date('start_date');
             $table->date('end_date');
             $table->integer('vinculation_hours');
