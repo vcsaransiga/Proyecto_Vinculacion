@@ -62,10 +62,10 @@
                                     </div>
                                     <input type="text" id="table-search-students"
                                         class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500"
-                                        placeholder="Buscar estudiante...">
+                                        placeholder="Buscar estudiante..." onkeyup="searchStudents()">
                                 </div>
                             </div>
-                            <table
+                            <table id="table-students"
                                 class="tw-w-full tw-text-sm tw-text-left tw-rtl:tw-text-right tw-text-gray-500 dark:tw-text-gray-400">
                                 <thead
                                     class="tw-text-xs tw-text-gray-700 tw-uppercase tw-bg-gray-50 dark:tw-bg-gray-700 dark:tw-text-gray-400">
@@ -269,6 +269,121 @@
             modalLastNameInput.value = studentLastName;
             modalCourseInput.value = studentCourse;
             modalHoursInput.value = studentHours;
+        });
+    });
+
+    function searchStudents() {
+        let input = document.getElementById('table-search-students');
+        let filter = input.value.toUpperCase();
+        let table = document.getElementById('table-students');
+        let tr = table.getElementsByTagName('tr');
+
+        // Obtener la fila th
+        let thRow = table.getElementsByTagName('thead')[0].getElementsByTagName('tr')[0];
+
+        for (let i = 0; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName('td');
+            let containsFilter = false;
+
+            // Excluir la fila th del filtrado
+            if (tr[i] === thRow) {
+                continue;
+            }
+
+            for (let j = 0; j < td.length; j++) {
+                let cellValue = td[j].textContent || td[j].innerText;
+                if (cellValue.toUpperCase().indexOf(filter) > -1) {
+                    containsFilter = true;
+                    break;
+                }
+            }
+
+            if (containsFilter) {
+                tr[i].style.display = '';
+            } else {
+                tr[i].style.display = 'none';
+            }
+        }
+    }
+</script>
+
+
+<script>
+    let currentPage = 1;
+    let recordsPerPage = 10;
+    let totalRecords = {{ $students->count() }};
+
+    function displayRecords() {
+        const startIndex = (currentPage - 1) * recordsPerPage;
+        const endIndex = startIndex + recordsPerPage;
+        const tableRows = document.querySelectorAll('#table-students tbody tr');
+
+        tableRows.forEach((row, index) => {
+            if (index >= startIndex && index < endIndex) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    function renderPaginationNumbers() {
+        const paginationContainer = document.getElementById('pagination-numbers');
+        paginationContainer.innerHTML = '';
+
+        const totalPages = Math.ceil(totalRecords / recordsPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const pageLink = document.createElement('a');
+            pageLink.href = '#';
+            pageLink.classList.add('tw-px-3', 'tw-py-2', 'tw-leading-tight', 'tw-text-gray-500', 'tw-bg-white',
+                'tw-border', 'tw-border-gray-300', 'tw-rounded-md', 'hover:tw-bg-gray-100', 'hover:tw-text-gray-700'
+            );
+
+            if (i === currentPage) {
+                pageLink.classList.add('tw-text-gray-700', 'tw-bg-gray-100');
+            }
+
+            pageLink.textContent = i;
+            pageLink.addEventListener('click', () => {
+                currentPage = i;
+                displayRecords();
+                renderPaginationNumbers();
+            });
+
+            paginationContainer.appendChild(pageLink);
+        }
+    }
+
+    function handleRecordsPerPageChange() {
+        const select = document.getElementById('records-per-page');
+        recordsPerPage = parseInt(select.value);
+        currentPage = 1;
+        displayRecords();
+        renderPaginationNumbers();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        displayRecords();
+        renderPaginationNumbers();
+
+        const recordsPerPageSelect = document.getElementById('records-per-page');
+        recordsPerPageSelect.value = recordsPerPage;
+        recordsPerPageSelect.addEventListener('change', handleRecordsPerPageChange);
+
+
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxAll = document.getElementById('checkbox-all-search');
+        const checkboxes = document.querySelectorAll('input[id^="checkbox-table-search-"]');
+
+        checkboxAll.addEventListener('change', function() {
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = checkboxAll.checked;
+            });
         });
     });
 </script>

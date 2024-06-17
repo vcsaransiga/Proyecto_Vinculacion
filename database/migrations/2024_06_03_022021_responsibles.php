@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('responsibles', function (Blueprint $table) {
             $table->string('id_responsible')->primary();
-            $table->string('name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('area')->nullable();
-            $table->string('role')->nullable();
-            $table->boolean('status')->nullable();
+            $table->string('name');
+            $table->string('last_name');
+            $table->string('area');
+            $table->string('role'); 
+            $table->boolean('status'); //activo o inactivo
             $table->timestamps();
         });
     }

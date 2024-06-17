@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             PeriodSeeder::class,
             CategoriesWarehouseSeeder::class,
             WarehouseSeeder::class,
+            ResponsibleSeeder::class,
             // ClientSeeder::class,
             // AnalystSeeder::class,
             // InterviewSeeder::class,

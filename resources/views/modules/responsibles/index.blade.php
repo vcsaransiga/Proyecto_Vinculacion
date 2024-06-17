@@ -8,36 +8,34 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="">Administración de Usuarios</h5>
-                                    <p class="mb-0 text-sm">Here you can manage users.</p>
+                                    <h5 class="">Administración de Responsables</h5>
+                                    <p class="mb-0 text-sm">Aquí puedes gestionar los responsables.</p>
                                 </div>
                                 <div class="col-6 text-end">
                                     <button type="button" class="btn btn-dark btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#createUserModal">
-                                        <i class="fas fa-user-plus me-2"></i> Agregar usuario
+                                        data-bs-target="#createResponsibleModal">
+                                        <i class="fas fa-user-plus me-2"></i> Agregar responsable
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row justify-content-center">
-                            <div class="">
-                                @if (session('success'))
-                                    <div class="alert alert-success" role="alert" id="alert">
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
-                                @if (session('error'))
-                                    <div class="alert alert-danger" role="alert" id="alert">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
+                        @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
                             </div>
-                        </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
 
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
+
+
                                 <div class="tw-flex-1">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -50,27 +48,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tw-flex-1 tw-flex tw-justify-end">
-                                    <label for="table-search" class="tw-sr-only">Search</label>
-                                    <div class="tw-relative">
-                                        <div
-                                            class="tw-absolute tw-inset-y-0 tw-start-0 tw-flex tw-items-center tw-ps-3 tw-pointer-events-none">
-                                            <svg class="tw-w-4 tw-h-4 tw-text-gray-500 dark:tw-text-gray-400"
-                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 20 20">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                            </svg>
-                                        </div>
-                                        <input type="text" id="table-search-users"
-                                            class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500"
-                                            placeholder="Buscar usuario..." onkeyup="searchUsers()">
+
+                                <label for="table-search" class="tw-sr-only">Search</label>
+                                <div class="tw-relative">
+                                    <div
+                                        class="tw-absolute tw-inset-y-0 tw-rtl:tw-inset-r-0 tw-start-0 tw-flex tw-items-center tw-ps-3 tw-pointer-events-none">
+                                        <svg class="tw-w-4 tw-h-4 tw-text-gray-500 dark:tw-text-gray-400"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 20 20">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                        </svg>
                                     </div>
+                                    <input type="text" id="table-search-responsibles"
+                                        class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:tw-focus:tw-ring-blue-500 dark:tw-focus:tw-border-blue-500"
+                                        placeholder="Buscar responsable..." onkeyup="searchResponsibles()">
                                 </div>
                             </div>
-
-                            <table id="users-table"
+                            <table id="table-responsibles"
                                 class="tw-w-full tw-text-sm tw-text-left tw-rtl:tw-text-right tw-text-gray-500 dark:tw-text-gray-400">
                                 <thead
                                     class="tw-text-xs tw-text-gray-700 tw-uppercase tw-bg-gray-50 dark:tw-bg-gray-700 dark:tw-text-gray-400">
@@ -78,84 +73,55 @@
                                         <th scope="col" class="tw-p-4">
                                             <div class="tw-flex tw-items-center">
                                                 <input id="checkbox-all-search" type="checkbox"
-                                                    class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                                                    class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:tw-focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
                                                 <label for="checkbox-all-search" class="tw-sr-only">checkbox</label>
                                             </div>
                                         </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Nombre
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Apellido
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Email
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Estado
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Acción
-                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">ID</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Apellido</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Área</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Rol</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Estado</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($responsibles as $responsible)
                                         <tr
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
-                                            {{-- <td class="tw-w-4 tw-p-4">
-                                                <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $user->id }}"
-                                                        type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $user->id }}"
-                                                        class="tw-sr-only">checkbox</label>
-                                                </div>
-                                            </td> --}}
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $user->id }}"
+                                                    <input id="checkbox-table-search-{{ $responsible->id_responsible }}"
                                                         type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $user->id }}"
+                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:tw-focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                                                    <label
+                                                        for="checkbox-table-search-{{ $responsible->id_responsible }}"
                                                         class="tw-sr-only">checkbox</label>
                                                 </div>
                                             </td>
-                                            {{-- <th scope="row"
-                                                class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
-                                                <img class="tw-w-10 tw-h-10 tw-rounded-full"
-                                                    src="/docs/images/people/profile-picture-1.jpg"
-                                                    alt="{{ $user->name }} image">
-                                                <div class="tw-ps-3">
-                                                    <div class="tw-text-base">{{ $user->name }}
-                                                    </div>
-                                                </div>
-                                            </th> --}}
-                                            <td class="tw-px-6 tw-py-4">
-                                                {{ $user->name }}
-                                            </td>
-                                            <td class="tw-px-6 tw-py-4">
-                                                {{ $user->last_name }}
-                                            </td>
-                                            <td class="tw-px-6 tw-py-4">
-                                                {{ $user->email }}
-                                            </td>
+                                            <td class="tw-px-6 tw-py-4">{{ $responsible->id_responsible }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $responsible->name }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $responsible->last_name }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $responsible->area }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $responsible->role }}</td>
                                             <td class="tw-px-6 tw-py-4">
                                                 <div class="tw-flex tw-items-center">
                                                     <div
-                                                        class="tw-h-2.5 tw-w-2.5 tw-rounded-full {{ $user->status ? 'tw-bg-green-500' : 'tw-bg-red-500' }} tw-me-2">
-                                                    </div> {{ $user->status ? 'Activo' : 'Inactivo' }}
+                                                        class="tw-h-2.5 tw-w-2.5 tw-rounded-full {{ $responsible->status ? 'tw-bg-green-500' : 'tw-bg-red-500' }} tw-me-2">
+                                                    </div> {{ $responsible->status ? 'Activo' : 'Inactivo' }}
                                                 </div>
                                             </td>
                                             <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
                                                 <a href="#"
                                                     class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"
-                                                    data-bs-toggle="modal" data-bs-target="#editUserModal"
-                                                    data-user-id="{{ $user->id }}"
-                                                    data-user-name="{{ $user->name }}"
-                                                    data-user-last_name="{{ $user->last_name }}"
-                                                    data-user-email="{{ $user->email }}"
-                                                    data-user-status="{{ $user->status }}">
+                                                    data-bs-toggle="modal" data-bs-target="#editResponsibleModal"
+                                                    data-responsible-id="{{ $responsible->id_responsible }}"
+                                                    data-responsible-name="{{ $responsible->name }}"
+                                                    data-responsible-last_name="{{ $responsible->last_name }}"
+                                                    data-responsible-area="{{ $responsible->area }}"
+                                                    data-responsible-role="{{ $responsible->role }}"
+                                                    data-responsible-status="{{ $responsible->status }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="currentColor"
@@ -165,13 +131,14 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </a>
-                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                    style="display:inline-block;">
+                                                <form
+                                                    action="{{ route('responsibles.destroy', $responsible->id_responsible) }}"
+                                                    method="POST" style="display:inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="tw-font-medium tw-text-red-600 dark:tw-text-red-500 hover:tw-underline"
-                                                        onclick="return confirm('Are you sure you want to delete this user?')">
+                                                        onclick="return confirm('¿Estás seguro de que deseas eliminar este responsable?')">
                                                         <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" fill="currentColor"
@@ -183,7 +150,6 @@
                                                     </button>
                                                 </form>
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -209,7 +175,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -217,17 +182,17 @@
         <x-app.footer />
     </main>
 
-    <!-- Create User Modal -->
-    <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel"
+    <!-- Create Responsible Modal -->
+    <div class="modal fade" id="createResponsibleModal" tabindex="-1" aria-labelledby="createResponsibleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createUserModalLabel">Agregar usuario</h5>
+                    <h5 class="modal-title" id="createResponsibleModalLabel">Agregar responsable</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="createUserForm" method="POST" action="{{ route('users.store') }}">
+                    <form id="createResponsibleForm" method="POST" action="{{ route('responsibles.store') }}">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
@@ -235,19 +200,19 @@
                         </div>
                         <div class="mb-3">
                             <label for="last_name" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name">
+                            <input type="text" class="form-control" id="last_name" name="last_name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <label for="area" class="form-label">Área</label>
+                            <input type="text" class="form-control" id="area" name="area" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <label for="role" class="form-label">Rol</label>
+                            <input type="text" class="form-control" id="role" name="role" required>
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Estado</label>
-                            <select class="form-control" id="status" name="status">
+                            <select class="form-control" id="status" name="status" required>
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             </select>
@@ -259,17 +224,17 @@
         </div>
     </div>
 
-    <!-- Edit User Modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel"
+    <!-- Edit Responsible Modal -->
+    <div class="modal fade" id="editResponsibleModal" tabindex="-1" aria-labelledby="editResponsibleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+                    <h5 class="modal-title" id="editResponsibleModalLabel">Editar Responsable</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editUserForm" method="POST" action="">
+                    <form id="editResponsibleForm" method="POST" action="">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
@@ -278,15 +243,20 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit_last_name" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="edit_last_name" name="last_name">
+                            <input type="text" class="form-control" id="edit_last_name" name="last_name"
+                                required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="edit_email" name="email" required>
+                            <label for="edit_area" class="form-label">Área</label>
+                            <input type="text" class="form-control" id="edit_area" name="area" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_role" class="form-label">Rol</label>
+                            <input type="text" class="form-control" id="edit_role" name="role" required>
                         </div>
                         <div class="mb-3">
                             <label for="edit_status" class="form-label">Estado</label>
-                            <select class="form-control" id="edit_status" name="status">
+                            <select class="form-control" id="edit_status" name="status" required>
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             </select>
@@ -297,41 +267,76 @@
             </div>
         </div>
     </div>
-
 </x-app-layout>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit user form
-        var editUserModal = document.getElementById('editUserModal');
-        editUserModal.addEventListener('show.bs.modal', function(event) {
+        // Logic to populate and handle the edit responsible form
+        var editResponsibleModal = document.getElementById('editResponsibleModal');
+        editResponsibleModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
-            var userId = button.getAttribute('data-user-id');
-            var userName = button.getAttribute('data-user-name');
-            var userLastName = button.getAttribute('data-user-last_name');
-            var userEmail = button.getAttribute('data-user-email');
-            var userStatus = button.getAttribute('data-user-status');
+            var responsibleId = button.getAttribute('data-responsible-id');
+            var responsibleName = button.getAttribute('data-responsible-name');
+            var responsibleLastName = button.getAttribute('data-responsible-last_name');
+            var responsibleArea = button.getAttribute('data-responsible-area');
+            var responsibleRole = button.getAttribute('data-responsible-role');
+            var responsibleStatus = button.getAttribute('data-responsible-status');
 
-            var modalForm = editUserModal.querySelector('form');
-            modalForm.action = '/users/' + userId;
+            var modalForm = editResponsibleModal.querySelector('form');
+            modalForm.action = '/responsibles/' + responsibleId;
 
-            var modalNameInput = editUserModal.querySelector('#edit_name');
-            var modalLastNameInput = editUserModal.querySelector('#edit_last_name');
-            var modalEmailInput = editUserModal.querySelector('#edit_email');
-            var modalStatusInput = editUserModal.querySelector('#edit_status');
+            var modalNameInput = editResponsibleModal.querySelector('#edit_name');
+            var modalLastNameInput = editResponsibleModal.querySelector('#edit_last_name');
+            var modalAreaInput = editResponsibleModal.querySelector('#edit_area');
+            var modalRoleInput = editResponsibleModal.querySelector('#edit_role');
+            var modalStatusInput = editResponsibleModal.querySelector('#edit_status');
 
-            modalNameInput.value = userName;
-            modalLastNameInput.value = userLastName;
-            modalEmailInput.value = userEmail;
-            modalStatusInput.value = userStatus;
+            modalNameInput.value = responsibleName;
+            modalLastNameInput.value = responsibleLastName;
+            modalAreaInput.value = responsibleArea;
+            modalRoleInput.value = responsibleRole;
+            modalStatusInput.value = responsibleStatus;
+        });
+
+        const checkboxAll = document.getElementById('checkbox-all-search');
+        const checkboxes = document.querySelectorAll('input[id^="checkbox-table-search-"]');
+
+        checkboxAll.addEventListener('change', function() {
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = checkboxAll.checked;
+            });
+        });
+
+        document.getElementById('deleteSelected').addEventListener('click', function() {
+            const checkedCheckboxes = document.querySelectorAll(
+                'input[id^="checkbox-table-search-"]:checked');
+            const idsToDelete = Array.from(checkedCheckboxes).map(cb => cb.id.split('-').pop());
+
+            if (idsToDelete.length > 0) {
+                fetch('/responsibles/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        ids: idsToDelete
+                    })
+                }).then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert('Hubo un problema al eliminar los responsables.');
+                    }
+                });
+            }
         });
     });
 
-    function searchUsers() {
-        let input = document.getElementById('table-search-users');
+    function searchResponsibles() {
+        let input = document.getElementById('table-search-responsibles');
         let filter = input.value.toUpperCase();
-        let table = document.getElementById('users-table');
+        let table = document.getElementById('table-responsibles');
         let tr = table.getElementsByTagName('tr');
 
         // Obtener la fila th
@@ -363,15 +368,16 @@
     }
 </script>
 
+
 <script>
     let currentPage = 1;
     let recordsPerPage = 10;
-    let totalRecords = {{ $users->count() }};
+    let totalRecords = {{ $responsibles->count() }};
 
     function displayRecords() {
         const startIndex = (currentPage - 1) * recordsPerPage;
         const endIndex = startIndex + recordsPerPage;
-        const tableRows = document.querySelectorAll('#users-table tbody tr');
+        const tableRows = document.querySelectorAll('#table-responsibles tbody tr');
 
         tableRows.forEach((row, index) => {
             if (index >= startIndex && index < endIndex) {

@@ -1,0 +1,26 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Responsible;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Responsible>
+ */
+class ResponsibleFactory extends Factory
+{
+    protected $model = Responsible::class;
+
+    public function definition()
+    {
+        return [
+            'id_responsible' => $this->faker->unique()->regexify('RESP-\d{2}'),
+            'name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'area' => $this->faker->word,
+            'role' => $this->faker->jobTitle,
+            'status' => $this->faker->boolean,
+        ];
+    }
+}

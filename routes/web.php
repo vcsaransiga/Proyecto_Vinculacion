@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\CategoriesWarehouseController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\ResponsibleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,7 +122,12 @@ Route::get('/students/search', [StudentController::class, 'search'])->name('stud
 Route::resource('periods', PeriodController::class);
 Route::get('/periods', [PeriodController::class, 'index'])->name('periods.index')->middleware('auth');
 
-Route::resource('categories_warehouse', CategoriesWarehouseController::class);
+Route::resource('categories_warehouse', CategoriesWarehouseController::class)->middleware('auth');
 // Route::get('/categories_warehouse', [CategoriesWarehouseController::class, 'index'])->name('categories_warehouse.index')->middleware('auth');
 
-Route::resource('warehouses', WarehouseController::class);
+Route::resource('warehouses', WarehouseController::class)->middleware('auth');
+
+
+Route::resource('warehouses', WarehouseController::class)->middleware('auth');
+
+Route::resource('responsibles', ResponsibleController::class)->middleware('auth');
