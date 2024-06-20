@@ -62,7 +62,8 @@
                                     </div>
                                     <input type="text" id="table-search-responsibles"
                                         class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:tw-focus:tw-ring-blue-500 dark:tw-focus:tw-border-blue-500"
-                                        placeholder="Buscar responsable..." onkeyup="searchResponsibles()">
+                                        placeholder="Buscar responsable..."
+                                        onkeyup="searchTable('table-search-responsibles', 'table-responsibles')">
                                 </div>
                             </div>
                             <table id="table-responsibles"

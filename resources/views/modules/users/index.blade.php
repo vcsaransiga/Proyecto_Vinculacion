@@ -65,7 +65,8 @@
                                         </div>
                                         <input type="text" id="table-search-users"
                                             class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500"
-                                            placeholder="Buscar usuario..." onkeyup="searchUsers()">
+                                            placeholder="Buscar usuario..."
+                                            onkeyup="searchTable('table-search-users', 'users-table')">
                                     </div>
                                 </div>
                             </div>
@@ -329,40 +330,6 @@
             modalStatusInput.value = userStatus;
         });
     });
-
-    function searchUsers() {
-        let input = document.getElementById('table-search-users');
-        let filter = input.value.toUpperCase();
-        let table = document.getElementById('users-table');
-        let tr = table.getElementsByTagName('tr');
-
-        // Obtener la fila th
-        let thRow = table.getElementsByTagName('thead')[0].getElementsByTagName('tr')[0];
-
-        for (let i = 0; i < tr.length; i++) {
-            let td = tr[i].getElementsByTagName('td');
-            let containsFilter = false;
-
-            // Excluir la fila th del filtrado
-            if (tr[i] === thRow) {
-                continue;
-            }
-
-            for (let j = 0; j < td.length; j++) {
-                let cellValue = td[j].textContent || td[j].innerText;
-                if (cellValue.toUpperCase().indexOf(filter) > -1) {
-                    containsFilter = true;
-                    break;
-                }
-            }
-
-            if (containsFilter) {
-                tr[i].style.display = '';
-            } else {
-                tr[i].style.display = 'none';
-            }
-        }
-    }
 </script>
 
 <script>

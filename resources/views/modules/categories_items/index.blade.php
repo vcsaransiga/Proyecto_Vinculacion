@@ -60,7 +60,8 @@
                                     </div>
                                     <input type="text" id="table-search-category-items"
                                         class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500"
-                                        placeholder="Buscar categoría de ítem..." onkeyup="searchCategoryItems()">
+                                        placeholder="Buscar categoría de ítem..."
+                                        onkeyup="searchTable('table-search-category-items', 'table-category-items')">
                                 </div>
                             </div>
                             <table id="table-category-items"
@@ -277,40 +278,6 @@
             }
         });
     });
-
-    function searchCategoryItems() {
-        let input = document.getElementById('table-search-category-items');
-        let filter = input.value.toUpperCase();
-        let table = document.getElementById('table-category-items');
-        let tr = table.getElementsByTagName('tr');
-
-        // Obtener la fila th
-        let thRow = table.getElementsByTagName('thead')[0].getElementsByTagName('tr')[0];
-
-        for (let i = 0; i < tr.length; i++) {
-            let td = tr[i].getElementsByTagName('td');
-            let containsFilter = false;
-
-            // Excluir la fila th del filtrado
-            if (tr[i] === thRow) {
-                continue;
-            }
-
-            for (let j = 0; j < td.length; j++) {
-                let cellValue = td[j].textContent || td[j].innerText;
-                if (cellValue.toUpperCase().indexOf(filter) > -1) {
-                    containsFilter = true;
-                    break;
-                }
-            }
-
-            if (containsFilter) {
-                tr[i].style.display = '';
-            } else {
-                tr[i].style.display = 'none';
-            }
-        }
-    }
 </script>
 
 
