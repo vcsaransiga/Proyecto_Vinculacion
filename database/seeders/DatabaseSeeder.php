@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ResponsibleSeeder::class,
             ModuleSeeder::class,
             CategoryItemSeeder::class,
+            MeasurementUnitSeeder::class,
         ]);
     }
 }

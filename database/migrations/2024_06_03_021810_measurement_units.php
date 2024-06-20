@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('measurement_units', function (Blueprint $table) {
             $table->string('id_unit')->primary();
-            $table->string('name')->nullable();
-            $table->string('symbol')->nullable();
+            $table->string('name');
+            $table->string('symbol');
             $table->timestamps();
         });
     }

@@ -167,6 +167,13 @@
                     <span class="nav-link-text ms-1">Categorías de ítems</span>
                 </a>
             </li>
+            <li class="nav-item border-start my-0 pt-2">
+                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('measurement_units.index') ? 'active' : '' }}"
+                    href="{{ route('measurement_units.index') }}">
+                    <span class="nav-link-text ms-1">Medidas de unidad</span>
+                </a>
+            </li>
+
 
 
             {{-- <li class="nav-item mt-2">

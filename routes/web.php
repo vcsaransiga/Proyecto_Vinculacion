@@ -14,6 +14,7 @@ use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ResponsibleController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\CategoryItemController;
+use App\Http\Controllers\MeasurementUnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,3 +138,4 @@ Route::resource('responsibles', ResponsibleController::class)->middleware('auth'
 Route::resource('modules', ModuleController::class)->middleware('auth');
 
 Route::resource('categories_items', CategoryItemController::class)->middleware('auth');
+Route::resource('measurement_units', MeasurementUnitController::class)->middleware('auth');
