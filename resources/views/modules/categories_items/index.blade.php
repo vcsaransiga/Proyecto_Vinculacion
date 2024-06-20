@@ -8,13 +8,13 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="">Administración de Módulos</h5>
-                                    <p class="mb-0 text-sm">Aquí puedes gestionar los módulos.</p>
+                                    <h5 class="">Administración de Categorías de Ítems</h5>
+                                    <p class="mb-0 text-sm">Aquí puedes gestionar las categorías de ítems.</p>
                                 </div>
                                 <div class="col-6 text-end">
                                     <button type="button" class="btn btn-dark btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#createModuleModal">
-                                        <i class="fas fa-plus me-2"></i> Agregar módulo
+                                        data-bs-target="#createCategoryItemModal">
+                                        <i class="fas fa-plus me-2"></i> Agregar categoría de ítem
                                     </button>
                                 </div>
                             </div>
@@ -34,7 +34,6 @@
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
-
                                 <div class="tw-flex-1">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -59,12 +58,12 @@
                                                 stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                         </svg>
                                     </div>
-                                    <input type="text" id="table-search-modules"
+                                    <input type="text" id="table-search-category-items"
                                         class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500"
-                                        placeholder="Buscar módulo..." onkeyup="searchModules()">
+                                        placeholder="Buscar categoría de ítem..." onkeyup="searchCategoryItems()">
                                 </div>
                             </div>
-                            <table id="table-modules"
+                            <table id="table-category-items"
                                 class="tw-w-full tw-text-sm tw-text-left tw-rtl:tw-text-right tw-text-gray-500 dark:tw-text-gray-400">
                                 <thead
                                     class="tw-text-xs tw-text-gray-700 tw-uppercase tw-bg-gray-50 dark:tw-bg-gray-700 dark:tw-text-gray-400">
@@ -78,44 +77,33 @@
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">ID</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Responsable</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Fecha de Inicio</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Fecha de Fin</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Horas de Vinculación</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Descripción</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($modules as $module)
+                                    @foreach ($categoryItems as $categoryItem)
                                         <tr
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $module->id_mod }}"
+                                                    <input id="checkbox-table-search-{{ $categoryItem->id_catitem }}"
                                                         type="checkbox"
                                                         class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $module->id_mod }}"
+                                                    <label for="checkbox-table-search-{{ $categoryItem->id_catitem }}"
                                                         class="tw-sr-only">checkbox</label>
                                                 </div>
                                             </td>
-                                            <td class="tw-px-6 tw-py-4">{{ $module->id_mod }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $module->name }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $module->responsible->name }}
-                                                {{ $module->responsible->last_name }}</td>
-
-                                            <td class="tw-px-6 tw-py-4">{{ $module->start_date }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $module->end_date }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $module->vinculation_hours }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $categoryItem->id_catitem }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $categoryItem->name }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $categoryItem->description }}</td>
                                             <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
                                                 <a href="#"
                                                     class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"
-                                                    data-bs-toggle="modal" data-bs-target="#editModuleModal"
-                                                    data-module-id="{{ $module->id_mod }}"
-                                                    data-module-name="{{ $module->name }}"
-                                                    data-module-responsible="{{ $module->id_responsible }}"
-                                                    data-module-start_date="{{ $module->start_date }}"
-                                                    data-module-end_date="{{ $module->end_date }}"
-                                                    data-module-vinculation_hours="{{ $module->vinculation_hours }}">
+                                                    data-bs-toggle="modal" data-bs-target="#editCategoryItemModal"
+                                                    data-category-item-id="{{ $categoryItem->id_catitem }}"
+                                                    data-category-item-name="{{ $categoryItem->name }}"
+                                                    data-category-item-description="{{ $categoryItem->description }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="currentColor"
@@ -125,13 +113,14 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </a>
-                                                <form action="{{ route('modules.destroy', $module->id_mod) }}"
+                                                <form
+                                                    action="{{ route('categories_items.destroy', $categoryItem->id_catitem) }}"
                                                     method="POST" style="display:inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="tw-font-medium tw-text-red-600 dark:tw-text-red-500 hover:tw-underline"
-                                                        onclick="return confirm('¿Estás seguro de que deseas eliminar este módulo?')">
+                                                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta categoría de ítem?')">
                                                         <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" fill="currentColor"
@@ -175,45 +164,26 @@
         <x-app.footer />
     </main>
 
-    <!-- Create Module Modal -->
-    <div class="modal fade" id="createModuleModal" tabindex="-1" aria-labelledby="createModuleModalLabel"
-        aria-hidden="true">
+    <!-- Create Category Item Modal -->
+    <div class="modal fade" id="createCategoryItemModal" tabindex="-1"
+        aria-labelledby="createCategoryItemModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createModuleModalLabel">Agregar módulo</h5>
-                    <button type="button" class=" btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    <h5 class="modal-title" id="createCategoryItemModalLabel">Agregar categoría de ítem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="createModuleForm" method="POST" action="{{ route('modules.store') }}">
+                    <form id="createCategoryItemForm" method="POST" action="{{ route('categories_items.store') }}">
                         @csrf
-                        <div class="mb-3">
-                            <label for="id_responsible" class="form-label">Responsable</label>
-                            <select class="form-control" id="id_responsible" name="id_responsible" required>
-                                @foreach ($responsibles as $responsible)
-                                    <option value="{{ $responsible->id_responsible }}">{{ $responsible->name }}
-                                        {{ $responsible->last_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="start_date" class="form-label">Fecha de Inicio</label>
-                            <input type="date" class="form-control" id="start_date" name="start_date" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="end_date" class="form-label">Fecha de Fin</label>
-                            <input type="date" class="form-control" id="end_date" name="end_date" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="vinculation_hours" class="form-label">Horas de Vinculación</label>
-                            <input type="number" class="form-control" id="vinculation_hours"
-                                name="vinculation_hours" required>
+                            <label for="description" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="description" name="description" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -222,47 +192,28 @@
         </div>
     </div>
 
-    <!-- Edit Module Modal -->
-    <div class="modal fade" id="editModuleModal" tabindex="-1" aria-labelledby="editModuleModalLabel"
+    <!-- Edit Category Item Modal -->
+    <div class="modal fade" id="editCategoryItemModal" tabindex="-1" aria-labelledby="editCategoryItemModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModuleModalLabel">Editar Módulo</h5>
+                    <h5 class="modal-title" id="editCategoryItemModalLabel">Editar categoría de ítem</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editModuleForm" method="POST" action="">
+                    <form id="editCategoryItemForm" method="POST" action="">
                         @csrf
                         @method('PUT')
-                        <div class="mb-3">
-                            <label for="edit_id_responsible" class="form-label">Responsable</label>
-                            <select class="form-control" id="edit_id_responsible" name="id_responsible" required>
-                                @foreach ($responsibles as $responsible)
-                                    <option value="{{ $responsible->id_responsible }}">
-                                        {{ $responsible->name }} {{ $responsible->last_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="mb-3">
                             <label for="edit_name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="edit_name" name="name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_start_date" class="form-label">Fecha de Inicio</label>
-                            <input type="date" class="form-control" id="edit_start_date" name="start_date"
+                            <label for="edit_description" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="edit_description" name="description"
                                 required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_end_date" class="form-label">Fecha de Fin</label>
-                            <input type="date" class="form-control" id="edit_end_date" name="end_date" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_vinculation_hours" class="form-label">Horas de Vinculación</label>
-                            <input type="number" class="form-control" id="edit_vinculation_hours"
-                                name="vinculation_hours" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
@@ -274,31 +225,22 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit module form
-        var editModuleModal = document.getElementById('editModuleModal');
-        editModuleModal.addEventListener('show.bs.modal', function(event) {
+        // Logic to populate and handle the edit category item form
+        var editCategoryItemModal = document.getElementById('editCategoryItemModal');
+        editCategoryItemModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
-            var moduleId = button.getAttribute('data-module-id');
-            var moduleName = button.getAttribute('data-module-name');
-            var moduleResponsible = button.getAttribute('data-module-responsible');
-            var moduleStartDate = button.getAttribute('data-module-start_date');
-            var moduleEndDate = button.getAttribute('data-module-end_date');
-            var moduleVinculationHours = button.getAttribute('data-module-vinculation_hours');
+            var categoryItemId = button.getAttribute('data-category-item-id');
+            var categoryItemName = button.getAttribute('data-category-item-name');
+            var categoryItemDescription = button.getAttribute('data-category-item-description');
 
-            var modalForm = editModuleModal.querySelector('form');
-            modalForm.action = '/modules/' + moduleId;
+            var modalForm = editCategoryItemModal.querySelector('form');
+            modalForm.action = '/categories_items/' + categoryItemId;
 
-            var modalNameInput = editModuleModal.querySelector('#edit_name');
-            var modalResponsibleInput = editModuleModal.querySelector('#edit_id_responsible');
-            var modalStartDateInput = editModuleModal.querySelector('#edit_start_date');
-            var modalEndDateInput = editModuleModal.querySelector('#edit_end_date');
-            var modalVinculationHoursInput = editModuleModal.querySelector('#edit_vinculation_hours');
+            var modalNameInput = editCategoryItemModal.querySelector('#edit_name');
+            var modalDescriptionInput = editCategoryItemModal.querySelector('#edit_description');
 
-            modalNameInput.value = moduleName;
-            modalResponsibleInput.value = moduleResponsible;
-            modalStartDateInput.value = moduleStartDate;
-            modalEndDateInput.value = moduleEndDate;
-            modalVinculationHoursInput.value = moduleVinculationHours;
+            modalNameInput.value = categoryItemName;
+            modalDescriptionInput.value = categoryItemDescription;
         });
 
         const checkboxAll = document.getElementById('checkbox-all-search');
@@ -316,7 +258,7 @@
             const idsToDelete = Array.from(checkedCheckboxes).map(cb => cb.id.split('-').pop());
 
             if (idsToDelete.length > 0) {
-                fetch('/modules/delete', {
+                fetch('/categories_items/delete', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -329,17 +271,17 @@
                     if (response.ok) {
                         location.reload();
                     } else {
-                        alert('Hubo un problema al eliminar los módulos.');
+                        alert('Hubo un problema al eliminar las categorías de ítems.');
                     }
                 });
             }
         });
     });
 
-    function searchModules() {
-        let input = document.getElementById('table-search-modules');
+    function searchCategoryItems() {
+        let input = document.getElementById('table-search-category-items');
         let filter = input.value.toUpperCase();
-        let table = document.getElementById('table-modules');
+        let table = document.getElementById('table-category-items');
         let tr = table.getElementsByTagName('tr');
 
         // Obtener la fila th
@@ -375,12 +317,12 @@
 <script>
     let currentPage = 1;
     let recordsPerPage = 10;
-    let totalRecords = {{ $modules->count() }};
+    let totalRecords = {{ $categoryItems->count() }};
 
     function displayRecords() {
         const startIndex = (currentPage - 1) * recordsPerPage;
         const endIndex = startIndex + recordsPerPage;
-        const tableRows = document.querySelectorAll('#table-modules tbody tr');
+        const tableRows = document.querySelectorAll('#table-category-items tbody tr');
 
         tableRows.forEach((row, index) => {
             if (index >= startIndex && index < endIndex) {

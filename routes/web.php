@@ -13,6 +13,7 @@ use App\Http\Controllers\CategoriesWarehouseController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ResponsibleController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\CategoryItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,3 +135,5 @@ Route::resource('warehouses', WarehouseController::class)->middleware('auth');
 Route::resource('responsibles', ResponsibleController::class)->middleware('auth');
 
 Route::resource('modules', ModuleController::class)->middleware('auth');
+
+Route::resource('categories_items', CategoryItemController::class)->middleware('auth');

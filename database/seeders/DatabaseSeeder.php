@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             WarehouseSeeder::class,
             ResponsibleSeeder::class,
             ModuleSeeder::class,
+            CategoryItemSeeder::class,
         ]);
     }
 }
