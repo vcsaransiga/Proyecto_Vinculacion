@@ -333,69 +333,13 @@
 </script>
 
 <script>
-    let currentPage = 1;
-    let recordsPerPage = 10;
-    let totalRecords = {{ $users->count() }};
+    document.addEventListener('DOMContentLoaded', function() {
+        const totalRecords = {{ $users->count() }};
+        const tableId = 'users-table';
+        const paginationContainerId = 'pagination-numbers';
+        const defaultRecordsPerPage = 10;
 
-    function displayRecords() {
-        const startIndex = (currentPage - 1) * recordsPerPage;
-        const endIndex = startIndex + recordsPerPage;
-        const tableRows = document.querySelectorAll('#users-table tbody tr');
-
-        tableRows.forEach((row, index) => {
-            if (index >= startIndex && index < endIndex) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    }
-
-    function renderPaginationNumbers() {
-        const paginationContainer = document.getElementById('pagination-numbers');
-        paginationContainer.innerHTML = '';
-
-        const totalPages = Math.ceil(totalRecords / recordsPerPage);
-
-        for (let i = 1; i <= totalPages; i++) {
-            const pageLink = document.createElement('a');
-            pageLink.href = '#';
-            pageLink.classList.add('tw-px-3', 'tw-py-2', 'tw-leading-tight', 'tw-text-gray-500', 'tw-bg-white',
-                'tw-border', 'tw-border-gray-300', 'tw-rounded-md', 'hover:tw-bg-gray-100', 'hover:tw-text-gray-700'
-            );
-
-            if (i === currentPage) {
-                pageLink.classList.add('tw-text-gray-700', 'tw-bg-gray-100');
-            }
-
-            pageLink.textContent = i;
-            pageLink.addEventListener('click', () => {
-                currentPage = i;
-                displayRecords();
-                renderPaginationNumbers();
-            });
-
-            paginationContainer.appendChild(pageLink);
-        }
-    }
-
-    function handleRecordsPerPageChange() {
-        const select = document.getElementById('records-per-page');
-        recordsPerPage = parseInt(select.value);
-        currentPage = 1;
-        displayRecords();
-        renderPaginationNumbers();
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        displayRecords();
-        renderPaginationNumbers();
-
-        const recordsPerPageSelect = document.getElementById('records-per-page');
-        recordsPerPageSelect.value = recordsPerPage;
-        recordsPerPageSelect.addEventListener('change', handleRecordsPerPageChange);
-
-
+        initPagination(totalRecords, tableId, paginationContainerId, defaultRecordsPerPage);
     });
 </script>
 

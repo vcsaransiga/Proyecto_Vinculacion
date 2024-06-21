@@ -109,7 +109,7 @@
                 </a>
             </li> --}}
             <li class="nav-item mt-2">
-                <div class="d-flex align-items-center nav-link">
+                <button class="d-flex align-items-center nav-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="ms-2"
                         viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                         <path fill-rule="evenodd"
@@ -117,7 +117,7 @@
                             clip-rule="evenodd" />
                     </svg>
                     <span class="font-weight-normal text-md ms-2">Informacion</span>
-                </div>
+                </button>
             </li>
             <li class="nav-item border-start my-0 pt-2">
                 <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('users.index') ? 'active' : '' }}"
