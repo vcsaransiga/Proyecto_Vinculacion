@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('kardex', function (Blueprint $table) {
             $table->string('id_kardex')->primary();
-            $table->integer('id_ope')->nullable();
-            $table->string('id_ware')->nullable();
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
-            $table->date('date')->nullable();
-            $table->integer('quantity')->nullable();
-            $table->float('price')->nullable();
-            $table->integer('balance')->nullable();
-            $table->integer('doc_reference')->nullable();
-            $table->string('operation_type')->nullable();
+            $table->integer('id_ope');
+            $table->string('id_ware');
+            $table->string('name');
+            $table->string('description');
+            $table->date('date');
+            $table->integer('quantity');
+            $table->float('price');
+            $table->integer('balance');
+            $table->integer('doc_reference');
+            $table->string('operation_type');
             $table->timestamps();
 
             // Índices adicionales

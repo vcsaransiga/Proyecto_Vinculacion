@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ModuleSeeder::class,
             CategoryItemSeeder::class,
             MeasurementUnitSeeder::class,
+            OperationTypeSeeder::class,
         ]);
     }
 }

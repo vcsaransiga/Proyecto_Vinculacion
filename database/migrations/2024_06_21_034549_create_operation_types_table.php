@@ -9,23 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('operations_type', function (Blueprint $table) {
-            $table->increments('id_ope');
-            $table->string('name');
-            $table->string('mov_type');
+        Schema::create('operation_types', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('operations_type');
+        Schema::dropIfExists('operation_types');
     }
 };

@@ -15,7 +15,7 @@ use App\Http\Controllers\ResponsibleController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\CategoryItemController;
 use App\Http\Controllers\MeasurementUnitController;
-
+use App\Http\Controllers\OperationTypeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -139,3 +139,5 @@ Route::resource('modules', ModuleController::class)->middleware('auth');
 
 Route::resource('categories_items', CategoryItemController::class)->middleware('auth');
 Route::resource('measurement_units', MeasurementUnitController::class)->middleware('auth');
+
+Route::resource('operations', OperationTypeController::class);
