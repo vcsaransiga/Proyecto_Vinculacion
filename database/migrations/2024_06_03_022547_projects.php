@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->string('id_pro')->primary();
-            $table->string('id_responsible')->nullable();
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
-            $table->string('status')->nullable();
-            $table->float('progress')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->float('budget')->nullable();
+            $table->string('id_responsible');
+            $table->string('name');
+            $table->text('description');
+            $table->string('status');
+            $table->float('progress');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->float('budget');
             $table->timestamps();
 
             // Índices adicionales

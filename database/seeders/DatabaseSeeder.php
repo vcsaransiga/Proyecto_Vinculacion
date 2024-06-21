@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             CategoryItemSeeder::class,
             MeasurementUnitSeeder::class,
             OperationTypeSeeder::class,
+            ProjectSeeder::class,
         ]);
     }
 }
