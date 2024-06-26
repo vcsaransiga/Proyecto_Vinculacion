@@ -106,6 +106,11 @@ Route::post('/reset-password', [ResetPasswordController::class, 'store'])
 
 
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+
 Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile');
 Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('users.update');
 
@@ -145,3 +150,4 @@ Route::resource('measurement_units', MeasurementUnitController::class)->middlewa
 Route::resource('operations', OperationTypeController::class)->middleware('auth');
 
 Route::resource('projects', ProjectController::class)->middleware('auth');
+
