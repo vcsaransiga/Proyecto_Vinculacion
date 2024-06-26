@@ -2,8 +2,8 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 
         <div class="top-0 bg-cover z-index-n1 min-height-100 max-height-200 h-25 position-absolute w-100 start-0 end-0"
-            style="background-image: url('../../../assets/img/header-blue-purple.jpg'); background-position: bottom;">
-        </div>
+        style="background-color: #F9FAFB ; background-position: bottom;">
+    </div>
         <x-app.navbar />
         <div class="px-5 py-4 container-fluid ">
             <form action="{{ route('users.update', auth()->user()->id) }}" method="POST">
@@ -26,10 +26,10 @@
                                 <div class="col-sm-auto col-8 my-auto">
                                     <div class="h-100">
                                         <h5 class="mb-1 font-weight-bolder">
-                                            {{ auth()->user()->name }}
+                                            {{ auth()->user()->name }} {{ auth()-> user()->last_name }}
                                         </h5>
                                         <p class="mb-0 font-weight-bold text-sm">
-                                            CEO / Co-Founder
+                                            Empleado UEP
                                         </p>
                                     </div>
                                 </div> 
@@ -55,7 +55,7 @@
                     <div class="col-lg-9 col-12 ">
                         <div class="card " id="basic-info">
                             <div class="card-header">
-                                <h5>Basic Info</h5>
+                                <h5>Informacion Basica</h5>
                             </div>
                             <div class="pt-0 card-body">
 
@@ -63,7 +63,7 @@
                                     <div class="col-6">
                                         <label for="name">Nombre</label>
                                         <input type="text" name="name" id="name"
-                                            value="{{ old('name', auth()->user()->name) }}" class="form-control">
+                                            value="{{ old('name', auth()->user()->name) }} {{ auth()-> user()->last_name }}" class="form-control">
                                         @error('name')
                                             <span class="text-danger text-sm">{{ $message }}</span>
                                         @enderror
@@ -81,7 +81,6 @@
                                     <div class="col-6">
                                         <label for="location">Direccion</label>
                                         <input type="text" name="location" id="location"
-                                            placeholder="Bucharest, Romania"
                                             value="{{ old('location', auth()->user()->location) }}"
                                             class="form-control">
                                         @error('location')
@@ -91,7 +90,7 @@
 
                                     <div class="col-6">
                                         <label for="phone">Telefono</label>
-                                        <input type="text" name="phone" id="phone" placeholder="0733456987"
+                                        <input type="text" name="phone" id="phone"
                                             value="{{ old('phone', auth()->user()->phone) }}" class="form-control">
                                         @error('phone')
                                             <span class="text-danger text-sm">{{ $message }}</span>
@@ -112,7 +111,6 @@
                 </div>
             </form>
         </div>
-        <x-app.footer />
         </div>
     </main>
 
