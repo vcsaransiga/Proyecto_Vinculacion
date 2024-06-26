@@ -1,9 +1,9 @@
-<aside class="overflow-hidden sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start "
+<aside class="overflow-hidden sidenav navbar navbar-vertical h-100 navbar-expand-xs border-0 bg-slate-900 fixed-start "
     id="sidenav-main">
     <div class="sidenav-header" style="margin-bottom:60px;">
         <img src="../assets/img/logoDash.png" alt="logo" style="height:150px;">
     </div>
-    <div class="collapse navbar-collapse px-4 overflow-hidden  w-auto " id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse px-4 overflow-hidden h-100 w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link  {{ is_current_route('dashboard') ? 'active' : '' }}"
