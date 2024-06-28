@@ -11,16 +11,14 @@
                 @method('PUT')
                 <div class="mt-5 mb-5 mt-lg-9 row justify-content-center">
                     <div class="col-lg-9 col-12">
-                        <div class="card card-body" id="profile">
-                            <img src="../../../assets/img/header-orange-purple.jpg" alt="pattern-lines"
-                                class="top-0 rounded-2 position-absolute start-0 w-100 h-100">
-
+                        <div class="card card-body" style="box-shadow: 2px 3px 25px -2px rgb(43, 51, 95);" id="profile">
                             <div class="row z-index-2 justify-content-center align-items-center">
                                 <div class="col-sm-auto col-4">
                                     <div class="avatar avatar-xl position-relative">
                                         <img src="../assets/img/team-2.jpg" alt="bruce"
                                             class="w-100 h-100 object-fit-cover border-radius-lg shadow-sm"
                                             id="preview">
+                                            
                                     </div>
                                 </div>
                                 <div class="col-sm-auto col-8 my-auto">
