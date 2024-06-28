@@ -15,7 +15,7 @@
                             <div class="row z-index-2 justify-content-center align-items-center">
                                 <div class="col-sm-auto col-4">
                                     <div class="avatar avatar-xl position-relative">
-                                        <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('default.png') }}" style="width: 150px; height: 150px;">
+                                            <img class="w-100 h-100 object-fit-cover border-radius-lg shadow-sm" src="{{ Auth::user()->profile_photo ? asset('storage/app/public/profile_photos' . Auth::user()->profile_photo) : asset('storage/app/public/profile_photos/default.jpg') }}" id="profileImage" style="cursor:pointer;">
                                             <input type="file" name="profile_photo" id="profilePhotoInput" style="display:none;">
                                             @error('profile_photo')
                                                 <span class="text-danger text-sm">{{ $message }}</span>
