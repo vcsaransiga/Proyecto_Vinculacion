@@ -6,7 +6,7 @@
     </div>
         <x-app.navbar />
         <div class="px-5 py-4 container-fluid ">
-            <form action="{{ route('users.update', auth()->user()->id) }}" method="POST">
+            <form action="{{ route('users.update', auth()->user()->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mt-5 mb-5 mt-lg-9 row justify-content-center">
@@ -15,7 +15,7 @@
                             <div class="row z-index-2 justify-content-center align-items-center">
                                 <div class="col-sm-auto col-4">
                                     <div class="avatar avatar-xl position-relative">
-                                            <img class="w-100 h-100 object-fit-cover border-radius-lg shadow-sm" src="{{ Auth::user()->profile_photo ? asset('storage/profile_images' . Auth::user()->profile_photo) : asset('storage/profile_images/default.jpg') }}" id="profileImage" style="cursor:pointer;">
+                                        <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('default.png') }}" style="width: 150px; height: 150px;">
                                             <input type="file" name="profile_photo" id="profilePhotoInput" style="display:none;">
                                             @error('profile_photo')
                                                 <span class="text-danger text-sm">{{ $message }}</span>

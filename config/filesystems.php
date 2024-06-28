@@ -36,12 +36,11 @@ return [
             'throw' => false,
         ],
 
-        'public' => [
+        'public/profile_photos' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => storage_path('app/public/profile_photos'),
+            'url' => env('APP_URL') . '/storage/public/profile_photos',
             'visibility' => 'public',
-            'throw' => false,
         ],
 
         's3' => [
