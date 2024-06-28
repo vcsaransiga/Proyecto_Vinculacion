@@ -110,6 +110,9 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/proyectos', function () {
+    return view('proyectos');
+})->name('proyectos');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile');
 Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('users.update');
