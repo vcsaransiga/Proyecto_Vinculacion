@@ -18,7 +18,7 @@
                                         <img src="../assets/img/team-2.jpg" alt="bruce"
                                             class="w-100 h-100 object-fit-cover border-radius-lg shadow-sm"
                                             id="preview">
-                                            
+
                                     </div>
                                 </div>
                                 <div class="col-sm-auto col-8 my-auto">
@@ -27,7 +27,7 @@
                                             {{ auth()->user()->name }} {{ auth()-> user()->last_name }}
                                         </h5>
                                         <p class="mb-0 font-weight-bold text-sm">
-                                            Empleado UEP
+                                            {{ auth()->user()->last_name }}
                                         </p>
                                     </div>
                                 </div> 
