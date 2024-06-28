@@ -18,7 +18,7 @@
                                         <img src="../assets/img/team-2.jpg" alt="bruce"
                                             class="w-100 h-100 object-fit-cover border-radius-lg shadow-sm"
                                             id="preview">
-
+                                   
                                     </div>
                                 </div>
                                 <div class="col-sm-auto col-8 my-auto">
@@ -61,7 +61,7 @@
                                     <div class="col-6">
                                         <label for="name">Nombre</label>
                                         <input type="text" name="name" id="name"
-                                            value="{{ old('name', auth()->user()->name) }} {{ auth()-> user()->last_name }}" class="form-control">
+                                            value="{{ old('name', auth()->user()->name) }}" class="form-control">
                                         @error('name')
                                             <span class="text-danger text-sm">{{ $message }}</span>
                                         @enderror
@@ -77,11 +77,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <label for="location">Direccion</label>
-                                        <input type="text" name="location" id="location"
-                                            value="{{ old('location', auth()->user()->location) }}"
+                                        <label for="location">Apellido</label>
+                                        <input type="text" name="last_name" id="last_name"
+                                            value="{{ old('last_name', auth()->user()->last_name) }}"
                                             class="form-control">
-                                        @error('location')
+                                        @error('last_name')
                                             <span class="text-danger text-sm">{{ $message }}</span>
                                         @enderror
                                     </div>
