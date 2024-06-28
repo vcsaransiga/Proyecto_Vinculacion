@@ -142,9 +142,7 @@
                 <li class="nav-item ps-2 d-flex align-items-center">
                     <a href="{{route('users.profile')}}" class="nav-link text-body p-0">
                         <img class="avatar avatar-sm"
-                        src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('storage/profile_photos/default.jpg') }}" 
-                        id="profileImage" 
-                        style="cursor:pointer;"> 
+                        src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('storage/profile_photos/default.jpg') }}"  style="cursor:pointer;"> 
                     </a>
                 </li>
             </ul>

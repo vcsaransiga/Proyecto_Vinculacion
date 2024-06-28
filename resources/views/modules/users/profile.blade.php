@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="col-6">
                                         <label for="email">Correo Electronico</label>
-                                        <input type="email" name="email" id="email"
+                                        <input type="email" name="email" id="email"  readonly
                                             value="{{ old('email', auth()->user()->email) }}" class="form-control">
                                         @error('email')
                                             <span class="text-danger text-sm">{{ $message }}</span>
