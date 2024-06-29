@@ -610,4 +610,5 @@
         </div>
     </main>
 
+    <script src="{{ asset('js/breadcrumbs.js') }}"></script>
 </x-app-layout>
