@@ -30,7 +30,7 @@ class PeriodController extends Controller
             'end_date' => $request->end_date,
         ]);
 
-        return redirect()->route('periods.index')->with('success', 'Periodo agregado exitosamente.');
+        return redirect()->route('periods.index')->with('success', 'Periodo agregado correctamente.');
     }
 
     public function update(Request $request, Period $period)
@@ -49,7 +49,7 @@ class PeriodController extends Controller
             'end_date' => $request->end_date,
         ]);
 
-        return redirect()->route('periods.index')->with('success', 'Periodo actualizado exitosamente.');
+        return redirect()->route('periods.index')->with('success', 'Periodo actualizado correctamente.');
     }
 
     public function search(Request $request)
@@ -65,6 +65,6 @@ class PeriodController extends Controller
     public function destroy(Period $period)
     {
         $period->delete();
-        return redirect()->route('periods.index')->with('success', 'Periodo eliminado exitosamente.');
+        return redirect()->route('periods.index')->with('success', 'Periodo eliminado correctamente.');
     }
 }

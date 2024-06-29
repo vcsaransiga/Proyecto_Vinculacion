@@ -39,7 +39,7 @@ class StudentController extends Controller
             'hours' => $request->hours,
         ]);
 
-        return redirect()->route('students.index')->with('success', 'Estudiante agregado exitosamente.');
+        return redirect()->route('students.index')->with('success', 'Estudiante agregado correctamente.');
     }
 
     public function update(Request $request, $id_stud)
@@ -54,7 +54,7 @@ class StudentController extends Controller
         $student = Student::findOrFail($id_stud);
         $student->update($request->all());
 
-        return redirect()->route('students.index')->with('success', 'Estudiante actualizado exitosamente.');
+        return redirect()->route('students.index')->with('success', 'Estudiante actualizado correctamente.');
     }
 
 
@@ -75,6 +75,6 @@ class StudentController extends Controller
         $student = Student::findOrFail($id_stud);
         $student->delete();
 
-        return redirect()->route('students.index')->with('success', 'Estudiante eliminado exitosamente.');
+        return redirect()->route('students.index')->with('success', 'Estudiante eliminado correctamente.');
     }
 }

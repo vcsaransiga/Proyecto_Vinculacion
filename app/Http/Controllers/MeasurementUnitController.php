@@ -30,7 +30,7 @@ class MeasurementUnitController extends Controller
             'symbol' => $request->symbol,
         ]);
 
-        return redirect()->route('measurement_units.index')->with('success', 'Unidad de medida creada exitosamente.');
+        return redirect()->route('measurement_units.index')->with('success', 'Unidad de medida creada correctamente.');
     }
 
     public function update(Request $request, MeasurementUnit $measurement_unit)
@@ -42,12 +42,12 @@ class MeasurementUnitController extends Controller
 
         $measurement_unit->update($request->all());
 
-        return redirect()->route('measurement_units.index')->with('success', 'Unidad de medida actualizada exitosamente.');
+        return redirect()->route('measurement_units.index')->with('success', 'Unidad de medida actualizada correctamente.');
     }
 
     public function destroy(MeasurementUnit $measurement_unit)
     {
         $measurement_unit->delete();
-        return redirect()->route('measurement_units.index')->with('success', 'Unidad de medida eliminada exitosamente.');
+        return redirect()->route('measurement_units.index')->with('success', 'Unidad de medida eliminada correctamente.');
     }
 }

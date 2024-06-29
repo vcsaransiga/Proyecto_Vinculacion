@@ -31,7 +31,7 @@ class CategoryItemController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('categories_items.index')->with('success', 'Categoría de artículo creada exitosamente.');
+        return redirect()->route('categories_items.index')->with('success', 'Categoría de artículo creada correctamente.');
     }
 
     public function update(Request $request, $id_catitem)
@@ -44,7 +44,7 @@ class CategoryItemController extends Controller
         $categoryItem = CategoryItem::findOrFail($id_catitem);
         $categoryItem->update($request->all());
 
-        return redirect()->route('categories_items.index')->with('success', 'Categoría de artículo actualizada exitosamente.');
+        return redirect()->route('categories_items.index')->with('success', 'Categoría de artículo actualizada correctamente.');
     }
 
     public function search(Request $request)
@@ -64,7 +64,7 @@ class CategoryItemController extends Controller
         $categoryItem = CategoryItem::findOrFail($id_catitem);
         $categoryItem->delete();
 
-        return redirect()->route('categories_items.index')->with('success', 'Categoría de artículo eliminada exitosamente.');
+        return redirect()->route('categories_items.index')->with('success', 'Categoría de artículo eliminada correctamente.');
     }
 
     public function deleteSelectedCategories(Request $request)
