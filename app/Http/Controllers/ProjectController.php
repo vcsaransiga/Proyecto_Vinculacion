@@ -44,7 +44,7 @@ class ProjectController extends Controller
             'budget' => $request->budget,
         ]);
 
-        return redirect()->route('projects.index')->with('success', 'Proyecto creado exitosamente.');
+        return redirect()->route('projects.index')->with('success', 'Proyecto creado correctamente.');
     }
 
     public function show($id)
@@ -76,7 +76,7 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $project->update($request->all());
 
-        return redirect()->route('projects.index')->with('success', 'Proyecto actualizado exitosamente.');
+        return redirect()->route('projects.index')->with('success', 'Proyecto actualizado correctamente.');
     }
 
 
@@ -91,6 +91,6 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $project->delete();
 
-        return redirect()->route('projects.index')->with('success', 'Proyecto eliminado exitosamente.');
+        return redirect()->route('projects.index')->with('success', 'Proyecto eliminado correctamente.');
     }
 }

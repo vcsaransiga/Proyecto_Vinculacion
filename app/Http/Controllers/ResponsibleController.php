@@ -41,7 +41,7 @@ class ResponsibleController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('responsibles.index')->with('success', 'Responsable agregado exitosamente.');
+        return redirect()->route('responsibles.index')->with('success', 'Responsable agregado correctamente.');
     }
 
     public function update(Request $request, $id_responsible)
@@ -57,7 +57,7 @@ class ResponsibleController extends Controller
         $responsible = Responsible::findOrFail($id_responsible);
         $responsible->update($request->all());
 
-        return redirect()->route('responsibles.index')->with('success', 'Responsable actualizado exitosamente.');
+        return redirect()->route('responsibles.index')->with('success', 'Responsable actualizado correctamente.');
     }
 
     public function search(Request $request)
@@ -84,6 +84,6 @@ class ResponsibleController extends Controller
         $responsible = Responsible::findOrFail($id_responsible);
         $responsible->delete();
 
-        return redirect()->route('responsibles.index')->with('success', 'Responsable eliminado exitosamente.');
+        return redirect()->route('responsibles.index')->with('success', 'Responsable eliminado correctamente.');
     }
 }

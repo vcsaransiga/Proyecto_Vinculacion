@@ -1,7 +1,6 @@
 <x-app-layout>
-    <x-app.navbar />
-
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        <x-app.navbar />
         <div class="container-fluid py-6">
             <div class="row">
                 <div class="col-12">

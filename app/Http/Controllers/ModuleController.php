@@ -39,7 +39,7 @@ class ModuleController extends Controller
             'vinculation_hours' => $request->vinculation_hours,
         ]);
 
-        return redirect()->route('modules.index')->with('success', 'Módulo creado exitosamente.');
+        return redirect()->route('modules.index')->with('success', 'Módulo creado correctamente.');
     }
 
     public function update(Request $request, $id_mod)
@@ -55,7 +55,7 @@ class ModuleController extends Controller
         $module = Module::findOrFail($id_mod);
         $module->update($request->all());
 
-        return redirect()->route('modules.index')->with('success', 'Módulo actualizado exitosamente.');
+        return redirect()->route('modules.index')->with('success', 'Módulo actualizado correctamente.');
     }
 
     public function search(Request $request)
@@ -83,6 +83,6 @@ class ModuleController extends Controller
         $module = Module::findOrFail($id_mod);
         $module->delete();
 
-        return redirect()->route('modules.index')->with('success', 'Módulo eliminado exitosamente.');
+        return redirect()->route('modules.index')->with('success', 'Módulo eliminado correctamente.');
     }
 }

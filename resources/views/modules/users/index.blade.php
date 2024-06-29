@@ -9,7 +9,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <h5 class="">Administración de Usuarios</h5>
-                                    <p class="mb-0 text-sm">Here you can manage users.</p>
+                                    <p class="mb-0 text-sm">Aqui puedes gestionar los usuarios.</p>
                                 </div>
                                 <div class="col-6 text-end">
                                     <button type="button" class="btn btn-dark btn-primary" data-bs-toggle="modal"

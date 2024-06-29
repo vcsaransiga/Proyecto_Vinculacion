@@ -33,7 +33,7 @@ class CategoriesWarehouseController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('categories_warehouse.index')->with('success', 'Categoría creada exitosamente.');
+        return redirect()->route('categories_warehouse.index')->with('success', 'Categoría creada correctamente.');
     }
 
     public function update(Request $request, $id_catware)
@@ -45,7 +45,7 @@ class CategoriesWarehouseController extends Controller
         $category = CategoriesWarehouse::find($id_catware);
         $category->update($request->all());
 
-        return redirect()->route('categories_warehouse.index')->with('success', 'Categoría actualizada exitosamente.');
+        return redirect()->route('categories_warehouse.index')->with('success', 'Categoría actualizada correctamente.');
     }
 
     public function search(Request $request)
@@ -70,6 +70,6 @@ class CategoriesWarehouseController extends Controller
         $category = CategoriesWarehouse::find($id_catware);
         $category->delete();
 
-        return redirect()->route('categories_warehouse.index')->with('success', 'Categoría eliminada exitosamente.');
+        return redirect()->route('categories_warehouse.index')->with('success', 'Categoría eliminada correctamente.');
     }
 }

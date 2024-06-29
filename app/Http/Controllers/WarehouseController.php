@@ -41,7 +41,7 @@ class WarehouseController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('warehouses.index')->with('success', 'Bodega creada exitosamente.');
+        return redirect()->route('warehouses.index')->with('success', 'Bodega creada correctamente.');
     }
 
     public function edit(Warehouse $warehouse)
@@ -60,7 +60,7 @@ class WarehouseController extends Controller
 
         $warehouse->update($request->all());
 
-        return redirect()->route('warehouses.index')->with('success', 'Bodega actualizada exitosamente.');
+        return redirect()->route('warehouses.index')->with('success', 'Bodega actualizada correctamente.');
     }
 
     public function search(Request $request)
@@ -85,6 +85,6 @@ class WarehouseController extends Controller
     public function destroy(Warehouse $warehouse)
     {
         $warehouse->delete();
-        return redirect()->route('warehouses.index')->with('success', 'Bodega eliminada exitosamente.');
+        return redirect()->route('warehouses.index')->with('success', 'Bodega eliminada correctamente.');
     }
 }

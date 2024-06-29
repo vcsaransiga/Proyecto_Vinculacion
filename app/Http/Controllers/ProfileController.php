@@ -16,9 +16,6 @@ class ProfileController extends Controller
 
     public function update(Request $request, User $user)
     {
-        // if (config('app.is_demo') && in_array(Auth::id(), [1])) {
-        //     return back()->with('error', "You are in a demo version. You are not allowed to change the email for default users.");
-        // }
 
         $request->validate([
             'name' => 'required|min:3|max:255',
@@ -49,18 +46,6 @@ class ProfileController extends Controller
                 'about' => $request->about,
             ]);
         }
-
-
-
-        // $user->update([
-        //     'name' => $request->name,
-        //     'last_name' => $request->last_name,
-        //     'email' => $request->email,
-        //     'profile_photo' => $request->profile_photo,
-        //     'phone' => $request->phone,
-        //     'about' => $request->about,
-        // ]);
-
 
         return back()->with('success', 'Tu perfil ha sido actualizado.');
     }
