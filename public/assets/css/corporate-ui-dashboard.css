@@ -10106,7 +10106,7 @@ fieldset:disabled .btn {
 }
 
 .py-6 {
-  padding-top: 4rem !important;
+  padding-top: 0rem !important;
   padding-bottom: 4rem !important;
 }
 
@@ -15334,7 +15334,7 @@ fieldset:disabled .btn {
   }
 
   .mt-lg-9 {
-    margin-top: 10rem !important;
+    margin-top: 5rem !important;
   }
 
   .mt-lg-10 {
@@ -22602,7 +22602,7 @@ hr.horizontal.gray-light {
 .navbar-vertical.navbar-expand-xs .navbar-collapse {
   display: block;
   overflow: auto;
-  height: calc(100vh - 300px);
+  height: 100vh;
 }
 
 .navbar-vertical.navbar-expand-xs>[class*="container"] {
