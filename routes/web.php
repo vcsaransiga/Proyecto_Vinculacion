@@ -107,6 +107,10 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/proyectos', function () {
+    return view('proyectos');
+})->name('proyectos');
+
 
 // Route::get('/laravel-examples/user-profile', [ProfileController::class, 'index'])->name('users.profile')->middleware('auth');
 // Route::put('/laravel-examples/user-profile/update', [ProfileController::class, 'update'])->name('users.update')->middleware('auth');
