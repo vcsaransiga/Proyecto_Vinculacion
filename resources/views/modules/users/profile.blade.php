@@ -6,7 +6,7 @@
     </div>
         <x-app.navbar />
         <div class="px-5 py-4 container-fluid ">
-            <form action="{{ route('users.update', auth()->user()->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('profile.update', auth()->user()->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mt-5 mb-5 mt-lg-9 row justify-content-center">
