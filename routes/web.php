@@ -115,7 +115,7 @@ Route::get('/about', function () {
 
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile');
-Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('users.update');
+Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
 
 
 
