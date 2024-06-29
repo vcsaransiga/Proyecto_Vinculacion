@@ -261,7 +261,7 @@
             var studentHours = button.getAttribute('data-student-hours');
 
             var modalForm = editStudentModal.querySelector('form');
-            modalForm.action = '/students/' + studentId;
+            modalForm.action = '/info/students/' + studentId;
 
             var modalNameInput = editStudentModal.querySelector('#edit_name');
             var modalLastNameInput = editStudentModal.querySelector('#edit_last_name');

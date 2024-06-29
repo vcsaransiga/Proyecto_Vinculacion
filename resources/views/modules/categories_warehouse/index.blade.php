@@ -239,7 +239,7 @@
             var categoryName = button.getAttribute('data-category-name');
 
             var modalForm = editCategoryModal.querySelector('form');
-            modalForm.action = '/categories_warehouse/' + categoryId;
+            modalForm.action = '/info/categories_warehouse/' + categoryId;
 
             var modalNameInput = editCategoryModal.querySelector('#edit_name');
             modalNameInput.value = categoryName;

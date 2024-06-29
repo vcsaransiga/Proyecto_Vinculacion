@@ -235,7 +235,7 @@
             var categoryItemDescription = button.getAttribute('data-category-item-description');
 
             var modalForm = editCategoryItemModal.querySelector('form');
-            modalForm.action = '/categories_items/' + categoryItemId;
+            modalForm.action = '/info/categories_items/' + categoryItemId;
 
             var modalNameInput = editCategoryItemModal.querySelector('#edit_name');
             var modalDescriptionInput = editCategoryItemModal.querySelector('#edit_description');

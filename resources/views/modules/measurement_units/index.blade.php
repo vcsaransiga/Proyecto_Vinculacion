@@ -234,7 +234,7 @@
             var unitSymbol = button.getAttribute('data-unit-symbol');
 
             var modalForm = editUnitModal.querySelector('form');
-            modalForm.action = '/measurement_units/' + unitId;
+            modalForm.action = '/info/measurement_units/' + unitId;
 
             var modalNameInput = editUnitModal.querySelector('#edit_name');
             var modalSymbolInput = editUnitModal.querySelector('#edit_symbol');

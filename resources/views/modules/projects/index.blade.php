@@ -331,7 +331,7 @@
             var projectBudget = button.getAttribute('data-project-budget');
 
             var modalForm = editProjectModal.querySelector('form');
-            modalForm.action = '/projects/' + projectId;
+            modalForm.action = '/info/projects/' + projectId;
 
             var modalNameInput = editProjectModal.querySelector('#edit_name');
             var modalResponsibleInput = editProjectModal.querySelector('#edit_id_responsible');

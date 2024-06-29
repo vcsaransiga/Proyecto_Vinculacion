@@ -287,7 +287,7 @@
             var moduleVinculationHours = button.getAttribute('data-module-vinculation_hours');
 
             var modalForm = editModuleModal.querySelector('form');
-            modalForm.action = '/modules/' + moduleId;
+            modalForm.action = '/info/modules/' + moduleId;
 
             var modalNameInput = editModuleModal.querySelector('#edit_name');
             var modalResponsibleInput = editModuleModal.querySelector('#edit_id_responsible');

@@ -78,9 +78,9 @@
                                     <tr>
                                         <th scope="col" class="tw-p-4">
                                             <div class="tw-flex tw-items-center">
-                                                <input id="checkbox-all-search" type="checkbox"
+                                                <input id="select_all_ids" type="checkbox"
                                                     class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                <label for="checkbox-all-search" class="tw-sr-only">checkbox</label>
+
                                             </div>
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
@@ -115,11 +115,10 @@
                                             </td> --}}
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $user->id }}"
-                                                        type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $user->id }}"
-                                                        class="tw-sr-only">checkbox</label>
+                                                    <input type="checkbox" id="" name="ids"
+                                                        class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600"
+                                                        value="{{ $user->id }}">
+
                                                 </div>
                                             </td>
                                             {{-- <th scope="row"
@@ -317,7 +316,7 @@
             var userStatus = button.getAttribute('data-user-status');
 
             var modalForm = editUserModal.querySelector('form');
-            modalForm.action = '/users/' + userId;
+            modalForm.action = '/info/users/' + userId;
 
             var modalNameInput = editUserModal.querySelector('#edit_name');
             var modalLastNameInput = editUserModal.querySelector('#edit_last_name');

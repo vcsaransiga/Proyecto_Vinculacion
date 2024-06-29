@@ -263,7 +263,7 @@
             var periodEndDate = button.getAttribute('data-period-end_date');
 
             var modalForm = editPeriodModal.querySelector('form');
-            modalForm.action = '/periods/' + periodId;
+            modalForm.action = '/info/periods/' + periodId;
 
             var modalNameInput = editPeriodModal.querySelector('#edit_name');
             var modalAcademicYearInput = editPeriodModal.querySelector('#edit_academic_year');
@@ -283,7 +283,7 @@
         const totalRecords = {{ $periods->count() }};
         const tableId = 'table-periods';
         const paginationContainerId = 'pagination-numbers';
-        const defaultRecordsPerPage = 10; 
+        const defaultRecordsPerPage = 10;
 
         initPagination(totalRecords, tableId, paginationContainerId, defaultRecordsPerPage);
     });

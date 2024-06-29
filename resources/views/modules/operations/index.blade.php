@@ -239,7 +239,7 @@
             var operationTypeMovType = button.getAttribute('data-operation-type-mov_type');
 
             var modalForm = editOperationTypeModal.querySelector('form');
-            modalForm.action = '/operations/' + operationTypeId;
+            modalForm.action = '/info/operations/' + operationTypeId;
 
             var modalNameInput = editOperationTypeModal.querySelector('#edit_name');
             var modalMovTypeInput = editOperationTypeModal.querySelector('#edit_mov_type');

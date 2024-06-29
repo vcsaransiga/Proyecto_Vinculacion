@@ -261,7 +261,7 @@
             var warehouseDescription = button.getAttribute('data-warehouse-description');
 
             var modalForm = editWarehouseModal.querySelector('form');
-            modalForm.action = '/warehouses/' + warehouseId;
+            modalForm.action = '/info/warehouses/' + warehouseId;
 
             var modalCatInput = editWarehouseModal.querySelector('#edit_id_catware');
             var modalNameInput = editWarehouseModal.querySelector('#edit_name');
@@ -312,7 +312,7 @@
         const totalRecords = {{ $warehouses->count() }};
         const tableId = 'warehouses-table';
         const paginationContainerId = 'pagination-numbers';
-        const defaultRecordsPerPage = 10; 
+        const defaultRecordsPerPage = 10;
 
         initPagination(totalRecords, tableId, paginationContainerId, defaultRecordsPerPage);
     });

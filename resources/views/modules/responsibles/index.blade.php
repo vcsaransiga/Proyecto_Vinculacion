@@ -286,7 +286,7 @@
             var responsibleStatus = button.getAttribute('data-responsible-status');
 
             var modalForm = editResponsibleModal.querySelector('form');
-            modalForm.action = '/responsibles/' + responsibleId;
+            modalForm.action = '/info/responsibles/' + responsibleId;
 
             var modalNameInput = editResponsibleModal.querySelector('#edit_name');
             var modalLastNameInput = editResponsibleModal.querySelector('#edit_last_name');
