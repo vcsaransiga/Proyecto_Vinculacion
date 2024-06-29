@@ -1,10 +1,6 @@
-import "./bootstrap";
-import "flowbite";
-
-// JavaScript para generar los breadcrumbs automáticamente
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener la URL actual
-    var currentUrl = window.location.href;
+    var currentUrl = window.location.pathname;
 
     // Obtener el elemento donde se agregarán los breadcrumbs
     var breadcrumbsContainer = document.getElementById("breadcrumbs");
@@ -20,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Construir cada elemento de breadcrumb
     urlParts.forEach(function (part, index) {
         // Construir la URL hasta el elemento actual
-        var breadcrumbUrl = urlParts.slice(0, index + 1).join("/");
+        var breadcrumbUrl = "/" + urlParts.slice(0, index + 1).join("/");
 
         // Construir el elemento de breadcrumb
         var breadcrumbItem = document.createElement("li");

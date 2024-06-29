@@ -26,7 +26,7 @@ class UserController extends Controller
 
         User::create($request->all());
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
     }
 
     public function update(Request $request, User $user)
@@ -40,7 +40,7 @@ class UserController extends Controller
         ]);
 
         $user->update($request->all());
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente.');
     }
 
     public function search(Request $request)
@@ -59,7 +59,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente.');
     }
 
     public function deleteSelectedUsers(Request $request)

@@ -22,7 +22,7 @@ class OperationTypeController extends Controller
 
         OperationType::create($request->all());
 
-        return redirect()->route('operations.index')->with('success', 'Tipo de operación creado exitosamente.');
+        return redirect()->route('operations.index')->with('success', 'Tipo de operación creado correctamente.');
     }
 
     public function update(Request $request, $id_ope)
@@ -35,7 +35,7 @@ class OperationTypeController extends Controller
         $operationType = OperationType::findOrFail($id_ope);
         $operationType->update($request->all());
 
-        return redirect()->route('operations.index')->with('success', 'Tipo de operación actualizado exitosamente.');
+        return redirect()->route('operations.index')->with('success', 'Tipo de operación actualizado correctamente.');
     }
 
     public function destroy($id_ope)
@@ -43,6 +43,6 @@ class OperationTypeController extends Controller
         $operationType = OperationType::findOrFail($id_ope);
         $operationType->delete();
 
-        return redirect()->route('operations.index')->with('success', 'Tipo de operación eliminado exitosamente.');
+        return redirect()->route('operations.index')->with('success', 'Tipo de operación eliminado correctamente.');
     }
 }
