@@ -115,7 +115,7 @@ Route::get('/proyectos', function () {
 })->name('proyectos');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile');
-Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('users.update');
+Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
 
 
 
@@ -153,4 +153,3 @@ Route::resource('measurement_units', MeasurementUnitController::class)->middlewa
 Route::resource('operations', OperationTypeController::class)->middleware('auth');
 
 Route::resource('projects', ProjectController::class)->middleware('auth');
-
