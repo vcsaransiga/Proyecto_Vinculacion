@@ -59,24 +59,17 @@ class CategoryItemController extends Controller
         return view('modules.categories_items.index', compact('categoryItems'));
     }
 
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        CategoryItem::whereIn('id_catitem', $ids)->delete();
+        return response()->json(["success" => "Categorias seleccionadas eliminadas exitosamente."]);
+    }
     public function destroy($id_catitem)
     {
         $categoryItem = CategoryItem::findOrFail($id_catitem);
         $categoryItem->delete();
 
         return redirect()->route('categories_items.index')->with('success', 'Categoría de artículo eliminada exitosamente.');
-    }
-
-    public function deleteSelectedCategories(Request $request)
-    {
-        $categoryIds = $request->input('ids');
-
-        // Eliminar las categorías seleccionadas de la base de datos
-        $categoryItems = CategoryItem::whereIn('id_catitem', $categoryIds)->get();
-        foreach ($categoryItems as $categoryItem) {
-            $categoryItem->delete();
-        }
-
-        return response()->json(['message' => 'Categorías de artículos eliminadas correctamente.']);
     }
 }

@@ -73,25 +73,17 @@ class ResponsibleController extends Controller
 
         return view('modules.responsibles.index', compact('responsibles'));
     }
-
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        Responsible::whereIn('id_responsible', $ids)->delete();
+        return response()->json(["success" => "Responsables seleccionados eliminados exitosamente."]);
+    }
     public function destroy($id_responsible)
     {
         $responsible = Responsible::findOrFail($id_responsible);
         $responsible->delete();
 
         return redirect()->route('responsibles.index')->with('success', 'Responsable eliminado exitosamente.');
-    }
-
-    public function deleteSelectedResponsibles(Request $request)
-    {
-        $responsibleIds = $request->input('ids');
-
-        // Eliminar los responsables seleccionados de la base de datos
-        $responsibles = Responsible::whereIn('id_responsible', $responsibleIds)->get();
-        foreach ($responsibles as $responsible) {
-            $responsible->delete();
-        }
-
-        return response()->json(['message' => 'Responsables eliminados correctamente.']);
     }
 }

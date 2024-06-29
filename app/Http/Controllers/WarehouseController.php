@@ -75,6 +75,13 @@ class WarehouseController extends Controller
         return view('modules.warehouses.index', compact('warehouses'));
     }
 
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        Warehouse::whereIn('id_ware', $ids)->delete();
+        return response()->json(["success" => "Bodegas seleccionadas eliminadas exitosamente."]);
+    }
+
     public function destroy(Warehouse $warehouse)
     {
         $warehouse->delete();

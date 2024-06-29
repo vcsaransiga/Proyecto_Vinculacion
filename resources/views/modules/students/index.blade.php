@@ -31,6 +31,14 @@
                             </div>
                         @endif
 
+                        <!-- Mensaje de éxito -->
+                        <div id="message"
+                            class="tw-hidden tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-rounded tw-relative"
+                            role="alert">
+                            <strong class="tw-font-bold">Éxito!</strong>
+                            <span class="tw-block sm:tw-inline" id="message-text"></span>
+                        </div>
+
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
@@ -44,7 +52,7 @@
                                             Acción
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Eliminar</a>
+                                            <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -73,9 +81,9 @@
                                     <tr>
                                         <th scope="col" class="tw-p-4">
                                             <div class="tw-flex tw-items-center">
-                                                <input id="checkbox-all-search" type="checkbox"
+                                                <input id="select_all_ids" type="checkbox"
                                                     class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                <label for="checkbox-all-search" class="tw-sr-only">checkbox</label>
+
                                             </div>
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">ID</th>
@@ -88,15 +96,14 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($students as $student)
-                                        <tr
+                                        <tr id="student_ids{{ $student->id_stud }}"
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $student->id_stud }}"
-                                                        type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $student->id_stud }}"
-                                                        class="tw-sr-only">checkbox</label>
+                                                    <input type="checkbox" id="" name="ids"
+                                                        class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600"
+                                                        value="{{ $student->id_stud }}">
+
                                                 </div>
                                             </td>
                                             <td class="tw-px-6 tw-py-4">{{ $student->id_stud }}</td>
@@ -128,7 +135,7 @@
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="tw-font-medium tw-text-red-600 dark:tw-text-red-500 hover:tw-underline"
-                                                        onclick="return confirm('Are you sure you want to delete this student?')">
+                                                        onclick="return confirm('Estas seguro de quieres eliminar este estudiante?')">
                                                         <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" fill="currentColor"
@@ -287,15 +294,16 @@
     });
 </script>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const checkboxAll = document.getElementById('checkbox-all-search');
-        const checkboxes = document.querySelectorAll('input[id^="checkbox-table-search-"]');
-
-        checkboxAll.addEventListener('change', function() {
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = checkboxAll.checked;
-            });
+        initializeDeleteAll({
+            selectAllId: "#select_all_ids",
+            checkboxClass: ".checkbox_ids",
+            deleteButtonId: "#deleteSelected",
+            deleteUrl: "{{ route('student.delete') }}",
+            csrfToken: "{{ csrf_token() }}",
+            rowIdPrefix: "#student_ids"
         });
     });
 </script>

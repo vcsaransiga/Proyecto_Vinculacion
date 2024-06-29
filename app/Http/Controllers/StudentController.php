@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller
 {
@@ -58,18 +59,15 @@ class StudentController extends Controller
     }
 
 
-    // public function search(Request $request)
-    // {
-    //     $searchTerm = $request->input('search');
 
-    //     $users = Student::where('id_stud', 'LIKE', "%$searchTerm%")
-    //         ->orWhere('name', 'LIKE', "%$searchTerm%")
-    //         ->orWhere('last_name', 'LIKE', "%$searchTerm%")
-    //         ->orWhere('course', 'LIKE', "%$searchTerm%")
-    //         ->get();
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        Student::whereIn('id_stud', $ids)->delete();
+        return response()->json(["success" => "Estudiantes seleccionados eliminados exitosamente."]);
+    }
 
-    //     return view('modules.students.index', compact('student'));
-    // }
+
     public function destroy($id_stud)
     {
         $student = Student::findOrFail($id_stud);

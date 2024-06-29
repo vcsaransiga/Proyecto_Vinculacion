@@ -125,30 +125,45 @@ Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profi
 
 
 Route::resource('/info/users', UserController::class)->middleware('auth');
+Route::delete('/info/selected-users', [UserController::class, 'deleteAll'])->name('user.delete')->middleware('auth');
 
 Route::resource('/info/students', StudentController::class)->middleware('auth');
+Route::delete('/info/selected-students', [StudentController::class, 'deleteAll'])->name('student.delete')->middleware('auth');
 
-
-
+// Periodos
+Route::delete('/info/selected-periods', [PeriodController::class, 'deleteAll'])->name('period.delete')->middleware('auth');
 Route::resource('/info/periods', PeriodController::class)->middleware('auth');
 
 
+// Categorías de Bodega
 Route::resource('/info/categories_warehouse', CategoriesWarehouseController::class)->middleware('auth');
+Route::delete('/info/selected-categories-warehouse', [CategoriesWarehouseController::class, 'deleteAll'])->name('category_warehouse.delete')->middleware('auth');
 
 
+// Bodegas
+Route::delete('/info/selected-warehouses', [WarehouseController::class, 'deleteAll'])->name('warehouse.delete')->middleware('auth');
 Route::resource('/info/warehouses', WarehouseController::class)->middleware('auth');
 
-
-Route::resource('/info/warehouses', WarehouseController::class)->middleware('auth');
-
+// Responsables
+Route::delete('/info/selected-responsibles', [ResponsibleController::class, 'deleteAll'])->name('responsible.delete')->middleware('auth');
 Route::resource('/info/responsibles', ResponsibleController::class)->middleware('auth');
 
+// Módulos
+Route::delete('/info/selected-modules', [ModuleController::class, 'deleteAll'])->name('module.delete')->middleware('auth');
 Route::resource('/info/modules', ModuleController::class)->middleware('auth');
 
+// Categorías de Ítems
+Route::delete('/info/selected-categories-items', [CategoryItemController::class, 'deleteAll'])->name('category_item.delete')->middleware('auth');
 Route::resource('/info/categories_items', CategoryItemController::class)->middleware('auth');
 
+// Unidades de Medida
+Route::delete('/info/selected-measurement-units', [MeasurementUnitController::class, 'deleteAll'])->name('measurement_unit.delete')->middleware('auth');
 Route::resource('/info/measurement_units', MeasurementUnitController::class)->middleware('auth');
 
+// Tipos de Operaciones
+Route::delete('/info/selected-operations', [OperationTypeController::class, 'deleteAll'])->name('operation.delete')->middleware('auth');
 Route::resource('/info/operations', OperationTypeController::class)->middleware('auth');
 
+// Proyectos
+Route::delete('/info/selected-projects', [ProjectController::class, 'deleteAll'])->name('project.delete')->middleware('auth');
 Route::resource('/info/projects', ProjectController::class)->middleware('auth');

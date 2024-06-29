@@ -45,6 +45,12 @@ class MeasurementUnitController extends Controller
         return redirect()->route('measurement_units.index')->with('success', 'Unidad de medida actualizada exitosamente.');
     }
 
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        MeasurementUnit::whereIn('id_unit', $ids)->delete();
+        return response()->json(["success" => "Unidades de medida seleccionadas eliminadas exitosamente."]);
+    }
     public function destroy(MeasurementUnit $measurement_unit)
     {
         $measurement_unit->delete();

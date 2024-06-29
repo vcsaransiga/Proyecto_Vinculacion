@@ -62,6 +62,13 @@ class PeriodController extends Controller
 
         return view('modules.periods.index', compact('periods'));
     }
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        Period::whereIn('id_period', $ids)->delete();
+        return response()->json(["success" => "Periodos seleccionados eliminados exitosamente."]);
+    }
     public function destroy(Period $period)
     {
         $period->delete();

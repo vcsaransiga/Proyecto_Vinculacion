@@ -72,24 +72,17 @@ class ModuleController extends Controller
         return view('modules.modules.index', compact('modules'));
     }
 
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        Module::whereIn('id_mod', $ids)->delete();
+        return response()->json(["success" => "Módulos seleccionados eliminados exitosamente."]);
+    }
     public function destroy($id_mod)
     {
         $module = Module::findOrFail($id_mod);
         $module->delete();
 
         return redirect()->route('modules.index')->with('success', 'Módulo eliminado exitosamente.');
-    }
-
-    public function deleteSelectedModules(Request $request)
-    {
-        $moduleIds = $request->input('ids');
-
-        // Eliminar los módulos seleccionados de la base de datos
-        $modules = Module::whereIn('id_mod', $moduleIds)->get();
-        foreach ($modules as $module) {
-            $module->delete();
-        }
-
-        return response()->json(['message' => 'Módulos eliminados correctamente.']);
     }
 }

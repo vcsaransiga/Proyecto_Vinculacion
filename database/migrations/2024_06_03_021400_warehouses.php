@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('warehouses', function (Blueprint $table) {
             $table->string('id_ware')->primary();
-            $table->string('id_catware')->nullable();
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->string('id_catware');
+            $table->string('name');
+            $table->string('description');
             $table->timestamps();
 
             // Relaciones
-            $table->foreign('id_catware')->references('id_catware')->on('categories_warehouse')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('id_catware')->references('id_catware')->on('categories_warehouse')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

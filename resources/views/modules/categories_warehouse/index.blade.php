@@ -33,6 +33,14 @@
                                     </div>
                                 @endif
                             </div>
+
+                        </div>
+                        <!-- Mensaje de éxito -->
+                        <div id="message"
+                            class="tw-hidden tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-rounded tw-relative"
+                            role="alert">
+                            <strong class="tw-font-bold">Éxito!</strong>
+                            <span class="tw-block sm:tw-inline" id="message-text"></span>
                         </div>
 
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
@@ -78,9 +86,9 @@
                                     <tr>
                                         <th scope="col" class="tw-p-4">
                                             <div class="tw-flex tw-items-center">
-                                                <input id="checkbox-all-search" type="checkbox"
+                                                <input id="select_all_ids" type="checkbox"
                                                     class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                <label for="checkbox-all-search" class="tw-sr-only">checkbox</label>
+
                                             </div>
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">ID</th>
@@ -94,15 +102,14 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($categories as $category)
-                                        <tr
+                                        <tr id="catware_ids{{ $category->id_catware }}"
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
                                                     <input id="checkbox-table-search-{{ $category->id_catware }}"
-                                                        type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $category->id_catware }}"
-                                                        class="tw-sr-only">checkbox</label>
+                                                        type="checkbox" value="{{ $category->id_catware }}"
+                                                        class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+
                                                 </div>
                                             </td>
                                             <td class="tw-px-6 tw-py-4">
@@ -244,42 +251,9 @@
             var modalNameInput = editCategoryModal.querySelector('#edit_name');
             modalNameInput.value = categoryName;
         });
-
-        const checkboxAll = document.getElementById('checkbox-all-search');
-        const checkboxes = document.querySelectorAll('input[id^="checkbox-table-search-"]');
-
-        checkboxAll.addEventListener('change', function() {
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = checkboxAll.checked;
-            });
-        });
-
-        document.getElementById('deleteSelected').addEventListener('click', function() {
-            const checkedCheckboxes = document.querySelectorAll(
-                'input[id^="checkbox-table-search-"]:checked');
-            const idsToDelete = Array.from(checkedCheckboxes).map(cb => cb.id.split('-').pop());
-
-            if (idsToDelete.length > 0) {
-                fetch('/categories_warehouse/delete', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        ids: idsToDelete
-                    })
-                }).then(response => {
-                    if (response.ok) {
-                        location.reload();
-                    } else {
-                        alert('Hubo un problema al eliminar las categorías.');
-                    }
-                });
-            }
-        });
     });
 </script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const totalRecords = {{ $categories->count() }};
@@ -288,5 +262,19 @@
         const defaultRecordsPerPage = 10;
 
         initPagination(totalRecords, tableId, paginationContainerId, defaultRecordsPerPage);
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeDeleteAll({
+            selectAllId: "#select_all_ids",
+            checkboxClass: ".checkbox_ids",
+            deleteButtonId: "#deleteSelected",
+            deleteUrl: "{{ route('category_warehouse.delete') }}",
+            csrfToken: "{{ csrf_token() }}",
+            rowIdPrefix: "#catware_ids"
+        });
     });
 </script>

@@ -55,23 +55,17 @@ class UserController extends Controller
 
         return view('modules.users.index', compact('users'));
     }
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        User::whereIn('id', $ids)->delete();
+        return response()->json(["success" => "Usuarios seleccionados eliminados exitosamente."]);
+    }
+
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
-    }
-
-    public function deleteSelectedUsers(Request $request)
-    {
-        $userIds = $request->input('userIds');
-
-        // Eliminar los usuarios seleccionados de la base de datos
-        $users = User::whereIn('id', $userIds)->get();
-        foreach ($users as $user) {
-            $user->delete();
-        }
-
-        return response()->json(['message' => 'Usuarios eliminados correctamente.']);
+        return redirect()->route('users.index')->with('success', 'User eliminado exitosamente.');
     }
 }

@@ -79,6 +79,13 @@ class ProjectController extends Controller
         return redirect()->route('projects.index')->with('success', 'Proyecto actualizado exitosamente.');
     }
 
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        Project::whereIn('id_pro', $ids)->delete();
+        return response()->json(["success" => "Proyectos seleccionados eliminados exitosamente."]);
+    }
     public function destroy($id)
     {
         $project = Project::findOrFail($id);

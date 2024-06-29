@@ -59,24 +59,17 @@ class CategoriesWarehouseController extends Controller
         return view('modules.categories_warehouse.index', compact('categories'));
     }
 
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        CategoriesWarehouse::whereIn('id_catware', $ids)->delete();
+        return response()->json(["success" => "Categorías de bodega seleccionadas eliminadas exitosamente."]);
+    }
     public function destroy($id_catware)
     {
         $category = CategoriesWarehouse::find($id_catware);
         $category->delete();
 
         return redirect()->route('categories_warehouse.index')->with('success', 'Categoría eliminada exitosamente.');
-    }
-
-    public function deleteSelectedCategories(Request $request)
-    {
-        $categoryIds = $request->input('ids');
-
-        // Eliminar las categorías seleccionadas de la base de datos
-        $categories = CategoriesWarehouse::whereIn('id_catware', $categoryIds)->get();
-        foreach ($categories as $category) {
-            $category->delete();
-        }
-
-        return response()->json(['message' => 'Categorías eliminadas correctamente.']);
     }
 }

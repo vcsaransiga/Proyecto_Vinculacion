@@ -34,6 +34,10 @@
                                 @endif
                             </div>
                         </div>
+                        <div id="message"
+                            class="tw-hidden tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-rounded tw-mb-4">
+                            <span id="message-text"></span>
+                        </div>
 
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
@@ -83,26 +87,16 @@
 
                                             </div>
                                         </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Nombre
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Apellido
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Email
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Estado
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            Acción
-                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Apellido</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Email </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Estado</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
-                                        <tr
+                                        <tr id="user_ids{{ $user->id }}"
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
                                             {{-- <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
@@ -171,7 +165,7 @@
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="tw-font-medium tw-text-red-600 dark:tw-text-red-500 hover:tw-underline"
-                                                        onclick="return confirm('Are you sure you want to delete this user?')">
+                                                        onclick="return confirm('Estas seguro de que quieres eliminar este usuario?')">
                                                         <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" fill="currentColor"
@@ -344,13 +338,13 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const checkboxAll = document.getElementById('checkbox-all-search');
-        const checkboxes = document.querySelectorAll('input[id^="checkbox-table-search-"]');
-
-        checkboxAll.addEventListener('change', function() {
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = checkboxAll.checked;
-            });
+        initializeDeleteAll({
+            selectAllId: "#select_all_ids",
+            checkboxClass: ".checkbox_ids",
+            deleteButtonId: "#deleteSelected",
+            deleteUrl: "{{ route('user.delete') }}",
+            csrfToken: "{{ csrf_token() }}",
+            rowIdPrefix: "#user_ids"
         });
     });
 </script>

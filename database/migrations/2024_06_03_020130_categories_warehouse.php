@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories_warehouse', function (Blueprint $table) {
             $table->string('id_catware')->primary();
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->timestamps();
         });
     }
