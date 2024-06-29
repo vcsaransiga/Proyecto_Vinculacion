@@ -35,6 +35,9 @@ Route::get('/', function () {
     return redirect('/dashboard');
 })->middleware('auth');
 
+
+Route::view('/info', 'info')->name('info');
+
 Route::get('/prueba', function () {
     return view('prueba');
 });
@@ -112,36 +115,31 @@ Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('users
 
 
 
-Route::resource('users', UserController::class)->middleware('auth');
-Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
-Route::get('/users/search', [UserController::class, 'search'])->name('users.search');
-Route::delete('/users/delete', [UserController::class, 'deleteSelectedUsers']);
+Route::resource('/info/users', UserController::class)->middleware('auth');
+
+Route::resource('/info/students', StudentController::class)->middleware('auth');
 
 
-Route::resource('students', StudentController::class);
-Route::get('/students', [StudentController::class, 'index'])->name('students.index')->middleware('auth');
-Route::get('/students/search', [StudentController::class, 'search'])->name('students.search');
+
+Route::resource('/info/periods', PeriodController::class)->middleware('auth');
 
 
-Route::resource('periods', PeriodController::class);
-Route::get('/periods', [PeriodController::class, 'index'])->name('periods.index')->middleware('auth');
-
-Route::resource('categories_warehouse', CategoriesWarehouseController::class)->middleware('auth');
-// Route::get('/categories_warehouse', [CategoriesWarehouseController::class, 'index'])->name('categories_warehouse.index')->middleware('auth');
-
-Route::resource('warehouses', WarehouseController::class)->middleware('auth');
+Route::resource('/info/categories_warehouse', CategoriesWarehouseController::class)->middleware('auth');
 
 
-Route::resource('warehouses', WarehouseController::class)->middleware('auth');
+Route::resource('/info/warehouses', WarehouseController::class)->middleware('auth');
 
-Route::resource('responsibles', ResponsibleController::class)->middleware('auth');
 
-Route::resource('modules', ModuleController::class)->middleware('auth');
+Route::resource('/info/warehouses', WarehouseController::class)->middleware('auth');
 
-Route::resource('categories_items', CategoryItemController::class)->middleware('auth');
+Route::resource('/info/responsibles', ResponsibleController::class)->middleware('auth');
 
-Route::resource('measurement_units', MeasurementUnitController::class)->middleware('auth');
+Route::resource('/info/modules', ModuleController::class)->middleware('auth');
 
-Route::resource('operations', OperationTypeController::class)->middleware('auth');
+Route::resource('/info/categories_items', CategoryItemController::class)->middleware('auth');
 
-Route::resource('projects', ProjectController::class)->middleware('auth');
+Route::resource('/info/measurement_units', MeasurementUnitController::class)->middleware('auth');
+
+Route::resource('/info/operations', OperationTypeController::class)->middleware('auth');
+
+Route::resource('/info/projects', ProjectController::class)->middleware('auth');

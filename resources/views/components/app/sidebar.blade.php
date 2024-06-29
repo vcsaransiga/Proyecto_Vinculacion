@@ -83,6 +83,29 @@
                     <span class="nav-link-text ms-1">Wallet</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ is_current_route('info') ? 'active' : '' }}" href="{{ route('info') }}">
+                    <div
+                        class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                        <svg width="30px" height="30px" viewBox="0 0 48 48" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>wallet</title>
+                            <g id="wallet" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="credit-card" transform="translate(12.000000, 15.000000)" fill="#FFFFFF">
+                                    <path class="color-background"
+                                        d="M3,0 C1.343145,0 0,1.343145 0,3 L0,4.5 L24,4.5 L24,3 C24,1.343145 22.6569,0 21,0 L3,0 Z"
+                                        id="Path" fill-rule="nonzero"></path>
+                                    <path class="color-foreground"
+                                        d="M24,7.5 L0,7.5 L0,15 C0,16.6569 1.343145,18 3,18 L21,18 C22.6569,18 24,16.6569 24,15 L24,7.5 Z M3,13.5 C3,12.67155 3.67158,12 4.5,12 L6,12 C6.82842,12 7.5,12.67155 7.5,13.5 C7.5,14.32845 6.82842,15 6,15 L4.5,15 C3.67158,15 3,14.32845 3,13.5 Z M10.5,12 C9.67158,12 9,12.67155 9,13.5 C9,14.32845 9.67158,15 10.5,15 L12,15 C12.82845,15 13.5,14.32845 13.5,13.5 C13.5,12.67155 12.82845,12 12,12 L10.5,12 Z"
+                                        id="Shape"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Información</span>
+                </a>
+            </li>
             {{-- <li class="nav-item">
                 <a class="nav-link  {{ is_current_route('RTL') ? 'active' : '' }}" href="{{ route('RTL') }}">
                     <div
@@ -108,83 +131,6 @@
                     <span class="nav-link-text ms-1">RTL</span>
                 </a>
             </li> --}}
-            <li class="nav-item mt-2">
-                <button class="d-flex align-items-center nav-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="ms-2"
-                        viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                        <path fill-rule="evenodd"
-                            d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span class="font-weight-normal text-md ms-2">Informacion</span>
-                </button>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('users.index') ? 'active' : '' }}"
-                    href="{{ route('users.index') }}">
-                    <span class="nav-link-text ms-1">Usuarios</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('students.index') ? 'active' : '' }}"
-                    href="{{ route('students.index') }}">
-                    <span class="nav-link-text ms-1">Estudiantes</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('periods.index') ? 'active' : '' }}"
-                    href="{{ route('periods.index') }}">
-                    <span class="nav-link-text ms-1">Periodos</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('categories_warehouse.index') ? 'active' : '' }}"
-                    href="{{ route('categories_warehouse.index') }}">
-                    <span class="nav-link-text ms-1">Categorías de Bodega</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('warehouses.index') ? 'active' : '' }}"
-                    href="{{ route('warehouses.index') }}">
-                    <span class="nav-link-text ms-1">Bodegas</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('responsibles.index') ? 'active' : '' }}"
-                    href="{{ route('responsibles.index') }}">
-                    <span class="nav-link-text ms-1">Responsables</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('modules.index') ? 'active' : '' }}"
-                    href="{{ route('modules.index') }}">
-                    <span class="nav-link-text ms-1">Módulos</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('categories_items.index') ? 'active' : '' }}"
-                    href="{{ route('categories_items.index') }}">
-                    <span class="nav-link-text ms-1">Categorías de ítems</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('measurement_units.index') ? 'active' : '' }}"
-                    href="{{ route('measurement_units.index') }}">
-                    <span class="nav-link-text ms-1">Medidas de unidad</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('operations.index') ? 'active' : '' }}"
-                    href="{{ route('operations.index') }}">
-                    <span class="nav-link-text ms-1">Tipos de operaciones</span>
-                </a>
-            </li>
-            <li class="nav-item border-start my-0 pt-2">
-                <a class="nav-link position-relative ms-0 ps-2 py-2 {{ is_current_route('projects.index') ? 'active' : '' }}"
-                    href="{{ route('projects.index') }}">
-                    <span class="nav-link-text ms-1">Proyectos</span>
-                </a>
-            </li>
 
 
 
