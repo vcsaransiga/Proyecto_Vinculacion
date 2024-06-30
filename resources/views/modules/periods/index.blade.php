@@ -31,10 +31,32 @@
                             </div>
                         @endif
 
+                        <!-- Mensaje de éxito -->
+                        <div id="message"
+                            class="tw-hidden tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-rounded tw-relative"
+                            role="alert">
+                            <strong class="tw-font-bold">Éxito!</strong>
+                            <span class="tw-block sm:tw-inline" id="message-text"></span>
+                        </div>
+
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-flex-column tw-flex-wrap md:tw-flex-row tw-space-y-4 md:tw-space-y-0 tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
-                                <label for="table-search" class="tw-sr-only">Buscar</label>
+
+                                <div class="tw-flex-1">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Acción
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <label for="table-search" class="tw-sr-only">Search</label>
                                 <div class="tw-relative">
                                     <div
                                         class="tw-absolute tw-inset-y-0 tw-rtl:tw-inset-r-0 tw-start-0 tw-flex tw-items-center tw-ps-3 tw-pointer-events-none">
@@ -58,9 +80,8 @@
                                     <tr>
                                         <th scope="col" class="tw-p-4">
                                             <div class="tw-flex tw-items-center">
-                                                <input id="checkbox-all-search" type="checkbox"
+                                                <input id="select_all_ids" type="checkbox"
                                                     class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                <label for="checkbox-all-search" class="tw-sr-only">checkbox</label>
                                             </div>
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
@@ -82,15 +103,12 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($periods as $period)
-                                        <tr
+                                        <tr id="period_ids{{ $period->id_period }}"
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $period->id_period }}"
-                                                        type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $period->id_period }}"
-                                                        class="tw-sr-only">checkbox</label>
+                                                    <input type="checkbox" value="{{ $period->id_period }}"
+                                                        class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
                                                 </div>
                                             </td>
                                             <td class="tw-px-6 tw-py-4">
@@ -289,15 +307,16 @@
     });
 </script>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const checkboxAll = document.getElementById('checkbox-all-search');
-        const checkboxes = document.querySelectorAll('input[id^="checkbox-table-search-"]');
-
-        checkboxAll.addEventListener('change', function() {
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = checkboxAll.checked;
-            });
+        initializeDeleteAll({
+            selectAllId: "#select_all_ids",
+            checkboxClass: ".checkbox_ids",
+            deleteButtonId: "#deleteSelected",
+            deleteUrl: "{{ route('period.delete') }}",
+            csrfToken: "{{ csrf_token() }}",
+            rowIdPrefix: "#period_ids"
         });
     });
 </script>

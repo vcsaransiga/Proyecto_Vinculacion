@@ -31,6 +31,14 @@
                             </div>
                         @endif
 
+                        <!-- Mensaje de éxito -->
+                        <div id="message"
+                            class="tw-hidden tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-rounded tw-relative"
+                            role="alert">
+                            <strong class="tw-font-bold">Éxito!</strong>
+                            <span class="tw-block sm:tw-inline" id="message-text"></span>
+                        </div>
+
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
@@ -70,9 +78,8 @@
                                     <tr>
                                         <th scope="col" class="tw-p-4">
                                             <div class="tw-flex tw-items-center">
-                                                <input id="checkbox-all-search" type="checkbox"
+                                                <input id="select_all_ids" type="checkbox"
                                                     class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                <label for="checkbox-all-search" class="tw-sr-only">checkbox</label>
                                             </div>
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">ID</th>
@@ -83,15 +90,12 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($operationTypes as $operationType)
-                                        <tr
+                                        <tr id="operation_ids{{ $operationType->id_ope }}"
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $operationType->id_ope }}"
-                                                        type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $operationType->id_ope }}"
-                                                        class="tw-sr-only">checkbox</label>
+                                                    <input type="checkbox" value="{{ $operationType->id_ope }}"
+                                                        class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
                                                 </div>
                                             </td>
                                             <td class="tw-px-6 tw-py-4">{{ $operationType->id_ope }}</td>
@@ -246,6 +250,20 @@
 
             modalNameInput.value = operationTypeName;
             modalMovTypeInput.value = operationTypeMovType;
+        });
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeDeleteAll({
+            selectAllId: "#select_all_ids",
+            checkboxClass: ".checkbox_ids",
+            deleteButtonId: "#deleteSelected",
+            deleteUrl: "{{ route('operation.delete') }}",
+            csrfToken: "{{ csrf_token() }}",
+            rowIdPrefix: "#operation_ids"
         });
     });
 </script>

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->index('id_responsible');
 
             // Relaciones
-            $table->foreign('id_responsible')->references('id_responsible')->on('responsibles')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('id_responsible')->references('id_responsible')->on('responsibles')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

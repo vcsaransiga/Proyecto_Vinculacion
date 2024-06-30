@@ -31,6 +31,14 @@
                             </div>
                         @endif
 
+                        <!-- Mensaje de éxito -->
+                        <div id="message"
+                            class="tw-hidden tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-rounded tw-relative"
+                            role="alert">
+                            <strong class="tw-font-bold">Éxito!</strong>
+                            <span class="tw-block sm:tw-inline" id="message-text"></span>
+                        </div>
+
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
@@ -60,7 +68,8 @@
                                     </div>
                                     <input type="text" id="table-search-projects"
                                         class="tw-block tw-p-2 tw-ps-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500"
-                                        placeholder="Buscar proyecto..." onkeyup="searchProjects()">
+                                        placeholder="Buscar proyecto..."
+                                        onkeyup="searchTable('table-search-projects','table-projects')">
                                 </div>
                             </div>
                             <table id="table-projects"
@@ -70,9 +79,8 @@
                                     <tr>
                                         <th scope="col" class="tw-p-4">
                                             <div class="tw-flex tw-items-center">
-                                                <input id="checkbox-all-search" type="checkbox"
+                                                <input id="select_all_ids" type="checkbox"
                                                     class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                <label for="checkbox-all-search" class="tw-sr-only">checkbox</label>
                                             </div>
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">ID</th>
@@ -89,15 +97,13 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($projects as $project)
-                                        <tr
+                                        <tr id="project_ids{{ $project->id_pro }}"
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $project->id_pro }}"
-                                                        type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $project->id_pro }}"
-                                                        class="tw-sr-only">checkbox</label>
+                                                    <input type="checkbox" value="{{ $project->id_pro }}"
+                                                        class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+
                                                 </div>
                                             </td>
                                             <td class="tw-px-6 tw-py-4">{{ $project->id_pro }}</td>
@@ -352,81 +358,29 @@
             modalBudgetInput.value = projectBudget;
         });
 
-        const checkboxAll = document.getElementById('checkbox-all-search');
-        const checkboxes = document.querySelectorAll('input[id^="checkbox-table-search-"]');
-
-        checkboxAll.addEventListener('change', function() {
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = checkboxAll.checked;
-            });
-        });
-
-        document.getElementById('deleteSelected').addEventListener('click', function() {
-            const checkedCheckboxes = document.querySelectorAll(
-                'input[id^="checkbox-table-search-"]:checked');
-            const idsToDelete = Array.from(checkedCheckboxes).map(cb => cb.id.split('-').pop());
-
-            if (idsToDelete.length > 0) {
-                fetch('/projects/delete', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        ids: idsToDelete
-                    })
-                }).then(response => {
-                    if (response.ok) {
-                        location.reload();
-                    } else {
-                        alert('Hubo un problema al eliminar los proyectos.');
-                    }
-                });
-            }
-        });
     });
 
-    function searchProjects() {
-        let input = document.getElementById('table-search-projects');
-        let filter = input.value.toUpperCase();
-        let table = document.getElementById('table-projects');
-        let tr = table.getElementsByTagName('tr');
-
-        // Obtener la fila th
-        let thRow = table.getElementsByTagName('thead')[0].getElementsByTagName('tr')[0];
-
-        for (let i = 0; i < tr.length; i++) {
-            let td = tr[i].getElementsByTagName('td');
-            let containsFilter = false;
-
-            // Excluir la fila th del filtrado
-            if (tr[i] === thRow) {
-                continue;
-            }
-
-            for (let j = 0; j < td.length; j++) {
-                let cellValue = td[j].textContent || td[j].innerText;
-                if (cellValue.toUpperCase().indexOf(filter) > -1) {
-                    containsFilter = true;
-                    break;
-                }
-            }
-
-            if (containsFilter) {
-                tr[i].style.display = '';
-            } else {
-                tr[i].style.display = 'none';
-            }
-        }
-    }
 
     document.addEventListener('DOMContentLoaded', function() {
         const totalRecords = {{ $projects->count() }};
         const tableId = 'table-projects';
         const paginationContainerId = 'pagination-numbers';
-        const defaultRecordsPerPage = 10; // O el valor que desees por defecto
+        const defaultRecordsPerPage = 10;
 
         initPagination(totalRecords, tableId, paginationContainerId, defaultRecordsPerPage);
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeDeleteAll({
+            selectAllId: "#select_all_ids",
+            checkboxClass: ".checkbox_ids",
+            deleteButtonId: "#deleteSelected",
+            deleteUrl: "{{ route('project.delete') }}",
+            csrfToken: "{{ csrf_token() }}",
+            rowIdPrefix: "#project_ids"
+        });
     });
 </script>
