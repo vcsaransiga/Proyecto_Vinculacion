@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Module;
 use App\Models\Responsible;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ModuleExport;
 
 class ModuleController extends Controller
 {
@@ -84,5 +87,29 @@ class ModuleController extends Controller
         $module->delete();
 
         return redirect()->route('modules.index')->with('success', 'Módulo eliminado correctamente.');
+    }
+
+    public function generatePDF()
+    {
+        $modules = Module::all();
+        $date = date('d/m/Y H:i:s');
+
+        $data = [
+            'title' => 'Registros de Módulos',
+            'date' => $date,
+            'modules' => $modules
+        ];
+
+        $pdf = PDF::loadView('modules.modules.pdf', $data);
+        $pdfName = "Modulos - {$date}.pdf";
+
+        return $pdf->download($pdfName);
+    }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Modulos {$date}.xlsx";
+        return Excel::download(new ModuleExport, $excelName);
     }
 }

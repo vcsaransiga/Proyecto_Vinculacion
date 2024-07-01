@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoryItem;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CategoriesItemExport;
 
 class CategoryItemController extends Controller
 {
@@ -71,5 +74,29 @@ class CategoryItemController extends Controller
         $categoryItem->delete();
 
         return redirect()->route('categories_items.index')->with('success', 'Categoría de artículo eliminada correctamente.');
+    }
+
+    public function generatePDF()
+    {
+        $categoryItems = CategoryItem::all();
+        $date = date('d/m/Y H:i:s');
+
+        $data = [
+            'title' => 'Registros de Categorías de Ítems',
+            'date' => $date,
+            'categoryItems' => $categoryItems
+        ];
+
+        $pdf = PDF::loadView('modules.categories_items.pdf', $data);
+        $pdfName = "Categorias_Items - {$date}.pdf";
+
+        return $pdf->download($pdfName);
+    }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Categorias_Items {$date}.xlsx";
+        return Excel::download(new CategoriesItemExport, $excelName);
     }
 }

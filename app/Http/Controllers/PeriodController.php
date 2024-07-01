@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Period;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PeriodExport;
 
 class PeriodController extends Controller
 {
@@ -73,5 +75,29 @@ class PeriodController extends Controller
     {
         $period->delete();
         return redirect()->route('periods.index')->with('success', 'Periodo eliminado correctamente.');
+    }
+
+    public function generatePDF()
+    {
+        $periods = Period::all();
+        $date = date('d/m/Y H:i:s');
+
+        $data = [
+            'title' => 'Registros de Periodos',
+            'date' => $date,
+            'periods' => $periods
+        ];
+
+        $pdf = PDF::loadView('modules.periods.pdf', $data);
+        $pdfName = "Periodos - {$date}.pdf";
+
+        return $pdf->download($pdfName);
+    }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Periodos {$date}.xlsx";
+        return Excel::download(new PeriodExport, $excelName);
     }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoriesWarehouse;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CategoriesWarehouseExport;
 
 class CategoriesWarehouseController extends Controller
 {
@@ -71,5 +74,29 @@ class CategoriesWarehouseController extends Controller
         $category->delete();
 
         return redirect()->route('categories_warehouse.index')->with('success', 'Categoría eliminada correctamente.');
+    }
+
+    public function generatePDF()
+    {
+        $categoriesWarehouse = CategoriesWarehouse::all();
+        $date = date('d/m/Y H:i:s');
+
+        $data = [
+            'title' => 'Registros de Categorías de Bodega',
+            'date' => $date,
+            'categoriesWarehouse' => $categoriesWarehouse
+        ];
+
+        $pdf = PDF::loadView('modules.categories_warehouse.pdf', $data);
+        $pdfName = "Categorias_Bodega - {$date}.pdf";
+
+        return $pdf->download($pdfName);
+    }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Categorias_Bodega {$date}.xlsx";
+        return Excel::download(new CategoriesWarehouseExport, $excelName);
     }
 }

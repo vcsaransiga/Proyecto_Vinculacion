@@ -123,47 +123,68 @@ Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profi
 
 
 
-
+// Usuarios
 Route::resource('/info/users', UserController::class)->middleware('auth');
 Route::delete('/info/selected-users', [UserController::class, 'deleteAll'])->name('user.delete')->middleware('auth');
+Route::get('/users/pdf', [UserController::class, 'generatePDF'])->name('users.pdf')->middleware('auth');
+Route::get('/users/export-excel', [UserController::class, 'exportExcel'])->name('users.download-excel')->middleware('auth');
 
+// Estudiantes
 Route::resource('/info/students', StudentController::class)->middleware('auth');
 Route::delete('/info/selected-students', [StudentController::class, 'deleteAll'])->name('student.delete')->middleware('auth');
+Route::get('/students/pdf', [StudentController::class, 'generatePDF'])->name('students.pdf')->middleware('auth');
+Route::get('/students/export-excel', [StudentController::class, 'exportExcel'])->name('students.download-excel')->middleware('auth');
 
 // Periodos
-Route::delete('/info/selected-periods', [PeriodController::class, 'deleteAll'])->name('period.delete')->middleware('auth');
 Route::resource('/info/periods', PeriodController::class)->middleware('auth');
-
+Route::delete('/info/selected-periods', [PeriodController::class, 'deleteAll'])->name('period.delete')->middleware('auth');
+Route::get('/periods/pdf', [PeriodController::class, 'generatePDF'])->name('periods.pdf')->middleware('auth');
+Route::get('/periods/export-excel', [PeriodController::class, 'exportExcel'])->name('periods.download-excel')->middleware('auth');
 
 // Categorías de Bodega
 Route::resource('/info/categories_warehouse', CategoriesWarehouseController::class)->middleware('auth');
 Route::delete('/info/selected-categories-warehouse', [CategoriesWarehouseController::class, 'deleteAll'])->name('category_warehouse.delete')->middleware('auth');
-
+Route::get('/categories_warehouse/pdf', [CategoriesWarehouseController::class, 'generatePDF'])->name('categories_warehouse.pdf')->middleware('auth');
+Route::get('/categories_warehouse/export-excel', [CategoriesWarehouseController::class, 'exportExcel'])->name('categories_warehouse.download-excel')->middleware('auth');
 
 // Bodegas
-Route::delete('/info/selected-warehouses', [WarehouseController::class, 'deleteAll'])->name('warehouse.delete')->middleware('auth');
 Route::resource('/info/warehouses', WarehouseController::class)->middleware('auth');
+Route::delete('/info/selected-warehouses', [WarehouseController::class, 'deleteAll'])->name('warehouse.delete')->middleware('auth');
+Route::get('/warehouses/pdf', [WarehouseController::class, 'generatePDF'])->name('warehouses.pdf')->middleware('auth');
+Route::get('/warehouses/export-excel', [WarehouseController::class, 'exportExcel'])->name('warehouses.download-excel')->middleware('auth');
 
 // Responsables
-Route::delete('/info/selected-responsibles', [ResponsibleController::class, 'deleteAll'])->name('responsible.delete')->middleware('auth');
 Route::resource('/info/responsibles', ResponsibleController::class)->middleware('auth');
+Route::delete('/info/selected-responsibles', [ResponsibleController::class, 'deleteAll'])->name('responsible.delete')->middleware('auth');
+Route::get('/responsibles/pdf', [ResponsibleController::class, 'generatePDF'])->name('responsibles.pdf')->middleware('auth');
+Route::get('/responsibles/export-excel', [ResponsibleController::class, 'exportExcel'])->name('responsibles.download-excel')->middleware('auth');
 
 // Módulos
-Route::delete('/info/selected-modules', [ModuleController::class, 'deleteAll'])->name('module.delete')->middleware('auth');
 Route::resource('/info/modules', ModuleController::class)->middleware('auth');
+Route::delete('/info/selected-modules', [ModuleController::class, 'deleteAll'])->name('module.delete')->middleware('auth');
+Route::get('/modules/pdf', [ModuleController::class, 'generatePDF'])->name('modules.pdf')->middleware('auth');
+Route::get('/modules/export-excel', [ModuleController::class, 'exportExcel'])->name('modules.download-excel')->middleware('auth');
 
 // Categorías de Ítems
-Route::delete('/info/selected-categories-items', [CategoryItemController::class, 'deleteAll'])->name('category_item.delete')->middleware('auth');
 Route::resource('/info/categories_items', CategoryItemController::class)->middleware('auth');
+Route::delete('/info/selected-categories-items', [CategoryItemController::class, 'deleteAll'])->name('category_item.delete')->middleware('auth');
+Route::get('/categories_items/pdf', [CategoryItemController::class, 'generatePDF'])->name('categories_items.pdf')->middleware('auth');
+Route::get('/categories_items/export-excel', [CategoryItemController::class, 'exportExcel'])->name('categories_items.download-excel')->middleware('auth');
 
 // Unidades de Medida
-Route::delete('/info/selected-measurement-units', [MeasurementUnitController::class, 'deleteAll'])->name('measurement_unit.delete')->middleware('auth');
 Route::resource('/info/measurement_units', MeasurementUnitController::class)->middleware('auth');
+Route::delete('/info/selected-measurement-units', [MeasurementUnitController::class, 'deleteAll'])->name('measurement_unit.delete')->middleware('auth');
+Route::get('/measurement_units/pdf', [MeasurementUnitController::class, 'generatePDF'])->name('measurement_units.pdf')->middleware('auth');
+Route::get('/measurement_units/export-excel', [MeasurementUnitController::class, 'exportExcel'])->name('measurement_units.download-excel')->middleware('auth');
 
 // Tipos de Operaciones
-Route::delete('/info/selected-operations', [OperationTypeController::class, 'deleteAll'])->name('operation.delete')->middleware('auth');
 Route::resource('/info/operations', OperationTypeController::class)->middleware('auth');
+Route::delete('/info/selected-operations', [OperationTypeController::class, 'deleteAll'])->name('operation.delete')->middleware('auth');
+Route::get('/operations/pdf', [OperationTypeController::class, 'generatePDF'])->name('operations.pdf')->middleware('auth');
+Route::get('/operations/export-excel', [OperationTypeController::class, 'exportExcel'])->name('operations.download-excel')->middleware('auth');
 
 // Proyectos
-Route::delete('/info/selected-projects', [ProjectController::class, 'deleteAll'])->name('project.delete')->middleware('auth');
 Route::resource('/info/projects', ProjectController::class)->middleware('auth');
+Route::delete('/info/selected-projects', [ProjectController::class, 'deleteAll'])->name('project.delete')->middleware('auth');
+Route::get('/projects/pdf', [ProjectController::class, 'generatePDF'])->name('projects.pdf')->middleware('auth');
+Route::get('/projects/export-excel', [ProjectController::class, 'exportExcel'])->name('projects.download-excel')->middleware('auth');

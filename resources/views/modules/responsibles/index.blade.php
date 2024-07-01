@@ -44,8 +44,8 @@
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
 
 
-                                <div class="tw-flex-1">
-                                    <div class="dropdown">
+                                <div class="d-flex flex-row justify-content-start">
+                                    <div class="dropdown mr-3">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -53,6 +53,19 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Generar
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                            <a class="dropdown-item" href="{{ route('responsibles.pdf') }}"
+                                                id="excel">PDF</a>
+                                            <a class="dropdown-item" href="{{ route('responsibles.download-excel') }}"
+                                                id="xls">Excel</a>
                                         </div>
                                     </div>
                                 </div>
@@ -86,6 +99,7 @@
                                             </div>
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">ID</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Cédula</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Apellido</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Área</th>
@@ -106,6 +120,7 @@
                                                 </div>
                                             </td>
                                             <td class="tw-px-6 tw-py-4">{{ $responsible->id_responsible }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $responsible->card_id }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $responsible->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $responsible->last_name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $responsible->area }}</td>
@@ -201,6 +216,10 @@
                     <form id="createResponsibleForm" method="POST" action="{{ route('responsibles.store') }}">
                         @csrf
                         <div class="mb-3">
+                            <label for="card_id" class="form-label">Cédula</label>
+                            <input type="text" class="form-control" id="card_id" name="card_id" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
@@ -245,6 +264,10 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
+                            <label for="edit_card_id" class="form-label">Cédula</label>
+                            <input type="text" class="form-control" id="edit_card_id" name="card_id" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="edit_name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="edit_name" name="name" required>
                         </div>
@@ -283,6 +306,7 @@
         editResponsibleModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
             var responsibleId = button.getAttribute('data-responsible-id');
+            var responsibleCardId = button.getAttribute('data-responsible-card_id');
             var responsibleName = button.getAttribute('data-responsible-name');
             var responsibleLastName = button.getAttribute('data-responsible-last_name');
             var responsibleArea = button.getAttribute('data-responsible-area');
@@ -292,12 +316,14 @@
             var modalForm = editResponsibleModal.querySelector('form');
             modalForm.action = '/info/responsibles/' + responsibleId;
 
+            var modalCardIdInput = editResponsibleModal.querySelector('#edit_card_id');
             var modalNameInput = editResponsibleModal.querySelector('#edit_name');
             var modalLastNameInput = editResponsibleModal.querySelector('#edit_last_name');
             var modalAreaInput = editResponsibleModal.querySelector('#edit_area');
             var modalRoleInput = editResponsibleModal.querySelector('#edit_role');
             var modalStatusInput = editResponsibleModal.querySelector('#edit_status');
 
+            modalCardIdInput.value = responsibleCardId;
             modalNameInput.value = responsibleName;
             modalLastNameInput.value = responsibleLastName;
             modalAreaInput.value = responsibleArea;

@@ -44,8 +44,8 @@
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
 
 
-                                <div class="tw-flex-1">
-                                    <div class="dropdown">
+                                <div class="d-flex flex-row justify-content-start">
+                                    <div class="dropdown mr-3">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -53,6 +53,19 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Generar
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                            <a class="dropdown-item" href="{{ route('students.pdf') }}"
+                                                id="excel">PDF</a>
+                                            <a class="dropdown-item" href="{{ route('students.download-excel') }}"
+                                                id="xls">Excel</a>
                                         </div>
                                     </div>
                                 </div>
@@ -87,6 +100,7 @@
                                             </div>
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">ID</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Cédula</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Apellido</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Curso</th>
@@ -107,6 +121,7 @@
                                                 </div>
                                             </td>
                                             <td class="tw-px-6 tw-py-4">{{ $student->id_stud }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $student->card_id }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $student->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $student->last_name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $student->course }}</td>
@@ -116,6 +131,7 @@
                                                     class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"
                                                     data-bs-toggle="modal" data-bs-target="#editStudentModal"
                                                     data-student-id="{{ $student->id_stud }}"
+                                                    data-student-card_id="{{ $student->card_id }}"
                                                     data-student-name="{{ $student->name }}"
                                                     data-student-last_name="{{ $student->last_name }}"
                                                     data-student-course="{{ $student->course }}"
@@ -193,6 +209,10 @@
                     <form id="createStudentForm" method="POST" action="{{ route('students.store') }}">
                         @csrf
                         <div class="mb-3">
+                            <label for="card_id" class="form-label">Cédula</label>
+                            <input type="text" class="form-control" id="card_id" name="card_id" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
@@ -231,6 +251,10 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
+                            <label for="edit_card_id" class="form-label">Cédula</label>
+                            <input type="text" class="form-control" id="edit_card_id" name="card_id" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="edit_name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="edit_name" name="name" required>
                         </div>
@@ -253,6 +277,7 @@
             </div>
         </div>
     </div>
+
 </x-app-layout>
 
 <script>
@@ -262,6 +287,7 @@
         editStudentModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
             var studentId = button.getAttribute('data-student-id');
+            var studentCardId = button.getAttribute('data-student-card_id');
             var studentName = button.getAttribute('data-student-name');
             var studentLastName = button.getAttribute('data-student-last_name');
             var studentCourse = button.getAttribute('data-student-course');
@@ -270,11 +296,13 @@
             var modalForm = editStudentModal.querySelector('form');
             modalForm.action = '/info/students/' + studentId;
 
+            var modalCardIdInput = editStudentModal.querySelector('#edit_card_id');
             var modalNameInput = editStudentModal.querySelector('#edit_name');
             var modalLastNameInput = editStudentModal.querySelector('#edit_last_name');
             var modalCourseInput = editStudentModal.querySelector('#edit_course');
             var modalHoursInput = editStudentModal.querySelector('#edit_hours');
 
+            modalCardIdInput.value = studentCardId;
             modalNameInput.value = studentName;
             modalLastNameInput.value = studentLastName;
             modalCourseInput.value = studentCourse;

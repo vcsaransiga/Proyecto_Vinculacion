@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Responsible;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProjectExport;
 
 class ProjectController extends Controller
 {
@@ -92,5 +95,29 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('projects.index')->with('success', 'Proyecto eliminado correctamente.');
+    }
+
+    public function generatePDF()
+    {
+        $projects = Project::all();
+        $date = date('d/m/Y H:i:s');
+
+        $data = [
+            'title' => 'Registros de Proyectos',
+            'date' => $date,
+            'projects' => $projects
+        ];
+
+        $pdf = PDF::loadView('modules.projects.pdf', $data);
+        $pdfName = "Proyectos - {$date}.pdf";
+
+        return $pdf->download($pdfName);
+    }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Proyectos {$date}.xlsx";
+        return Excel::download(new ProjectExport, $excelName);
     }
 }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use App\Exports\UserExport;
 
 class UserController extends Controller
 {
@@ -67,5 +70,29 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User eliminado exitosamente.');
+    }
+
+    public function generatePDF()
+    {
+        $users = User::all();
+        $date = date('d/m/Y H:i:s');
+
+        $data = [
+            'title' => 'Registros de Usuarios',
+            'date' => $date,
+            'users' => $users
+        ];
+
+        $pdf = PDF::loadView('modules.users.pdf', $data);
+        $pdfName = "Usuarios - {$date}.pdf";
+
+        return $pdf->download($pdfName);
+    }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Usuarios {$date}.xlsx";
+        return Excel::download(new UserExport, $excelName);
     }
 }

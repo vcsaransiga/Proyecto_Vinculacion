@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Warehouse;
 use App\Models\CategoriesWarehouse;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\WarehouseExport;
 
 class WarehouseController extends Controller
 {
@@ -86,5 +89,29 @@ class WarehouseController extends Controller
     {
         $warehouse->delete();
         return redirect()->route('warehouses.index')->with('success', 'Bodega eliminada correctamente.');
+    }
+
+    public function generatePDF()
+    {
+        $warehouses = Warehouse::all();
+        $date = date('d/m/Y H:i:s');
+
+        $data = [
+            'title' => 'Registros de Bodegas',
+            'date' => $date,
+            'warehouses' => $warehouses
+        ];
+
+        $pdf = PDF::loadView('modules.warehouses.pdf', $data);
+        $pdfName = "Bodegas - {$date}.pdf";
+
+        return $pdf->download($pdfName);
+    }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Bodegas {$date}.xlsx";
+        return Excel::download(new WarehouseExport, $excelName);
     }
 }

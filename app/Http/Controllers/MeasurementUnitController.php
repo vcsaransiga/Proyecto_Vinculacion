@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\MeasurementUnit;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MeasurementUnitExport;
 
 class MeasurementUnitController extends Controller
 {
@@ -55,5 +58,29 @@ class MeasurementUnitController extends Controller
     {
         $measurement_unit->delete();
         return redirect()->route('measurement_units.index')->with('success', 'Unidad de medida eliminada correctamente.');
+    }
+
+    public function generatePDF()
+    {
+        $measurementUnits = MeasurementUnit::all();
+        $date = date('d/m/Y H:i:s');
+
+        $data = [
+            'title' => 'Registros de Unidades de Medida',
+            'date' => $date,
+            'measurementUnits' => $measurementUnits
+        ];
+
+        $pdf = PDF::loadView('modules.measurement_units.pdf', $data);
+        $pdfName = "Unidades_Medida - {$date}.pdf";
+
+        return $pdf->download($pdfName);
+    }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Unidades_Medida {$date}.xlsx";
+        return Excel::download(new MeasurementUnitExport, $excelName);
     }
 }

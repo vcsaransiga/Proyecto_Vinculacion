@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StudentsExport;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class StudentController extends Controller
 {
@@ -18,9 +22,10 @@ class StudentController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'last_name' => 'nullable|string|max:255',
-            'course' => 'nullable|string|max:255',
-            'hours' => 'nullable|numeric',
+            'card_id' => 'required|string|max:10',
+            'last_name' => 'required|string|max:255',
+            'course' => 'required|string|max:255',
+            'hours' => 'required|numeric',
         ]);
 
         // Obtener el último estudiante basado en el id_stud
@@ -34,6 +39,7 @@ class StudentController extends Controller
 
         Student::create([
             'id_stud' => 'EST-' . $newIdNumber,
+            'card_id' => $request->card_id,
             'name' => $request->name,
             'last_name' => $request->last_name,
             'course' => $request->course,
@@ -47,9 +53,10 @@ class StudentController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'last_name' => 'nullable|string|max:255',
-            'course' => 'nullable|string|max:255',
-            'hours' => 'nullable|numeric',
+            'card_id' => 'required|string|max:10',
+            'last_name' => 'required|string|max:255',
+            'course' => 'required|string|max:255',
+            'hours' => 'required|numeric',
         ]);
 
         $student = Student::findOrFail($id_stud);
@@ -74,5 +81,33 @@ class StudentController extends Controller
         $student->delete();
 
         return redirect()->route('students.index')->with('success', 'Estudiante eliminado correctamente.');
+    }
+
+    public function generatePDF()
+    {
+
+        $students = Student::all();
+        $date = date('d/m/Y H:i:s');
+
+
+        $data = [
+
+            'title' => 'Registros de Estudiantes',
+            'date' => date('d/m/Y H:i:s'),
+            'students' => $students
+        ];
+
+        $pdf = PDF::loadView('modules.students.pdf', $data);
+        $pdfName = "Estudiantes - {$date}.pdf";
+
+
+        return $pdf->download($pdfName);
+    }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');;
+        $excelName = "Estudiantes {$date}.xlsx";
+        return Excel::download(new StudentsExport, $excelName);
     }
 }

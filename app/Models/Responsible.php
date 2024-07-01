@@ -15,6 +15,7 @@ class Responsible extends Model
 
     protected $fillable = [
         'id_responsible',
+        'card_id',
         'name',
         'last_name',
         'area',

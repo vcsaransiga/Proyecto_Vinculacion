@@ -42,8 +42,9 @@
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
-                                <div class="tw-flex-1">
-                                    <div class="dropdown">
+
+                                <div class="d-flex flex-row justify-content-start">
+                                    <div class="dropdown mr-3">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -51,6 +52,19 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Generar
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                            <a class="dropdown-item" href="{{ route('users.pdf') }}"
+                                                id="excel">PDF</a>
+                                            <a class="dropdown-item" href="{{ route('users.download-excel') }}"
+                                                id="xls">Excel</a>
                                         </div>
                                     </div>
                                 </div>

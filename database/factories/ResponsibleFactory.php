@@ -16,6 +16,7 @@ class ResponsibleFactory extends Factory
     {
         return [
             'id_responsible' => $this->faker->unique()->regexify('RESP-\d{2}'),
+            'card_id' => $this->faker->numerify('##########'),
             'name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'area' => $this->faker->word,

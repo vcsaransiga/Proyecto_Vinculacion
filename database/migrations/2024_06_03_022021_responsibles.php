@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('responsibles', function (Blueprint $table) {
             $table->string('id_responsible')->primary();
+            $table->string('card_id');
             $table->string('name');
             $table->string('last_name');
             $table->string('area');

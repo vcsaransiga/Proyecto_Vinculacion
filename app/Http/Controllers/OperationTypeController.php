@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\OperationType;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OperationsTypeExport;
 
 class OperationTypeController extends Controller
 {
@@ -51,5 +54,30 @@ class OperationTypeController extends Controller
         $operationType->delete();
 
         return redirect()->route('operations.index')->with('success', 'Tipo de operación eliminado correctamente.');
+    }
+
+
+    public function generatePDF()
+    {
+        $operationTypes = OperationType::all();
+        $date = date('d/m/Y H:i:s');
+
+        $data = [
+            'title' => 'Registros de Tipos de Operaciones',
+            'date' => $date,
+            'operationTypes' => $operationTypes
+        ];
+
+        $pdf = PDF::loadView('modules.operations.pdf', $data);
+        $pdfName = "Tipos_Operaciones - {$date}.pdf";
+
+        return $pdf->download($pdfName);
+    }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Tipos_Operaciones {$date}.xlsx";
+        return Excel::download(new OperationsTypeExport, $excelName);
     }
 }

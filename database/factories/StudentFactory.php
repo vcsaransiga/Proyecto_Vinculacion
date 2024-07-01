@@ -16,6 +16,7 @@ class StudentFactory extends Factory
 
         return [
             'id_stud' => $id,
+            'card_id' => $this->faker->numerify('##########'),
             'name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'course' => $this->faker->word,
