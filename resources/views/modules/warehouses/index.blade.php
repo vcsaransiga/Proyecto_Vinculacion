@@ -194,13 +194,19 @@
                 <div class="modal-body">
                     <form id="createWarehouseForm" method="POST" action="{{ route('warehouses.store') }}">
                         @csrf
-                        <div class="mb-3">
-                            <label for="id_catware" class="form-label">Categoría</label>
-                            <select class="form-control" id="id_catware" name="id_catware" required>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id_catware }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="id_catware" class="form-label">Categoría</label>
+                                <select class="form-control" id="id_catware" name="id_catware" required>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id_catware }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <a href="{{ route('categories_warehouse.index') }}" class="btn btn-info">Agregar
+                                    Categoría</a>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
@@ -231,13 +237,19 @@
                     <form id="editWarehouseForm" method="POST" action="">
                         @csrf
                         @method('PUT')
-                        <div class="mb-3">
-                            <label for="edit_id_catware" class="form-label">Categoría</label>
-                            <select class="form-control" id="edit_id_catware" name="id_catware" required>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id_catware }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="edit_id_catware" class="form-label">Categoría</label>
+                                <select class="form-control" id="edit_id_catware" name="id_catware" required>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id_catware }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <a href="{{ route('categories_warehouse.index') }}" class="btn btn-info">Agregar
+                                    Categoría</a>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="edit_name" class="form-label">Nombre</label>

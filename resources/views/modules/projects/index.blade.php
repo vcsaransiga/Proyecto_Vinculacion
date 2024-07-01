@@ -227,15 +227,21 @@
                 <div class="modal-body">
                     <form id="createProjectForm" method="POST" action="{{ route('projects.store') }}">
                         @csrf
-                        <div class="mb-3">
-                            <label for="id_responsible" class="form-label">Responsable</label>
-                            <select class="form-control" id="id_responsible" name="id_responsible" required>
-                                @foreach ($responsibles as $responsible)
-                                    <option value="{{ $responsible->id_responsible }}">{{ $responsible->name }}
-                                        {{ $responsible->last_name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="id_responsible" class="form-label">Responsable</label>
+                                <select class="form-control" id="id_responsible" name="id_responsible" required>
+                                    @foreach ($responsibles as $responsible)
+                                        <option value="{{ $responsible->id_responsible }}">{{ $responsible->name }}
+                                            {{ $responsible->last_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <a href="{{ route('responsibles.index') }}" class="btn btn-info">Agregar
+                                    Responsable</a>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
@@ -287,15 +293,21 @@
                     <form id="editProjectForm" method="POST" action="">
                         @csrf
                         @method('PUT')
-                        <div class="mb-3">
-                            <label for="edit_id_responsible" class="form-label">Responsable</label>
-                            <select class="form-control" id="edit_id_responsible" name="id_responsible" required>
-                                @foreach ($responsibles as $responsible)
-                                    <option value="{{ $responsible->id_responsible }}">
-                                        {{ $responsible->name }} {{ $responsible->last_name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="edit_id_responsible" class="form-label">Responsable</label>
+                                <select class="form-control" id="edit_id_responsible" name="id_responsible" required>
+                                    @foreach ($responsibles as $responsible)
+                                        <option value="{{ $responsible->id_responsible }}">
+                                            {{ $responsible->name }} {{ $responsible->last_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <a href="{{ route('responsibles.index') }}" class="btn btn-info">Agregar
+                                    Responsable</a>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="edit_name" class="form-label">Nombre</label>
