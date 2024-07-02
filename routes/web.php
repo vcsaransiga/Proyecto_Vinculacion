@@ -167,6 +167,8 @@ Route::resource('/info/modules', ModuleController::class)->middleware('auth');
 Route::delete('/info/selected-modules', [ModuleController::class, 'deleteAll'])->name('module.delete')->middleware('auth');
 Route::get('/modules/pdf', [ModuleController::class, 'generatePDF'])->name('modules.pdf')->middleware('auth');
 Route::get('/modules/export-excel', [ModuleController::class, 'exportExcel'])->name('modules.download-excel')->middleware('auth');
+Route::get('/modules/{module}/students', [ModuleController::class, 'getStudents'])->name('modules.getStudents');
+
 
 // Categorías de Ítems
 Route::resource('/info/categories_items', CategoryItemController::class)->middleware('auth');
