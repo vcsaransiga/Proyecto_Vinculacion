@@ -21,4 +21,9 @@ class Student extends Model
         'course',
         'hours',
     ];
+
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class, 'mod_stud', 'id_stud', 'id_mod');
+    }
 }

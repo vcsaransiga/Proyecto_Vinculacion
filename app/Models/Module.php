@@ -26,4 +26,10 @@ class Module extends Model
     {
         return $this->belongsTo(Responsible::class, 'id_responsible');
     }
+
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'mod_stud', 'id_mod', 'id_stud');
+    }
 }

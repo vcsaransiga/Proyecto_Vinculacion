@@ -36,7 +36,7 @@ Route::get('/', function () {
 })->middleware('auth');
 
 
-Route::view('/info', 'info')->name('info');
+Route::view('/info', 'info')->name('info')->middleware('auth');
 
 Route::get('/prueba', function () {
     return view('prueba');
@@ -105,7 +105,7 @@ Route::post('/reset-password', [ResetPasswordController::class, 'store'])
 
 Route::get('/about', function () {
     return view('about');
-})->name('about');
+})->name('about')->middleware('auth');
 
 Route::get('/proyectos', function () {
     return view('proyectos');
@@ -118,8 +118,8 @@ Route::get('/proyectos', function () {
 
 
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile');
-Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile')->middleware('auth');
+Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
 
 
@@ -134,6 +134,9 @@ Route::resource('/info/students', StudentController::class)->middleware('auth');
 Route::delete('/info/selected-students', [StudentController::class, 'deleteAll'])->name('student.delete')->middleware('auth');
 Route::get('/students/pdf', [StudentController::class, 'generatePDF'])->name('students.pdf')->middleware('auth');
 Route::get('/students/export-excel', [StudentController::class, 'exportExcel'])->name('students.download-excel')->middleware('auth');
+Route::get('/info/students/{id_stud}/modules', [StudentController::class, 'getModules'])->name('students.getModules');
+
+
 
 // Periodos
 Route::resource('/info/periods', PeriodController::class)->middleware('auth');
