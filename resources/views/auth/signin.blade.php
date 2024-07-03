@@ -36,7 +36,6 @@
                                     </div>
                                     
                                 @enderror
-                                <div id="error-message" style="color: red;"></div> --}}
                                 <div class="card-body">
                                     <form role="form" class="text-start" id="login-form" method="POST" action="sign-in">
                                         @csrf
