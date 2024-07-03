@@ -30,8 +30,14 @@
                                         </div>
                                     @enderror
                                 </div>
+                                @error('attempts')
+                                    <div class="alert alert-danger text-sm" role="alert">
+                                        {{ $message }}
+                                    </div>
+                                    
+                                @enderror
                                 <div class="card-body">
-                                    <form role="form" class="text-start" method="POST" action="sign-in">
+                                    <form role="form" class="text-start" id="login-form" method="POST" action="sign-in">
                                         @csrf
                                         <label style="color:#4a59a4!important;" >Correo Electronico</label>
                                         <div class="mb-3">

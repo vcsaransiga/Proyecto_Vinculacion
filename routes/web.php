@@ -17,6 +17,7 @@ use App\Http\Controllers\CategoryItemController;
 use App\Http\Controllers\MeasurementUnitController;
 use App\Http\Controllers\OperationTypeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Middleware\ThrottleLogins;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,7 +83,7 @@ Route::get('/sign-in', [LoginController::class, 'create'])
     ->name('sign-in');
 
 Route::post('/sign-in', [LoginController::class, 'store'])
-    ->middleware('guest');
+    ->middleware(['guest', ThrottleLogins::class]);
 
 Route::post('/logout', [LoginController::class, 'destroy'])
     ->middleware('auth')
@@ -109,8 +110,12 @@ Route::get('/about', function () {
 
 Route::get('/proyectos', function () {
     return view('proyectos');
-})->name('proyectos');
+})->name('proyectos')->middleware('auth');
 
+
+Route::middleware(['throttle:login_attempts'])->group(function () {
+    Route::post('/login', [LoginController::class, 'login']);
+});
 
 // Route::get('/laravel-examples/user-profile', [ProfileController::class, 'index'])->name('users.profile')->middleware('auth');
 // Route::put('/laravel-examples/user-profile/update', [ProfileController::class, 'update'])->name('users.update')->middleware('auth');
