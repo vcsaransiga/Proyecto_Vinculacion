@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 
@@ -58,10 +58,11 @@ class RegisterController extends Controller
             'last_name' => $request->last_name,
             'password' => Hash::make($request->password),
         ]);
+        event(new Registered($user));
 
         Auth::login($user);
 
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/email/verify');
     }
 }
