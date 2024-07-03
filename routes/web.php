@@ -106,7 +106,7 @@ Route::post('/reset-password', [ResetPasswordController::class, 'store'])
 
 Route::get('/about', function () {
     return view('about');
-})->name('about');
+})->name('about')->middleware('auth');
 
 Route::get('/proyectos', function () {
     return view('proyectos');
