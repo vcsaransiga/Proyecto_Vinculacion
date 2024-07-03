@@ -17,6 +17,7 @@ use App\Http\Controllers\CategoryItemController;
 use App\Http\Controllers\MeasurementUnitController;
 use App\Http\Controllers\OperationTypeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Middleware\ThrottleLogins;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,7 +83,7 @@ Route::get('/sign-in', [LoginController::class, 'create'])
     ->name('sign-in');
 
 Route::post('/sign-in', [LoginController::class, 'store'])
-    ->middleware('guest');
+    ->middleware(['guest', ThrottleLogins::class]);
 
 Route::post('/logout', [LoginController::class, 'destroy'])
     ->middleware('auth')
