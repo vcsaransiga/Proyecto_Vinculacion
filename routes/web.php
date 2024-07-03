@@ -109,7 +109,7 @@ Route::get('/about', function () {
 
 Route::get('/proyectos', function () {
     return view('proyectos');
-})->name('proyectos');
+})->name('proyectos')->middleware('auth');
 
 
 Route::middleware(['throttle:login_attempts'])->group(function () {
