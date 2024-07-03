@@ -111,8 +111,8 @@
 
             <li class="nav-item">
                 <a class="nav-link 
-                {{ Request::is('info') || Request::is('proyectos/*') ? 'active' : '' }}"
-                    href="{{ route('info') }}">
+                {{ Request::is('proyectos') || Request::is('proyectos/*') ? 'active' : '' }}"
+                    href="{{ route('proyectos') }}">
                     <div
                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                         <svg width="30px" height="30px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -125,7 +125,7 @@
                         </svg>
                         
                     </div>
-                    <span class="nav-link-text ms-1">Proyectos</span>
+                    <span class="nav-link-text ms-1">Proyecto</span>
                 </a>
             </li>
 
