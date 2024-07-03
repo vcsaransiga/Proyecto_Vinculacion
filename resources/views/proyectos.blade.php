@@ -8,7 +8,7 @@
                         <div class="card-header pb-0">
                             <h3 style="margin-left: 5vh;">Datos Generales</h3>
                         </div>
-                        <div  style="display: flex; justify-content:space-between;">
+                        <div style="display: flex; justify-content:space-between;">
                             <div style="display: flex;">
                                 <div style="margin-top: 7vh; margin-left: 5vh;">
                                     <p style="font-weight: bold; color:#0F172A;">Nombre del Proyecto:</p>
@@ -24,83 +24,79 @@
                                 </div>
                             </div>
                             <div class="col-4" style="background-color:rgb(143, 143, 143); border-radius:2%; margin-top:3vh; margin-right:5vh; width: 400px; height: 210px;">
-                                <img src="../assets/img/logoDash.png" alt="ues" style="margin: auto; width=100%; height:100%;">
+                                <img src="../assets/img/cuy1.png" alt="ues" style="margin: auto; width=100%; height:100%; padding:5%">
                             </div>
                         </div>
                         <div style="margin-top:2vh; margin-rigth:0;">
-                            <div style="width:90%; margin:auto;  border-bottom: 3px solid #0F172A;" >
+                            <div style="width:90%; margin:auto;  border-bottom: 3px solid #0F172A;">
                                 <ul id="menu" style=" width:90%; display: flex; justify-content:space-between; padding:0; margin:auto">
-                                    <li >
+                                    <li>
                                         <p id="tareas" style="font-weight: bold;">Tareas</p>
                                     </li>
-                                    <li >
-                                        <p id="kardex" style="font-weight: bold; ">Kardex</p>
+                                    <li>
+                                        <p id="kardex" style="font-weight: bold;">Kardex</p>
                                     </li>
-                                    <li >
-                                        <p id="descripcion" style="font-weight: bold;" >Descripcion</p>
+                                    <li>
+                                        <p id="descripcion" style="font-weight: bold;">Descripcion</p>
                                     </li>
-                                    <li >
-                                        <p id="recursos" style="font-weight: bold;" >Recursos</p>
+                                    <li>
+                                        <p id="recursos" style="font-weight: bold;">Recursos</p>
                                     </li>
                                 </ul>
                             </div>
                             <div id="tareas-content" class="contenidos">
                                 <p>Contenido para Tareas</p>
                             </div>
-                            <div id="kardex-content" class="contenidos">
-                                <p>Contenido para Kardex</p>
+                            <div id="kardex-content" class="contenidos" style="width: 100%; padding-left: 5%; padding-right:5%;">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Fecha</th>
+                                            <th>Cantidad</th>
+                                            <th>Saldo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Lechuga</td>
+                                            <td>01/01/2021</td>
+                                            <td>100</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lechuga</td>
+                                            <td>09/01/2021</td>
+                                            <td>100</td>
+                                            <td>200</td>
+                                    </tbody>
+                                </table>               
                             </div>
-                            <div id="descripcion-content" class="contenidos">
-                                <p>Contenido para Descripcion</p>
+                            <div id="descripcion-content" class="contenidos" style="width: 100%; padding-left: 5%; padding-right:5%;">
+                                <p style="text-align: center; margin-top:2%;">La Unidad Educativa de Producción establece el proyecto didactico productivo con el proposito de crear un ambiente de practica y produccion permanente, la meta productiva es de engordar dos porcinos mensuales, los cuales ingresan de 60 dias de edad ya con todas las vacunas respectivas, los cuales son criados por 90 dias utilizando una tabla de nutricion diseñada para cumplir con el objetivo, los animales al final son faenados y la carne es comercializada en el punto de entas de la misma unidad a los Padres de Famila, Funcionarios y Ciudadania en general</p>
                             </div>
-                            <div id="recursos-content" class="contenidos">
-                                <p>Contenido para Recursos</p>
+                            <div id="recursos-content" class="contenidos" style="width: 100%; padding-left: 5%; padding-right:5%;">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Descripcion</th>
+                                            <th>Descargar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Informacion del Proyecto</td>
+                                            <td>Archivo de informacion del proyecto</td>
+                                            <td><img src="https://img.icons8.com/ios-filled/50/000000/download.png" alt="Descargar" style="width: 20px; height: 20px; justify-content:center; margin:auto;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Presupuesto</td>
+                                            <td>Archivo de presupuesto del proyecto</td>
+                                            <td><img src="https://img.icons8.com/ios-filled/50/000000/download.png" alt="Descargar" style="width: 20px; height: 20px; margin:auto;"></td>
+                                    </tbody>
+                                </table>                            
                             </div>
-
-                            <style>
-                                .contenidos{
-                                    display: none;
-                                    
-                                }
-                                #tareas{
-                                    cursor: pointer;
-                                    color:#0F172A;
-                                }
-                                #kardex{
-                                    cursor: pointer;
-                                    color:#0F172A;
-
-                                }
-                                #descripcion{
-                                    cursor: pointer;
-                                    color:#0F172A;
-
-                                }
-                                #recursos{
-                                    cursor: pointer;
-                                    color:#0F172A;
-
-                                }
-                                #tareas:hover{
-                                    border-radius:0; 
-                                    border-bottom: 1px black solid;
-
-                                }
-                                #kardex:hover{                                    border-radius:0; 
-                                    border-bottom: 1px black solid;
-
-                                }
-                                #descripcion:hover{                                    border-radius:0; 
-                                    border-bottom: 1px black solid;
-                                }
-                                #recursos:hover{                                    border-radius:0; 
-                                    border-bottom: 1px black solid;
-                                }
-
-                                .selected{                                    border-radius:0; 
-                                    border-bottom: 1px black solid;
-                                }
-                            </style>
                         </div>
                     </div>
                 </div>
@@ -108,6 +104,38 @@
         </div>
     </main>
 </x-app-layout>
+
+<style>
+    .contenidos {
+        display: none;
+    }
+    .selected {
+        border-bottom: 1px black solid;
+        color: white; /* Cambia el color de las letras a blanco */
+    }
+    #menu p {
+        cursor: pointer;
+        color: #0F172A;
+    }
+    #menu p:hover {
+        border-radius: 0;
+        border-bottom: 1px black solid;
+    }
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    .custom-table th, .custom-table td, .custom-table a {
+        border-bottom: 3px solid black;
+        padding: 10px;
+        text-align: center;
+        color: #0F172A;
+    }
+    .custom-table th {
+        background-color: #f4f4f4;
+    }
+</style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -142,8 +170,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     menu.addEventListener('click', function (e) {
         if (e.target && e.target.closest('p')) {
-            const li = e.target.closest('p');
-            const targetId = li.id + '-content';
+            const p = e.target.closest('p');
+            const targetId = p.id + '-content';
 
             // Save the selected item to localStorage
             localStorage.setItem('lastSelected', targetId);
