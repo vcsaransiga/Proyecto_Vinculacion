@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
@@ -36,9 +37,6 @@ use App\Http\Middleware\ThrottleLogins;
 Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::get('/', function () {
-    return redirect('/dashboard');
-})->middleware(['auth', 'verified']);
 
 
 Route::view('/info', 'info')->name('info');
@@ -47,9 +45,7 @@ Route::get('/prueba', function () {
     return view('prueba');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard')->middleware(['auth', 'verified']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/tables', function () {
     return view('tables');
@@ -200,6 +196,7 @@ Route::resource('/info/projects', ProjectController::class)->middleware(['auth',
 Route::delete('/info/selected-projects', [ProjectController::class, 'deleteAll'])->name('project.delete')->middleware(['auth', 'verified']);
 Route::get('/projects/pdf', [ProjectController::class, 'generatePDF'])->name('projects.pdf')->middleware(['auth', 'verified']);
 Route::get('/projects/export-excel', [ProjectController::class, 'exportExcel'])->name('projects.download-excel')->middleware(['auth', 'verified']);
+Route::get('/projects/list', [ProjectController::class, 'list'])->name('projects.list')->middleware(['auth', 'verified']);
 
 //Auditoria
 Route::get('/audits', [AuditController::class, 'index'])->middleware(['auth', 'verified'])->name('audits.index');
