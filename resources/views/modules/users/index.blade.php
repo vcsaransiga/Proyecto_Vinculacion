@@ -152,7 +152,8 @@
                                                 <div class="tw-flex tw-items-center">
                                                     <div
                                                         class="tw-h-2.5 tw-w-2.5 tw-rounded-full {{ $user->status ? 'tw-bg-green-500' : 'tw-bg-red-500' }} tw-me-2">
-                                                    </div> {{ $user->status ? 'Activo' : 'Inactivo' }}
+                                                    </div>
+                                                    {{ $user->status ? 'Activo' : 'Inactivo' }}
                                                 </div>
                                             </td>
                                             <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">

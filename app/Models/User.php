@@ -14,6 +14,14 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
     use HasApiTokens, HasFactory, Notifiable;
     use \OwenIt\Auditing\Auditable;
 
+
+    protected $fillable = [
+        'name',
+        'last_name',
+        'email',
+        'password',
+        'status',
+    ];
     /**
      * The attributes that are mass assignable.
      *
@@ -42,8 +50,8 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
         'status' => 'boolean',
     ];
 
-    public function getStatusAttribute($value)
-    {
-        return $value ? 'Activo' : 'Inactivo';
-    }
+    // public function getStatusAttribute($value)
+    // {
+    //     return $value ? 'Activo' : 'Inactivo';
+    // }
 }
