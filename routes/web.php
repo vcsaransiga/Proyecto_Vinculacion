@@ -38,6 +38,9 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('/', function () {
+    return redirect('/dashboard');
+})->middleware(['auth', 'verified']);
 
 Route::view('/info', 'info')->name('info');
 
