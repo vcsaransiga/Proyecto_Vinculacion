@@ -132,7 +132,7 @@
                                                     class="tw-focus:tw-outline-none tw-text-white tw-bg-green-700 hover:tw-bg-green-800 tw-focus:tw-ring-4 tw-focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-green-600 dark:hover:tw-bg-green-700 dark:tw-focus:tw-ring-green-800"
                                                     data-bs-toggle="modal" data-bs-target="#modulesModal"
                                                     data-student-id="{{ $student->id_stud }}">
-                                                    Ver Módulos
+                                                    Ver
                                                 </button>
                                             </td>
 
