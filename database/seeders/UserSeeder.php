@@ -78,6 +78,15 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'Alejandro',
+                'last_name' => 'Mallama',
+                'email' => 'alejo@ueps.com',
+                'password' => Hash::make('Alejo123'),
+                'status' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
