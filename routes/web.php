@@ -20,6 +20,7 @@ use App\Http\Controllers\CategoryItemController;
 use App\Http\Controllers\MeasurementUnitController;
 use App\Http\Controllers\OperationTypeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\AuditController;
 use App\Http\Middleware\ThrottleLogins;
 /*
 |--------------------------------------------------------------------------
@@ -196,6 +197,9 @@ Route::resource('/info/projects', ProjectController::class)->middleware(['auth',
 Route::delete('/info/selected-projects', [ProjectController::class, 'deleteAll'])->name('project.delete')->middleware(['auth', 'verified']);
 Route::get('/projects/pdf', [ProjectController::class, 'generatePDF'])->name('projects.pdf')->middleware(['auth', 'verified']);
 Route::get('/projects/export-excel', [ProjectController::class, 'exportExcel'])->name('projects.download-excel')->middleware(['auth', 'verified']);
+
+//Auditoria
+Route::get('/audits', [AuditController::class, 'index'])->middleware(['auth', 'verified'])->name('audits.index');
 
 
 //Validacion de Cuenta
