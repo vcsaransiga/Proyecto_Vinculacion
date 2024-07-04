@@ -374,6 +374,7 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                    console.log(error);
                     noModulesMessage.textContent = 'Hubo un error al obtener los módulos.';
                     noModulesMessage.style.display = 'block'; // Mostrar el mensaje de error
                 });

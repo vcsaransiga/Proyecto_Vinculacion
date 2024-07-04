@@ -143,6 +143,7 @@ Route::resource('/info/students', StudentController::class)->middleware(['auth',
 Route::delete('/info/selected-students', [StudentController::class, 'deleteAll'])->name('student.delete')->middleware(['auth', 'verified']);
 Route::get('/students/pdf', [StudentController::class, 'generatePDF'])->name('students.pdf')->middleware(['auth', 'verified']);
 Route::get('/students/export-excel', [StudentController::class, 'exportExcel'])->name('students.download-excel')->middleware(['auth', 'verified']);
+Route::get('/info/students/{id_stud}/modules', [StudentController::class, 'getModules'])->name('students.getModules');
 
 // Periodos
 Route::resource('/info/periods', PeriodController::class)->middleware(['auth', 'verified']);
@@ -173,6 +174,8 @@ Route::resource('/info/modules', ModuleController::class)->middleware(['auth', '
 Route::delete('/info/selected-modules', [ModuleController::class, 'deleteAll'])->name('module.delete')->middleware(['auth', 'verified']);
 Route::get('/modules/pdf', [ModuleController::class, 'generatePDF'])->name('modules.pdf')->middleware(['auth', 'verified']);
 Route::get('/modules/export-excel', [ModuleController::class, 'exportExcel'])->name('modules.download-excel')->middleware(['auth', 'verified']);
+Route::get('/modules/{module}/students', [ModuleController::class, 'getStudents'])->name('modules.getStudents');
+
 
 // Categorías de Ítems
 Route::resource('/info/categories_items', CategoryItemController::class)->middleware(['auth', 'verified']);
