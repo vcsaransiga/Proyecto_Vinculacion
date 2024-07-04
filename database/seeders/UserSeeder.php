@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
                 'status' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'John',
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
                 'status' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Jane',
@@ -41,6 +43,7 @@ class UserSeeder extends Seeder
                 'status' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Michael',
@@ -50,6 +53,7 @@ class UserSeeder extends Seeder
                 'status' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Emily',
@@ -59,6 +63,7 @@ class UserSeeder extends Seeder
                 'status' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Alec',
@@ -68,6 +73,7 @@ class UserSeeder extends Seeder
                 'status' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Zamyr',
@@ -77,6 +83,7 @@ class UserSeeder extends Seeder
                 'status' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Alejandro',
@@ -86,6 +93,7 @@ class UserSeeder extends Seeder
                 'status' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'email_verified_at' => now(),
             ],
         ]);
     }
