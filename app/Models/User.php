@@ -21,6 +21,9 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
         'email',
         'password',
         'status',
+        'profile_photo',
+        'phone',
+        'about',
     ];
     /**
      * The attributes that are mass assignable.

@@ -126,8 +126,8 @@ Route::middleware(['throttle:login_attempts'])->group(function () {
 
 
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile')->middleware(['auth', 'verified']);
-Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update')->middleware(['auth', 'verified']);
+Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile')->middleware(['auth']);
+Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
 
 
 
