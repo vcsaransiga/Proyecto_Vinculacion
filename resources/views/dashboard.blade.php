@@ -43,16 +43,16 @@
                                 <div>
                                     <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
                                         @php
-                                        $imageUrl = $project->image_url ? asset('storage/' . $project->image_url) : asset('storage/default.jpg');
+                                        $imageUrl = $project->image ? asset('storage/projects/' . $project->image) : asset('storage/default.jpg');
                                     @endphp
                                     <div class="full-background bg-cover" style="background-image: url('{{ $imageUrl }}')"></div>
                                         <div class="card-body text-start px-3 py-0 w-100">
                                             <div class="row mt-12">
                                                 <div class="col-sm-3 mt-auto">
-                                                    <h4 class="text-dark font-weight-bolder">#{{ $loop->iteration }}</h4>
-                                                    <p class="text-dark opacity-6 text-xs font-weight-bolder mb-0">Nombre del Proyecto</p>
-                                                    <h5 class="text-dark font-weight-bolder">{{ $project->name }}</h5>
-                                                </div>
+                                                    <h4 class="text-dark font-weight-bolder" style="color: white !important;">#{{ $loop->iteration }}</h4>
+                                                    <p class="text-dark opacity-6 text-xs font-weight-bolder mb-0" style="color: white !important;">Nombre del Proyecto</p>
+                                                    <h5 class="text-dark font-weight-bolder" style="color: white !important;">{{ $project->name }}</h5>
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>

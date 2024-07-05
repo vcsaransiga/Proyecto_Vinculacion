@@ -225,7 +225,7 @@
                         style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="createProjectForm" method="POST" action="{{ route('projects.store') }}">
+                    <form id="createProjectForm" method="POST" action="{{ route('projects.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3 d-flex">
                             <div class="me-2">
@@ -294,7 +294,7 @@
                         style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editProjectForm" method="POST" action="">
+                    <form id="editProjectForm" method="POST" action="" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3 d-flex">

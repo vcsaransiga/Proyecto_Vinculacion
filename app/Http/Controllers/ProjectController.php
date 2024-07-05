@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Project;
@@ -43,6 +42,8 @@ class ProjectController extends Controller
         $lastIdNumber = $lastProject ? intval(substr($lastProject->id_pro, 5)) : 0;
         $newIdNumber = str_pad($lastIdNumber + 1, 4, '0', STR_PAD_LEFT);
 
+        $imagePath = $request->file('image') ? $request->file('image')->store('images', 'public/projects') : null;
+
         Project::create([
             'id_pro' => 'PROJ-' . $newIdNumber,
             'id_responsible' => $request->id_responsible,
@@ -53,7 +54,7 @@ class ProjectController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'budget' => $request->budget,
-            'image' => $request->file('image') ? $request->file('image')->store('images', 'public/projects') : null,
+            'image' => $imagePath,
         ]);
 
         return redirect()->route('projects.index')->with('success', 'Proyecto creado correctamente.');
@@ -74,7 +75,7 @@ class ProjectController extends Controller
 
     public function update(Request $request, $id)
     {
-        $imagePath = $request->file('image') ? $request->file('image')->store('images', 'public') : null;
+        $project = Project::findOrFail($id);
 
         $request->validate([
             'id_responsible' => 'required|string|max:255',
@@ -88,12 +89,22 @@ class ProjectController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de la imagen
         ]);
 
-        $project = Project::findOrFail($id);
-        $project->update($request->all());
+        $imagePath = $request->file('image') ? $request->file('image')->store('images', 'public/projects') : $project->image;
+
+        $project->update([
+            'id_responsible' => $request->id_responsible,
+            'name' => $request->name,
+            'description' => $request->description,
+            'status' => $request->status,
+            'progress' => $request->progress,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'budget' => $request->budget,
+            'image' => $imagePath,
+        ]);
 
         return redirect()->route('projects.index')->with('success', 'Proyecto actualizado correctamente.');
     }
-
 
     public function deleteAll(Request $request)
     {
@@ -101,6 +112,7 @@ class ProjectController extends Controller
         Project::whereIn('id_pro', $ids)->delete();
         return response()->json(["success" => "Proyectos seleccionados eliminados exitosamente."]);
     }
+
     public function destroy($id)
     {
         $project = Project::findOrFail($id);
