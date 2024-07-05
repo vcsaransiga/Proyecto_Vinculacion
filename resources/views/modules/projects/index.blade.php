@@ -272,6 +272,10 @@
                             <label for="budget" class="form-label">Presupuesto</label>
                             <input type="number" class="form-control" id="budget" name="budget" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Fotografia</label>
+                            <input type="file" class="form-control" id="image" name="image" >
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
@@ -338,6 +342,10 @@
                         <div class="mb-3">
                             <label for="edit_budget" class="form-label">Presupuesto</label>
                             <input type="number" class="form-control" id="edit_budget" name="budget" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Fotografia</label>
+                            <input type="file" class="form-control" id="edit_image" name="image" >
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>

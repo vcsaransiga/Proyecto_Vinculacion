@@ -10,7 +10,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $projectCount = Project::count(); // Obtiene el número de proyectos
-        return view('dashboard', compact('projectCount'));
+        // Obtén solo seis proyectos
+        $projects = Project::limit(6)->get();
+        // Pasa los proyectos a la vista del dashboard
+        return view('dashboard', compact('projects'));
     }
 }

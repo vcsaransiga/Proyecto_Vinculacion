@@ -43,8 +43,6 @@ class ProjectController extends Controller
         $lastIdNumber = $lastProject ? intval(substr($lastProject->id_pro, 5)) : 0;
         $newIdNumber = str_pad($lastIdNumber + 1, 4, '0', STR_PAD_LEFT);
 
-        $imagePath = $request->file('image') ? $request->file('image')->store('images', 'public') : null;
-
         Project::create([
             'id_pro' => 'PROJ-' . $newIdNumber,
             'id_responsible' => $request->id_responsible,
@@ -55,7 +53,7 @@ class ProjectController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'budget' => $request->budget,
-            'image' => $imagePath,
+            'image' => $request->file('image') ? $request->file('image')->store('images', 'public/projects') : null,
         ]);
 
         return redirect()->route('projects.index')->with('success', 'Proyecto creado correctamente.');
