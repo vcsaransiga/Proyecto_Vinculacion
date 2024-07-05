@@ -29,7 +29,7 @@ class ProfileController extends Controller
         if ($request->hasFile('profile_photo')) {
             // Borrar la imagen anterior si existe
             if ($user->profile_photo) {
-                Storage::delete('public/' . $user->profile_photo);
+                Storage::delete('public/profile_photos/' . $user->profile_photo);
             }
             $data['profile_photo'] = $request->file('profile_photo')->store('users', 'public/profile_photos');
         }
