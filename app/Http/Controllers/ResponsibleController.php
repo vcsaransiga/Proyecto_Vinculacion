@@ -84,12 +84,43 @@ class ResponsibleController extends Controller
     }
 
 
+    public function deactivateAll(Request $request)
+    {
+        $ids = $request->ids;
+
+        // Validar que los IDs sean un array y no estén vacíos
+        if (!is_array($ids) || empty($ids)) {
+            return response()->json(["error" => "No se han seleccionado responsables."]);
+        }
+
+        // Actualizar el campo 'status' a inactivo para los responsables seleccionados
+        $responsibles = Responsible::whereIn('id_responsible', $ids)->get();
+        foreach ($responsibles as $responsible) {
+            $responsible->update(['status' => 0]);
+        }
+
+        return response()->json(["success" => "Responsables seleccionados desactivados exitosamente."]);
+    }
+
     public function deleteAll(Request $request)
     {
         $ids = $request->ids;
-        Responsible::whereIn('id_responsible', $ids)->delete();
+
+        // Validar que los IDs sean un array y no estén vacíos
+        if (!is_array($ids) || empty($ids)) {
+            return response()->json(["error" => "No se han seleccionado responsables."]);
+        }
+
+        // Eliminar los responsables seleccionados
+        $responsibles = Responsible::whereIn('id_responsible', $ids)->get();
+        foreach ($responsibles as $responsible) {
+            $responsible->delete();
+        }
+
         return response()->json(["success" => "Responsables seleccionados eliminados exitosamente."]);
     }
+
+
     public function destroy($id_responsible)
     {
         $responsible = Responsible::findOrFail($id_responsible);

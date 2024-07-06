@@ -169,6 +169,7 @@
     <script src="{{ asset('assets/js/search.js') }}"></script>
     <script src="{{ asset('assets/js/pagination.js') }}"></script>
     <script src="{{ asset('assets/js/deleteAll.js') }}"></script>
+    <script src="{{ asset('assets/js/deactivateAll.js') }}"></script>
     <script>
         if (document.getElementsByClassName('mySwiper')) {
             var swiper = new Swiper(".mySwiper", {

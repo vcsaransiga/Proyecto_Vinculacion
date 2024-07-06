@@ -60,12 +60,44 @@ class UserController extends Controller
 
         return view('modules.users.index', compact('users'));
     }
+
+    public function deactivateAll(Request $request)
+    {
+        $ids = $request->ids;
+
+        // Validar que los IDs sean un array y no estén vacíos
+        if (!is_array($ids) || empty($ids)) {
+            return response()->json(["error" => "No se han seleccionado usuarios."]);
+        }
+
+        // Actualizar el campo 'status' a inactivo para los usuarios seleccionados
+        $users = User::whereIn('id', $ids)->get();
+        foreach ($users as $user) {
+            $user->update(['status' => 0]);
+        }
+
+        return response()->json(["success" => "Usuarios seleccionados desactivados exitosamente."]);
+    }
+
     public function deleteAll(Request $request)
     {
         $ids = $request->ids;
-        User::whereIn('id', $ids)->delete();
+
+        // Validar que los IDs sean un array y no estén vacíos
+        if (!is_array($ids) || empty($ids)) {
+            return response()->json(["error" => "No se han seleccionado usuarios."]);
+        }
+
+        // Eliminar los usuarios seleccionados
+        $users = User::whereIn('id', $ids)->get();
+        foreach ($users as $user) {
+            $user->delete();
+        }
+
         return response()->json(["success" => "Usuarios seleccionados eliminados exitosamente."]);
     }
+
+
 
 
     public function destroy(User $user)
