@@ -33,10 +33,18 @@
 
                         <!-- Mensaje de éxito -->
                         <div id="message"
-                            class="tw-hidden tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-rounded tw-relative"
+                            class="tw-hidden tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-mt-2 tw-rounded tw-relative"
                             role="alert">
                             <strong class="tw-font-bold">Éxito!</strong>
                             <span class="tw-block sm:tw-inline" id="message-text"></span>
+                        </div>
+
+                        <!-- Mensaje de error -->
+                        <div id="message-error"
+                            class="tw-hidden tw-bg-red-100 tw-border tw-border-red-400 tw-text-red-700 tw-px-4 tw-py-3 tw-mt-2 tw-rounded tw-relative"
+                            role="alert">
+                            <strong class="tw-font-bold">Error!</strong>
+                            <span class="tw-block sm:tw-inline" id="message-text-error"></span>
                         </div>
 
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
@@ -52,8 +60,12 @@
                                             Acción
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#"
+                                                id="deactivateSelected">Desactivar</a>
                                             <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
                                         </div>
+
+
                                     </div>
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -152,7 +164,8 @@
                                                     data-student-name="{{ $student->name }}"
                                                     data-student-last_name="{{ $student->last_name }}"
                                                     data-student-course="{{ $student->course }}"
-                                                    data-student-hours="{{ $student->hours }}">
+                                                    data-student-hours="{{ $student->hours }}"
+                                                    data-student-status="{{ $student->status }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="currentColor"
@@ -162,6 +175,7 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </a>
+
                                                 <form action="{{ route('students.destroy', $student->id_stud) }}"
                                                     method="POST" style="display:inline-block;">
                                                     @csrf
@@ -270,12 +284,20 @@
                             <input type="number" class="form-control" id="hours" name="hours"
                                 step="0.01">
                         </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Estado</label>
+                            <select class="form-control" id="status" name="status" required>
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Edit Student Modal -->
     <div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentModalLabel"
@@ -312,6 +334,13 @@
                             <input type="number" class="form-control" id="edit_hours" name="hours"
                                 step="0.01">
                         </div>
+                        <div class="mb-3">
+                            <label for="edit_status" class="form-label">Estado</label>
+                            <select class="form-control" id="edit_status" name="status" required>
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
@@ -319,11 +348,11 @@
         </div>
     </div>
 
+
 </x-app-layout>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit student form
         var editStudentModal = document.getElementById('editStudentModal');
         editStudentModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
@@ -333,6 +362,7 @@
             var studentLastName = button.getAttribute('data-student-last_name');
             var studentCourse = button.getAttribute('data-student-course');
             var studentHours = button.getAttribute('data-student-hours');
+            var studentStatus = button.getAttribute('data-student-status');
 
             var modalForm = editStudentModal.querySelector('form');
             modalForm.action = '/info/students/' + studentId;
@@ -342,12 +372,14 @@
             var modalLastNameInput = editStudentModal.querySelector('#edit_last_name');
             var modalCourseInput = editStudentModal.querySelector('#edit_course');
             var modalHoursInput = editStudentModal.querySelector('#edit_hours');
+            var modalStatusInput = editStudentModal.querySelector('#edit_status');
 
             modalCardIdInput.value = studentCardId;
             modalNameInput.value = studentName;
             modalLastNameInput.value = studentLastName;
             modalCourseInput.value = studentCourse;
             modalHoursInput.value = studentHours;
+            modalStatusInput.value = studentStatus;
         });
     });
 </script>
@@ -411,6 +443,17 @@
             checkboxClass: ".checkbox_ids",
             deleteButtonId: "#deleteSelected",
             deleteUrl: "{{ route('student.delete') }}",
+            csrfToken: "{{ csrf_token() }}",
+            rowIdPrefix: "#student_ids"
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeDeactivateAll({
+            selectAllId: "#select_all_ids",
+            checkboxClass: ".checkbox_ids",
+            deactivateButtonId: "#deactivateSelected",
+            deactivateUrl: "{{ route('student.deactivate') }}",
             csrfToken: "{{ csrf_token() }}",
             rowIdPrefix: "#student_ids"
         });

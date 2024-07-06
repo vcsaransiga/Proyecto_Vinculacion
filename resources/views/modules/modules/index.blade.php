@@ -40,6 +40,14 @@
                             <span class="tw-block sm:tw-inline" id="message-text"></span>
                         </div>
 
+                        <!-- Mensaje de error -->
+                        <div id="message-error"
+                            class="tw-hidden tw-bg-red-100 tw-border tw-border-red-400 tw-text-red-700 tw-px-4 tw-py-3 tw-rounded tw-relative"
+                            role="alert">
+                            <strong class="tw-font-bold">Error!</strong>
+                            <span class="tw-block sm:tw-inline" id="message-text-error"></span>
+                        </div>
+
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
@@ -53,6 +61,8 @@
                                             Acción
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#"
+                                                id="deactivateSelected">Desactivar</a>
                                             <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
                                         </div>
                                     </div>
@@ -553,6 +563,17 @@
             deleteUrl: "{{ route('module.delete') }}",
             csrfToken: "{{ csrf_token() }}",
             rowIdPrefix: "#modules_ids"
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeDeactivateAll({
+            selectAllId: "#select_all_ids",
+            checkboxClass: ".checkbox_ids",
+            deactivateButtonId: "#deactivateSelected",
+            deactivateUrl: "{{ route('module.deactivate') }}",
+            csrfToken: "{{ csrf_token() }}",
+            rowIdPrefix: "#module_ids"
         });
     });
 </script>

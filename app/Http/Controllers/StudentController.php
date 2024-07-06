@@ -82,12 +82,42 @@ class StudentController extends Controller
 
 
 
+    public function deactivateAll(Request $request)
+    {
+        $ids = $request->ids;
+
+        // Validar que los IDs sean un array y no estén vacíos
+        if (!is_array($ids) || empty($ids)) {
+            return response()->json(["error" => "No se han seleccionado estudiantes."]);
+        }
+
+        // Actualizar el campo 'status' a inactivo para los estudiantes seleccionados
+        $students = Student::whereIn('id_stud', $ids)->get();
+        foreach ($students as $student) {
+            $student->update(['status' => 0]);
+        }
+
+        return response()->json(["success" => "Estudiantes seleccionados desactivados exitosamente."]);
+    }
+
     public function deleteAll(Request $request)
     {
         $ids = $request->ids;
-        Student::whereIn('id_stud', $ids)->delete();
+
+        // Validar que los IDs sean un array y no estén vacíos
+        if (!is_array($ids) || empty($ids)) {
+            return response()->json(["error" => "No se han seleccionado estudiantes."]);
+        }
+
+        // Eliminar los estudiantes seleccionados
+        $students = Student::whereIn('id_stud', $ids)->get();
+        foreach ($students as $student) {
+            $student->delete();
+        }
+
         return response()->json(["success" => "Estudiantes seleccionados eliminados exitosamente."]);
     }
+
 
 
     public function destroy($id_stud)

@@ -1,10 +1,10 @@
-function initializeDeleteAll(options) {
+function initializeDeactivateAll(options) {
     $(function (e) {
         $(options.selectAllId).click(function () {
             $(options.checkboxClass).prop('checked', $(this).prop('checked'));
         });
 
-        $(options.deleteButtonId).click(function (e) {
+        $(options.deactivateButtonId).click(function (e) {
             e.preventDefault();
 
             // Mensaje de confirmación
@@ -25,36 +25,32 @@ function initializeDeleteAll(options) {
                 return;
             }
 
-
-            console.log(`IDs a eliminar: ${all_ids}`);
+            console.log(`IDs a desactivar: ${all_ids}`);
 
             $.ajax({
-                url: options.deleteUrl,
-                type: "DELETE",
+                url: options.deactivateUrl,
+                type: "PATCH",
                 data: {
                     ids: all_ids,
                     _token: options.csrfToken
                 },
                 success: function (response) {
-                    $.each(all_ids, function (key, val) {
-                        $(`${options.rowIdPrefix}${val}`).remove();
-                    });
-
                     if (response.success) {
                         // Mostrar el mensaje de éxito
-                        $('#message').removeClass('tw-hidden').addClass('tw-block');
-                        $('#message-text').text(response.success);
-                        console.log('Eliminación exitosa:', response.success);
+                        $('#message-success').removeClass('tw-hidden').addClass('tw-block');
+                        $('#message-text-success').text(response.success);
+                        console.log('Desactivación exitosa:', response.success);
 
-                        // Recargar la página
-                        // location.reload();
+                        // Recargar la página después de 2 segundos
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
                     }
-
                 },
                 error: function (xhr, status, error) {
-                    console.error('Error al eliminar los elementos seleccionados:', error);
+                    console.error('Error al desactivar los elementos seleccionados:', error);
                     console.error('Detalles del error:', xhr, status);
-                    alert('Error al eliminar los elementos seleccionados');
+                    alert('Error al desactivar los elementos seleccionados');
                 }
             });
         });

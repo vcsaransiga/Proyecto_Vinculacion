@@ -134,12 +134,14 @@ Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profi
 // Usuarios
 Route::resource('/info/users', UserController::class)->middleware(['auth', 'verified']);
 Route::delete('/info/selected-users', [UserController::class, 'deleteAll'])->name('user.delete')->middleware(['auth', 'verified']);
+Route::patch('/info/selected-users/deactivate', [UserController::class, 'deactivateAll'])->name('user.deactivate')->middleware(['auth', 'verified']);
 Route::get('/users/pdf', [UserController::class, 'generatePDF'])->name('users.pdf')->middleware(['auth', 'verified']);
 Route::get('/users/export-excel', [UserController::class, 'exportExcel'])->name('users.download-excel')->middleware(['auth', 'verified']);
 
 // Estudiantes
 Route::resource('/info/students', StudentController::class)->middleware(['auth', 'verified']);
 Route::delete('/info/selected-students', [StudentController::class, 'deleteAll'])->name('student.delete')->middleware(['auth', 'verified']);
+Route::patch('/info/selected-students/deactivate', [StudentController::class, 'deactivateAll'])->name('student.deactivate')->middleware(['auth', 'verified']);
 Route::get('/students/pdf', [StudentController::class, 'generatePDF'])->name('students.pdf')->middleware(['auth', 'verified']);
 Route::get('/students/export-excel', [StudentController::class, 'exportExcel'])->name('students.download-excel')->middleware(['auth', 'verified']);
 Route::get('/info/students/{id_stud}/modules', [StudentController::class, 'getModules'])->name('students.getModules');
@@ -165,12 +167,14 @@ Route::get('/warehouses/export-excel', [WarehouseController::class, 'exportExcel
 // Responsables
 Route::resource('/info/responsibles', ResponsibleController::class)->middleware(['auth', 'verified']);
 Route::delete('/info/selected-responsibles', [ResponsibleController::class, 'deleteAll'])->name('responsible.delete')->middleware(['auth', 'verified']);
+Route::patch('/info/selected-responsibles/deactivate', [ResponsibleController::class, 'deactivateAll'])->name('responsible.deactivate')->middleware(['auth', 'verified']);
 Route::get('/responsibles/pdf', [ResponsibleController::class, 'generatePDF'])->name('responsibles.pdf')->middleware(['auth', 'verified']);
 Route::get('/responsibles/export-excel', [ResponsibleController::class, 'exportExcel'])->name('responsibles.download-excel')->middleware(['auth', 'verified']);
 
 // Módulos
 Route::resource('/info/modules', ModuleController::class)->middleware(['auth', 'verified']);
 Route::delete('/info/selected-modules', [ModuleController::class, 'deleteAll'])->name('module.delete')->middleware(['auth', 'verified']);
+Route::patch('/info/selected-modules/deactivate', [ModuleController::class, 'deactivateAll'])->name('module.deactivate')->middleware(['auth', 'verified']);
 Route::get('/modules/pdf', [ModuleController::class, 'generatePDF'])->name('modules.pdf')->middleware(['auth', 'verified']);
 Route::get('/modules/export-excel', [ModuleController::class, 'exportExcel'])->name('modules.download-excel')->middleware(['auth', 'verified']);
 Route::get('/modules/{module}/students', [ModuleController::class, 'getStudents'])->name('modules.getStudents');
