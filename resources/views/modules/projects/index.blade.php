@@ -252,8 +252,13 @@
                             <textarea class="form-control" id="description" name="description" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="status" class="form-label">Estado</label>
-                            <input type="text" class="form-control" id="status" name="status" required>
+                            <label for="status" class="form-label">Estado:</label>
+                            <select class="form-control" id="status" name="status">
+                                <option value="initiated">Iniciado</option>
+                                <option value="in_progress">En Progreso</option>
+                                <option value="cancelled">Cancelado</option>
+                                <option value="completed">Completado</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="progress" class="form-label">Progreso (%)</label>
@@ -318,9 +323,17 @@
                             <textarea class="form-control" id="edit_description" name="description" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_status" class="form-label">Estado</label>
-                            <input type="text" class="form-control" id="edit_status" name="status" required>
+
+
+                            <label for="edit_status" class="form-label">Estado:</label>
+                            <select class="form-control" id="edit_status" name="status">
+                                <option value="initiated">Iniciado</option>
+                                <option value="in_progress">En Progreso</option>
+                                <option value="cancelled">Cancelado</option>
+                                <option value="completed">Completado</option>
+                            </select>
                         </div>
+
                         <div class="mb-3">
                             <label for="edit_progress" class="form-label">Progreso (%)</label>
                             <input type="number" class="form-control" id="edit_progress" name="progress"

@@ -18,8 +18,21 @@ class Project extends Model implements Auditable
         'id_pro', 'id_responsible', 'name', 'description', 'status', 'progress', 'start_date', 'end_date', 'budget', 'image',
     ];
 
+
     public function responsible()
     {
         return $this->belongsTo(Responsible::class, 'id_responsible', 'id_responsible');
+    }
+
+    public function getStatusAttribute($value)
+    {
+        $statuses = [
+            'initiated' => 'Iniciado',
+            'in_progress' => 'En Progreso',
+            'cancelled' => 'Cancelado',
+            'completed' => 'Completado',
+        ];
+
+        return $statuses[$value] ?? $value;
     }
 }

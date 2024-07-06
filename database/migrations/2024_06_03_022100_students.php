@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('course');
             $table->float('hours');
+            $table->boolean('status'); //activo o inactivo
             $table->timestamps();
         
         });

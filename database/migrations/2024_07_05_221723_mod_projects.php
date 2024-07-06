@@ -9,30 +9,30 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->string('id_task')->primary();
+        Schema::create('mod_projects', function (Blueprint $table) {
             $table->string('id_pro');
-            $table->string('name');
-            $table->string('description');
-            $table->float('hours');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('id_mod');
+            $table->primary(['id_pro', 'id_mod']);
             $table->timestamps();
 
+            // Índices adicionales
+            $table->index('id_mod');
+            $table->index('id_pro');
+
             // Relaciones
+            $table->foreign('id_mod')->references('id_mod')->on('modules')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_pro')->references('id_pro')->on('projects')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('mod_projects');
     }
 };
