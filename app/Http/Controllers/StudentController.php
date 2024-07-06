@@ -26,6 +26,7 @@ class StudentController extends Controller
             'last_name' => 'required|string|max:255',
             'course' => 'required|string|max:255',
             'hours' => 'required|numeric',
+            'status' => 'required|boolean',
         ]);
 
         // Obtener el último estudiante basado en el id_stud
@@ -55,6 +56,7 @@ class StudentController extends Controller
             'last_name' => $request->last_name,
             'course' => $request->course,
             'hours' => $request->hours,
+            'status' => $request->status,
         ]);
 
         return redirect()->route('students.index')->with('success', 'Estudiante agregado correctamente.');
@@ -69,6 +71,7 @@ class StudentController extends Controller
             'last_name' => 'required|string|max:255',
             'course' => 'required|string|max:255',
             'hours' => 'required|numeric',
+            'status' => 'required|boolean',
         ]);
 
         $student = Student::findOrFail($id_stud);

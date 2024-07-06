@@ -19,4 +19,10 @@ class Period extends Model implements Auditable
         'start_date',
         'end_date',
     ];
+
+
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class, 'mod_stud', 'id_period', 'id_mod');
+    }
 }

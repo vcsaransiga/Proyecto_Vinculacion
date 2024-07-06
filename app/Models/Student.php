@@ -22,6 +22,7 @@ class Student extends Model implements Auditable
         'last_name',
         'course',
         'hours',
+        'status',
     ];
 
     public function modules()

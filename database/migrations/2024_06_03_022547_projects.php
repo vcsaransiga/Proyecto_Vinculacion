@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('id_responsible');
             $table->string('name');
             $table->text('description');
-            $table->string('status');
+            $table->enum('status', ['initiated', 'in_progress', 'cancelled', 'completed'])->default('initiated');
             $table->float('progress');
             $table->date('start_date');
             $table->date('end_date');

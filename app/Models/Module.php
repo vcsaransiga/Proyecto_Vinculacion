@@ -18,10 +18,12 @@ class Module extends Model implements Auditable
     protected $fillable = [
         'id_mod',
         'id_responsible',
+        'id_period',
         'name',
         'start_date',
         'end_date',
         'vinculation_hours',
+        'status',
     ];
 
     public function responsible()
@@ -29,9 +31,19 @@ class Module extends Model implements Auditable
         return $this->belongsTo(Responsible::class, 'id_responsible');
     }
 
+    public function period()
+    {
+        return $this->belongsTo(Period::class, 'id_period');
+    }
+
 
     public function students()
     {
         return $this->belongsToMany(Student::class, 'mod_stud', 'id_mod', 'id_stud');
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'mod_projects', 'id_mod', 'id_pro');
     }
 }

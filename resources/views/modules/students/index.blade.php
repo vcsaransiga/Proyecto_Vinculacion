@@ -105,6 +105,7 @@
                                         <th scope="row" class="tw-px-6 tw-py-3">Curso</th>
                                         <th scope="row" class="tw-px-6 tw-py-3">Horas</th>
                                         <th scope="row" class="tw-px-6 tw-py-3">Módulos</th>
+                                        <th scope="row" class="tw-px-6 tw-py-3">Estado</th>
                                         <th scope="row" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
@@ -135,7 +136,13 @@
                                                     Ver
                                                 </button>
                                             </td>
-
+                                            <td class="tw-px-6 tw-py-4">
+                                                <div class="tw-flex tw-items-center">
+                                                    <div
+                                                        class="tw-h-2.5 tw-w-2.5 tw-rounded-full {{ $student->status ? 'tw-bg-green-500' : 'tw-bg-red-500' }} tw-me-2">
+                                                    </div> {{ $student->status ? 'Activo' : 'Inactivo' }}
+                                                </div>
+                                            </td>
                                             <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
                                                 <a href="#"
                                                     class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"

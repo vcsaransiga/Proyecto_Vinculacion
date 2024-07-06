@@ -21,6 +21,7 @@ class StudentFactory extends Factory
             'last_name' => $this->faker->lastName,
             'course' => $this->faker->word,
             'hours' => $this->faker->randomFloat(2, 0, 100),
+            'status' => $this->faker->boolean,
         ];
     }
 }

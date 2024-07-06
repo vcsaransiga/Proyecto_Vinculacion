@@ -102,10 +102,12 @@
                                         <th scope="col" class="tw-px-6 tw-py-3">ID</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Responsable</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Periodo</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Fecha de Inicio</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Fecha de Fin</th>
                                         <th scope="col" class="tw-px-6 tw-py-3 tw-w-2">Horas de Vinculación</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Estudiantes</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Estado</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
@@ -123,9 +125,12 @@
                                             <td class="tw-px-6 tw-py-4">{{ $module->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $module->responsible->name }}
                                                 {{ $module->responsible->last_name }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $module->period->name }}
+                                                {{ $module->period->academic_year }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $module->start_date }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $module->end_date }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $module->vinculation_hours }}</td>
+
                                             <td class="tw-px-6 tw-py-4" style="width: 150px;">
                                                 <button type="button"
                                                     class="tw-w-full tw-text-white tw-bg-green-700 hover:tw-bg-green-800 focus:tw-ring-4 focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-1 dark:tw-bg-green-600 dark:hover:tw-bg-green-700 dark:tw-focus:tw-ring-green-800"
@@ -134,16 +139,26 @@
                                                     Ver
                                                 </button>
                                             </td>
-                                            <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
+                                            <td class="tw-px-6 tw-py-4">
+                                                <div class="tw-flex tw-items-center">
+                                                    <div
+                                                        class="tw-h-2.5 tw-w-2.5 tw-rounded-full {{ $module->status ? 'tw-bg-green-500' : 'tw-bg-red-500' }} tw-me-2">
+                                                    </div> {{ $module->status ? 'Activo' : 'Inactivo' }}
+                                                </div>
+                                            </td>
+                                            <td
+                                                class="tw-px-6 tw-py-4 tw-flex tw-flex-col tw-justify-between tw-space-y-2">
                                                 <a href="#"
                                                     class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"
                                                     data-bs-toggle="modal" data-bs-target="#editModuleModal"
                                                     data-module-id="{{ $module->id_mod }}"
                                                     data-module-name="{{ $module->name }}"
                                                     data-module-responsible="{{ $module->id_responsible }}"
+                                                    data-module-period="{{ $module->id_period }}"
                                                     data-module-start_date="{{ $module->start_date }}"
                                                     data-module-end_date="{{ $module->end_date }}"
-                                                    data-module-vinculation_hours="{{ $module->vinculation_hours }}">
+                                                    data-module-vinculation_hours="{{ $module->vinculation_hours }}"
+                                                    data-module-status="{{ $module->status }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="currentColor"
@@ -171,6 +186,7 @@
                                                     </button>
                                                 </form>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -257,6 +273,23 @@
                                     Responsable</button>
                             </div>
                         </div>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="id_period" class="form-label">Periodo</label>
+                                <select class="form-control" id="id_period" name="id_period" required>
+                                    @foreach ($periods as $period)
+                                        <option value="{{ $period->id_period }}">{{ $period->name }}
+
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#createPeriodModal" data-bs-dismiss="modal">Agregar
+                                    Periodo</button>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -273,6 +306,13 @@
                             <label for="vinculation_hours" class="form-label">Horas de Vinculación</label>
                             <input type="number" class="form-control" id="vinculation_hours"
                                 name="vinculation_hours" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Estado</label>
+                            <select class="form-control" id="status" name="status" required>
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -313,6 +353,22 @@
                                     Responsable</button>
                             </div>
                         </div>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="edit_id_period" class="form-label">Periodo</label>
+                                <select class="form-control" id="edit_id_period" name="id_period" required>
+                                    @foreach ($periods as $period)
+                                        <option value="{{ $period->id_period }}">{{ $period->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#createPeriodModal" data-bs-dismiss="modal">Agregar
+                                    Periodo</button>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
                             <label for="edit_name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="edit_name" name="name" required>
@@ -330,6 +386,13 @@
                             <label for="edit_vinculation_hours" class="form-label">Horas de Vinculación</label>
                             <input type="number" class="form-control" id="edit_vinculation_hours"
                                 name="vinculation_hours" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_status" class="form-label">Estado</label>
+                            <select class="form-control" id="edit_status" name="status" required>
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
@@ -391,31 +454,47 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit module form
         var editModuleModal = document.getElementById('editModuleModal');
         editModuleModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
             var moduleId = button.getAttribute('data-module-id');
             var moduleName = button.getAttribute('data-module-name');
             var moduleResponsible = button.getAttribute('data-module-responsible');
+            var modulePeriod = button.getAttribute('data-module-period');
             var moduleStartDate = button.getAttribute('data-module-start_date');
             var moduleEndDate = button.getAttribute('data-module-end_date');
             var moduleVinculationHours = button.getAttribute('data-module-vinculation_hours');
+            var moduleStatus = button.getAttribute('data-module-status');
 
             var modalForm = editModuleModal.querySelector('form');
             modalForm.action = '/info/modules/' + moduleId;
 
             var modalNameInput = editModuleModal.querySelector('#edit_name');
             var modalResponsibleInput = editModuleModal.querySelector('#edit_id_responsible');
+            var modalPeriodInput = editModuleModal.querySelector('#edit_id_period');
             var modalStartDateInput = editModuleModal.querySelector('#edit_start_date');
             var modalEndDateInput = editModuleModal.querySelector('#edit_end_date');
             var modalVinculationHoursInput = editModuleModal.querySelector('#edit_vinculation_hours');
+            var modalStatusInput = editModuleModal.querySelector('#edit_status'); // Corrección aquí
+
+            console.log({
+                moduleId,
+                moduleName,
+                moduleResponsible,
+                modulePeriod,
+                moduleStartDate,
+                moduleEndDate,
+                moduleVinculationHours,
+                moduleStatus
+            });
 
             modalNameInput.value = moduleName;
             modalResponsibleInput.value = moduleResponsible;
+            modalPeriodInput.value = modulePeriod;
             modalStartDateInput.value = moduleStartDate;
             modalEndDateInput.value = moduleEndDate;
             modalVinculationHoursInput.value = moduleVinculationHours;
+            modalStatusInput.value = moduleStatus;
         });
     });
 </script>

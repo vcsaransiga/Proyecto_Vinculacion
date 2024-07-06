@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('id_kardex')->primary();
             $table->integer('id_ope');
             $table->string('id_ware');
+            $table->string('id_pro');
             $table->string('name');
             $table->string('description');
             $table->date('date');
@@ -28,10 +29,12 @@ return new class extends Migration
             // Índices adicionales
             $table->index('id_ope');
             $table->index('id_ware');
+            $table->index('id_pro');
 
             // Relaciones
-            $table->foreign('id_ope')->references('id_ope')->on('operations_type')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreign('id_ware')->references('id_ware')->on('warehouses')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('id_ope')->references('id_ope')->on('operations_type')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_ware')->references('id_ware')->on('warehouses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_pro')->references('id_pro')->on('projects')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

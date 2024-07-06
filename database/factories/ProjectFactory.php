@@ -16,11 +16,11 @@ class ProjectFactory extends Factory
     public function definition()
     {
         return [
-            'id_pro' => $this->faker->unique()->regexify('PROJ-[0-9]{4}'),
+            'id_pro' => $this->faker->unique()->regexify('PROJ-[0-9]{2}'),
             'id_responsible' => Responsible::factory(),
             'name' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'status' => $this->faker->randomElement(['Active', 'Inactive', 'Completed']),
+            'status' => $this->faker->randomElement(['initiated', 'in_progress', 'cancelled', 'completed']),
             'progress' => $this->faker->randomFloat(2, 0, 100),
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),

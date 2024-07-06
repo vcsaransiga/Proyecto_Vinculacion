@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Module;
 use App\Models\Responsible;
+use App\Models\Period;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,19 +14,22 @@ class ModuleController extends Controller
 {
     public function index()
     {
-        $modules = Module::with('responsible')->get();
+        $modules = Module::all();
         $responsibles = Responsible::all();
-        return view('modules.modules.index', compact('modules', 'responsibles'));
+        $periods = Period::all();
+        return view('modules.modules.index', compact('modules', 'responsibles', 'periods'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'id_responsible' => 'required|string|max:255',
+            'id_period' => 'required|integer',
             'name' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'vinculation_hours' => 'required|integer',
+            'status' => 'required|boolean',
         ]);
 
         // Obtener el último módulo basado en el id_mod
@@ -36,10 +40,12 @@ class ModuleController extends Controller
         Module::create([
             'id_mod' => 'MOD-' . $newIdNumber,
             'id_responsible' => $request->id_responsible,
+            'id_period' => $request->id_period,
             'name' => $request->name,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'vinculation_hours' => $request->vinculation_hours,
+            'status' => $request->status,
         ]);
 
         return redirect()->route('modules.index')->with('success', 'Módulo creado correctamente.');
@@ -47,12 +53,16 @@ class ModuleController extends Controller
 
     public function update(Request $request, $id_mod)
     {
+        // dd($request->all());
+
         $request->validate([
             'id_responsible' => 'required|string|max:255',
+            'id_period' => 'required|integer',
             'name' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'vinculation_hours' => 'required|integer',
+            'status' => 'required|boolean',
         ]);
 
         $module = Module::findOrFail($id_mod);
@@ -61,19 +71,7 @@ class ModuleController extends Controller
         return redirect()->route('modules.index')->with('success', 'Módulo actualizado correctamente.');
     }
 
-    public function search(Request $request)
-    {
-        $searchTerm = $request->input('search');
 
-        $modules = Module::where('id_mod', 'LIKE', "%$searchTerm%")
-            ->orWhere('name', 'LIKE', "%$searchTerm%")
-            ->orWhere('start_date', 'LIKE', "%$searchTerm%")
-            ->orWhere('end_date', 'LIKE', "%$searchTerm%")
-            ->orWhere('vinculation_hours', 'LIKE', "%$searchTerm%")
-            ->get();
-
-        return view('modules.modules.index', compact('modules'));
-    }
 
     public function deleteAll(Request $request)
     {
@@ -115,7 +113,7 @@ class ModuleController extends Controller
 
     public function getStudents($moduleId)
     {
-        $students = Module::findOrFail($moduleId)->students; 
+        $students = Module::findOrFail($moduleId)->students;
         return response()->json($students);
     }
 }
