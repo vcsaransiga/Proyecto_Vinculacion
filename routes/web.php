@@ -23,6 +23,7 @@ use App\Http\Controllers\OperationTypeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\KardexController;
 use App\Http\Controllers\AuditController;
 use App\Http\Middleware\ThrottleLogins;
 /*
@@ -218,6 +219,14 @@ Route::resource('/info/items', ItemController::class)->middleware(['auth', 'veri
 Route::delete('/info/selected-items', [ItemController::class, 'deleteAll'])->name('item.delete')->middleware(['auth', 'verified']);
 Route::get('/items/pdf', [ItemController::class, 'generatePDF'])->name('items.pdf')->middleware(['auth', 'verified']);
 Route::get('/items/export-excel', [ItemController::class, 'exportExcel'])->name('items.download-excel')->middleware(['auth', 'verified']);
+
+
+//Kardex
+Route::resource('/info/kardex', KardexController::class)->middleware(['auth', 'verified']);
+Route::delete('/info/selected-kardex', [KardexController::class, 'deleteAll'])->name('kardex.delete')->middleware(['auth', 'verified']);
+Route::get('/kardex/pdf', [KardexController::class, 'generatePDF'])->name('kardex.pdf')->middleware(['auth', 'verified']);
+Route::get('/kardex/export-excel', [KardexController::class, 'exportExcel'])->name('kardex.download-excel')->middleware(['auth', 'verified']);
+
 
 //Auditoria
 Route::get('/audits', [AuditController::class, 'index'])->middleware(['auth', 'verified'])->name('audits.index');

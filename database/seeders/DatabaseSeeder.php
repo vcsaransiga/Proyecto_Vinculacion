@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             ModStudSeeder::class,
             TaskSeeder::class,
             ItemSeeder::class,
+            KardexSeeder::class,
         ]);
     }
 }
