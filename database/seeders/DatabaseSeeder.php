@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,
             ModStudSeeder::class,
             TaskSeeder::class,
+            ItemSeeder::class,
         ]);
     }
 }
