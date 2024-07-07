@@ -95,6 +95,16 @@ class UserSeeder extends Seeder
                 'updated_at' => now(),
                 'email_verified_at' => now(),
             ],
+            [
+                'name' => 'Melanie',
+                'last_name' => 'Ullco',
+                'email' => 'melanierubi.mu@gmail.com',
+                'password' => Hash::make('1234567'),
+                'status' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'email_verified_at' => now(),
+            ],
         ]);
     }
 }

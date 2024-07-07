@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('status')->nullable();
             $table->string('phone')->nullable();
             $table->text('about')->nullable();
+            $table->string('token_login')->nullable(); 
             $table->rememberToken();
             $table->timestamps();
         });

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use PragmaRX\Google2FA\Google2FA;
 
 class ProfileController extends Controller
 {
@@ -14,6 +15,7 @@ class ProfileController extends Controller
         $user = User::find(Auth::id());
         return view('modules.users.profile', compact('user'));
     }
+
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -32,6 +34,15 @@ class ProfileController extends Controller
                 Storage::delete('public/profile_photos/' . $user->profile_photo);
             }
             $data['profile_photo'] = $request->file('profile_photo')->store('users', 'public/profile_photos');
+        }
+
+        // Actualizar la opción de autenticación de dos factores
+        if ($request->has('two_factor_enabled')) {
+            $user->two_factor_enabled = true;
+            $user->token_login = (new Google2FA())->generateSecretKey();
+        } else {
+            $user->two_factor_enabled = false;
+            $user->token_login = null;
         }
 
         $user->update($data);
