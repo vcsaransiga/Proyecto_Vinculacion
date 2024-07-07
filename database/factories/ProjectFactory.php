@@ -25,6 +25,7 @@ class ProjectFactory extends Factory
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
             'budget' => $this->faker->randomFloat(2, 1000, 100000),
+            'image' => $this->faker->image(public_path('assets/img')),
         ];
     }
 }

@@ -22,6 +22,7 @@ use App\Http\Controllers\MeasurementUnitController;
 use App\Http\Controllers\OperationTypeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuditController;
 use App\Http\Middleware\ThrottleLogins;
 /*
@@ -212,6 +213,11 @@ Route::delete('/info/selected-tasks', [TaskController::class, 'deleteAll'])->nam
 Route::get('/tasks/pdf', [TaskController::class, 'generatePDF'])->name('tasks.pdf')->middleware(['auth', 'verified']);
 Route::get('/tasks/export-excel', [TaskController::class, 'exportExcel'])->name('tasks.download-excel')->middleware(['auth', 'verified']);
 
+//Items
+Route::resource('/info/items', ItemController::class)->middleware(['auth', 'verified']);
+Route::delete('/info/selected-items', [ItemController::class, 'deleteAll'])->name('item.delete')->middleware(['auth', 'verified']);
+Route::get('/items/pdf', [ItemController::class, 'generatePDF'])->name('items.pdf')->middleware(['auth', 'verified']);
+Route::get('/items/export-excel', [ItemController::class, 'exportExcel'])->name('items.download-excel')->middleware(['auth', 'verified']);
 
 //Auditoria
 Route::get('/audits', [AuditController::class, 'index'])->middleware(['auth', 'verified'])->name('audits.index');
