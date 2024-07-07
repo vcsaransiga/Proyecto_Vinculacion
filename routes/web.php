@@ -232,3 +232,8 @@ Route::get('/force-error-503', function () {
 Route::get('/force-error-403', function () {
     abort(403);
 });
+
+
+Route::post('/login-two-factor/{user}', [LoginController::class, 'login2FA'])->name('login.2fa');
+Route::get('/login-two-factor/{user}', [LoginController::class, 'show2FAForm'])->name('login.2fa.form');
+Route::post('/send-2fa-code/{user}', [LoginController::class, 'send2FACode'])->name('send.2fa.code');

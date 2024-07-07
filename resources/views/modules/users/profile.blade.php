@@ -1,6 +1,5 @@
 <x-app-layout>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-
         <div class="top-0 bg-cover z-index-n1 min-height-100 max-height-200 h-25 position-absolute w-100 start-0 end-0"
         style="background-color: #F9FAFB ; background-position: bottom;">
     </div>
@@ -28,7 +27,7 @@
                                 <div class="col-sm-auto col-8 my-auto">
                                     <div class="h-100">
                                         <h5 class="mb-1 font-weight-bolder">
-                                            {{ auth()->user()->name }} {{ auth()-> user()->last_name }}
+                                            {{ auth()->user()->name }} {{ auth()->user()->last_name }}
                                         </h5>
                                         <p class="mb-0 font-weight-bold text-sm">
                                             {{ auth()->user()->last_name }}
@@ -106,6 +105,10 @@
                                         <span class="text-danger text-sm">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <div class="form-check form-switch mt-3">
+                                    <input class="form-check-input" type="checkbox" id="two_factor_enabled" name="two_factor_enabled" {{ auth()->user()->two_factor_enabled ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="two_factor_enabled">Activar Autenticación de Dos Factores</label>
+                                </div>
                                 <button type="submit" class="mt-6 mb-0 btn btn-white btn-sm float-end">Guardar Cambios</button>
                             </div>
                         </div>
@@ -115,7 +118,6 @@
         </div>
         </div>
     </main>
-
 </x-app-layout>
 
 <script>
