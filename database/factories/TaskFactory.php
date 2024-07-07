@@ -10,23 +10,22 @@ use App\Models\Project;
  */
 class TaskFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+
+    public function definition()
     {
+        $startDate = $this->faker->dateTimeBetween('-1 year', '+1 year');
+        $endDate = $this->faker->dateTimeBetween($startDate, '+1 year');
+
         return [
             'id_task' => $this->faker->unique()->regexify('TASK-[0-9]{4}'),
             'id_pro' => Project::factory(),
             'name' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'hours' => $this->faker->randomFloat(2, 1, 100),
-            'start_date' => $this->faker->date(),
-            'end_date' => $this->faker->date(),
-            'percentage' => $this->faker->randomFloat(2, 1, 20), // Ajusta según sea necesario
-            'status' => 'pending',
+            'hours' => $this->faker->randomFloat(2, 0, 100),
+            'start_date' => $startDate->format('Y-m-d'),
+            'end_date' => $endDate->format('Y-m-d'),
+            'percentage' => $this->faker->randomFloat(2, 0, 100),
+            'status' => $this->faker->randomElement(['pending', 'completed']),
         ];
     }
 }

@@ -331,10 +331,8 @@
                         <div class="mb-3">
                             <label for="edit_status" class="form-label">Estado:</label>
                             <select class="form-control" id="edit_status" name="status">
-                                <option value="pending" {{ $task->status == 'pending' ? 'selected' : '' }}>Pendiente
-                                </option>
-                                <option value="completed" {{ $task->status == 'completed' ? 'selected' : '' }}>
-                                    Completado</option>
+                                <option value="pending">Pendiente</option>
+                                <option value="completed">Completado</option>
                             </select>
 
                         </div>
