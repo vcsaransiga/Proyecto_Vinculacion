@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TaskExport;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -54,29 +55,40 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
-        // Depurar los datos recibidos en la solicitud
-        // dd('Request Data:', $request->all());
+        // Log request data
+        Log::info('Request data:', $request->all());
 
-        // Validar los datos de la solicitud
-        $request->validate([
-            'id_pro' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'hours' => 'required|numeric|min:0',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'percentage' => 'required|numeric|between:0,100',
-            'status' => 'required|string|in:pending,completed',
-        ]);
+        try {
+            // Validar los datos de la solicitud
+            Log::info('Starting validation');
+            $validatedData = $request->validate([
+                'id_pro' => 'required|string|max:255',
+                'name' => 'required|string|max:255',
+                'description' => 'required|string',
+                'hours' => 'required|numeric|min:0',
+                'start_date' => 'required|date',
+                'end_date' => 'required|date|after_or_equal:start_date',
+                'percentage' => 'required|numeric|between:0,100',
+                'status' => 'required|string|in:pending,completed',
+            ]);
+            Log::info('Validation passed', $validatedData);
 
+            // Actualizar la tarea
+            Log::info('Updating task');
+            $task->update($validatedData);
+            Log::info('Task updated successfully', $task->toArray());
+        } catch (\Exception $e) {
+            // Log cualquier excepción
+            Log::error('Error during update process', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
 
-        // Actualizar la tarea y depurar el resultado
-        $updateResult = $task->update($request->all());
-
+            return redirect()->route('tasks.index')->with('error', 'Error actualizando la tarea.');
+        }
 
         return redirect()->route('tasks.index')->with('success', 'Tarea actualizada correctamente.');
     }
-
 
     public function deleteAll(Request $request)
     {
