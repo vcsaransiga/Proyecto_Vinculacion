@@ -109,7 +109,17 @@ class ProjectController extends Controller
     public function deleteAll(Request $request)
     {
         $ids = $request->ids;
-        Project::whereIn('id_pro', $ids)->delete();
+        // Validar que los IDs sean un array y no estén vacíos
+        if (!is_array($ids) || empty($ids)) {
+            return response()->json(["error" => "No se han seleccionado usuarios."]);
+        }
+
+        // Eliminar los registros seleccionados
+        $projects = Project::whereIn('id_pro', $ids)->get();
+        foreach ($projects as $project) {
+            $project->delete();
+        }
+
         return response()->json(["success" => "Proyectos seleccionados eliminados exitosamente."]);
     }
 
