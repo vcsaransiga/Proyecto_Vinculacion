@@ -15,7 +15,7 @@ class ResponsibleFactory extends Factory
     public function definition()
     {
         return [
-            'id_responsible' => $this->faker->unique()->regexify('RESP-\d{2}'),
+            'id_responsible' => $this->faker->unique()->regexify('RESP-[0-9]{4}'),
             'card_id' => $this->faker->numerify('##########'),
             'name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,

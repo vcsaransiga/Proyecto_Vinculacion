@@ -21,6 +21,7 @@ use App\Http\Controllers\CategoryItemController;
 use App\Http\Controllers\MeasurementUnitController;
 use App\Http\Controllers\OperationTypeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuditController;
 use App\Http\Middleware\ThrottleLogins;
 /*
@@ -204,6 +205,13 @@ Route::delete('/info/selected-projects', [ProjectController::class, 'deleteAll']
 Route::get('/projects/pdf', [ProjectController::class, 'generatePDF'])->name('projects.pdf')->middleware(['auth', 'verified']);
 Route::get('/projects/export-excel', [ProjectController::class, 'exportExcel'])->name('projects.download-excel')->middleware(['auth', 'verified']);
 Route::get('/projects/list', [ProjectController::class, 'list'])->name('projects.list')->middleware(['auth', 'verified']);
+
+//Tareas 
+Route::resource('/info/tasks', TaskController::class)->middleware(['auth', 'verified']);
+Route::delete('/info/selected-tasks', [TaskController::class, 'deleteAll'])->name('task.delete')->middleware(['auth', 'verified']);
+Route::get('/tasks/pdf', [TaskController::class, 'generatePDF'])->name('tasks.pdf')->middleware(['auth', 'verified']);
+Route::get('/tasks/export-excel', [TaskController::class, 'exportExcel'])->name('tasks.download-excel')->middleware(['auth', 'verified']);
+
 
 //Auditoria
 Route::get('/audits', [AuditController::class, 'index'])->middleware(['auth', 'verified'])->name('audits.index');

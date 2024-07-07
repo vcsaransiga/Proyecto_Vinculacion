@@ -19,6 +19,8 @@ return new class extends Migration
             $table->float('hours');
             $table->date('start_date');
             $table->date('end_date');
+            $table->float('percentage');
+            $table->enum('status', ['pending', 'completed'])->default('pending');
             $table->timestamps();
 
             // Relaciones

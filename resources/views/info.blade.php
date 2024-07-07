@@ -140,6 +140,18 @@
                         <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
                     </div>
                 </a>
+                <a href="{{ route('tasks.index') }}">
+                    <div
+                        class="tw-max-w-sm tw-p-6 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow dark:tw-bg-gray-800 dark:tw-border-gray-700 tw-flex tw-flex-col tw-items-center">
+                        <img src="{{ asset('assets/img/logos/task.svg') }}" class="tw-w-10 tw-h-10 tw-mb-3"
+                            alt="Task Logo">
+                        <h5
+                            class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
+                            Tareas
+                        </h5>
+                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+                    </div>
+                </a>
             </div>
         </div>
     </main>

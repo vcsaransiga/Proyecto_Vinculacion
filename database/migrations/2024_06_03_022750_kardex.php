@@ -23,7 +23,6 @@ return new class extends Migration
             $table->float('price');
             $table->integer('balance');
             $table->integer('doc_reference');
-            $table->string('operation_type');
             $table->timestamps();
 
             // Índices adicionales
