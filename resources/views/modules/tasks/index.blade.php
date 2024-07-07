@@ -243,7 +243,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="hours" class="form-label">Horas</label>
-                            <input type="number" class="form-control" id="hours" name="hours" step="0.01"
+                            <input type="number" class="form-control" id="hours" name="hours" step="any"
                                 required>
                         </div>
                         <div class="mb-3">
@@ -312,7 +312,7 @@
                         <div class="mb-3">
                             <label for="edit_hours" class="form-label">Horas</label>
                             <input type="number" class="form-control" id="edit_hours" name="hours"
-                                step="0.01" required>
+                                step="any"" required>
                         </div>
                         <div class="mb-3">
                             <label for="edit_start_date" class="form-label">Fecha de Inicio</label>

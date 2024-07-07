@@ -27,9 +27,9 @@ return new class extends Migration
             $table->index('id_unit');
 
             // Relaciones
-            $table->foreign('id_catitem')->references('id_catitem')->on('categories_items')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreign('id_pro')->references('id_pro')->on('projects')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreign('id_unit')->references('id_unit')->on('measurement_units')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('id_catitem')->references('id_catitem')->on('categories_items')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_pro')->references('id_pro')->on('projects')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_unit')->references('id_unit')->on('measurement_units')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

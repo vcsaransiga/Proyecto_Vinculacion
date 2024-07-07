@@ -23,6 +23,9 @@ class Audit extends BaseAudit
             'App\Models\Project' => 'Proyecto',
             'App\Models\Responsible' => 'Responsable',
             'App\Models\Warehouse' => 'Bodega',
+            'App\Models\Task' => 'Tarea',
+            'App\Models\Item' => 'Item',
+            'App\Models\Kardex' => 'Kardex',
 
         ];
 

@@ -266,7 +266,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="price" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+                            <input type="number" class="form-control" id="price" name="price" step="any"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="balance" class="form-label">Balance</label>
@@ -347,8 +348,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit_price" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="edit_price" name="price" step="0.01"
-                                required>
+                            <input type="number" class="form-control" id="edit_price" name="price"
+                                step="any" required>
                         </div>
                         <div class="mb-3">
                             <label for="edit_balance" class="form-label">Balance</label>

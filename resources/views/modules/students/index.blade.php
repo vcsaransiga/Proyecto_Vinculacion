@@ -282,7 +282,7 @@
                         <div class="mb-3">
                             <label for="hours" class="form-label">Horas</label>
                             <input type="number" class="form-control" id="hours" name="hours"
-                                step="0.01">
+                                step="any">
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Estado</label>
@@ -332,7 +332,7 @@
                         <div class="mb-3">
                             <label for="edit_hours" class="form-label">Horas</label>
                             <input type="number" class="form-control" id="edit_hours" name="hours"
-                                step="0.01">
+                                step="any">
                         </div>
                         <div class="mb-3">
                             <label for="edit_status" class="form-label">Estado</label>

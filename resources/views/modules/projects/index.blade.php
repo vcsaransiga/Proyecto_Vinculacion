@@ -225,7 +225,8 @@
                         style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="createProjectForm" method="POST" action="{{ route('projects.store') }}" enctype="multipart/form-data">
+                    <form id="createProjectForm" method="POST" action="{{ route('projects.store') }}"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3 d-flex">
                             <div class="me-2">
@@ -263,7 +264,7 @@
                         <div class="mb-3">
                             <label for="progress" class="form-label">Progreso (%)</label>
                             <input type="number" class="form-control" id="progress" name="progress"
-                                min="0" max="100" required>
+                                min="0" max="100" step="any" required>
                         </div>
                         <div class="mb-3">
                             <label for="start_date" class="form-label">Fecha de Inicio</label>
@@ -275,11 +276,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="budget" class="form-label">Presupuesto</label>
-                            <input type="number" class="form-control" id="budget" name="budget" required>
+                            <input type="number" class="form-control" id="budget" name="budget" step="any"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Fotografia</label>
-                            <input type="file" class="form-control" id="image" name="image" >
+                            <input type="file" class="form-control" id="image" name="image">
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -341,7 +343,7 @@
                         <div class="mb-3">
                             <label for="edit_progress" class="form-label">Progreso (%)</label>
                             <input type="number" class="form-control" id="edit_progress" name="progress"
-                                min="0" max="100" required>
+                                min="0" max="100" step="any" required>
                         </div>
                         <div class="mb-3">
                             <label for="edit_start_date" class="form-label">Fecha de Inicio</label>
@@ -354,11 +356,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit_budget" class="form-label">Presupuesto</label>
-                            <input type="number" class="form-control" id="edit_budget" name="budget" required>
+                            <input type="number" class="form-control" id="edit_budget" name="budget"
+                                step="any" required>
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Fotografia</label>
-                            <input type="file" class="form-control" id="edit_image" name="image" >
+                            <input type="file" class="form-control" id="edit_image" name="image">
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>

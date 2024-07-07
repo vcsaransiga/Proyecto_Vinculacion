@@ -13,7 +13,7 @@
                             class="tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Usuarios
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('students.index') }}">
@@ -25,7 +25,7 @@
                             class="tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Estudiantes
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
 
@@ -38,7 +38,7 @@
                             class="tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Periodos
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('categories_warehouse.index') }}">
@@ -50,7 +50,7 @@
                             class="tw-mb-2 tw-text-2xl tw-font-bold tw-text-center tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Categorías de Bodega
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('warehouses.index') }}">
@@ -62,7 +62,7 @@
                             class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Bodegas
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('responsibles.index') }}">
@@ -74,7 +74,7 @@
                             class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Responsables
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('modules.index') }}">
@@ -86,7 +86,7 @@
                             class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Módulos
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('categories_items.index') }}">
@@ -99,7 +99,7 @@
                             class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Categorías de ítems
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('measurement_units.index') }}">
@@ -112,7 +112,7 @@
                             class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Medidas de unidad
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('operations.index') }}">
@@ -125,7 +125,7 @@
                             class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Tipos de operaciones
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('projects.index') }}">
@@ -137,7 +137,7 @@
                             class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Proyectos
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('tasks.index') }}">
@@ -149,7 +149,7 @@
                             class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Tareas
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('items.index') }}">
@@ -161,7 +161,7 @@
                             class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Items
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
                 <a href="{{ route('kardex.index') }}">
@@ -173,7 +173,7 @@
                             class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                             Kardex
                         </h5>
-                        <p class="tw-mb-3 tw-font-normal tw-text-gray-500 dark:tw-text-gray-400">Descripción</p>
+
                     </div>
                 </a>
             </div>
