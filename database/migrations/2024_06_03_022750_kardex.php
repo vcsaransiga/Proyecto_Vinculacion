@@ -22,7 +22,6 @@ return new class extends Migration
             $table->integer('quantity');
             $table->float('price');
             $table->integer('balance');
-            $table->integer('doc_reference');
             $table->timestamps();
 
             // Índices adicionales
