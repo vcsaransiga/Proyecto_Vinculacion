@@ -37,15 +37,21 @@ class ProjectController extends Controller
             'budget' => 'required|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de la imagen
         ]);
-
+    
+        // Obtener el último proyecto por fecha de creación
         $lastProject = Project::orderBy('created_at', 'desc')->first();
         $lastIdNumber = $lastProject ? intval(substr($lastProject->id_pro, 5)) : 0;
-        $newIdNumber = str_pad($lastIdNumber + 1, 4, '0', STR_PAD_LEFT);
-
-        $imagePath = $request->file('image') ? $request->file('image')->store('images', 'public/projects') : null;
-
+    
+        do {
+            $newIdNumber = str_pad($lastIdNumber + 1, 4, '0', STR_PAD_LEFT);
+            $newIdPro = 'PROJ-' . $newIdNumber;
+            $lastIdNumber++;
+        } while (Project::where('id_pro', $newIdPro)->exists());
+    
+        $imagePath = $request->file('image') ? $request->file('image')->store('projects', 'public') : null;
+    
         Project::create([
-            'id_pro' => 'PROJ-' . $newIdNumber,
+            'id_pro' => $newIdPro,
             'id_responsible' => $request->id_responsible,
             'name' => $request->name,
             'description' => $request->description,
@@ -56,10 +62,10 @@ class ProjectController extends Controller
             'budget' => $request->budget,
             'image' => $imagePath,
         ]);
-
+    
         return redirect()->route('projects.index')->with('success', 'Proyecto creado correctamente.');
     }
-
+    
     public function show($id)
     {
         $project = Project::with('responsible')->findOrFail($id);
