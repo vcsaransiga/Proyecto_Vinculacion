@@ -51,10 +51,10 @@ class VerifyEmailNotification extends Notification
 
         return (new MailMessage)
             ->subject('Verificacion de Correo Electronico')
-            ->line('Haga clic en el botón siguiente para verificar su correo electrónico.')
-            ->action('Verificar correo electrónico', $verificationUrl)
-            ->line('Si no ha creado una cuenta, no es necesario que haga nada más.');
-        // ->view('email.verification_email', ['url' => $verificationUrl]);
+            // ->line('Haga clic en el botón siguiente para verificar su correo electrónico.')
+            // ->action('Verificar correo electrónico', $verificationUrl)
+            // ->line('Si no ha creado una cuenta, no es necesario que haga nada más.');
+            ->view('email.verify_email', ['url' => $verificationUrl]);
     }
 
     /**
