@@ -43,7 +43,7 @@
                                         </div>
                                     @enderror
                                     @if (session('retry_after'))
-                                        <div id="countdown" class="alert alert-warning text-sm" role="alert">
+                                        <div id="countdown" class="alert alert-danger text-sm" role="alert">
                                             Inténtalo de nuevo en <span id="seconds">{{ session('retry_after') }}</span> segundos.
                                         </div>
                                     @endif
