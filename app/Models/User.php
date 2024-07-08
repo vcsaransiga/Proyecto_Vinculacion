@@ -10,6 +10,8 @@ use Laravel\Sanctum\HasApiTokens;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 use App\Notifications\VerifyEmailNotification;
+use App\Notifications\ResetPasswordNotification;
+
 
 
 class User extends Authenticatable implements MustVerifyEmail, Auditable
@@ -64,5 +66,9 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmailNotification);
+    }
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }
