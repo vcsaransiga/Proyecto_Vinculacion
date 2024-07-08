@@ -49,7 +49,7 @@
             clearTimeout(timeout);
             timeout = setTimeout(() => {
                 window.location.reload(true);
-            }, 900000); // 1 minuto en milisegundos
+            }, 15000); // 1 minuto en milisegundos
         }
 
         document.addEventListener('mousemove', resetTimeout);
