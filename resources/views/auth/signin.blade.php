@@ -93,11 +93,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="position-absolute w-40 top-0 end-0 h-100 d-md-block d-none">
-                                <div class="oblique-image position-absolute fixed-top ms-auto h-100 z-index-0 bg-cover ms-n8"
-                                    style="background-image:url('../assets/img/logoVertical.png');background-position:center; background-size:100%; background-repeat: no-repeat;">
-                                </div>
+                        <div class="col-md-6 d-flex justify-content-center">
+                            <div class="text-center">
+
+                                <img src="../assets/img/logoVertical.png" alt="Logo UEPS">
                             </div>
                         </div>
                     </div>
