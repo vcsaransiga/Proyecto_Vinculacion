@@ -55,7 +55,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 Route::get('/tables', function () {
     return view('tables');
-})->middleware(['auth', 'verified']);
+})->name('tables')->middleware(['auth', 'verified']);
 Route::get('/wallet', function () {
     return view('wallet');
 })->name('wallet')->middleware(['auth', 'verified']);
