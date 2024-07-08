@@ -26,9 +26,7 @@ class TwoFactorCode extends Notification
     {
         return (new MailMessage)
                     ->subject('Código de verificación de dos factores')
-                    ->line('Tu código de verificación es: ' . $this->code)
-                    ->line('Si no solicitaste este código, puedes ignorar este correo.')
-                    ->line('Gracias por usar nuestra aplicación!');
+                    ->view('email.two_factor_code', ['code' => $this->code]);
     }
 
     public function toArray($notifiable)
