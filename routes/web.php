@@ -41,10 +41,10 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+//ruta por defecto segun el rol
 Route::get('/', function () {
     return redirect('/dashboard');
-})->middleware(['auth', 'verified']);
-
+})->middleware(['auth', 'verified', 'role.redirect']);
 
 
 Route::get('/prueba', function () {

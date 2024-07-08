@@ -11,10 +11,23 @@ use App\Exports\UserExport;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
+
 {
+
+    // public function index(Request $request)
+    // {
+    //     $sortField = $request->get('sort', 'id'); // Campo por defecto
+    //     $sortDirection = $request->get('direction', 'asc'); // Dirección por defecto
+    //     $roles = Role::all();
+
+    //     $users = User::orderBy($sortField, $sortDirection)->get();
+
+    //     return view('modules.users.index', compact('users', 'roles', 'sortField', 'sortDirection'));
+    // }
+
     public function index()
     {
-        $users = User::all();
+        $users = User::orderByDesc('id')->get();
         $roles = Role::all();
         return view('modules.users.index', compact('users', 'roles'));
     }
@@ -29,6 +42,20 @@ class UserController extends Controller
             'password' => 'required|string',
             'roles' => 'nullable|array',
             'roles.*' => 'exists:roles,name',
+        ], [
+            'name.required' => 'El nombre es obligatorio',
+            'name.min' => 'El nombre debe tener al menos 3 caracteres',
+            'name.max' => 'El nombre no puede tener más de 255 caracteres',
+            'last_name.required' => 'El apellido es obligatorio',
+            'last_name.min' => 'El apellido debe tener al menos 3 caracteres',
+            'last_name.max' => 'El apellido no puede tener más de 255 caracteres',
+            'email.required' => 'El correo electrónico es obligatorio',
+            'email.email' => 'Debe ser una dirección de correo electrónico válida',
+            'email.max' => 'El correo electrónico no puede tener más de 255 caracteres',
+            'email.unique' => 'El correo electrónico ya está registrado',
+            'password.required' => 'La contraseña es obligatoria',
+            'password.min' => 'La contraseña debe tener al menos 7 caracteres',
+            'password.max' => 'La contraseña no puede tener más de 255 caracteres',
         ]);
 
         $user = User::create($request->all());
