@@ -43,7 +43,7 @@
                                 <div>
                                     <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
                                         @php
-                                        $imageUrl = $project->image ? asset('storage/projects/' . $project->image) : asset('storage/default.jpg');
+                                        $imageUrl = $project->image ? asset('storage/' . $project->image) : asset('storage/default.jpg');
                                     @endphp
                                     <div class="full-background bg-cover" style="background-image: url('{{ $imageUrl }}')"></div>
                                         <div class="card-body text-start px-3 py-0 w-100">
