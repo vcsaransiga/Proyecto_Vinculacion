@@ -9,7 +9,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <h5 class="">Administración de Usuarios</h5>
-                                    <p class="mb-0 text-sm">Aqui puedes gestionar los usuarios.</p>
+                                    <p class="mb-0 text-sm">Aquí puedes gestionar los usuarios.</p>
                                 </div>
                                 <div class="col-6 text-end">
                                     <button type="button" class="btn btn-dark btn-primary" data-bs-toggle="modal"
@@ -118,6 +118,7 @@
                                         <th scope="col" class="tw-px-6 tw-py-3">Apellido</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Email </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Estado</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Roles</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
@@ -125,48 +126,29 @@
                                     @foreach ($users as $user)
                                         <tr id="user_ids{{ $user->id }}"
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
-                                            {{-- <td class="tw-w-4 tw-p-4">
-                                                <div class="tw-flex tw-items-center">
-                                                    <input id="checkbox-table-search-{{ $user->id }}"
-                                                        type="checkbox"
-                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                    <label for="checkbox-table-search-{{ $user->id }}"
-                                                        class="tw-sr-only">checkbox</label>
-                                                </div>
-                                            </td> --}}
                                             <td class="tw-w-4 tw-p-4">
                                                 <div class="tw-flex tw-items-center">
                                                     <input type="checkbox" id="" name="ids"
                                                         class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600"
                                                         value="{{ $user->id }}">
-
                                                 </div>
                                             </td>
-                                            {{-- <th scope="row"
-                                                class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
-                                                <img class="tw-w-10 tw-h-10 tw-rounded-full"
-                                                    src="/docs/images/people/profile-picture-1.jpg"
-                                                    alt="{{ $user->name }} image">
-                                                <div class="tw-ps-3">
-                                                    <div class="tw-text-base">{{ $user->name }}
-                                                    </div>
-                                                </div>
-                                            </th> --}}
-                                            <td class="tw-px-6 tw-py-4">
-                                                {{ $user->name }}
-                                            </td>
-                                            <td class="tw-px-6 tw-py-4">
-                                                {{ $user->last_name }}
-                                            </td>
-                                            <td class="tw-px-6 tw-py-4">
-                                                {{ $user->email }}
-                                            </td>
+                                            <td class="tw-px-6 tw-py-4">{{ $user->name }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $user->last_name }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $user->email }}</td>
                                             <td class="tw-px-6 tw-py-4">
                                                 <div class="tw-flex tw-items-center">
                                                     <div
                                                         class="tw-h-2.5 tw-w-2.5 tw-rounded-full {{ $user->status ? 'tw-bg-green-500' : 'tw-bg-red-500' }} tw-me-2">
                                                     </div> {{ $user->status ? 'Activo' : 'Inactivo' }}
                                                 </div>
+                                            </td>
+                                            <td class="tw-px-6 tw-py-4">
+                                                <button class="btn btn-info" data-bs-toggle="modal"
+                                                    data-bs-target="#viewRolesModal"
+                                                    data-user-id="{{ $user->id }}">
+                                                    Ver
+                                                </button>
                                             </td>
                                             <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
                                                 <a href="#"
@@ -204,7 +186,6 @@
                                                     </button>
                                                 </form>
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -274,6 +255,17 @@
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="roles" class="form-label">Roles</label>
+                            @foreach ($roles as $role)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="role_{{ $role->id }}"
+                                        name="roles[]" value="{{ $role->name }}">
+                                    <label class="form-check-label"
+                                        for="role_{{ $role->id }}">{{ ucfirst($role->name) }}</label>
+                                </div>
+                            @endforeach
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
@@ -314,6 +306,18 @@
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="edit_roles" class="form-label">Roles</label>
+                            @foreach ($roles as $role)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox"
+                                        id="edit_role_{{ $role->id }}" name="roles[]"
+                                        value="{{ $role->name }}">
+                                    <label class="form-check-label"
+                                        for="role_{{ $role->id }}">{{ ucfirst($role->name) }}</label>
+                                </div>
+                            @endforeach
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
@@ -321,10 +325,39 @@
         </div>
     </div>
 
+
+    <!-- View Roles Modal -->
+    <div class="modal fade" id="viewRolesModal" tabindex="-1" aria-labelledby="viewRolesModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewRolesModalLabel">Roles del Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="rolesList" class="list-group">
+                        <!-- Los roles se insertarán aquí dinámicamente -->
+                    </ul>
+                    <div id="noRolesMessage" class="alert alert-warning d-none mt-3" role="alert">
+                        Este usuario no tiene roles asignados.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </x-app-layout>
 
-
 <script>
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         // Logic to populate and handle the edit user form
         var editUserModal = document.getElementById('editUserModal');
@@ -343,12 +376,46 @@
             var modalLastNameInput = editUserModal.querySelector('#edit_last_name');
             var modalEmailInput = editUserModal.querySelector('#edit_email');
             var modalStatusInput = editUserModal.querySelector('#edit_status');
+            var modalRolesInput = editUserModal.querySelector('#edit_roles');
 
             modalNameInput.value = userName;
             modalLastNameInput.value = userLastName;
             modalEmailInput.value = userEmail;
             modalStatusInput.value = userStatus;
+
+            fetch('/info/users/' + userId + '/roles')
+                .then(response => response.json())
+                .then(data => {
+                    modalRolesInput.value = data.roles;
+                });
         });
+    });
+
+    var viewRolesModal = document.getElementById('viewRolesModal');
+    viewRolesModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        var userId = button.getAttribute('data-user-id');
+        var rolesList = document.getElementById('rolesList');
+
+        rolesList.innerHTML = '';
+
+        fetch('/info/users/' + userId + '/roles')
+            .then(response => response.json())
+            .then(data => {
+                if (data.roles.length > 0) {
+                    data.roles.forEach(function(role) {
+                        var listItem = document.createElement('li');
+                        listItem.textContent = capitalizeFirstLetter(role);
+                        listItem.classList.add('list-group-item');
+                        rolesList.appendChild(listItem);
+                    });
+                } else {
+                    var listItem = document.createElement('li');
+                    listItem.textContent = 'No tiene roles asignados';
+                    listItem.classList.add('list-group-item');
+                    rolesList.appendChild(listItem);
+                }
+            });
     });
 </script>
 

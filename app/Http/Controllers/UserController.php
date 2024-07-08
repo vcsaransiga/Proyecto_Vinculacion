@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Exports\UserExport;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     public function index()
     {
         $users = User::all();
-        return view('modules.users.index', compact('users'));
+        $roles = Role::all();
+        return view('modules.users.index', compact('users', 'roles'));
     }
 
     public function store(Request $request)
@@ -25,16 +27,21 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'status' => 'required|boolean',
             'password' => 'required|string',
+            'roles' => 'nullable|array',
+            'roles.*' => 'exists:roles,name',
         ]);
 
-        User::create($request->all());
+        $user = User::create($request->all());
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        if ($request->has('roles')) {
+            $user->assignRole($request->roles);
+        }
+
+        return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
     }
 
     public function update(Request $request, User $user)
     {
-
         $request->validate([
             'name' => 'required|string|max:255',
             'last_name' => 'nullable|string|max:255',
@@ -42,11 +49,16 @@ class UserController extends Controller
             'telephone' => 'nullable|string|max:255',
             'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'status' => 'nullable|boolean',
+            'roles' => 'nullable|array',
+            'roles.*' => 'exists:roles,name',
         ]);
 
         $user->update($request->all());
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        $user->syncRoles($request->roles);
+
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente.');
     }
+
 
     public function search(Request $request)
     {
@@ -58,19 +70,18 @@ class UserController extends Controller
             ->orWhere('email', 'LIKE', "%$searchTerm%")
             ->get();
 
-        return view('modules.users.index', compact('users'));
+        $roles = Role::all();
+        return view('modules.users.index', compact('users', 'roles'));
     }
 
     public function deactivateAll(Request $request)
     {
         $ids = $request->ids;
 
-        // Validar que los IDs sean un array y no estén vacíos
         if (!is_array($ids) || empty($ids)) {
             return response()->json(["error" => "No se han seleccionado usuarios."]);
         }
 
-        // Actualizar el campo 'status' a inactivo para los usuarios seleccionados
         $users = User::whereIn('id', $ids)->get();
         foreach ($users as $user) {
             $user->update(['status' => 0]);
@@ -83,12 +94,10 @@ class UserController extends Controller
     {
         $ids = $request->ids;
 
-        // Validar que los IDs sean un array y no estén vacíos
         if (!is_array($ids) || empty($ids)) {
             return response()->json(["error" => "No se han seleccionado usuarios."]);
         }
 
-        // Eliminar los usuarios seleccionados
         $users = User::whereIn('id', $ids)->get();
         foreach ($users as $user) {
             $user->delete();
@@ -96,9 +105,6 @@ class UserController extends Controller
 
         return response()->json(["success" => "Usuarios seleccionados eliminados exitosamente."]);
     }
-
-
-
 
     public function destroy(User $user)
     {
@@ -128,5 +134,10 @@ class UserController extends Controller
         $date = date('d-m-Y H:i:s');
         $excelName = "Usuarios {$date}.xlsx";
         return Excel::download(new UserExport, $excelName);
+    }
+
+    public function getUserRoles(User $user)
+    {
+        return response()->json(['roles' => $user->roles->pluck('name')->toArray()]);
     }
 }

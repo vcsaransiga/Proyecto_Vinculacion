@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmailVerificationController extends Controller
 {
@@ -14,7 +15,8 @@ class EmailVerificationController extends Controller
     public function verify(EmailVerificationRequest $request)
     {
         $request->fulfill();
-        return redirect('/dashboard'); // Redirige a la página deseada después de la verificación
+        Auth::logout();
+        return redirect('/sign-in')->with('success', 'Se ha verificado tu correo electrónico correctamente. Por favor, espera a que el administrador te asigne un rol.');
     }
 
     /**

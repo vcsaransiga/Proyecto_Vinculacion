@@ -28,8 +28,29 @@ class LoginController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
+        // Verificar si el usuario está inactivo
+        if ($user && !$user->status) {
+            return redirect('/sign-in')->with('error', 'Este usuario está inactivo, contacta a un administrador');
+        }
+
         if ($user && Auth::attempt($credentials, $rememberMe)) {
             $request->session()->regenerate();
+
+            // Verificar si el usuario no tiene roles
+            if ($user->roles->isEmpty()) {
+                Auth::logout();
+                return redirect('/sign-in')->with('error', 'Espera a que un administrador te asigne un rol.');
+            }
+
+            // Verificar si el usuario tiene roles específicos
+            if ($user->hasRole('administrador')) {
+                $redirectTo = '/dashboard';
+            } elseif ($user->hasRole('auditor')) {
+                $redirectTo = '/audits';
+            } else {
+                Auth::logout();
+                return redirect('/sign-in')->with('error', 'No tiene los permisos necesarios para acceder al sistema.');
+            }
 
             if ($user->two_factor_enabled) {
                 $token = (new Google2FA)->generateSecretKey();
@@ -40,9 +61,9 @@ class LoginController extends Controller
 
                 $user->notify(new TwoFactorCode($token));
 
-                return redirect()->route('login.2fa.form', ['user' => $user->id]);
+                return redirect()->route('login.2fa.form', ['user' => $user->id, 'redirectTo' => $redirectTo]);
             } else {
-                return redirect()->intended('/dashboard');
+                return redirect()->intended($redirectTo);
             }
         }
 
@@ -63,7 +84,8 @@ class LoginController extends Controller
                 config('app.name'),
                 $user->email,
                 $user->token_login
-            ), 'utf-8'
+            ),
+            'utf-8'
         );
 
         return 'data:image/png;base64,' . base64_encode($data);
@@ -90,7 +112,8 @@ class LoginController extends Controller
             // Limpiar el código de dos factores después de la autenticación exitosa
             $user->update(['two_factor_code' => null, 'two_factor_expires_at' => null]);
 
-            return redirect()->intended('/dashboard');
+            $redirectTo = $request->input('redirectTo', '/dashboard');
+            return redirect()->intended($redirectTo);
         }
 
         return redirect()->route('login.2fa.form', ['user' => $user->id])->withErrors(['code_verification' => 'Código de verificación incorrecto']);

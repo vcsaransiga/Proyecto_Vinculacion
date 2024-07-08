@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             TaskSeeder::class,
             ItemSeeder::class,
             KardexSeeder::class,
+            RolesAndPermissionsSeeder::class,
+            UserRoleSeeder::class,
         ]);
     }
 }
