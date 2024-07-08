@@ -53,9 +53,9 @@ Route::get('/prueba', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
-// Route::get('/tables', function () {
-//     return view('tables')->name('tables')->middleware(['auth', 'verified']);
-// });
+Route::get('/tables', function () {
+    return view('tables');
+})->middleware(['auth', 'verified']);
 Route::get('/wallet', function () {
     return view('wallet');
 })->name('wallet')->middleware(['auth', 'verified']);
