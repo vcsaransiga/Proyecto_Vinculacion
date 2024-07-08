@@ -41,10 +41,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-//ruta por defecto segun el rol
-Route::get('/', function () {
-    return redirect('/dashboard');
-})->middleware(['auth', 'verified', 'role.redirect']);
 
 
 Route::get('/prueba', function () {
@@ -134,7 +130,9 @@ Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profi
 
 
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth', 'verified','2fa']], function () {
+
+    
     // Rutas de administrador
     Route::group(['middleware' => ['role:administrador']], function () {
 
