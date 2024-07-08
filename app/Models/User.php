@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\VerifyEmailNotification;
+
 
 class User extends Authenticatable implements MustVerifyEmail, Auditable
 {
@@ -59,4 +61,8 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
     // {
     //     return $value ? 'Activo' : 'Inactivo';
     // }
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmailNotification);
+    }
 }
