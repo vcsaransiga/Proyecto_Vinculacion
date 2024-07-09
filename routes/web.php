@@ -51,7 +51,6 @@ Route::get('/prueba', function () {
     return view('prueba');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::get('/tables', function () {
     return view('tables');
@@ -64,9 +63,6 @@ Route::get('/RTL', function () {
     return view('RTL');
 })->name('RTL')->middleware(['auth', 'verified']);
 
-Route::get('/profile', function () {
-    return view('account-pages.profile');
-})->name('profile')->middleware(['auth', 'verified']);
 
 Route::get('/signin', function () {
     return view('account-pages.signin');
@@ -109,9 +105,6 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create']
 Route::post('/reset-password', [ResetPasswordController::class, 'store'])
     ->middleware('guest');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about')->middleware(['auth', 'verified']);
 
 Route::get('/proyectos', function () {
     return view('proyectos');
@@ -128,8 +121,6 @@ Route::middleware(['throttle:login_attempts'])->group(function () {
 
 
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile')->middleware(['auth']);
-Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
 
 
 
@@ -137,6 +128,7 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
     // Rutas de administrador
     Route::group(['middleware' => ['role:administrador']], function () {
 
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::view('/info', 'info')->name('info');
 
@@ -239,6 +231,12 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
 
     // Rutas compartidas
     Route::get('/info/users/{user}/roles', [UserController::class, 'getUserRoles']);
+    Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile')->middleware(['auth']);
+    Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
 });
 
 
