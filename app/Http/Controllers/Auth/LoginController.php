@@ -105,12 +105,13 @@ class LoginController extends Controller
         logger()->info('2FA verification result:', ['isValidGoogle2FA' => $isValidGoogle2FA, 'isValidToken' => $isValidToken]);
 
         if ($isValidGoogle2FA || $isValidToken) {
+            $request->session()->put('two_factor_authenticated', true);
             $request->session()->regenerate();
 
             Auth::login($user);
 
             // Limpiar el código de dos factores después de la autenticación exitosa
-            $user->update(['two_factor_code' => null, 'two_factor_expires_at' => null]);
+            $user->update(['token_login' => null, 'two_factor_expires_at' => null]);
 
             $redirectTo = $request->input('redirectTo', '/dashboard');
             return redirect()->intended($redirectTo);

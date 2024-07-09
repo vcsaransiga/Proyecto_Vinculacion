@@ -73,8 +73,7 @@
         </div>
         <div class="footer">
             <p>Gracias por usar nuestra aplicación!</p>
-            <p>Si tienes algún problema o pregunta sobre la app, contáctanos:</p>
-            <p>WhatsApp 095 869 1809</p>
+          
         </div>
     </div>
 </body>
