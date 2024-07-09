@@ -106,16 +106,86 @@
                                         <th scope="col" class="tw-p-4">
                                             <div class="tw-flex tw-items-center">
                                                 <input id="select_all_ids" type="checkbox"
-                                                    class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:tw-focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                                                    class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
                                             </div>
                                         </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">ID</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Cédula</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Apellido</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Área</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Rol</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Estado</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                ID
+                                                <a
+                                                    href="?sort=id_responsible&direction={{ $sortField === 'id_responsible' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Cédula
+                                                <a
+                                                    href="?sort=card_id&direction={{ $sortField === 'card_id' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Nombre
+                                                <a
+                                                    href="?sort=name&direction={{ $sortField === 'name' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Apellido
+                                                <a
+                                                    href="?sort=last_name&direction={{ $sortField === 'last_name' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Área
+                                                <a
+                                                    href="?sort=area&direction={{ $sortField === 'area' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Rol
+                                                <a
+                                                    href="?sort=role&direction={{ $sortField === 'role' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Estado
+                                                <a
+                                                    href="?sort=status&direction={{ $sortField === 'status' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>

@@ -14,23 +14,23 @@ class UserController extends Controller
 
 {
 
-    // public function index(Request $request)
-    // {
-    //     $sortField = $request->get('sort', 'id'); // Campo por defecto
-    //     $sortDirection = $request->get('direction', 'asc'); // Dirección por defecto
-    //     $roles = Role::all();
-
-    //     $users = User::orderBy($sortField, $sortDirection)->get();
-
-    //     return view('modules.users.index', compact('users', 'roles', 'sortField', 'sortDirection'));
-    // }
-
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderByDesc('id')->get();
+        $sortField = $request->get('sort', 'id'); // Campo por defecto
+        $sortDirection = $request->get('direction', 'asc'); // Dirección por defecto
         $roles = Role::all();
-        return view('modules.users.index', compact('users', 'roles'));
+
+        $users = User::orderBy($sortField, $sortDirection)->get();
+
+        return view('modules.users.index', compact('users', 'roles', 'sortField', 'sortDirection'));
     }
+
+    // public function index()
+    // {
+    //     $users = User::orderByDesc('id')->get();
+    //     $roles = Role::all();
+    //     return view('modules.users.index', compact('users', 'roles'));
+    // }
 
     public function store(Request $request)
     {

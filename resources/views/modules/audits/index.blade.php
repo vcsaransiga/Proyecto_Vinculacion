@@ -54,10 +54,9 @@
                                             Generar
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                            <a class="dropdown-item" href="{{ route('students.pdf') }}"
-                                                id="excel">PDF</a>
-                                            <a class="dropdown-item" href="{{ route('students.download-excel') }}"
-                                                id="xls">Excel</a>
+                                            <a class="dropdown-item" href="{{ route('audits.pdf') }}"
+                                                id="pdf">PDF</a>
+                                            <a class="dropdown-item" href="#" id="xls">Excel</a>
                                         </div>
                                     </div>
                                 </div>
@@ -90,6 +89,7 @@
                                         <th scope="col" class="tw-px-6 tw-py-3">Tipo modificado</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">ID registro modificado</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Cambios</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Hora</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">IP</th>
                                     </tr>
                                 </thead>
@@ -107,11 +107,12 @@
                                                 <button type="button"
                                                     class="tw-text-blue-600 hover:tw-underline tw-font-medium"
                                                     data-bs-toggle="modal" data-bs-target="#changesModal"
-                                                    data-old-values="{{ json_encode($audit->old_values) }}"
-                                                    data-new-values="{{ json_encode($audit->new_values) }}">
+                                                    data-old-values="{{ json_encode($audit->old_values, JSON_PRETTY_PRINT) }}"
+                                                    data-new-values="{{ json_encode($audit->new_values, JSON_PRETTY_PRINT) }}">
                                                     Ver
                                                 </button>
                                             </td>
+                                            <td class="tw-px-6 tw-py-4">{{ $audit->created_at }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $audit->ip_address }}</td>
                                         </tr>
                                     @endforeach

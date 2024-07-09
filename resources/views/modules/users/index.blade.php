@@ -111,17 +111,57 @@
                                             <div class="tw-flex tw-items-center">
                                                 <input id="select_all_ids" type="checkbox"
                                                     class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-
                                             </div>
                                         </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Apellido</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Email </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Estado</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Nombre
+                                                <a
+                                                    href="?sort=name&direction={{ $sortField === 'name' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Apellido
+                                                <a
+                                                    href="?sort=last_name&direction={{ $sortField === 'last_name' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Email
+                                                <a
+                                                    href="?sort=email&direction={{ $sortField === 'email' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Estado
+                                                <a
+                                                    href="?sort=status&direction={{ $sortField === 'status' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Roles</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr id="user_ids{{ $user->id }}"
@@ -314,7 +354,7 @@
                                         id="edit_role_{{ $role->id }}" name="roles[]"
                                         value="{{ $role->name }}">
                                     <label class="form-check-label"
-                                        for="role_{{ $role->id }}">{{ ucfirst($role->name) }}</label>
+                                        for="edit_role_{{ $role->id }}">{{ ucfirst($role->name) }}</label>
                                 </div>
                             @endforeach
                         </div>
@@ -383,10 +423,21 @@
             modalEmailInput.value = userEmail;
             modalStatusInput.value = userStatus;
 
+            // Limpiar los roles seleccionados
+            modalRolesInput.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+                checkbox.checked = false;
+            });
+
+            // Obtener y marcar los roles del usuario
             fetch('/info/users/' + userId + '/roles')
                 .then(response => response.json())
                 .then(data => {
-                    modalRolesInput.value = data.roles;
+                    data.roles.forEach(function(role) {
+                        var roleCheckbox = document.getElementById('edit_role_' + role.id);
+                        if (roleCheckbox) {
+                            roleCheckbox.checked = true;
+                        }
+                    });
                 });
         });
     });

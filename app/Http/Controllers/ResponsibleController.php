@@ -10,10 +10,20 @@ use App\Exports\ResponsibleExport;
 
 class ResponsibleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $responsibles = Responsible::all();
-        return view('modules.responsibles.index', compact('responsibles'));
+        $sortField = $request->get('sort', 'id_responsible'); // Campo por defecto
+        $sortDirection = $request->get('direction', 'asc'); // Dirección por defecto
+
+        // Validar los campos de ordenamiento para evitar inyecciones SQL
+        $validSortFields = ['id_responsible', 'card_id', 'name', 'last_name', 'area', 'role', 'status'];
+        if (!in_array($sortField, $validSortFields)) {
+            $sortField = 'id_responsible';
+        }
+
+        $responsibles = Responsible::orderBy($sortField, $sortDirection)->paginate(10);
+
+        return view('modules.responsibles.index', compact('responsibles', 'sortField', 'sortDirection'));
     }
 
     public function store(Request $request)

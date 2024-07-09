@@ -12,10 +12,20 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all();
-        return view('modules.students.index', compact('students'));
+        $sortField = $request->get('sort', 'id_stud'); // Campo por defecto
+        $sortDirection = $request->get('direction', 'asc'); // Dirección por defecto
+
+        // Validar los campos de ordenamiento para evitar inyecciones SQL
+        $validSortFields = ['id_stud', 'card_id', 'name', 'last_name', 'course', 'hours', 'status'];
+        if (!in_array($sortField, $validSortFields)) {
+            $sortField = 'id_stud';
+        }
+
+        $students = Student::orderBy($sortField, $sortDirection)->paginate(10);
+
+        return view('modules.students.index', compact('students', 'sortField', 'sortDirection'));
     }
 
     public function store(Request $request)
