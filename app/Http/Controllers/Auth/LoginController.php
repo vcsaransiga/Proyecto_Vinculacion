@@ -59,8 +59,6 @@ class LoginController extends Controller
                     'two_factor_expires_at' => Carbon::now()->addMinutes(10),
                 ]);
 
-                $user->notify(new TwoFactorCode($token));
-
                 return redirect()->route('login.2fa.form', ['user' => $user->id, 'redirectTo' => $redirectTo]);
             } else {
                 return redirect()->intended($redirectTo);
