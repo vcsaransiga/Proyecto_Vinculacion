@@ -233,10 +233,10 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
     Route::get('/info/users/{user}/roles', [UserController::class, 'getUserRoles']);
     Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile')->middleware(['auth']);
     Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
-    
+
     Route::get('/about', function () {
         return view('about');
-    })->name('about')
+    })->name('about');
 });
 
 
