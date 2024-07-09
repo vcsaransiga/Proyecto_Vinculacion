@@ -51,7 +51,6 @@ Route::get('/prueba', function () {
     return view('prueba');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::get('/tables', function () {
     return view('tables');
@@ -137,6 +136,7 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
     // Rutas de administrador
     Route::group(['middleware' => ['role:administrador']], function () {
 
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::view('/info', 'info')->name('info');
 
