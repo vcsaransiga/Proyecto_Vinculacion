@@ -1,3 +1,9 @@
+<?php
+use App\Models\Project;
+use App\Models\Task;
+use App\Models\User;
+?>
+
 <x-app-layout>
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -65,7 +71,7 @@
                     <div class="swiper-button-next"></div>
                 </div>
                 @else
-                <p>No projects found.</p>
+                <p class="font-weight-bold mb-0">Aún no se ha añadido ningún proyecto</p>
                 @endif
                 
             </div>
@@ -87,7 +93,7 @@
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Proyectos</p>
-                                        <h4 class="mb-2 font-weight-bold">$99,118.5</h4>
+                                        <h4 class="mb-2 font-weight-bold">{{Project::count();}}</h4>
                                         <div class="d-flex align-items-center">
                                             <span class="text-sm text-success font-weight-bolder">
                                                 <i class="fa fa-chevron-up text-xs me-1"></i>10.5%
@@ -117,8 +123,8 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
-                                        <p class="text-sm text-secondary mb-1">Transactions</p>
-                                        <h4 class="mb-2 font-weight-bold">376</h4>
+                                        <p class="text-sm text-secondary mb-1">Tareas</p>
+                                        <h4 class="mb-2 font-weight-bold">{{Task::count();}}</h4>
                                         <div class="d-flex align-items-center">
                                             <span class="text-sm text-success font-weight-bolder">
                                                 <i class="fa fa-chevron-up text-xs me-1"></i>55%
@@ -146,8 +152,8 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
-                                        <p class="text-sm text-secondary mb-1">Avg. Transaction</p>
-                                        <h4 class="mb-2 font-weight-bold">$450.53</h4>
+                                        <p class="text-sm text-secondary mb-1">Usuarios</p>
+                                        <h4 class="mb-2 font-weight-bold">{{User::count();}}</h4>
                                         <div class="d-flex align-items-center">
                                             <span class="text-sm text-success font-weight-bolder">
                                                 <i class="fa fa-chevron-up text-xs me-1"></i>22%
@@ -194,18 +200,18 @@
                 <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
                     <div class="card shadow-xs border h-100">
                         <div class="card-header pb-0">
-                            <h6 class="font-weight-semibold text-lg mb-0">Balances over time</h6>
-                            <p class="text-sm">Here you have details about the balance.</p>
+                            <h6 class="font-weight-semibold text-lg mb-0">Avance Por Proyecto</h6>
+                            <p class="text-sm">Aquí tienes detalles sobre los avances de cada proyecto.</p>
                             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
                                     autocomplete="off" checked>
-                                <label class="btn btn-white px-3 mb-0" for="btnradio1">12 months</label>
+                                <label class="btn btn-white px-3 mb-0" for="btnradio1">12 meses</label>
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
                                     autocomplete="off">
-                                <label class="btn btn-white px-3 mb-0" for="btnradio2">30 days</label>
+                                <label class="btn btn-white px-3 mb-0" for="btnradio2">30 días</label>
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio3"
                                     autocomplete="off">
-                                <label class="btn btn-white px-3 mb-0" for="btnradio3">7 days</label>
+                                <label class="btn btn-white px-3 mb-0" for="btnradio3">7 días</label>
                             </div>
                         </div>
                         <div class="card-body py-3">
