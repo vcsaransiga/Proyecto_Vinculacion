@@ -197,6 +197,7 @@ use App\Models\User;
                 </div>
             </div>
             <div class="row my-2">
+                
                 <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
                     <div class="card shadow-xs border h-100">
                         <div class="card-header pb-0">
@@ -216,8 +217,39 @@ use App\Models\User;
                         </div>
                         <div class="card-body py-3">
                             <div class="chart mb-2">
-                                <canvas id="chart-bars" class="chart-canvas" height="240"></canvas>
-                            </div>
+                                <div style="width: 80%; margin: auto;">
+                                    <canvas id="projectProgressChart"></canvas>
+                                </div>
+                            
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        var ctx = document.getElementById('projectProgressChart').getContext('2d');
+                                        var projectNames = @json($projects->pluck('name'));
+                                        var projectProgress = @json($projects->pluck('progress'));
+                            
+                                        var chart = new Chart(ctx, {
+                                            type: 'bar', // Puedes cambiar el tipo de gráfico aquí
+                                            data: {
+                                                labels: projectNames,
+                                                datasets: [{
+                                                    label: 'Progreso de Proyectos (%)',
+                                                    data: projectProgress,
+                                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true,
+                                                        max: 100
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    });
+                                </script>                            </div>
                             <button class="btn btn-white mb-0 ms-auto">View report</button>
                         </div>
                     </div>
@@ -514,4 +546,5 @@ use App\Models\User;
     </main>
 
     <script src="{{ asset('js/breadcrumbs.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </x-app-layout>
