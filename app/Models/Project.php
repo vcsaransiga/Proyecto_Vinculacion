@@ -35,4 +35,9 @@ class Project extends Model implements Auditable
 
         return $statuses[$value] ?? $value;
     }
+
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class, 'mod_projects', 'id_pro', 'id_mod');
+    }
 }

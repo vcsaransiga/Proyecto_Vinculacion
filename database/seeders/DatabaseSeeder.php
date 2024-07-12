@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             KardexSeeder::class,
             RolesAndPermissionsSeeder::class,
             UserRoleSeeder::class,
+            ModProjectSeeder::class,
         ]);
     }
 }

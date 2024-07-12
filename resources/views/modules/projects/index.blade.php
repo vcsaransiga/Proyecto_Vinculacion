@@ -42,8 +42,6 @@
                         <div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg tw-p-5">
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
-
-
                                 <div class="d-flex flex-row justify-content-start">
                                     <div class="dropdown mr-3">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -128,16 +126,7 @@
                                                 </a>
                                             </div>
                                         </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            <div class="tw-flex tw-items-center">
-                                                Descripción
-                                                <a
-                                                    href="?sort=description&direction={{ $sortField === 'description' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
-                                                    <img class="tw-w-3 tw-h-3 tw-ms-1.5" aria-hidden="true"
-                                                        src="{{ asset('assets/img/logos/up-down.svg') }}">
-                                                </a>
-                                            </div>
-                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Descripción</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
                                             <div class="tw-flex tw-items-center">
                                                 Estado
@@ -188,6 +177,7 @@
                                                 </a>
                                             </div>
                                         </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Módulos</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
@@ -200,14 +190,22 @@
                                                 <div class="tw-flex tw-items-center">
                                                     <input type="checkbox" value="{{ $project->id_pro }}"
                                                         class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-
                                                 </div>
                                             </td>
                                             <td class="tw-px-6 tw-py-4">{{ $project->id_pro }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $project->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $project->responsible->name }}
                                                 {{ $project->responsible->last_name }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $project->description }}</td>
+                                            <td class="tw-px-6 tw-py-4">
+                                                <button class="toggle-description tw-text-blue-600 hover:tw-underline"
+                                                    data-project-id="{{ $project->id_pro }}">
+                                                    <img src="{{ asset('assets/img/logos/plus.svg') }}"
+                                                        class="tw-w-5 tw-h-5">
+                                                </button>
+                                                <div class="description-content tw-hidden tw-mt-2">
+                                                    {{ $project->description }}
+                                                </div>
+                                            </td>
                                             <td class="tw-px-6 tw-py-4">{{ $project->status }}</td>
                                             <td class="tw-px-6 tw-py-4">
                                                 <div
@@ -220,10 +218,45 @@
                                                         style="width: {{ $project->progress }}%"></div>
                                                 </div>
                                             </td>
-
                                             <td class="tw-px-6 tw-py-4">{{ $project->start_date }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $project->end_date }}</td>
                                             <td class="tw-px-6 tw-py-4">${{ number_format($project->budget, 2) }}</td>
+                                            <td class="tw-px-6 tw-py-4">
+                                                <button class="btn btn-info" data-bs-toggle="modal"
+                                                    data-bs-target="#modulesModal{{ $project->id_pro }}">
+                                                    Ver
+                                                </button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="modulesModal{{ $project->id_pro }}"
+                                                    tabindex="-1"
+                                                    aria-labelledby="modulesModalLabel{{ $project->id_pro }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"
+                                                                    id="modulesModalLabel{{ $project->id_pro }}">
+                                                                    Módulos de {{ $project->name }}</h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <ul class="list-group">
+                                                                    @foreach ($project->modules as $module)
+                                                                        <li class="list-group-item">
+                                                                            {{ $module->name }}</li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Cerrar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
                                                 <a href="#"
                                                     class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"
@@ -316,8 +349,7 @@
                                 <select class="form-control" id="id_responsible" name="id_responsible" required>
                                     @foreach ($responsibles as $responsible)
                                         <option value="{{ $responsible->id_responsible }}">{{ $responsible->name }}
-                                            {{ $responsible->last_name }}
-                                        </option>
+                                            {{ $responsible->last_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -333,6 +365,18 @@
                         <div class="mb-3">
                             <label for="description" class="form-label">Descripción</label>
                             <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modules" class="form-label">Módulos:</label>
+                            @foreach ($modules as $module)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $module->id_mod }}"
+                                        id="module{{ $module->id_mod }}" name="modules[]">
+                                    <label class="form-check-label" for="module{{ $module->id_mod }}">
+                                        {{ $module->name }}
+                                    </label>
+                                </div>
+                            @endforeach
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Estado:</label>
@@ -411,8 +455,18 @@
                             <textarea class="form-control" id="edit_description" name="description" required></textarea>
                         </div>
                         <div class="mb-3">
-
-
+                            <label for="edit_modules" class="form-label">Módulos:</label>
+                            @foreach ($modules as $module)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $module->id_mod }}"
+                                        id="edit_module{{ $module->id_mod }}" name="modules[]">
+                                    <label class="form-check-label" for="edit_module{{ $module->id_mod }}">
+                                        {{ $module->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="mb-3">
                             <label for="edit_status" class="form-label">Estado:</label>
                             <select class="form-control" id="edit_status" name="status">
                                 <option value="initiated">Iniciado</option>
@@ -421,7 +475,6 @@
                                 <option value="completed">Completado</option>
                             </select>
                         </div>
-
                         <div class="mb-3">
                             <label for="edit_progress" class="form-label">Progreso (%)</label>
                             <input type="number" class="form-control" id="edit_progress" name="progress"
@@ -451,6 +504,7 @@
             </div>
         </div>
     </div>
+
 </x-app-layout>
 
 <script>
@@ -491,8 +545,21 @@
             modalBudgetInput.value = projectBudget;
         });
 
+        // Toggle description visibility
+        document.querySelectorAll('.toggle-description').forEach(button => {
+            button.addEventListener('click', function() {
+                const descriptionContent = this.nextElementSibling;
+                if (descriptionContent.classList.contains('tw-hidden')) {
+                    descriptionContent.classList.remove('tw-hidden');
+                    this.querySelector('img').src =
+                        '{{ asset('assets/img/logos/minus.svg') }}';
+                } else {
+                    descriptionContent.classList.add('tw-hidden');
+                    this.querySelector('img').src = '{{ asset('assets/img/logos/plus.svg') }}';
+                }
+            });
+        });
     });
-
 
     document.addEventListener('DOMContentLoaded', function() {
         const totalRecords = {{ $projects->count() }};
@@ -503,7 +570,6 @@
         initPagination(totalRecords, tableId, paginationContainerId, defaultRecordsPerPage);
     });
 </script>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

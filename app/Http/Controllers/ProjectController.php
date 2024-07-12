@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Module;
 use App\Models\Responsible;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -21,8 +22,9 @@ class ProjectController extends Controller
             ->get();
 
         $responsibles = Responsible::all();
+        $modules = Module::where('status', true)->get(); // Solo módulos activos
 
-        return view('modules.projects.index', compact('projects', 'responsibles', 'sortField', 'sortDirection'));
+        return view('modules.projects.index', compact('projects', 'responsibles', 'modules', 'sortField', 'sortDirection'));
     }
 
 
@@ -44,10 +46,10 @@ class ProjectController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'budget' => 'required|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de la imagen
+            'modules' => 'array', // Validación de los módulos seleccionados
         ]);
 
-        // Obtener el último proyecto por fecha de creación
+        // Generar nuevo ID de proyecto
         $lastProject = Project::orderBy('created_at', 'desc')->first();
         $lastIdNumber = $lastProject ? intval(substr($lastProject->id_pro, 5)) : 0;
 
@@ -59,7 +61,7 @@ class ProjectController extends Controller
 
         $imagePath = $request->file('image') ? $request->file('image')->store('projects', 'public') : null;
 
-        Project::create([
+        $project = Project::create([
             'id_pro' => $newIdPro,
             'id_responsible' => $request->id_responsible,
             'name' => $request->name,
@@ -72,20 +74,10 @@ class ProjectController extends Controller
             'image' => $imagePath,
         ]);
 
+        // Sincronizar módulos seleccionados
+        $project->modules()->sync($request->modules);
+
         return redirect()->route('projects.index')->with('success', 'Proyecto creado correctamente.');
-    }
-
-    public function show($id)
-    {
-        $project = Project::with('responsible')->findOrFail($id);
-        return view('projects.show', compact('project'));
-    }
-
-    public function edit($id)
-    {
-        $project = Project::findOrFail($id);
-        $responsibles = Responsible::all();
-        return view('projects.edit', compact('project', 'responsibles'));
     }
 
     public function update(Request $request, $id)
@@ -101,7 +93,7 @@ class ProjectController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'budget' => 'required|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de la imagen
+            'modules' => 'array', // Validación de los módulos seleccionados
         ]);
 
         $imagePath = $request->file('image') ? $request->file('image')->store('images', 'public/projects') : $project->image;
@@ -118,7 +110,25 @@ class ProjectController extends Controller
             'image' => $imagePath,
         ]);
 
+        // Sincronizar módulos seleccionados
+        $project->modules()->sync($request->modules);
+
         return redirect()->route('projects.index')->with('success', 'Proyecto actualizado correctamente.');
+    }
+
+
+    public function show($id)
+    {
+        $project = Project::with('responsible')->findOrFail($id);
+        return view('projects.show', compact('project'));
+    }
+
+    public function edit($id)
+    {
+        $project = Project::findOrFail($id);
+        $responsibles = Responsible::all();
+        $modules = Module::where('status', true)->get(); // Solo módulos activos
+        return view('modules.projects.edit', compact('project', 'responsibles', 'modules'));
     }
 
     public function deleteAll(Request $request)

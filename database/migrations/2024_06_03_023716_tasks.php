@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('id_task')->primary();
             $table->string('id_pro');
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->float('hours');
             $table->date('start_date');
             $table->date('end_date');
