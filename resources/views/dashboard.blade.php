@@ -2,6 +2,7 @@
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\Student;
 ?>
 
 <x-app-layout>
@@ -81,25 +82,15 @@ use App\Models\User;
                         <div class="card-body text-start p-3 w-100">
                             <div
                                 class="icon icon-shape icon-sm bg-dark text-white text-center border-radius-sm d-flex align-items-center justify-content-center mb-3">
-                                <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M4.5 3.75a3 3 0 00-3 3v.75h21v-.75a3 3 0 00-3-3h-15z" />
-                                    <path fill-rule="evenodd"
-                                        d="M22.5 9.75h-21v7.5a3 3 0 003 3h15a3 3 0 003-3v-7.5zm-18 3.75a.75.75 0 01.75-.75h6a.75.75 0 010 1.5h-6a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z"
-                                        clip-rule="evenodd" />
-                                </svg>
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3 4.75A2.75 2.75 0 015.75 2h3.086a2.75 2.75 0 012.06.96L11.682 4h6.568A2.75 2.75 0 0121 6.75v10.5A2.75 2.75 0 0118.25 20H5.75A2.75 2.75 0 013 17.25V4.75zM5.75 3.5A1.25 1.25 0 004.5 4.75v12.5c0 .69.56 1.25 1.25 1.25h12.5c.69 0 1.25-.56 1.25-1.25V6.75c0-.69-.56-1.25-1.25-1.25H11a1.25 1.25 0 01-.94-.44L8.75 3.5H5.75z" clip-rule="evenodd"/>
+                                </svg>                                
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Proyectos</p>
                                         <h4 class="mb-2 font-weight-bold">{{Project::count();}}</h4>
-                                        <div class="d-flex align-items-center">
-                                            <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>10.5%
-                                            </span>
-                                            <span class="text-sm ms-1">from $89,740.00</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -111,26 +102,15 @@ use App\Models\User;
                         <div class="card-body text-start p-3 w-100">
                             <div
                                 class="icon icon-shape icon-sm bg-dark text-white text-center border-radius-sm d-flex align-items-center justify-content-center mb-3">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M7.5 5.25a3 3 0 013-3h3a3 3 0 013 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0112 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 017.5 5.455V5.25zm7.5 0v.09a49.488 49.488 0 00-6 0v-.09a1.5 1.5 0 011.5-1.5h3a1.5 1.5 0 011.5 1.5zm-3 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                                        clip-rule="evenodd" />
-                                    <path
-                                        d="M3 18.4v-2.796a4.3 4.3 0 00.713.31A26.226 26.226 0 0012 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923-2.12.282-4.282.427-6.477.427a49.19 49.19 0 01-6.477-.427C4.047 21.128 3 19.852 3 18.4z" />
-                                </svg>
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h16a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V3zm2 2h14v14H5V5zm2.293 6.293a1 1 0 011.414 0l1.586 1.586 3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>                                
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Tareas</p>
                                         <h4 class="mb-2 font-weight-bold">{{Task::count();}}</h4>
-                                        <div class="d-flex align-items-center">
-                                            <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>55%
-                                            </span>
-                                            <span class="text-sm ms-1">from 243</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -142,24 +122,16 @@ use App\Models\User;
                         <div class="card-body text-start p-3 w-100">
                             <div
                                 class="icon icon-shape icon-sm bg-dark text-white text-center border-radius-sm d-flex align-items-center justify-content-center mb-3">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M3 6a3 3 0 013-3h12a3 3 0 013 3v12a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm4.5 7.5a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0v-2.25a.75.75 0 01.75-.75zm3.75-1.5a.75.75 0 00-1.5 0v4.5a.75.75 0 001.5 0V12zm2.25-3a.75.75 0 01.75.75v6.75a.75.75 0 01-1.5 0V9.75A.75.75 0 0113.5 9zm3.75-1.5a.75.75 0 00-1.5 0v9a.75.75 0 001.5 0v-9z"
-                                        clip-rule="evenodd" />
-                                </svg>
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M12 2a5 5 0 100 10 5 5 0 000-10zm-3 5a3 3 0 116 0 3 3 0 01-6 0z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd" d="M12 12a7 7 0 00-7 7 .75.75 0 001.5 0 5.5 5.5 0 0111 0 .75.75 0 001.5 0 7 7 0 00-7-7z" clip-rule="evenodd"/>
+                                </svg>                         
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Usuarios</p>
                                         <h4 class="mb-2 font-weight-bold">{{User::count();}}</h4>
-                                        <div class="d-flex align-items-center">
-                                            <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>22%
-                                            </span>
-                                            <span class="text-sm ms-1">from $369.30</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -171,24 +143,15 @@ use App\Models\User;
                         <div class="card-body text-start p-3 w-100">
                             <div
                                 class="icon icon-shape icon-sm bg-dark text-white text-center border-radius-sm d-flex align-items-center justify-content-center mb-3">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M5.25 2.25a3 3 0 00-3 3v4.318a3 3 0 00.879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 005.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 00-2.122-.879H5.25zM6.375 7.5a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z"
-                                        clip-rule="evenodd" />
-                                </svg>
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M12 2L1 7l11 5 11-5-11-5zm0 2.236L18.764 7 12 9.764 5.236 7 12 4.236zM4.5 9.5l-2.236 1.118L12 16.5l9.736-5.882L19.5 9.5l-7.5 3.882L4.5 9.5zM12 18l-8.5 4v-3.5l8.5-3.5 8.5 3.5V22L12 18z" clip-rule="evenodd"/>
+                                </svg>                                                           
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
-                                        <p class="text-sm text-secondary mb-1">Coupon Sales</p>
-                                        <h4 class="mb-2 font-weight-bold">$23,364.55</h4>
-                                        <div class="d-flex align-items-center">
-                                            <span class="text-sm text-success font-weight-bolder">
-                                                <i class="fa fa-chevron-up text-xs me-1"></i>18%
-                                            </span>
-                                            <span class="text-sm ms-1">from $19,800.40</span>
-                                        </div>
+                                        <p class="text-sm text-secondary mb-1">Estudiantes</p>
+                                        <h4 class="mb-2 font-weight-bold">{{Student::count();}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -197,12 +160,13 @@ use App\Models\User;
                 </div>
             </div>
             <div class="row my-2">
+                
                 <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
                     <div class="card shadow-xs border h-100">
                         <div class="card-header pb-0">
                             <h6 class="font-weight-semibold text-lg mb-0">Avance Por Proyecto</h6>
                             <p class="text-sm">Aquí tienes detalles sobre los avances de cada proyecto.</p>
-                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            {{-- <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
                                     autocomplete="off" checked>
                                 <label class="btn btn-white px-3 mb-0" for="btnradio1">12 meses</label>
@@ -212,13 +176,44 @@ use App\Models\User;
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio3"
                                     autocomplete="off">
                                 <label class="btn btn-white px-3 mb-0" for="btnradio3">7 días</label>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="card-body py-3">
                             <div class="chart mb-2">
-                                <canvas id="chart-bars" class="chart-canvas" height="240"></canvas>
-                            </div>
-                            <button class="btn btn-white mb-0 ms-auto">View report</button>
+                                <div style="width: 80%; margin: auto;">
+                                    <canvas id="projectProgressChart"></canvas>
+                                </div>
+                            
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        var ctx = document.getElementById('projectProgressChart').getContext('2d');
+                                        var projectNames = @json($projects->pluck('name'));
+                                        var projectProgress = @json($projects->pluck('progress'));
+                            
+                                        var chart = new Chart(ctx, {
+                                            type: 'bar', // Puedes cambiar el tipo de gráfico aquí
+                                            data: {
+                                                labels: projectNames,
+                                                datasets: [{
+                                                    label: 'Progreso de Proyectos (%)',
+                                                    data: projectProgress,
+                                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true,
+                                                        max: 100
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    });
+                                </script>                            </div>
+                            {{-- <button class="btn btn-white mb-0 ms-auto">View report</button> --}}
                         </div>
                     </div>
                 </div>
@@ -514,4 +509,5 @@ use App\Models\User;
     </main>
 
     <script src="{{ asset('js/breadcrumbs.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </x-app-layout>
