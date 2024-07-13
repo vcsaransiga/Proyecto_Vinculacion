@@ -67,12 +67,14 @@ class ResponsibleController extends Controller
             'status' => $request->status,
         ]);
 
-        // Verificar si la solicitud proviene del modal de módulos
-        if ($request->has('from_module') && $request->input('from_module') == 'true') {
-            return redirect()->route('modules.index')->with('success', 'Responsable agregado correctamente.');
-        }
+        // // Verificar si la solicitud proviene del modal de módulos
+        // if ($request->has('from_module') && $request->input('from_module') == 'true') {
+        //     return redirect()->route('modules.index')->with('success', 'Responsable agregado correctamente.');
+        // }
 
-        return redirect()->route('responsibles.index')->with('success', 'Responsable agregado correctamente.');
+        // return redirect()->route('responsibles.index')->with('success', 'Responsable agregado correctamente.');
+
+        return redirect()->back()->with('success', 'Responsable agregado correctamente.');
     }
 
 

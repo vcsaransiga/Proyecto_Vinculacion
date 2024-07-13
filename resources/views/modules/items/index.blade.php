@@ -264,21 +264,33 @@
                 <div class="modal-body">
                     <form id="createItemForm" method="POST" action="{{ route('items.store') }}">
                         @csrf
-                        <div class="mb-3">
-                            <label for="id_catitem" class="form-label">Categoría</label>
-                            <select class="form-control" id="id_catitem" name="id_catitem" required>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id_catitem }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="id_catitem" class="form-label">Categoría</label>
+                                <select class="form-control" id="id_catitem" name="id_catitem" required>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id_catitem }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#createCategoryItemModal">Agregar Categoría</button>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="id_unit" class="form-label">Unidad de Medida</label>
-                            <select class="form-control" id="id_unit" name="id_unit" required>
-                                @foreach ($units as $unit)
-                                    <option value="{{ $unit->id_unit }}">{{ $unit->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="id_unit" class="form-label">Unidad de Medida</label>
+                                <select class="form-control" id="id_unit" name="id_unit" required>
+                                    @foreach ($units as $unit)
+                                        <option value="{{ $unit->id_unit }}">{{ $unit->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#createUnitModal">Agregar Unidad</button>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="id_pro" class="form-label">Proyecto</label>
@@ -321,21 +333,33 @@
                     <form id="editItemForm" method="POST" action="">
                         @csrf
                         @method('PUT')
-                        <div class="mb-3">
-                            <label for="edit_id_catitem" class="form-label">Categoría</label>
-                            <select class="form-control" id="edit_id_catitem" name="id_catitem" required>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id_catitem }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="edit_id_catitem" class="form-label">Categoría</label>
+                                <select class="form-control" id="edit_id_catitem" name="id_catitem" required>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id_catitem }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#createCategoryItemModal">Agregar Categoría</button>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="edit_id_unit" class="form-label">Unidad de Medida</label>
-                            <select class="form-control" id="edit_id_unit" name="id_unit" required>
-                                @foreach ($units as $unit)
-                                    <option value="{{ $unit->id_unit }}">{{ $unit->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="edit_id_unit" class="form-label">Unidad de Medida</label>
+                                <select class="form-control" id="edit_id_unit" name="id_unit" required>
+                                    @foreach ($units as $unit)
+                                        <option value="{{ $unit->id_unit }}">{{ $unit->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#createUnitModal">Agregar Unidad</button>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="edit_id_pro" class="form-label">Proyecto</label>
@@ -358,6 +382,62 @@
                             <input type="date" class="form-control" id="edit_date" name="date" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Category Item Modal -->
+    <div class="modal fade" id="createCategoryItemModal" tabindex="-1"
+        aria-labelledby="createCategoryItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createCategoryItemModalLabel">Agregar categoría de ítem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createCategoryItemForm" method="POST" action="{{ route('categories_items.store') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Unit Modal -->
+    <div class="modal fade" id="createUnitModal" tabindex="-1" aria-labelledby="createUnitModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createUnitModalLabel">Agregar unidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createUnitForm" method="POST" action="{{ route('measurement_units.store') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="symbol" class="form-label">Unidad de medida</label>
+                            <input type="text" class="form-control" id="symbol" name="symbol" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
             </div>

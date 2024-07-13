@@ -34,7 +34,7 @@ class CategoryItemController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('categories_items.index')->with('success', 'Categoría de artículo creada correctamente.');
+        return redirect()->back()->with('success', 'Unidad de medida creada correctamente.');
     }
 
     public function update(Request $request, $id_catitem)

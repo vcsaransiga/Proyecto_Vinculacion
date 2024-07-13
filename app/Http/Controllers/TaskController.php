@@ -49,14 +49,7 @@ class TaskController extends Controller
             'status' => $request->status,
         ]);
 
-        $previousUrl = URL::previous();
-        $showUrl = route('projects.show', $request->id_pro);
-
-        if ($previousUrl === $showUrl) {
-            return redirect()->route('projects.show', $request->id_pro)->with('success', 'Tarea creada correctamente.');
-        } else {
-            return redirect()->route('tasks.index')->with('success', 'Tarea creada correctamente.');
-        }
+        return redirect()->back()->with('success', 'Tarea creada correctamente.');
     }
 
 
@@ -75,14 +68,7 @@ class TaskController extends Controller
 
             $task->update($validatedData);
 
-            $previousUrl = URL::previous();
-            $showUrl = route('projects.show', $task->id_pro);
-
-            if ($previousUrl === $showUrl) {
-                return redirect()->route('projects.show', $task->id_pro)->with('success', 'Tarea actualizada correctamente.');
-            } else {
-                return redirect()->route('tasks.index')->with('success', 'Tarea actualizada correctamente.');
-            }
+            return redirect()->back()->with('success', 'Tarea actualizada correctamente');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error actualizando la tarea.');
         }

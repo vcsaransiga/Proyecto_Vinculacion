@@ -33,7 +33,7 @@ class MeasurementUnitController extends Controller
             'symbol' => $request->symbol,
         ]);
 
-        return redirect()->route('measurement_units.index')->with('success', 'Unidad de medida creada correctamente.');
+        return redirect()->back()->with('success', 'Unidad de medida creada correctamente.');
     }
 
     public function update(Request $request, MeasurementUnit $measurement_unit)
