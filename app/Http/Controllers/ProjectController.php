@@ -96,7 +96,7 @@ class ProjectController extends Controller
             'modules' => 'array', // Validación de los módulos seleccionados
         ]);
 
-        $imagePath = $request->file('image') ? $request->file('image')->store('images', 'public/projects') : $project->image;
+        $imagePath = $request->file('image') ? $request->file('image')->store('projects', 'public') : $project->image;
 
         $project->update([
             'id_responsible' => $request->id_responsible,

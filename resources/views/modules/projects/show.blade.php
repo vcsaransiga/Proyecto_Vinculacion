@@ -159,8 +159,10 @@
 
                                 <div id="kardex-content" class="tab-pane contents">
                                     @if ($project->kardex->isEmpty())
-                                        <div class="alert alert-info" role="alert">
-                                            No hay movimientos de kardex asociados a este proyecto.
+                                        <div class="col-12">
+                                            <div class="alert alert-info" role="alert">
+                                                No hay movimientos de kardex asociados a este proyecto.
+                                            </div>
                                         </div>
                                     @else
                                         <div class="table-responsive">
