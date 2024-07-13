@@ -6,6 +6,8 @@ use App\Models\Item;
 use App\Models\CategoryItem;
 use App\Models\MeasurementUnit;
 use App\Models\Project;
+use App\Models\Module;
+use App\Models\Responsible;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,14 +15,33 @@ use App\Exports\ItemExport;
 
 class ItemController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     $items = Item::all();
+    //     $categories = CategoryItem::all();
+    //     $units = MeasurementUnit::all();
+    //     $projects = Project::all();
+    //     return view('modules.items.index', compact('items', 'categories', 'units', 'projects'));
+    // }
+
+    public function index(Request $request)
     {
-        $items = Item::all();
+        $sortField = $request->input('sort', 'id_item');
+        $sortDirection = $request->input('direction', 'asc');
+
+        $items = Item::orderBy($sortField, $sortDirection)->get();
+
         $categories = CategoryItem::all();
         $units = MeasurementUnit::all();
-        $projects = Project::all();
-        return view('modules.items.index', compact('items', 'categories', 'units', 'projects'));
+        $projectIds = $items->pluck('id_pro')->unique();
+
+        $projects = Project::whereIn('id_pro', $projectIds)->get();
+
+
+        return view('modules.items.index', compact('items', 'categories', 'units', 'projects', 'sortField', 'sortDirection'));
     }
+
+
 
     public function list()
     {

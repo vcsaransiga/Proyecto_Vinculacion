@@ -97,6 +97,7 @@
                                 <li class="nav-item"><a class="nav-link" id="tareas" href="#">Tareas</a></li>
                                 <li class="nav-item"><a class="nav-link" id="kardex" href="#">Kardex</a></li>
                                 <li class="nav-item"><a class="nav-link" id="descripcion" href="#">Descripción</a>
+                                <li class="nav-item"><a class="nav-link" id="inventory" href="#">Inventario</a>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" id="recursos" href="#">Recursos</a></li>
                             </ul>

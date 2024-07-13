@@ -91,13 +91,67 @@
                                                     class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
                                             </div>
                                         </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">ID</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                ID
+                                                <a
+                                                    href="?sort=id_item&direction={{ $sortField === 'id_item' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-3 tw-h-3 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Nombre
+                                                <a
+                                                    href="?sort=name&direction={{ $sortField === 'name' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-3 tw-h-3 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}">
+                                                </a>
+                                            </div>
+                                        </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Descripción</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Fecha</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Proyecto</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Categoría</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Unidad de Medida</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Fecha
+                                                <a
+                                                    href="?sort=date&direction={{ $sortField === 'date' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-3 tw-h-3 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Proyecto
+                                                <a
+                                                    href="?sort=id_pro&direction={{ $sortField === 'id_pro' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-3 tw-h-3 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Categoría
+                                                <a
+                                                    href="?sort=id_catitem&direction={{ $sortField === 'id_catitem' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-3 tw-h-3 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Unidad de Medida
+                                                <a
+                                                    href="?sort=id_unit&direction={{ $sortField === 'id_unit' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-3 tw-h-3 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}">
+                                                </a>
+                                            </div>
+                                        </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
@@ -113,7 +167,16 @@
                                             </td>
                                             <td class="tw-px-6 tw-py-4">{{ $item->id_item }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $item->name }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $item->description }}</td>
+                                            <td class="tw-px-6 tw-py-4">
+                                                <button class="toggle-description tw-text-blue-600 hover:tw-underline"
+                                                    data-item-id="{{ $item->id_item }}">
+                                                    <img src="{{ asset('assets/img/logos/plus.svg') }}"
+                                                        class="tw-w-5 tw-h-5">
+                                                </button>
+                                                <div class="description-content tw-hidden tw-mt-2">
+                                                    {{ $item->description }}
+                                                </div>
+                                            </td>
                                             <td class="tw-px-6 tw-py-4">{{ $item->date }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $item->project->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $item->category->name }}</td>
@@ -332,6 +395,21 @@
             modalProjectInput.value = itemProject;
             modalCategoryInput.value = itemCategory;
             modalUnitInput.value = itemUnit;
+        });
+
+        // Toggle description visibility
+        document.querySelectorAll('.toggle-description').forEach(button => {
+            button.addEventListener('click', function() {
+                const descriptionContent = this.nextElementSibling;
+                if (descriptionContent.classList.contains('tw-hidden')) {
+                    descriptionContent.classList.remove('tw-hidden');
+                    this.querySelector('img').src =
+                        '{{ asset('assets/img/logos/minus.svg') }}';
+                } else {
+                    descriptionContent.classList.add('tw-hidden');
+                    this.querySelector('img').src = '{{ asset('assets/img/logos/plus.svg') }}';
+                }
+            });
         });
     });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Module;
+use App\Models\Item;
 use App\Models\Responsible;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -136,7 +137,8 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $responsibles = Responsible::where('status', true)->get();
         $modules = Module::where('status', true)->get(); // Solo módulos activos
-        return view('modules.projects.show', compact('project', 'responsibles', 'modules'));
+        $items = Item::all();
+        return view('modules.projects.show', compact('project', 'responsibles', 'modules', 'items'));
     }
     public function edit($id)
     {
