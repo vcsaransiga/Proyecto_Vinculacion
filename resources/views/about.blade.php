@@ -78,7 +78,7 @@
                                 </div>
                             </div>
 
-                            <h2 class="display-5 fw-bold fs-3 mt-3">UEP-UES</h2>
+                            <h2 class="display-5 fw-bold fs-3 mt-3">UEP-UEPS</h2>
                             <hr>
                             <div class="row">
                                 <div class="col-6 d-flex align-items-stretch">
