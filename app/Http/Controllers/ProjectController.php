@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProjectExport;
+use Illuminate\Support\Facades\URL;
 
 class ProjectController extends Controller
 {
@@ -21,7 +22,7 @@ class ProjectController extends Controller
             ->orderBy($sortField, $sortDirection)
             ->get();
 
-        $responsibles = Responsible::all();
+        $responsibles = Responsible::where('status', true)->get();
         $modules = Module::where('status', true)->get(); // Solo módulos activos
 
         return view('modules.projects.index', compact('projects', 'responsibles', 'modules', 'sortField', 'sortDirection'));
@@ -113,7 +114,15 @@ class ProjectController extends Controller
         // Sincronizar módulos seleccionados
         $project->modules()->sync($request->modules);
 
-        return redirect()->route('projects.index')->with('success', 'Proyecto actualizado correctamente.');
+        // Verificar la URL anterior para determinar la redirección
+        $previousUrl = URL::previous();
+        $showUrl = route('projects.show', $id);
+
+        if ($previousUrl === $showUrl) {
+            return redirect()->route('projects.show', $id)->with('success', 'Proyecto actualizado correctamente.');
+        } else {
+            return redirect()->route('projects.index')->with('success', 'Proyecto actualizado correctamente.');
+        }
     }
 
 
@@ -125,12 +134,14 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::findOrFail($id);
-        return view('modules.projects.show', compact('project'));
+        $responsibles = Responsible::where('status', true)->get();
+        $modules = Module::where('status', true)->get(); // Solo módulos activos
+        return view('modules.projects.show', compact('project', 'responsibles', 'modules'));
     }
     public function edit($id)
     {
         $project = Project::findOrFail($id);
-        $responsibles = Responsible::all();
+        $responsibles = Responsible::where('status', true)->get();
         $modules = Module::where('status', true)->get(); // Solo módulos activos
         return view('modules.projects.edit', compact('project', 'responsibles', 'modules'));
     }

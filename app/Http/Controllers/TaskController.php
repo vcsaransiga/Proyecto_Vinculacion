@@ -9,6 +9,7 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TaskExport;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 
 class TaskController extends Controller
 {
@@ -23,7 +24,6 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_pro' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'hours' => 'required|numeric|min:0',
@@ -49,20 +49,21 @@ class TaskController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('tasks.index')->with('success', 'Tarea creada correctamente.');
+        $previousUrl = URL::previous();
+        $showUrl = route('projects.show', $request->id_pro);
+
+        if ($previousUrl === $showUrl) {
+            return redirect()->route('projects.show', $request->id_pro)->with('success', 'Tarea creada correctamente.');
+        } else {
+            return redirect()->route('tasks.index')->with('success', 'Tarea creada correctamente.');
+        }
     }
 
 
     public function update(Request $request, Task $task)
     {
-        // Log request data
-        Log::info('Request data:', $request->all());
-
         try {
-            // Validar los datos de la solicitud
-            Log::info('Starting validation');
             $validatedData = $request->validate([
-                'id_pro' => 'required|string|max:255',
                 'name' => 'required|string|max:255',
                 'description' => 'required|string',
                 'hours' => 'required|numeric|min:0',
@@ -71,23 +72,20 @@ class TaskController extends Controller
                 'percentage' => 'required|numeric|between:0,100',
                 'status' => 'required|string|in:pending,completed',
             ]);
-            Log::info('Validation passed', $validatedData);
 
-            // Actualizar la tarea
-            Log::info('Updating task');
             $task->update($validatedData);
-            Log::info('Task updated successfully', $task->toArray());
+
+            $previousUrl = URL::previous();
+            $showUrl = route('projects.show', $task->id_pro);
+
+            if ($previousUrl === $showUrl) {
+                return redirect()->route('projects.show', $task->id_pro)->with('success', 'Tarea actualizada correctamente.');
+            } else {
+                return redirect()->route('tasks.index')->with('success', 'Tarea actualizada correctamente.');
+            }
         } catch (\Exception $e) {
-            // Log cualquier excepción
-            Log::error('Error during update process', [
-                'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
-            ]);
-
-            return redirect()->route('tasks.index')->with('error', 'Error actualizando la tarea.');
+            return redirect()->back()->with('error', 'Error actualizando la tarea.');
         }
-
-        return redirect()->route('tasks.index')->with('success', 'Tarea actualizada correctamente.');
     }
 
     public function deleteAll(Request $request)
