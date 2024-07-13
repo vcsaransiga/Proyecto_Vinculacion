@@ -18,10 +18,10 @@ class TaskFactory extends Factory
 
         return [
             'id_task' => $this->faker->unique()->regexify('TASK-[0-9]{4}'),
-            'id_pro' => Project::factory(),
+            'id_pro' => Project::inRandomOrder()->first()->id_pro,
             'name' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'hours' => $this->faker->randomFloat(2, 0, 100),
+            'hours' => $this->faker->randomFloat(2, 0, 10),
             'start_date' => $startDate->format('Y-m-d'),
             'end_date' => $endDate->format('Y-m-d'),
             'percentage' => $this->faker->randomFloat(2, 0, 100),

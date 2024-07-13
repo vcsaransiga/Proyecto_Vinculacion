@@ -117,12 +117,16 @@ class ProjectController extends Controller
     }
 
 
+    // public function show($id)
+    // {
+    //     $project = Project::with('responsible')->findOrFail($id);
+    //     return view('modules.projects.show', compact('project'));
+    // }
     public function show($id)
     {
-        $project = Project::with('responsible')->findOrFail($id);
-        return view('projects.show', compact('project'));
+        $project = Project::findOrFail($id);
+        return view('modules.projects.show', compact('project'));
     }
-
     public function edit($id)
     {
         $project = Project::findOrFail($id);

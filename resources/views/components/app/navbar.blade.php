@@ -5,8 +5,8 @@
                 <!-- Los items de breadcrumb se generarán aquí dinámicamente -->
             </ol>
         </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
+            {{-- <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group">
                     <span class="input-group-text text-body bg-white  border-end-0 ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none"
@@ -17,8 +17,8 @@
                     </span>
                     <input type="text" class="form-control ps-0" placeholder="Search">
                 </div>
-            </div>
-            <div class="mb-0 font-weight-bold breadcrumb-text text-white">
+            </div> --}}
+            <div class="mb-0 font-weight-bold breadcrumb-text text-white d-flex align-items-cente">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
@@ -26,7 +26,13 @@
                 this.closest('form').submit();">
                         <button class="btn btn-sm  btn-white  mb-0 me-1" type="submit">Cerrar Sesion</button>
                     </a>
+
                 </form>
+                <a href="{{ route('users.profile') }}" class="nav-link text-body p-0">
+                    <img class="avatar avatar-sm"
+                        src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('storage/profile_photos/default.jpg') }}"
+                        style="cursor:pointer;">
+                </a>
             </div>
             <ul class="navbar-nav  justify-content-end">
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -137,12 +143,13 @@
                         </li>
                     </ul>
                 </li> --}}
-                <li class="nav-item ps-2 d-flex align-items-center">
-                    <a href="{{route('users.profile')}}" class="nav-link text-body p-0">
+                {{-- <li class="nav-item ps-2 d-flex align-items-center">
+                    <a href="{{ route('users.profile') }}" class="nav-link text-body p-0">
                         <img class="avatar avatar-sm"
-                        src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('storage/profile_photos/default.jpg') }}"  style="cursor:pointer;"> 
+                            src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('storage/profile_photos/default.jpg') }}"
+                            style="cursor:pointer;">
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

@@ -18,7 +18,7 @@ class ModuleProjectFactory extends Factory
     {
         return [
             'id_pro' => Project::inRandomOrder()->first()->id_pro,
-            'id_mod' => Module::inRandomOrder()->first()->id_mod,
+            'id_mod' => Module::inRandomOrder()->first()->id_mod->status->true,
         ];
     }
 }

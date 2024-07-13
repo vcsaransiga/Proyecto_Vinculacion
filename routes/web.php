@@ -203,7 +203,8 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
         Route::delete('/info/selected-projects', [ProjectController::class, 'deleteAll'])->name('project.delete');
         Route::get('/projects/pdf', [ProjectController::class, 'generatePDF'])->name('projects.pdf');
         Route::get('/projects/export-excel', [ProjectController::class, 'exportExcel'])->name('projects.download-excel');
-        Route::get('/projects/list', [ProjectController::class, 'list'])->name('projects.list');
+        Route::get('/projects', [ProjectController::class, 'list'])->name('projects.list');
+        Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
 
         // Tareas
         Route::resource('/info/tasks', TaskController::class);

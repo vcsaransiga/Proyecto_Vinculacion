@@ -112,8 +112,8 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link 
-                    {{ Request::is('proyectos') || Request::is('proyectos/*') ? 'active' : '' }}"
-                        href="{{ route('proyectos') }}">
+                    {{ Request::is('projects') || Request::is('projects/*') ? 'active' : '' }}"
+                        href="{{ route('projects.list') }}">
                         <div
                             class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                             <svg width="30px" height="30px" viewBox="0 0 48 48" version="1.1"
@@ -129,7 +129,7 @@
                             </svg>
 
                         </div>
-                        <span class="nav-link-text ms-1">Proyecto</span>
+                        <span class="nav-link-text ms-1">Proyectos</span>
                     </a>
                 </li>
             @endrole
@@ -270,7 +270,7 @@
             clearTimeout(timeout);
             timeout = setTimeout(() => {
                 window.location.reload(true);
-            }, 900000); 
+            }, 900000);
         }
 
         document.addEventListener('mousemove', resetTimeout);

@@ -40,4 +40,14 @@ class Project extends Model implements Auditable
     {
         return $this->belongsToMany(Module::class, 'mod_projects', 'id_pro', 'id_mod');
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'id_pro', 'id_pro');
+    }
+
+    public function kardex()
+    {
+        return $this->hasMany(Kardex::class, 'id_pro', 'id_pro');
+    }
 }

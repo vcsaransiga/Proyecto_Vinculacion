@@ -17,7 +17,7 @@ class ModProjectSeeder extends Seeder
          $projects = Project::all();
          $modules = Module::all();
          $combinations = [];
-         $totalCombinations = 100; // Número total de combinaciones deseadas
+         $totalCombinations = 40; // Número total de combinaciones deseadas
  
          while (count($combinations) < $totalCombinations) {
              $project = $projects->random();
