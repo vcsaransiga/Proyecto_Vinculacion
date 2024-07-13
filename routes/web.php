@@ -217,6 +217,8 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
         Route::delete('/info/selected-items', [ItemController::class, 'deleteAll'])->name('item.delete');
         Route::get('/items/pdf', [ItemController::class, 'generatePDF'])->name('items.pdf');
         Route::get('/items/export-excel', [ItemController::class, 'exportExcel'])->name('items.download-excel');
+        Route::get('/items/{id}/tags', [ItemController::class, 'getTags']);
+
 
         // Kardex
         Route::resource('/info/kardex', KardexController::class);

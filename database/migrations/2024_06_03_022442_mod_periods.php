@@ -22,8 +22,8 @@ return new class extends Migration
             $table->index('id_period');
 
             // Relaciones
-            $table->foreign('id_mod')->references('id_mod')->on('modules')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreign('id_period')->references('id_period')->on('periods')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('id_mod')->references('id_mod')->on('modules')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_period')->references('id_period')->on('periods')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

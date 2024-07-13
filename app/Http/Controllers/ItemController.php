@@ -26,7 +26,7 @@ class ItemController extends Controller
 
     public function index(Request $request)
     {
-        $sortField = $request->input('sort', 'id_item');
+        $sortField = $request->input('sort', 'created_at');
         $sortDirection = $request->input('direction', 'asc');
 
         $items = Item::orderBy($sortField, $sortDirection)->get();
@@ -64,7 +64,7 @@ class ItemController extends Controller
         $lastIdNumber = $lastItem ? intval(substr($lastItem->id_item, 5)) : 0;
         $newIdNumber = str_pad($lastIdNumber + 1, 4, '0', STR_PAD_LEFT);
 
-        Item::create([
+        $item = Item::create([
             'id_item' => 'ITEM-' . $newIdNumber,
             'id_catitem' => $request->id_catitem,
             'id_unit' => $request->id_unit,
@@ -73,6 +73,10 @@ class ItemController extends Controller
             'description' => $request->description,
             'date' => $request->date,
         ]);
+
+        if ($request->has('tags')) {
+            $item->attachTags($request->tags);
+        }
 
         return redirect()->route('items.index')->with('success', 'Ítem creado correctamente.');
     }
@@ -114,6 +118,10 @@ class ItemController extends Controller
             'date' => $request->date,
         ]);
 
+        if ($request->has('tags')) {
+            $item->syncTags($request->tags);
+        }
+
         return redirect()->route('items.index')->with('success', 'Ítem actualizado correctamente.');
     }
 
@@ -138,6 +146,12 @@ class ItemController extends Controller
         $item->delete();
 
         return redirect()->route('items.index')->with('success', 'Ítem eliminado correctamente.');
+    }
+
+    public function getTags($id)
+    {
+        $item = Item::findOrFail($id);
+        return response()->json(['tags' => $item->tags->pluck('name')]);
     }
 
     public function generatePDF()

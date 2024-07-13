@@ -31,7 +31,6 @@
                             </div>
                         @endif
 
-                        <!-- Mensaje de éxito -->
                         <div id="message"
                             class="tw-hidden tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-rounded tw-relative"
                             role="alert">
@@ -39,7 +38,6 @@
                             <span class="tw-block sm:tw-inline" id="message-text"></span>
                         </div>
 
-                        <!-- Mensaje de error -->
                         <div id="error-message"
                             class="tw-hidden tw-bg-red-100 tw-border tw-border-red-400 tw-text-red-700 tw-px-4 tw-py-3 tw-rounded tw-relative"
                             role="alert">
@@ -59,6 +57,19 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="sortDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Ordenar por
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="sortDropdownMenuButton">
+                                            <a class="dropdown-item" href="?sort=created_at&direction=asc">Fecha
+                                                (ascendente)</a>
+                                            <a class="dropdown-item" href="?sort=created_at&direction=desc">Fecha
+                                                (descendente)</a>
                                         </div>
                                     </div>
                                 </div>
@@ -152,6 +163,7 @@
                                                 </a>
                                             </div>
                                         </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Etiquetas</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
@@ -181,6 +193,23 @@
                                             <td class="tw-px-6 tw-py-4">{{ $item->project->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $item->category->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $item->unit->name }}</td>
+                                            <td class="tw-px-6 tw-py-4">
+                                                <button class="toggle-tags tw-text-blue-600 hover:tw-underline"
+                                                    data-item-id="{{ $item->id_item }}">
+                                                    <img src="{{ asset('assets/img/logos/plus.svg') }}"
+                                                        class="tw-w-5 tw-h-5">
+                                                </button>
+                                                <div class="tags-content tw-hidden tw-mt-2">
+                                                    <div class="tw-flex tw-flex-wrap tw-gap-1">
+                                                        @foreach ($item->tags as $tag)
+                                                            <span
+                                                                class="tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700">
+                                                                {{ $tag->name }}
+                                                            </span>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
                                                 <a href="#"
                                                     class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"
@@ -312,6 +341,10 @@
                             <label for="date" class="form-label">Fecha</label>
                             <input type="date" class="form-control" id="date" name="date" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="tags" class="form-label">Etiquetas</label>
+                            <div id="SelectBoxCreate" style="width: 100%;"></div>
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
@@ -381,6 +414,10 @@
                             <label for="edit_date" class="form-label">Fecha</label>
                             <input type="date" class="form-control" id="edit_date" name="date" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="tags" class="form-label">Etiquetas</label>
+                            <div id="SelectBoxEdit" style="width: 100%;"></div>
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
@@ -445,36 +482,55 @@
     </div>
 </x-app-layout>
 
+<!-- jQuery selectit plugin -->
+<link rel="stylesheet" href="../assets/css/jquery.selectit.css" />
+<script src="{{ asset('assets/js/jquery.selectit.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit item form
-        var editItemModal = document.getElementById('editItemModal');
-        editItemModal.addEventListener('show.bs.modal', function(event) {
-            var button = event.relatedTarget;
-            var itemId = button.getAttribute('data-item-id');
-            var itemName = button.getAttribute('data-item-name');
-            var itemDescription = button.getAttribute('data-item-description');
-            var itemDate = button.getAttribute('data-item-date');
-            var itemProject = button.getAttribute('data-item-project');
-            var itemCategory = button.getAttribute('data-item-category');
-            var itemUnit = button.getAttribute('data-item-unit');
+        $(function() {
+            $('#SelectBoxCreate').selectit({
+                fieldname: 'tags[]',
+            });
 
-            var modalForm = editItemModal.querySelector('form');
-            modalForm.action = '/info/items/' + itemId;
+            var editItemModal = document.getElementById('editItemModal');
+            editItemModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                var itemId = button.getAttribute('data-item-id');
+                var itemName = button.getAttribute('data-item-name');
+                var itemDescription = button.getAttribute('data-item-description');
+                var itemDate = button.getAttribute('data-item-date');
+                var itemProject = button.getAttribute('data-item-project');
+                var itemCategory = button.getAttribute('data-item-category');
+                var itemUnit = button.getAttribute('data-item-unit');
 
-            var modalNameInput = editItemModal.querySelector('#edit_name');
-            var modalDescriptionInput = editItemModal.querySelector('#edit_description');
-            var modalDateInput = editItemModal.querySelector('#edit_date');
-            var modalProjectInput = editItemModal.querySelector('#edit_id_pro');
-            var modalCategoryInput = editItemModal.querySelector('#edit_id_catitem');
-            var modalUnitInput = editItemModal.querySelector('#edit_id_unit');
+                var modalForm = editItemModal.querySelector('form');
+                modalForm.action = '/info/items/' + itemId;
 
-            modalNameInput.value = itemName;
-            modalDescriptionInput.value = itemDescription;
-            modalDateInput.value = itemDate;
-            modalProjectInput.value = itemProject;
-            modalCategoryInput.value = itemCategory;
-            modalUnitInput.value = itemUnit;
+                var modalNameInput = editItemModal.querySelector('#edit_name');
+                var modalDescriptionInput = editItemModal.querySelector('#edit_description');
+                var modalDateInput = editItemModal.querySelector('#edit_date');
+                var modalProjectInput = editItemModal.querySelector('#edit_id_pro');
+                var modalCategoryInput = editItemModal.querySelector('#edit_id_catitem');
+                var modalUnitInput = editItemModal.querySelector('#edit_id_unit');
+
+                modalNameInput.value = itemName;
+                modalDescriptionInput.value = itemDescription;
+                modalDateInput.value = itemDate;
+                modalProjectInput.value = itemProject;
+                modalCategoryInput.value = itemCategory;
+                modalUnitInput.value = itemUnit;
+
+                $.ajax({
+                    url: '/items/' + itemId + '/tags',
+                    method: 'GET',
+                    success: function(data) {
+                        $('#SelectBoxEdit').selectit({
+                            fieldname: 'tags[]',
+                            values: data.tags
+                        });
+                    }
+                });
+            });
         });
 
         // Toggle description visibility
@@ -487,6 +543,21 @@
                         '{{ asset('assets/img/logos/minus.svg') }}';
                 } else {
                     descriptionContent.classList.add('tw-hidden');
+                    this.querySelector('img').src = '{{ asset('assets/img/logos/plus.svg') }}';
+                }
+            });
+        });
+
+        // Toggle tags visibility
+        document.querySelectorAll('.toggle-tags').forEach(button => {
+            button.addEventListener('click', function() {
+                const tagsContent = this.nextElementSibling;
+                if (tagsContent.classList.contains('tw-hidden')) {
+                    tagsContent.classList.remove('tw-hidden');
+                    this.querySelector('img').src =
+                        '{{ asset('assets/img/logos/minus.svg') }}';
+                } else {
+                    tagsContent.classList.add('tw-hidden');
                     this.querySelector('img').src = '{{ asset('assets/img/logos/plus.svg') }}';
                 }
             });

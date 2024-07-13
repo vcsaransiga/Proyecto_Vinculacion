@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration
 {
     /**
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->index('id_responsible');
 
             // Relaciones
-            $table->foreign('id_responsible')->references('id_responsible')->on('responsibles')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('id_responsible')->references('id_responsible')->on('responsibles')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
