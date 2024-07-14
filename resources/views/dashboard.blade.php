@@ -326,7 +326,7 @@ use App\Models\Student;
                 </div>
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-12">
                     <div class="card shadow-xs border">
                         <div class="card-header pb-0">
@@ -363,7 +363,7 @@ use App\Models\Student;
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </main>
 
     <script src="{{ asset('js/breadcrumbs.js') }}"></script>
