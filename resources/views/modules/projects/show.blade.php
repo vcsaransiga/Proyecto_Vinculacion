@@ -447,7 +447,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="percentage" class="form-label">Porcentaje</label>
-                            <input type="number" class="form-control" id="percentage" name="percentage" required>
+                            <input type="number" class="form-control" id="percentage" name="percentage"
+                                step="any" required>
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Estado:</label>
