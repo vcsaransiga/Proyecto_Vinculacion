@@ -12,6 +12,7 @@ use App\Models\OperationType;
 use App\Models\CategoriesWarehouse;
 use App\Models\Warehouse;
 use App\Models\MeasurementUnit;
+use App\Exports\ProjectIndividualExport;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
@@ -207,5 +208,12 @@ class ProjectController extends Controller
         $date = date('d-m-Y H:i:s');
         $excelName = "Proyectos {$date}.xlsx";
         return Excel::download(new ProjectExport, $excelName);
+    }
+
+    public function exportIndividualExcel($id)
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Proyecto {$id}_{$date}.xlsx";
+        return Excel::download(new ProjectIndividualExport($id), $excelName);
     }
 }

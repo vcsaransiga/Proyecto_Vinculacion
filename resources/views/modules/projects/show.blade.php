@@ -19,9 +19,10 @@
 
                         <div class="card-header pb-0 d-flex">
                             <h3 class="ml-3 me-auto p-2">Datos Generales</h3>
-                            <button type="button" class="btn btn-dark btn-primary mr-3">
+                            <a href="{{ route('projects.exportIndividualExcel', $project->id_pro) }}" type="button"
+                                class="btn btn-dark btn-primary mr-3">
                                 <i class="fas fa-file-text me-2"></i> Reporte
-                            </button>
+                            </a>
                             <button type="button" class="btn btn-dark btn-primary mr-3" data-bs-toggle="modal"
                                 data-bs-target="#editProjectModal" data-project="{{ json_encode($project) }}">
                                 <i class="fas fa-pencil me-2"></i> Editar proyecto
@@ -67,7 +68,7 @@
                                                     <td>${{ number_format($project->budget, 2) }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th class="font-weight-bold">Porcentaje de compleción:</th>
+                                                    <th class="font-weight-bold">Completado:</th>
                                                     <td>
                                                         <div class="tw-w-full tw-max-w-xs">
                                                             <div

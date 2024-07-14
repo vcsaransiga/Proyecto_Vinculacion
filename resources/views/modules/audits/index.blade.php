@@ -89,7 +89,7 @@
                                         <th scope="col" class="tw-px-6 tw-py-3">Tipo modificado</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">ID registro modificado</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Cambios</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Hora</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Fecha - Hora</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">IP</th>
                                     </tr>
                                 </thead>

@@ -18,7 +18,7 @@
                     <input type="text" class="form-control ps-0" placeholder="Search">
                 </div>
             </div> --}}
-            <div class="mb-0 font-weight-bold breadcrumb-text text-white d-flex align-items-cente">
+            <div class="mb-0 font-weight-bold breadcrumb-text text-white d-flex">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 

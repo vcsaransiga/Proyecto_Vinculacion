@@ -205,6 +205,8 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
         Route::get('/projects/export-excel', [ProjectController::class, 'exportExcel'])->name('projects.download-excel');
         Route::get('/projects', [ProjectController::class, 'list'])->name('projects.list');
         Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
+        Route::get('projects/export-individual/{id}', [ProjectController::class, 'exportIndividualExcel'])->name('projects.exportIndividualExcel');
+
 
         // Tareas
         Route::resource('/info/tasks', TaskController::class);
