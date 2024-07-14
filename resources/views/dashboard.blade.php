@@ -243,7 +243,7 @@ use App\Models\Student;
                                     </button>
                                 </div> --}}
                             </div>
-                            <div class="pb-3 d-sm-flex align-items-center">
+                            {{-- <div class="pb-3 d-sm-flex align-items-center">
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                     <input type="radio" class="btn-check" name="btnradiotable" id="btnradiotable1"
                                         autocomplete="off" checked>
@@ -267,7 +267,7 @@ use App\Models\Student;
                                     </span>
                                     <input type="text" class="form-control" placeholder="Search">
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="card-body px-0 py-0">
                             <div class="table-responsive p-0">
