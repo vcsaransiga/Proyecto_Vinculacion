@@ -293,19 +293,19 @@ use App\Models\Student;
                                                 <td>
                                                     <div class="d-flex px-2">
                                                         <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">{{ $task['tarea'] }}</h6>
+                                                            <h6 class="mb-0 text-sm">{{ $task->name }}</h6>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <p class="text-sm font-weight-normal mb-0">{{ $task['avance'] }}</p>
+                                                    <p class="text-sm font-weight-normal mb-0">{{ $task->percentage }}</p>
                                                 </td>
                                                 <td>
-                                                    <span class="text-sm font-weight-normal">{{ $task['fecha'] }}</span>
+                                                    <span class="text-sm font-weight-normal">{{ $task->end_date }}</span>
                                                 </td>
                                                 <td class="align-middle">
                                                     <div class="ms-2">
-                                                        <p class="text-dark text-sm mb-0">{{ $task['proyecto'] }}</p>
+                                                        <p class="text-dark text-sm mb-0">{{ $task->id_pro }}</p>
                                                     </div>
                                                 </td>
                                                 <td class="align-middle">
