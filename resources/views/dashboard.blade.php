@@ -305,7 +305,7 @@ use App\Models\Student;
                                                 </td>
                                                 <td class="align-middle">
                                                     <div class="ms-2">
-                                                        <p class="text-dark text-sm mb-0">{{ $task->id_pro }}</p>
+                                                        <p class="text-dark text-sm mb-0">{{ $task->project->name }}</p>
                                                     </div>
                                                 </td>
                                                 <td class="align-middle">
