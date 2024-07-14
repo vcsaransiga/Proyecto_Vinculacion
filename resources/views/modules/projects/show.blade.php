@@ -5,7 +5,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-
                         @if (session('success'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('success') }}
@@ -68,7 +67,7 @@
                                                     <td>${{ number_format($project->budget, 2) }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th class="font-weight-bold">Completado:</th>
+                                                    <th class="font-weight-bold">Porcentaje - Estado:</th>
                                                     <td>
                                                         <div class="tw-w-full tw-max-w-xs">
                                                             <div
@@ -79,6 +78,9 @@
                                                                 class="tw-w-full tw-bg-gray-200 tw-rounded-full tw-h-2.5 dark:tw-bg-gray-700">
                                                                 <div class="tw-bg-blue-600 tw-h-2.5 tw-rounded-full"
                                                                     style="width: {{ $project->progress }}%"></div>
+                                                            </div>
+                                                            <div>
+                                                                {{ $project->status }}
                                                             </div>
                                                         </div>
                                                     </td>
@@ -105,25 +107,36 @@
                                 <li class="nav-item"><a class="nav-link" id="kardex" href="#">Kardex</a></li>
                                 <li class="nav-item"><a class="nav-link" id="inventory" href="#">Inventario</a>
                                 <li class="nav-item"><a class="nav-link" id="descripcion" href="#">Descripción</a>
-
                                 </li>
                                 <li class="nav-item"><a class="nav-link" id="recursos" href="#">Recursos</a></li>
                             </ul>
 
                             <div class="tab-content">
                                 <div id="tareas-content" class="tab-pane contents">
-                                    <div class="d-flex justify-content-end">
-
-                                        <button type="button" class="btn btn-dark btn-primary mr-3"
-                                            data-bs-toggle="modal" data-bs-target="#createTaskModal">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <div class="dropdown">
+                                            <button class="btn btn-dark dropdown-toggle" type="button"
+                                                id="taskFilterButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Filtrar por estado
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="taskFilterButton">
+                                                <a class="dropdown-item" href="#"
+                                                    onclick="filterTasks('all')">Todas</a>
+                                                <a class="dropdown-item" href="#"
+                                                    onclick="filterTasks('Completado')">Completadas</a>
+                                                <a class="dropdown-item" href="#"
+                                                    onclick="filterTasks('Pendiente')">Pendientes</a>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-success mr-3" data-bs-toggle="modal"
+                                            data-bs-target="#createTaskModal">
                                             <i class="fas fa-plus me-2"></i> Agregar tarea
                                         </button>
+
                                     </div>
                                     <div class="container">
-
-                                        <div class="row">
-
-
+                                        <div class="row" id="task-list">
                                             @if ($project->tasks->isEmpty())
                                                 <div class="col-12">
                                                     <div class="alert alert-info" role="alert">
@@ -132,7 +145,8 @@
                                                 </div>
                                             @else
                                                 @foreach ($project->tasks as $task)
-                                                    <div class="col-md-3 mb-4">
+                                                    <div class="col-md-3 mb-4 task-item"
+                                                        data-status="{{ $task->status }}">
                                                         <div class="card">
                                                             <div class="card-body">
                                                                 <div
@@ -153,15 +167,14 @@
                                                                         data-task="{{ json_encode($task) }}">
                                                                         <i class="fas fa-pencil me-2"></i>
                                                                     </button>
-
                                                                 </div>
                                                                 <h5 class="card-title">{{ $task->name }}</h5>
                                                                 <p class="card-text"><strong>Horas:</strong>
                                                                     {{ $task->hours }}</p>
                                                                 <p class="card-text"><strong>Fecha:</strong>
-                                                                    {{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}
+                                                                    {{ \Carbon\Carbon::parse($task->start_date)->format('d/m/Y') }}
                                                                     -
-                                                                    {{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
+                                                                    {{ \Carbon\Carbon::parse($task->end_date)->format('d/m/Y') }}
                                                                 </p>
                                                                 <p class="card-text"><strong>Porcentaje
                                                                         Proyecto:</strong> {{ $task->percentage }}%</p>
@@ -179,7 +192,7 @@
                                 <div id="kardex-content" class="tab-pane contents">
                                     <div class="d-flex justify-content-end ">
 
-                                        <button type="button" class="btn btn-dark btn-primary mr-3 mb-2"
+                                        <button type="button" class="btn btn-success mr-3 mb-2"
                                             data-bs-toggle="modal" data-bs-target="#createKardexModal">
                                             <i class="fas fa-plus me-2"></i> Agregar registro
                                         </button>
@@ -224,8 +237,7 @@
                                 </div>
                                 <div id="inventory-content" class="tab-pane mt-0 contents">
                                     <div class="d-flex justify-content-end mt-0">
-
-                                        <button type="button" class="btn btn-dark btn-primary mr-3 mb-2"
+                                        <button type="button" class="btn btn-success mr-3 mb-2"
                                             data-bs-toggle="modal" data-bs-target="#createItemModal">
                                             <i class="fas fa-plus me-2"></i> Agregar item
                                         </button>
@@ -279,7 +291,6 @@
                                 <div id="descripcion-content" class="tab-pane contents">
                                     <p class="text-center">{{ $project->description }}</p>
                                 </div>
-
 
                                 <div id="recursos-content" class="tab-pane contents">
                                     <div class="table-responsive">
@@ -652,7 +663,6 @@
             </div>
         </div>
     </div>
-
 </x-app-layout>
 
 <style>
@@ -728,12 +738,22 @@
 
             var moduleCheckboxes = modalForm.querySelectorAll('input[name="modules[]"]');
             moduleCheckboxes.forEach(function(checkbox) {
-                checkbox.checked = project.modules.some(function(mod) {
-                    return mod.id_mod === checkbox.value;
+                checkbox.checked = false; // Deselect all checkboxes
+                project.modules.forEach(function(mod) {
+                    if (mod.id_mod == checkbox.value) {
+                        checkbox.checked = true;
+                    }
                 });
             });
-        });
 
+            var statusSelect = modalForm.querySelector('#edit_status');
+            for (var i = 0; i < statusSelect.options.length; i++) {
+                console.log(statusSelect.options[i].value);
+                if (statusSelect.options[i].value == project.status) {
+                    statusSelect.options[i].selected = true;
+                }
+            }
+        });
 
         var editTaskModal = document.getElementById('editTaskModal');
         editTaskModal.addEventListener('show.bs.modal', function(event) {
@@ -790,5 +810,16 @@
                 showContent(targetId);
             }
         });
+
+        window.filterTasks = function(status) {
+            const tasks = document.querySelectorAll('.task-item');
+            tasks.forEach(task => {
+                if (status === 'all' || task.getAttribute('data-status') === status) {
+                    task.style.display = 'block';
+                } else {
+                    task.style.display = 'none';
+                }
+            });
+        }
     });
 </script>
