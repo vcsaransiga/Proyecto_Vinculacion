@@ -41,7 +41,8 @@ class ProjectController extends Controller
     {
         $projects = Project::with('responsible')->get();
         $responsibles = Responsible::all();
-        return view('modules.projects.list', compact('projects', 'responsibles'));
+        $modules = Module::where('status', true)->get();
+        return view('modules.projects.list', compact('projects', 'responsibles', 'modules'));
     }
 
     public function store(Request $request)
@@ -86,7 +87,7 @@ class ProjectController extends Controller
         // Sincronizar módulos seleccionados
         $project->modules()->sync($request->modules);
 
-        return redirect()->route('projects.index')->with('success', 'Proyecto creado correctamente.');
+        return redirect()->back()->with('success', 'Proyecto creado correctamente.');
     }
 
     public function update(Request $request, $id)
@@ -122,15 +123,7 @@ class ProjectController extends Controller
         // Sincronizar módulos seleccionados
         $project->modules()->sync($request->modules);
 
-        // Verificar la URL anterior para determinar la redirección
-        $previousUrl = URL::previous();
-        $showUrl = route('projects.show', $id);
-
-        if ($previousUrl === $showUrl) {
-            return redirect()->route('projects.show', $id)->with('success', 'Proyecto actualizado correctamente.');
-        } else {
-            return redirect()->route('projects.index')->with('success', 'Proyecto actualizado correctamente.');
-        }
+        return redirect()->back()->with('success', 'Proyecto actualizado correctamente');
     }
 
 

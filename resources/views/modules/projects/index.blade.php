@@ -12,7 +12,7 @@
                                     <p class="mb-0 text-sm">Aquí puedes gestionar los proyectos.</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <button type="button" class="btn btn-dark btn-primary" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                                         data-bs-target="#createProjectModal">
                                         <i class="fas fa-plus me-2"></i> Agregar proyecto
                                     </button>
