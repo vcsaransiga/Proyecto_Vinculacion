@@ -6,6 +6,12 @@ use App\Models\Project;
 use App\Models\Module;
 use App\Models\Item;
 use App\Models\Responsible;
+use App\Models\CategoryItem;
+use App\Models\Kardex;
+use App\Models\OperationType;
+use App\Models\CategoriesWarehouse;
+use App\Models\Warehouse;
+use App\Models\MeasurementUnit;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
@@ -138,7 +144,13 @@ class ProjectController extends Controller
         $responsibles = Responsible::where('status', true)->get();
         $modules = Module::where('status', true)->get(); // Solo módulos activos
         $items = Item::all();
-        return view('modules.projects.show', compact('project', 'responsibles', 'modules', 'items'));
+        $categoriesItem = CategoryItem::all();
+        $units = MeasurementUnit::all();
+        $operationTypes = OperationType::all();
+        $warehouses = Warehouse::all();
+
+
+        return view('modules.projects.show', compact('project', 'responsibles', 'modules', 'items', 'categoriesItem', 'units', 'operationTypes', 'warehouses'));
     }
     public function edit($id)
     {

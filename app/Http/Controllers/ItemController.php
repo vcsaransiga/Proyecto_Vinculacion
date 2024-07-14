@@ -78,7 +78,7 @@ class ItemController extends Controller
             $item->attachTags($request->tags);
         }
 
-        return redirect()->route('items.index')->with('success', 'Ítem creado correctamente.');
+        return redirect()->back()->with('success', 'Ítem creado correctamente.');
     }
 
     public function show($id)
@@ -122,7 +122,7 @@ class ItemController extends Controller
             $item->syncTags($request->tags);
         }
 
-        return redirect()->route('items.index')->with('success', 'Ítem actualizado correctamente.');
+        return redirect()->back()->with('success', 'Ítem actualizado correctamente.');
     }
 
     public function deleteAll(Request $request)

@@ -46,6 +46,11 @@ class Project extends Model implements Auditable
         return $this->hasMany(Task::class, 'id_pro', 'id_pro');
     }
 
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'id_pro', 'id_pro');
+    }
+
     public function kardex()
     {
         return $this->hasMany(Kardex::class, 'id_pro', 'id_pro');

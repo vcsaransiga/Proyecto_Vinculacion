@@ -17,8 +17,11 @@
                             </div>
                         @endif
 
-                        <div class="card-header pb-0 d-flex justify-content-between">
-                            <h3 class="ml-3">Datos Generales</h3>
+                        <div class="card-header pb-0 d-flex">
+                            <h3 class="ml-3 me-auto p-2">Datos Generales</h3>
+                            <button type="button" class="btn btn-dark btn-primary mr-3">
+                                <i class="fas fa-file-text me-2"></i> Reporte
+                            </button>
                             <button type="button" class="btn btn-dark btn-primary mr-3" data-bs-toggle="modal"
                                 data-bs-target="#editProjectModal" data-project="{{ json_encode($project) }}">
                                 <i class="fas fa-pencil me-2"></i> Editar proyecto
@@ -41,7 +44,10 @@
                                                 </tr>
                                                 <tr>
                                                     <th class="font-weight-bold">Periodo:</th>
-                                                    <td>{{ $project->start_date }} - {{ $project->end_date }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}
+                                                        -
+                                                        {{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th class="font-weight-bold align-top">Modulos:</th>
@@ -96,15 +102,16 @@
                             <ul class="nav nav-tabs" id="menu">
                                 <li class="nav-item"><a class="nav-link" id="tareas" href="#">Tareas</a></li>
                                 <li class="nav-item"><a class="nav-link" id="kardex" href="#">Kardex</a></li>
-                                <li class="nav-item"><a class="nav-link" id="descripcion" href="#">Descripción</a>
                                 <li class="nav-item"><a class="nav-link" id="inventory" href="#">Inventario</a>
+                                <li class="nav-item"><a class="nav-link" id="descripcion" href="#">Descripción</a>
+
                                 </li>
                                 <li class="nav-item"><a class="nav-link" id="recursos" href="#">Recursos</a></li>
                             </ul>
 
-                            <div class="tab-content mt-3">
+                            <div class="tab-content">
                                 <div id="tareas-content" class="tab-pane contents">
-                                    <div class="d-flex justify-content-end ">
+                                    <div class="d-flex justify-content-end">
 
                                         <button type="button" class="btn btn-dark btn-primary mr-3"
                                             data-bs-toggle="modal" data-bs-target="#createTaskModal">
@@ -151,7 +158,9 @@
                                                                 <p class="card-text"><strong>Horas:</strong>
                                                                     {{ $task->hours }}</p>
                                                                 <p class="card-text"><strong>Fecha:</strong>
-                                                                    {{ $task->start_date }} - {{ $task->end_date }}
+                                                                    {{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}
+                                                                    -
+                                                                    {{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
                                                                 </p>
                                                                 <p class="card-text"><strong>Porcentaje
                                                                         Proyecto:</strong> {{ $task->percentage }}%</p>
@@ -167,6 +176,13 @@
                                 </div>
 
                                 <div id="kardex-content" class="tab-pane contents">
+                                    <div class="d-flex justify-content-end ">
+
+                                        <button type="button" class="btn btn-dark btn-primary mr-3 mb-2"
+                                            data-bs-toggle="modal" data-bs-target="#createKardexModal">
+                                            <i class="fas fa-plus me-2"></i> Agregar registro
+                                        </button>
+                                    </div>
                                     @if ($project->kardex->isEmpty())
                                         <div class="col-12">
                                             <div class="alert alert-info" role="alert">
@@ -184,7 +200,7 @@
                                                         <th>Fecha</th>
                                                         <th>Cantidad</th>
                                                         <th>Precio</th>
-                                                        <th>Saldo</th>
+                                                        <th>Balance</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -193,10 +209,64 @@
                                                             <td>{{ $kardex->id_kardex }}</td>
                                                             <td>{{ $kardex->operationType->name }}</td>
                                                             <td>{{ $kardex->warehouse->name }}</td>
-                                                            <td>{{ $kardex->date }}</td>
+                                                            <td>{{ \Carbon\Carbon::parse($kardex->date)->format('d-m-Y') }}
+                                                            </td>
                                                             <td>{{ $kardex->quantity }}</td>
                                                             <td>${{ $kardex->price }}</td>
                                                             <td>${{ $kardex->balance }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div id="inventory-content" class="tab-pane mt-0 contents">
+                                    <div class="d-flex justify-content-end mt-0">
+
+                                        <button type="button" class="btn btn-dark btn-primary mr-3 mb-2"
+                                            data-bs-toggle="modal" data-bs-target="#createItemModal">
+                                            <i class="fas fa-plus me-2"></i> Agregar item
+                                        </button>
+                                    </div>
+                                    @if ($project->items->isEmpty())
+                                        <div class="col-12">
+                                            <div class="alert alert-info" role="alert">
+                                                No hay items asociados a este proyectos
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Categoría</th>
+                                                        <th>Unidad</th>
+                                                        <th>Nombre</th>
+                                                        <th>Fecha</th>
+                                                        <th>Etiquetas</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($project->items as $item)
+                                                        <tr>
+                                                            <td>{{ $item->id_item }}</td>
+                                                            <td>{{ $item->category->name }}</td>
+                                                            <td>{{ $item->unit->name }}</td>
+                                                            <td>{{ $item->name }}</td>
+                                                            <td>{{ \Carbon\Carbon::parse($item->date)->format('d-m-Y') }}
+                                                            </td>
+                                                            <td>
+                                                                <div class="tw-flex tw-flex-wrap tw-gap-1">
+                                                                    @foreach ($item->tags as $tag)
+                                                                        <span
+                                                                            class="tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700">
+                                                                            {{ $tag->name }}
+                                                                        </span>
+                                                                    @endforeach
+                                                                </div>
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -208,6 +278,7 @@
                                 <div id="descripcion-content" class="tab-pane contents">
                                     <p class="text-center">{{ $project->description }}</p>
                                 </div>
+
 
                                 <div id="recursos-content" class="tab-pane contents">
                                     <div class="table-responsive">
@@ -447,6 +518,139 @@
         </div>
     </div>
 
+    <!-- Create Item Modal -->
+    <div class="modal fade" id="createItemModal" tabindex="-1" aria-labelledby="createItemModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createItemModalLabel">Agregar ítem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createItemForm" method="POST" action="{{ route('items.store') }}">
+                        @csrf
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="id_catitem" class="form-label">Categoría</label>
+                                <select class="form-control" id="id_catitem" name="id_catitem" required>
+                                    @foreach ($categoriesItem as $category)
+                                        <option value="{{ $category->id_catitem }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#createCategoryItemModal">Agregar Categoría</button>
+                            </div>
+                        </div>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="id_unit" class="form-label">Unidad de Medida</label>
+                                <select class="form-control" id="id_unit" name="id_unit" required>
+                                    @foreach ($units as $unit)
+                                        <option value="{{ $unit->id_unit }}">{{ $unit->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#createUnitModal">Agregar Unidad</button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="id_pro" value="{{ $project->id_pro }}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="date" name="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tags" class="form-label">Etiquetas</label>
+                            <div id="SelectBoxCreate" style="width: 100%;"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Create Kardex Modal -->
+    <div class="modal fade" id="createKardexModal" tabindex="-1" aria-labelledby="createKardexModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createKardexModalLabel">Agregar entrada de Kardex</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createKardexForm" method="POST" action="{{ route('kardex.store') }}">
+                        @csrf
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="id_ope" class="form-label">Tipo de Operación</label>
+                                <select class="form-control" id="id_ope" name="id_ope" required>
+                                    @foreach ($operationTypes as $operationType)
+                                        <option value="{{ $operationType->id_ope }}">{{ $operationType->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <a href="{{ route('operations.index') }}" class="btn btn-info">Agregar Tipo de
+                                    Operación</a>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_ware" class="form-label">Almacén</label>
+                            <select class="form-control" id="id_ware" name="id_ware" required>
+                                @foreach ($warehouses as $warehouse)
+                                    <option value="{{ $warehouse->id_ware }}">{{ $warehouse->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <input type="hidden" name="id_pro" value="{{ $project->id_pro }}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="date" name="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Cantidad</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="price" name="price" step="any"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="balance" class="form-label">Balance</label>
+                            <input type="number" class="form-control" id="balance" name="balance" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </x-app-layout>
 
 <style>
@@ -483,7 +687,15 @@
         width: auto;
     }
 </style>
+<!-- jQuery selectit plugin -->
+<link rel="stylesheet" href="../assets/css/jquery.selectit.css" />
+<script src="{{ asset('assets/js/jquery.selectit.js') }}"></script>
 
+<script>
+    $('#SelectBoxCreate').selectit({
+        fieldname: 'tags[]',
+    });
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var editProjectModal = document.getElementById('editProjectModal');

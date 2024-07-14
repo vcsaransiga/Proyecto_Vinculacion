@@ -53,7 +53,7 @@ class KardexController extends Controller
             'balance' => $request->balance,
         ]);
 
-        return redirect()->route('kardex.index')->with('success', 'Kardex entry created successfully.');
+        return redirect()->back()->with('success', 'Registro de kardex creado correctamente.');
     }
 
     public function show($id)
@@ -89,7 +89,7 @@ class KardexController extends Controller
 
         $kardex->update($request->all());
 
-        return redirect()->route('kardex.index')->with('success', 'Kardex entry updated successfully.');
+        return redirect()->back()->with('success', 'Registro de kardex actualizado correctamente.');
     }
 
     public function deleteAll(Request $request)
