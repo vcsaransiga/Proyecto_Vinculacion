@@ -1,7 +1,7 @@
 <aside class="overflow-hidden sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start "
     id="sidenav-main">
     <div class="sidenav-header" style="margin-bottom:60px;">
-        <img src="../assets/img/logoDash.png" alt="logo" style="height:150px;">
+        <a href="dashboard"><img src="../assets/img/logoDash.png" alt="logo" style="height:150px;"></a>
     </div>
     <div class="collapse navbar-collapse px-4 overflow-hidden  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
