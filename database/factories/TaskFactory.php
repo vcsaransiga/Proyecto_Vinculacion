@@ -25,7 +25,7 @@ class TaskFactory extends Factory
             'start_date' => $startDate->format('Y-m-d'),
             'end_date' => $endDate->format('Y-m-d'),
             'percentage' => $this->faker->randomFloat(2, 0, 100),
-            'status' => $this->faker->randomElement(['pending', 'completed']),
+            'status' => $this->faker->randomElement(['pending']),
         ];
     }
 }
