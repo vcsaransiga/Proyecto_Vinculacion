@@ -12,7 +12,7 @@
                                     <p class="mb-0 text-sm">Aquí puedes gestionar estudiantes.</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <button type="button" class="btn btn-dark btn-primary" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                         data-bs-target="#createStudentModal">
                                         <i class="fas fa-user-plus me-2"></i> Agregar estudiante
                                     </button>
@@ -54,7 +54,7 @@
 
                                 <div class="d-flex flex-row justify-content-start">
                                     <div class="dropdown mr-3">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        <button class="btn btn-info dropdown-toggle" type="button"
                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
                                             Acción
@@ -68,7 +68,7 @@
 
                                     </div>
                                     <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        <button class="btn btn-info dropdown-toggle" type="button"
                                             id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
                                             Generar

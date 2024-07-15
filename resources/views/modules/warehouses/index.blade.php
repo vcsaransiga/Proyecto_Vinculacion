@@ -12,7 +12,7 @@
                                     <p class="mb-0 text-sm">Aquí puedes gestionar las bodegas.</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <button type="button" class="btn btn-dark btn-primary" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                         data-bs-target="#createWarehouseModal">
                                         <i class="fas fa-plus me-2"></i> Agregar bodega
                                     </button>

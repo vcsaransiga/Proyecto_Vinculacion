@@ -3712,8 +3712,8 @@ fieldset:disabled .btn {
 
 .btn-info {
   --bs-btn-color: #000;
-  --bs-btn-bg: #55a6f8;
-  --bs-btn-border-color: #55a6f8;
+  --bs-btn-bg: #4a59a4;
+  --bs-btn-border-color: #4a59a4;
   --bs-btn-hover-color: #000;
   --bs-btn-hover-bg: #6fb3f9;
   --bs-btn-hover-border-color: #66aff9;
@@ -3723,8 +3723,8 @@ fieldset:disabled .btn {
   --bs-btn-active-border-color: #66aff9;
   --bs-btn-active-shadow: none;
   --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: #55a6f8;
-  --bs-btn-disabled-border-color: #55a6f8;
+  --bs-btn-disabled-bg: #4a59a4;
+  --bs-btn-disabled-border-color: #4a59a4;
 }
 
 .btn-warning {
