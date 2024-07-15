@@ -47,7 +47,7 @@
                                                         href="{{ route('projects.show', $project->id_pro) }}">
 
                                                         @if (is_null($project->image))
-                                                            <img src="../assets/img/projects/default.png" />
+                                                            <img src="../assets/img/projects/default.PNG" />
                                                         @else
                                                             {{-- <img src="{{ asset('storage/' . $project->image }} )"/> --}}
                                                             <img src="{{ asset('storage/' . $project->image) }}">
