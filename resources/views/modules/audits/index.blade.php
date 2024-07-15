@@ -1,3 +1,35 @@
+<style>
+    .json-view {
+        font-family: monospace;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-size: 14px;
+        line-height: 1.5;
+        color: black;
+    }
+
+    .json-key {
+        color: black;
+        font-weight: bold;
+    }
+
+    .json-string {
+        color: black;
+    }
+
+    .json-number {
+        color: #ae81ff;
+    }
+
+    .json-boolean {
+        color: #66d9ef;
+    }
+
+    .json-null {
+        color: #fd971f;
+    }
+</style>
+
 <x-app-layout>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <x-app.navbar />
@@ -107,8 +139,8 @@
                                                 <button type="button"
                                                     class="tw-text-blue-600 hover:tw-underline tw-font-medium"
                                                     data-bs-toggle="modal" data-bs-target="#changesModal"
-                                                    data-old-values="{{ json_encode($audit->old_values, JSON_PRETTY_PRINT) }}"
-                                                    data-new-values="{{ json_encode($audit->new_values, JSON_PRETTY_PRINT) }}">
+                                                    data-old-values="{{ json_encode($audit->old_values) }}"
+                                                    data-new-values="{{ json_encode($audit->new_values) }}">
                                                     Ver
                                                 </button>
                                             </td>
@@ -157,20 +189,17 @@
                         style="background-color: red"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="d-flex flex-row justify-content-center">
-                        <div class="mr-4">
+                    <div class="d-flex flex-row justify-content-between">
+                        <div class="w-50 pr-2">
                             <h6>Antes</h6>
-                            <pre id="oldValues" class="rounded bg-danger"></pre>
+                            <div id="oldValues" class="json-view rounded bg-danger p-2"></div>
                         </div>
-                        <div>
+                        <div class="w-50 pl-2">
                             <h6>Después</h6>
-                            <pre id="newValues" class="rounded bg-success"></pre>
+                            <div id="newValues" class="json-view rounded bg-success p-2"></div>
                         </div>
                     </div>
                 </div>
-                {{-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div> --}}
             </div>
         </div>
     </div>
@@ -194,6 +223,56 @@
             var modal = $(this);
             modal.find('#oldValues').text(JSON.stringify(oldValues, null, 2));
             modal.find('#newValues').text(JSON.stringify(newValues, null, 2));
+        });
+    });
+</script>
+
+
+<script>
+    function formatJSON(json) {
+        if (typeof json !== 'string') {
+            json = JSON.stringify(json, null, 2);
+        }
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(
+            /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+            function(match) {
+                var cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+    }
+
+    function wrapLongStrings(json, maxLength = 50) {
+        return json.replace(/"([^"]+)":/g, function(match, p1) {
+            if (p1.length > maxLength) {
+                return '"' + p1.replace(/(.{1,50})/g, '$1\n') + '":';
+            }
+            return match;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('changesModal');
+        modal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var oldValues = JSON.parse(button.getAttribute('data-old-values'));
+            var newValues = JSON.parse(button.getAttribute('data-new-values'));
+
+            document.getElementById('oldValues').innerHTML = formatJSON(wrapLongStrings(JSON.stringify(
+                oldValues, null, 2)));
+            document.getElementById('newValues').innerHTML = formatJSON(wrapLongStrings(JSON.stringify(
+                newValues, null, 2)));
         });
     });
 </script>

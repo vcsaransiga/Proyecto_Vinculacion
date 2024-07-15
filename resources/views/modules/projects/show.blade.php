@@ -258,6 +258,7 @@
                                                         <th>Unidad</th>
                                                         <th>Nombre</th>
                                                         <th>Fecha</th>
+                                                        <th>Stock</th>
                                                         <th>Etiquetas</th>
                                                     </tr>
                                                 </thead>
@@ -269,6 +270,7 @@
                                                             <td>{{ $item->unit->name }}</td>
                                                             <td>{{ $item->name }}</td>
                                                             <td>{{ \Carbon\Carbon::parse($item->date)->format('d-m-Y') }}
+                                                            <td>{{ $item->stock }}</td>
                                                             </td>
                                                             <td>
                                                                 <div class="tw-flex tw-flex-wrap tw-gap-1">
