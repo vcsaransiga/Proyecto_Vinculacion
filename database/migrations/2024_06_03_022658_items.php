@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->date('date');
+            $table->bigInteger('stock');
             $table->timestamps();
 
             // Índices adicionales

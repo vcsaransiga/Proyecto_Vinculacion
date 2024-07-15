@@ -58,6 +58,7 @@ class ItemController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
+            'stock' => 'required|integer|min:0',
         ]);
 
         $lastItem = Item::orderBy('created_at', 'desc')->first();
@@ -72,6 +73,7 @@ class ItemController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'date' => $request->date,
+            'stock' => $request->stock,
         ]);
 
         if ($request->has('tags')) {
@@ -107,6 +109,7 @@ class ItemController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
+            'stock' => 'required|integer|min:0',
         ]);
 
         $item->update([
@@ -116,6 +119,7 @@ class ItemController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'date' => $request->date,
+            'stock' => $request->stock,
         ]);
 
         if ($request->has('tags')) {

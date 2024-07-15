@@ -66,10 +66,9 @@
                                             Ordenar por
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="sortDropdownMenuButton">
-                                            <a class="dropdown-item" href="?sort=created_at&direction=asc">Fecha
-                                                (ascendente)</a>
-                                            <a class="dropdown-item" href="?sort=created_at&direction=desc">Fecha
-                                                (descendente)</a>
+                                            <a class="dropdown-item" href="?sort=created_at&direction=desc">Nuevos</a>
+                                            <a class="dropdown-item" href="?sort=created_at&direction=asc">Antiguos</a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -163,6 +162,16 @@
                                                 </a>
                                             </div>
                                         </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
+                                                Stock
+                                                <a
+                                                    href="?sort=stock&direction={{ $sortField === 'stock' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-3 tw-h-3 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}">
+                                                </a>
+                                            </div>
+                                        </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Etiquetas</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
@@ -193,6 +202,7 @@
                                             <td class="tw-px-6 tw-py-4">{{ $item->project->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $item->category->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $item->unit->name }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $item->stock }}</td>
                                             <td class="tw-px-6 tw-py-4">
                                                 <button class="toggle-tags tw-text-blue-600 hover:tw-underline"
                                                     data-item-id="{{ $item->id_item }}">
@@ -220,7 +230,8 @@
                                                     data-item-date="{{ $item->date }}"
                                                     data-item-project="{{ $item->id_pro }}"
                                                     data-item-category="{{ $item->id_catitem }}"
-                                                    data-item-unit="{{ $item->id_unit }}">
+                                                    data-item-unit="{{ $item->id_unit }}"
+                                                    data-item-stock="{{ $item->stock }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="currentColor"
@@ -342,6 +353,10 @@
                             <input type="date" class="form-control" id="date" name="date" required>
                         </div>
                         <div class="mb-3">
+                            <label for="stock" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="stock" name="stock" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="tags" class="form-label">Etiquetas</label>
                             <div id="SelectBoxCreate" style="width: 100%;"></div>
                         </div>
@@ -415,6 +430,10 @@
                             <input type="date" class="form-control" id="edit_date" name="date" required>
                         </div>
                         <div class="mb-3">
+                            <label for="edit_stock" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="edit_stock" name="stock" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="tags" class="form-label">Etiquetas</label>
                             <div id="SelectBoxEdit" style="width: 100%;"></div>
                         </div>
@@ -486,83 +505,87 @@
 <link rel="stylesheet" href="../assets/css/jquery.selectit.css" />
 <script src="{{ asset('assets/js/jquery.selectit.js') }}"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        $(function() {
-            $('#SelectBoxCreate').selectit({
-                fieldname: 'tags[]',
-            });
-
-            var editItemModal = document.getElementById('editItemModal');
-            editItemModal.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget;
-                var itemId = button.getAttribute('data-item-id');
-                var itemName = button.getAttribute('data-item-name');
-                var itemDescription = button.getAttribute('data-item-description');
-                var itemDate = button.getAttribute('data-item-date');
-                var itemProject = button.getAttribute('data-item-project');
-                var itemCategory = button.getAttribute('data-item-category');
-                var itemUnit = button.getAttribute('data-item-unit');
-
-                var modalForm = editItemModal.querySelector('form');
-                modalForm.action = '/info/items/' + itemId;
-
-                var modalNameInput = editItemModal.querySelector('#edit_name');
-                var modalDescriptionInput = editItemModal.querySelector('#edit_description');
-                var modalDateInput = editItemModal.querySelector('#edit_date');
-                var modalProjectInput = editItemModal.querySelector('#edit_id_pro');
-                var modalCategoryInput = editItemModal.querySelector('#edit_id_catitem');
-                var modalUnitInput = editItemModal.querySelector('#edit_id_unit');
-
-                modalNameInput.value = itemName;
-                modalDescriptionInput.value = itemDescription;
-                modalDateInput.value = itemDate;
-                modalProjectInput.value = itemProject;
-                modalCategoryInput.value = itemCategory;
-                modalUnitInput.value = itemUnit;
-
-                $.ajax({
-                    url: '/items/' + itemId + '/tags',
-                    method: 'GET',
-                    success: function(data) {
-                        $('#SelectBoxEdit').selectit({
-                            fieldname: 'tags[]',
-                            values: data.tags
-                        });
-                    }
-                });
-            });
+    $(function() {
+        $('#SelectBoxCreate').selectit({
+            fieldname: 'tags[]',
         });
 
-        // Toggle description visibility
-        document.querySelectorAll('.toggle-description').forEach(button => {
-            button.addEventListener('click', function() {
-                const descriptionContent = this.nextElementSibling;
-                if (descriptionContent.classList.contains('tw-hidden')) {
-                    descriptionContent.classList.remove('tw-hidden');
-                    this.querySelector('img').src =
-                        '{{ asset('assets/img/logos/minus.svg') }}';
-                } else {
-                    descriptionContent.classList.add('tw-hidden');
-                    this.querySelector('img').src = '{{ asset('assets/img/logos/plus.svg') }}';
-                }
-            });
-        });
+        var editItemModal = document.getElementById('editItemModal');
+        editItemModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var itemId = button.getAttribute('data-item-id');
+            var itemName = button.getAttribute('data-item-name');
+            var itemDescription = button.getAttribute('data-item-description');
+            var itemDate = button.getAttribute('data-item-date');
+            var itemProject = button.getAttribute('data-item-project');
+            var itemCategory = button.getAttribute('data-item-category');
+            var itemUnit = button.getAttribute('data-item-unit');
+            var itemStock = button.getAttribute('data-item-stock');
 
-        // Toggle tags visibility
-        document.querySelectorAll('.toggle-tags').forEach(button => {
-            button.addEventListener('click', function() {
-                const tagsContent = this.nextElementSibling;
-                if (tagsContent.classList.contains('tw-hidden')) {
-                    tagsContent.classList.remove('tw-hidden');
-                    this.querySelector('img').src =
-                        '{{ asset('assets/img/logos/minus.svg') }}';
-                } else {
-                    tagsContent.classList.add('tw-hidden');
-                    this.querySelector('img').src = '{{ asset('assets/img/logos/plus.svg') }}';
+            var modalForm = editItemModal.querySelector('form');
+            modalForm.action = '/info/items/' + itemId;
+
+            var modalNameInput = editItemModal.querySelector('#edit_name');
+            var modalDescriptionInput = editItemModal.querySelector('#edit_description');
+            var modalDateInput = editItemModal.querySelector('#edit_date');
+            var modalProjectInput = editItemModal.querySelector('#edit_id_pro');
+            var modalCategoryInput = editItemModal.querySelector('#edit_id_catitem');
+            var modalUnitInput = editItemModal.querySelector('#edit_id_unit');
+            var modalStockInput = editItemModal.querySelector('#edit_stock');
+
+            modalNameInput.value = itemName;
+            modalDescriptionInput.value = itemDescription;
+            modalDateInput.value = itemDate;
+            modalProjectInput.value = itemProject;
+            modalCategoryInput.value = itemCategory;
+            modalUnitInput.value = itemUnit;
+            modalStockInput.value = itemStock;
+
+            $.ajax({
+                url: '/items/' + itemId + '/tags',
+                method: 'GET',
+                success: function(data) {
+                    $('#SelectBoxEdit').selectit({
+                        fieldname: 'tags[]',
+                        values: data.tags
+                    });
                 }
             });
         });
     });
+
+
+
+    // Toggle description visibility
+    document.querySelectorAll('.toggle-description').forEach(button => {
+        button.addEventListener('click', function() {
+            const descriptionContent = this.nextElementSibling;
+            if (descriptionContent.classList.contains('tw-hidden')) {
+                descriptionContent.classList.remove('tw-hidden');
+                this.querySelector('img').src =
+                    '{{ asset('assets/img/logos/minus.svg') }}';
+            } else {
+                descriptionContent.classList.add('tw-hidden');
+                this.querySelector('img').src = '{{ asset('assets/img/logos/plus.svg') }}';
+            }
+        });
+    });
+
+    // Toggle tags visibility
+    document.querySelectorAll('.toggle-tags').forEach(button => {
+        button.addEventListener('click', function() {
+            const tagsContent = this.nextElementSibling;
+            if (tagsContent.classList.contains('tw-hidden')) {
+                tagsContent.classList.remove('tw-hidden');
+                this.querySelector('img').src =
+                    '{{ asset('assets/img/logos/minus.svg') }}';
+            } else {
+                tagsContent.classList.add('tw-hidden');
+                this.querySelector('img').src = '{{ asset('assets/img/logos/plus.svg') }}';
+            }
+        });
+    });
+
 
     document.addEventListener('DOMContentLoaded', function() {
         const totalRecords = {{ $items->count() }};

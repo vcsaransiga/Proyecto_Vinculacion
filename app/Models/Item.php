@@ -24,6 +24,7 @@ class Item extends Model implements Auditable
         'name',
         'description',
         'date',
+        'stock'
     ];
 
     public function category()

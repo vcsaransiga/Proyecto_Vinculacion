@@ -25,6 +25,7 @@ class ItemFactory extends Factory
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence,
             'date' => $this->faker->date(),
+            'stock' => $this->faker->numberBetween(0, 100),
         ];
     }
 

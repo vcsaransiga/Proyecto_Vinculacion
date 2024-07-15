@@ -586,6 +586,10 @@
                             <input type="date" class="form-control" id="date" name="date" required>
                         </div>
                         <div class="mb-3">
+                            <label for="stock" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="stock" name="stock" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="tags" class="form-label">Etiquetas</label>
                             <div id="SelectBoxCreate" style="width: 100%;"></div>
                         </div>
