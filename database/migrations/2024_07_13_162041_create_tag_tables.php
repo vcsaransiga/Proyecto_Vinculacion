@@ -21,9 +21,9 @@ return new class extends Migration
 
         Schema::create('taggables', function (Blueprint $table) {
             $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
-
-            $table->morphs('taggable');
-
+            $table->string('taggable_id');
+            $table->string('taggable_type');
+            $table->index(['taggable_id', 'taggable_type']);
             $table->unique(['tag_id', 'taggable_id', 'taggable_type']);
         });
     }

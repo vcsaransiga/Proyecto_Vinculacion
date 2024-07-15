@@ -27,4 +27,12 @@ class ItemFactory extends Factory
             'date' => $this->faker->date(),
         ];
     }
+
+    public function withTags()
+    {
+        return $this->afterCreating(function (Item $item) {
+            $tags = $this->faker->words(3); // Genera 3 tags aleatorios
+            $item->attachTags($tags);
+        });
+    }
 }
