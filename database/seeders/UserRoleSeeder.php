@@ -14,7 +14,7 @@ class UserRoleSeeder extends Seeder
     public function run(): void
     {
         $userDiego = User::where('email', 'diegodavidrecalde@gmail.com')->first();
-        $userDiego->assignRole('administrador', 'auditor');
+        $userDiego->assignRole('administrador', 'auditor', 'coordinador');
 
         $userAlejo = User::where('email', 'alejo@ueps.com')->first();
         $userAlejo->assignRole('administrador', 'auditor');
@@ -28,5 +28,8 @@ class UserRoleSeeder extends Seeder
 
         $userAuditor = User::where('email', 'auditor@example.com')->first();
         $userAuditor->assignRole('auditor');
+
+        $userCoordinador = User::where('email', 'coordinador@example.com')->first();
+        $userCoordinador->assignRole('coordinador');
     }
 }

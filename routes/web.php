@@ -235,6 +235,14 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
         Route::get('/audits/pdf', [AuditController::class, 'generatePDF'])->name('audits.pdf');
     });
 
+
+    // Rutas de coordinador
+    Route::group(['middleware' => ['role:coordinador']], function () {
+        Route::get('/projects', [ProjectController::class, 'list'])->name('projects.list');
+        Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
+        Route::get('projects/export-individual/{id}', [ProjectController::class, 'exportIndividualExcel'])->name('projects.exportIndividualExcel');
+    });
+
     // Rutas compartidas
     Route::get('/info/users/{user}/roles', [UserController::class, 'getUserRoles']);
     Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile')->middleware(['auth']);
