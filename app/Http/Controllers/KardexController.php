@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\OperationType;
 use App\Models\Warehouse;
 use App\Models\Project;
+use App\Models\Item;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\KardexExport;
@@ -19,7 +20,8 @@ class KardexController extends Controller
         $operationTypes = OperationType::all();
         $warehouses = Warehouse::all();
         $projects = Project::all();
-        return view('modules.kardex.index', compact('kardexEntries', 'operationTypes', 'warehouses', 'projects'));
+        $items = Item::all();
+        return view('modules.kardex.index', compact('kardexEntries', 'operationTypes', 'warehouses', 'projects', 'items'));
     }
 
     public function store(Request $request)
@@ -28,8 +30,8 @@ class KardexController extends Controller
             'id_ope' => 'required|integer',
             'id_ware' => 'required|string|max:255',
             'id_pro' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'id_item' => 'required|string|max:255',
+            'detail' => 'required|string',
             'date' => 'required|date',
             'quantity' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
@@ -45,8 +47,8 @@ class KardexController extends Controller
             'id_ope' => $request->id_ope,
             'id_ware' => $request->id_ware,
             'id_pro' => $request->id_pro,
-            'name' => $request->name,
-            'description' => $request->description,
+            'id_item' => $request->id_item,
+            'detail' => $request->detail,
             'date' => $request->date,
             'quantity' => $request->quantity,
             'price' => $request->price,
@@ -79,8 +81,8 @@ class KardexController extends Controller
             'id_ope' => 'required|integer',
             'id_ware' => 'required|string|max:255',
             'id_pro' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'id_item' => 'required|string|max:255',
+            'detail' => 'required|string',
             'date' => 'required|date',
             'quantity' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
@@ -102,7 +104,7 @@ class KardexController extends Controller
 
         Kardex::whereIn('id_kardex', $ids)->delete();
 
-        return response()->json(["success" => "Selected kardex entries deleted successfully."]);
+        return response()->json(["success" => "Entradas de kardex seleccionadas eliminadas exitosamente."]);
     }
 
     public function destroy($id)
@@ -110,7 +112,7 @@ class KardexController extends Controller
         $kardex = Kardex::findOrFail($id);
         $kardex->delete();
 
-        return redirect()->route('kardex.index')->with('success', 'Kardex entry deleted successfully.');
+        return redirect()->route('kardex.index')->with('success', 'Entrada de kardex eliminada exitosamente.');
     }
 
     public function generatePDF()
@@ -119,7 +121,7 @@ class KardexController extends Controller
         $date = date('d/m/Y H:i:s');
 
         $data = [
-            'title' => 'Kardex Records',
+            'title' => 'Registros de kardex',
             'date' => $date,
             'kardexEntries' => $kardexEntries
         ];

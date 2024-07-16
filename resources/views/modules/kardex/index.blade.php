@@ -102,8 +102,8 @@
                                         <th scope="col" class="tw-px-6 tw-py-3">Operación</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Almacén</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Proyecto</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Nombre</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Descripción</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Ítem</th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Detalle</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Fecha</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Cantidad</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Precio</th>
@@ -125,8 +125,8 @@
                                             <td class="tw-px-6 tw-py-4">{{ $entry->operationType->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->warehouse->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->project->name }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $entry->name }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $entry->description }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $entry->item->name }}</td>
+                                            <td class="tw-px-6 tw-py-4">{{ $entry->detail }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->date }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->quantity }}</td>
                                             <td class="tw-px-6 tw-py-4">${{ number_format($entry->price, 2) }}</td>
@@ -139,8 +139,8 @@
                                                     data-kardex-operation="{{ $entry->id_ope }}"
                                                     data-kardex-warehouse="{{ $entry->id_ware }}"
                                                     data-kardex-project="{{ $entry->id_pro }}"
-                                                    data-kardex-name="{{ $entry->name }}"
-                                                    data-kardex-description="{{ $entry->description }}"
+                                                    data-kardex-item="{{ $entry->id_item }}"
+                                                    data-kardex-detail="{{ $entry->detail }}"
                                                     data-kardex-date="{{ $entry->date }}"
                                                     data-kardex-quantity="{{ $entry->quantity }}"
                                                     data-kardex-price="{{ $entry->price }}"
@@ -249,12 +249,16 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <label for="id_item" class="form-label">Ítem</label>
+                            <select class="form-control" id="id_item" name="id_item" required>
+                                @foreach ($items as $item)
+                                    <option value="{{ $item->id_item }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="description" name="description" required></textarea>
+                            <label for="detail" class="form-label">Detalle</label>
+                            <textarea class="form-control" id="detail" name="detail" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="date" class="form-label">Fecha</label>
@@ -331,12 +335,16 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="edit_name" name="name" required>
+                            <label for="edit_id_item" class="form-label">Ítem</label>
+                            <select class="form-control" id="edit_id_item" name="id_item" required>
+                                @foreach ($items as $item)
+                                    <option value="{{ $item->id_item }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_description" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="edit_description" name="description" required></textarea>
+                            <label for="edit_detail" class="form-label">Detalle</label>
+                            <textarea class="form-control" id="edit_detail" name="detail" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="edit_date" class="form-label">Fecha</label>
@@ -365,7 +373,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit kardex form
         var editKardexModal = document.getElementById('editKardexModal');
         editKardexModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
@@ -373,8 +380,8 @@
             var kardexOperation = button.getAttribute('data-kardex-operation');
             var kardexWarehouse = button.getAttribute('data-kardex-warehouse');
             var kardexProject = button.getAttribute('data-kardex-project');
-            var kardexName = button.getAttribute('data-kardex-name');
-            var kardexDescription = button.getAttribute('data-kardex-description');
+            var kardexItem = button.getAttribute('data-kardex-item');
+            var kardexDetail = button.getAttribute('data-kardex-detail');
             var kardexDate = button.getAttribute('data-kardex-date');
             var kardexQuantity = button.getAttribute('data-kardex-quantity');
             var kardexPrice = button.getAttribute('data-kardex-price');
@@ -386,8 +393,8 @@
             var modalOperationInput = editKardexModal.querySelector('#edit_id_ope');
             var modalWarehouseInput = editKardexModal.querySelector('#edit_id_ware');
             var modalProjectInput = editKardexModal.querySelector('#edit_id_pro');
-            var modalNameInput = editKardexModal.querySelector('#edit_name');
-            var modalDescriptionInput = editKardexModal.querySelector('#edit_description');
+            var modalItemInput = editKardexModal.querySelector('#edit_id_item');
+            var modalDetailInput = editKardexModal.querySelector('#edit_detail');
             var modalDateInput = editKardexModal.querySelector('#edit_date');
             var modalQuantityInput = editKardexModal.querySelector('#edit_quantity');
             var modalPriceInput = editKardexModal.querySelector('#edit_price');
@@ -396,17 +403,14 @@
             modalOperationInput.value = kardexOperation;
             modalWarehouseInput.value = kardexWarehouse;
             modalProjectInput.value = kardexProject;
-            modalNameInput.value = kardexName;
-            modalDescriptionInput.value = kardexDescription;
+            modalItemInput.value = kardexItem;
+            modalDetailInput.value = kardexDetail;
             modalDateInput.value = kardexDate;
             modalQuantityInput.value = kardexQuantity;
             modalPriceInput.value = kardexPrice;
             modalBalanceInput.value = kardexBalance;
         });
 
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
         const totalRecords = {{ $kardexEntries->count() }};
         const tableId = 'table-kardex';
         const paginationContainerId = 'pagination-numbers';
@@ -414,10 +418,7 @@
 
         initPagination(totalRecords, tableId, paginationContainerId, defaultRecordsPerPage);
     });
-</script>
 
-
-<script>
     document.addEventListener('DOMContentLoaded', function() {
         initializeDeleteAll({
             selectAllId: "#select_all_ids",

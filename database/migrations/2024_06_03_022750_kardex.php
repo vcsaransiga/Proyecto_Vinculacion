@@ -16,8 +16,8 @@ return new class extends Migration
             $table->integer('id_ope');
             $table->string('id_ware');
             $table->string('id_pro');
-            $table->string('name');
-            $table->string('description');
+            $table->string('id_item');
+            $table->string('detail');
             $table->date('date');
             $table->integer('quantity');
             $table->float('price');
@@ -28,11 +28,13 @@ return new class extends Migration
             $table->index('id_ope');
             $table->index('id_ware');
             $table->index('id_pro');
+            $table->index('id_item');
 
             // Relaciones
             $table->foreign('id_ope')->references('id_ope')->on('operations_type')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_ware')->references('id_ware')->on('warehouses')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_pro')->references('id_pro')->on('projects')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_item')->references('id_item')->on('items')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -211,6 +211,8 @@
                                                         <th>ID</th>
                                                         <th>Operacion</th>
                                                         <th>Bodega</th>
+                                                        <th>Item</th>
+                                                        <th>Detalle</th>
                                                         <th>Fecha</th>
                                                         <th>Cantidad</th>
                                                         <th>Precio</th>
@@ -223,8 +225,12 @@
                                                             <td>{{ $kardex->id_kardex }}</td>
                                                             <td>{{ $kardex->operationType->name }}</td>
                                                             <td>{{ $kardex->warehouse->name }}</td>
+                                                            <td>{{ $kardex->item->name }}</td>
+                                                            <td>{{ $kardex->detail }}</td>
                                                             <td>{{ \Carbon\Carbon::parse($kardex->date)->format('d-m-Y') }}
                                                             </td>
+
+
                                                             <td>{{ $kardex->quantity }}</td>
                                                             <td>${{ $kardex->price }}</td>
                                                             <td>${{ $kardex->balance }}</td>
@@ -639,12 +645,16 @@
                         </div>
                         <input type="hidden" name="id_pro" value="{{ $project->id_pro }}">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <label for="id_item" class="form-label">Ítem</label>
+                            <select class="form-control" id="id_item" name="id_item" required>
+                                @foreach ($items as $item)
+                                    <option value="{{ $item->id_item }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="description" name="description" required></textarea>
+                            <label for="detail" class="form-label">Detalle</label>
+                            <textarea class="form-control" id="detail" name="detail" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="date" class="form-label">Fecha</label>

@@ -22,8 +22,8 @@ class Kardex extends Model implements Auditable
         'id_ope',
         'id_ware',
         'id_pro',
-        'name',
-        'description',
+        'id_item',
+        'detail',
         'date',
         'quantity',
         'price',
@@ -43,5 +43,10 @@ class Kardex extends Model implements Auditable
     public function project()
     {
         return $this->belongsTo(Project::class, 'id_pro', 'id_pro');
+    }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class, 'id_item', 'id_item');
     }
 }

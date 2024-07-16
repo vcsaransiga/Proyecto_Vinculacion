@@ -7,6 +7,7 @@ use App\Models\Kardex;
 use App\Models\OperationType;
 use App\Models\Warehouse;
 use App\Models\Project;
+use App\Models\Item;
 
 class KardexFactory extends Factory
 {
@@ -19,8 +20,8 @@ class KardexFactory extends Factory
             'id_ope' => OperationType::all()->random()->id_ope,
             'id_ware' => Warehouse::all()->random()->id_ware,
             'id_pro' => Project::all()->random()->id_pro,
-            'name' => $this->faker->word,
-            'description' => $this->faker->sentence,
+            'id_item' => Item::all()->random()->id_item,
+            'detail' => $this->faker->sentence,
             'date' => $this->faker->date(),
             'quantity' => $this->faker->numberBetween(1, 100),
             'price' => $this->faker->randomFloat(2, 1, 1000),
