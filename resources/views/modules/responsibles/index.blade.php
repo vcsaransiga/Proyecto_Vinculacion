@@ -186,6 +186,7 @@
                                                 </a>
                                             </div>
                                         </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">ID Usuario</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                     </tr>
                                 </thead>
@@ -213,16 +214,19 @@
                                                     </div> {{ $responsible->status ? 'Activo' : 'Inactivo' }}
                                                 </div>
                                             </td>
+                                            <td class="tw-px-6 tw-py-4">{{ $responsible->id_user }}</td>
                                             <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
                                                 <a href="#"
                                                     class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"
                                                     data-bs-toggle="modal" data-bs-target="#editResponsibleModal"
                                                     data-responsible-id="{{ $responsible->id_responsible }}"
+                                                    data-responsible-card_id="{{ $responsible->card_id }}"
                                                     data-responsible-name="{{ $responsible->name }}"
                                                     data-responsible-last_name="{{ $responsible->last_name }}"
                                                     data-responsible-area="{{ $responsible->area }}"
                                                     data-responsible-role="{{ $responsible->role }}"
-                                                    data-responsible-status="{{ $responsible->status }}">
+                                                    data-responsible-status="{{ $responsible->status }}"
+                                                    data-responsible-id_user="{{ $responsible->id_user }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="currentColor"
@@ -251,6 +255,7 @@
                                                     </button>
                                                 </form>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -317,6 +322,16 @@
                             <input type="text" class="form-control" id="role" name="role" required>
                         </div>
                         <div class="mb-3">
+                            <label for="id_user" class="form-label">Usuario (opcional)</label>
+                            <select class="form-control" id="id_user" name="id_user">
+                                <option value="">Seleccionar usuario</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->id }} .- {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="status" class="form-label">Estado</label>
                             <select class="form-control" id="status" name="status" required>
                                 <option value="1">Activo</option>
@@ -372,6 +387,16 @@
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="edit_id_user" class="form-label">Usuario (opcional)</label>
+                            <select class="form-control" id="edit_id_user" name="id_user">
+                                <option value="">Sin usuario</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->id }} .- {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
@@ -382,7 +407,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit responsible form
         var editResponsibleModal = document.getElementById('editResponsibleModal');
         editResponsibleModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
@@ -393,6 +417,7 @@
             var responsibleArea = button.getAttribute('data-responsible-area');
             var responsibleRole = button.getAttribute('data-responsible-role');
             var responsibleStatus = button.getAttribute('data-responsible-status');
+            var responsibleIdUser = button.getAttribute('data-responsible-id_user');
 
             var modalForm = editResponsibleModal.querySelector('form');
             modalForm.action = '/info/responsibles/' + responsibleId;
@@ -403,6 +428,7 @@
             var modalAreaInput = editResponsibleModal.querySelector('#edit_area');
             var modalRoleInput = editResponsibleModal.querySelector('#edit_role');
             var modalStatusInput = editResponsibleModal.querySelector('#edit_status');
+            var modalIdUserInput = editResponsibleModal.querySelector('#edit_id_user');
 
             modalCardIdInput.value = responsibleCardId;
             modalNameInput.value = responsibleName;
@@ -410,6 +436,7 @@
             modalAreaInput.value = responsibleArea;
             modalRoleInput.value = responsibleRole;
             modalStatusInput.value = responsibleStatus;
+            modalIdUserInput.value = responsibleIdUser;
         });
     });
 </script>

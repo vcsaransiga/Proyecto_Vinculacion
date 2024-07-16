@@ -20,7 +20,6 @@ return new class extends Migration
             $table->float('hours');
             $table->boolean('status'); //activo o inactivo
             $table->timestamps();
-        
         });
     }
 

@@ -453,6 +453,16 @@
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="id_user" class="form-label">Usuario (opcional)</label>
+                            <select class="form-control" id="id_user" name="id_user">
+                                <option value="">Seleccionar usuario</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->id }} .- {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
