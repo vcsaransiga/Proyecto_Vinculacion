@@ -22,7 +22,7 @@ class ResponsibleController extends Controller
             $sortField = 'id_responsible';
         }
 
-        $responsibles = Responsible::orderBy($sortField, $sortDirection)->paginate(10);
+        $responsibles = Responsible::all();
         $users = User::where('status', true)->get(); // Solo usuarios activos
 
         return view('modules.responsibles.index', compact('responsibles', 'users', 'sortField', 'sortDirection'));
