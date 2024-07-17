@@ -69,7 +69,7 @@
                                         </div>
                                     @endrole
                                     <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        <button class="btn btn-info dropdown-toggle" type="button"
                                             id="sortDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
                                             Ordenar por

@@ -8,8 +8,13 @@
                         <div class="pb-0 card-header">
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="">Administración de Tareas</h5>
-                                    <p class="mb-0 text-sm">Aquí puedes gestionar las tareas.</p>
+                                    @role('rector')
+                                        <h5 class="">Administración de Tareas</h5>
+                                        <p class="mb-0 text-sm">Aquí puedes gestionar las tareas.</p>
+                                    @else
+                                        <h5 class="">Tareas</h5>
+                                        <p class="mb-0 text-sm">Aquí puedes visualizar las tareas.</p>
+                                    @endrole
                                 </div>
                                 @role('rector')
                                     <div class="col-6 text-end">
@@ -135,7 +140,16 @@
                                             <td class="tw-px-6 tw-py-4">{{ $task->id_task }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $task->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $task->project->name }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $task->description }}</td>
+                                            <td class="tw-px-6 tw-py-4">
+                                                <button class="toggle-description tw-text-blue-600 hover:tw-underline"
+                                                    data-task-id="{{ $task->id_pro }}">
+                                                    <img src="{{ asset('assets/img/logos/plus.svg') }}"
+                                                        class="tw-w-5 tw-h-5">
+                                                </button>
+                                                <div class="description-content tw-hidden tw-mt-2">
+                                                    {{ $task->description }}
+                                                </div>
+                                            </td>
                                             <td class="tw-px-6 tw-py-4">{{ $task->hours }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $task->start_date }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $task->end_date }}</td>
@@ -388,6 +402,21 @@
             modalEndDateInput.value = taskEndDate;
             modalPercentageInput.value = taskPercentage;
             modalStatusInput.value = taskStatus;
+        });
+
+        // Toggle description visibility
+        document.querySelectorAll('.toggle-description').forEach(button => {
+            button.addEventListener('click', function() {
+                const descriptionContent = this.nextElementSibling;
+                if (descriptionContent.classList.contains('tw-hidden')) {
+                    descriptionContent.classList.remove('tw-hidden');
+                    this.querySelector('img').src =
+                        '{{ asset('assets/img/logos/minus.svg') }}';
+                } else {
+                    descriptionContent.classList.add('tw-hidden');
+                    this.querySelector('img').src = '{{ asset('assets/img/logos/plus.svg') }}';
+                }
+            });
         });
 
     });

@@ -9,10 +9,15 @@
                         <div class="pb-2 card-header">
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="">Administración de Proyectos</h5>
-                                    <p class="mb-0 text-sm">Aquí puedes gestionar los proyectos.</p>
+                                    @role('rector')
+                                        <h5 class="">Administración de Proyectos</h5>
+                                        <p class="mb-0 text-sm">Aquí puedes gestionar los proyectos.</p>
+                                    @else
+                                        <h5 class="">Proyectos</h5>
+                                        <p class="mb-0 text-sm">Aquí puedes visualizar los proyectos.</p>
+                                    @endrole
                                 </div>
-                                @role('administrador')
+                                @role('rector')
                                     <div class="col-6 text-end">
                                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#createProjectModal">
@@ -46,17 +51,19 @@
                             <div
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
                                 <div class="d-flex flex-row justify-content-start">
-                                    <div class="dropdown mr-3">
-                                        <button class="btn btn-info dropdown-toggle" type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Acción
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
+                                    @role('rector')
+                                        <div class="dropdown mr-3">
+                                            <button class="btn btn-info dropdown-toggle" type="button"
+                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Acción
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="dropdown">
+                                    @endrole
+                                    <div class="dropdown mr-2">
                                         <button class="btn btn-info dropdown-toggle" type="button"
                                             id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -93,12 +100,14 @@
                                 <thead
                                     class="tw-text-xs tw-text-gray-700 tw-uppercase tw-bg-gray-50 dark:tw-bg-gray-700 dark:tw-text-gray-400">
                                     <tr>
-                                        <th scope="col" class="tw-p-4">
-                                            <div class="tw-flex tw-items-center">
-                                                <input id="select_all_ids" type="checkbox"
-                                                    class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                            </div>
-                                        </th>
+                                        @role('rector')
+                                            <th scope="col" class="tw-p-4">
+                                                <div class="tw-flex tw-items-center">
+                                                    <input id="select_all_ids" type="checkbox"
+                                                        class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                                                </div>
+                                            </th>
+                                        @endrole
                                         <th scope="col" class="tw-px-6 tw-py-3">
                                             <div class="tw-flex tw-items-center">
                                                 ID
@@ -181,7 +190,7 @@
                                             </div>
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Módulos</th>
-                                        @role('administrador')
+                                        @role('rector')
                                             <th scope="col" class="tw-px-6 tw-py-3">Acción</th>
                                         @endrole
                                     </tr>
@@ -191,12 +200,14 @@
                                     @foreach ($projects as $project)
                                         <tr id="project_ids{{ $project->id_pro }}"
                                             class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
-                                            <td class="tw-w-4 tw-p-4">
-                                                <div class="tw-flex tw-items-center">
-                                                    <input type="checkbox" value="{{ $project->id_pro }}"
-                                                        class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-                                                </div>
-                                            </td>
+                                            @role('rector')
+                                                <td class="tw-w-4 tw-p-4">
+                                                    <div class="tw-flex tw-items-center">
+                                                        <input type="checkbox" value="{{ $project->id_pro }}"
+                                                            class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
+                                                    </div>
+                                                </td>
+                                            @endrole
                                             <td class="tw-px-6 tw-py-4">{{ $project->id_pro }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $project->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $project->responsible->name }}
@@ -262,7 +273,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            @role('administrador')
+                                            @role('rector')
                                                 <td class="tw-px-6 tw-py-4 tw-flex tw-space-x-2">
                                                     <a href="#"
                                                         class="tw-font-medium tw-text-blue-600 dark:tw-text-blue-500 hover:tw-underline"
