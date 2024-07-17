@@ -26,7 +26,6 @@
                 <th scope="col">Cédula</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
-                <th scope="col">Curso</th>
             </tr>
         </thead>
         <tbody>

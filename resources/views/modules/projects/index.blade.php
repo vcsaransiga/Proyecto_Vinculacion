@@ -333,7 +333,6 @@
                 </div>
             </div>
         </div>
-        <x-app.footer />
     </main>
 
     <!-- Create Project Modal -->

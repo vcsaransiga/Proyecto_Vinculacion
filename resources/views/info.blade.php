@@ -18,7 +18,7 @@
                         </div>
                     </a>
                 @endrole
-                @role('administrador|coordinador')
+                @role('administrador|coordinador|rector')
                     <a href="{{ route('students.index') }}">
                         <div
                             class="tw-max-w-sm tw-p-6 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow dark:tw-bg-gray-800 dark:tw-border-gray-700 tw-flex tw-flex-col tw-items-center">
@@ -105,19 +105,7 @@
 
                         </div>
                     </a>
-                    <a href="{{ route('measurement_units.index') }}">
-                        <div
-                            class="tw-max-w-sm tw-p-6 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow dark:tw-bg-gray-800 dark:tw-border-gray-700 tw-flex tw-flex-col tw-items-center">
 
-                            <img src="{{ asset('assets/img/logos/unit.svg') }}" class="tw-w-10 tw-h-10 tw-mb-3"
-                                alt="Medida de unidad Logo">
-                            <h5
-                                class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
-                                Medidas de unidad
-                            </h5>
-
-                        </div>
-                    </a>
                     <a href="{{ route('operations.index') }}">
                         <div
                             class="tw-max-w-sm tw-p-6 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow dark:tw-bg-gray-800 dark:tw-border-gray-700 tw-flex tw-flex-col tw-items-center">
@@ -127,6 +115,19 @@
                             <h5
                                 class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
                                 Tipos de operaciones
+                            </h5>
+
+                        </div>
+                    </a>
+                    <a href="{{ route('measurement_units.index') }}">
+                        <div
+                            class="tw-max-w-sm tw-p-6 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow dark:tw-bg-gray-800 dark:tw-border-gray-700 tw-flex tw-flex-col tw-items-center">
+
+                            <img src="{{ asset('assets/img/logos/unit.svg') }}" class="tw-w-10 tw-h-10 tw-mb-3"
+                                alt="Medida de unidad Logo">
+                            <h5
+                                class="tw-text-center tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900 dark:tw-text-white">
+                                Medidas de unidad
                             </h5>
 
                         </div>

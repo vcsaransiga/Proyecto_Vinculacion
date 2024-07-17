@@ -87,7 +87,7 @@
                         <span class="nav-link-text ms-1">Tablas</span>
                     </a>
                 </li> --}}
-            @role('administrador|coordinador')
+            @role('administrador|coordinador|rector')
                 <li class="nav-item">
                     <a class="nav-link 
                 {{ Request::is('info') || Request::is('info/*') ? 'active' : '' }}"
@@ -113,7 +113,8 @@
                     </a>
                 </li>
             @endrole
-            @role('coordinador')
+
+            @role('rector|coordinador')
                 <li class="nav-item">
                     <a class="nav-link 
                     {{ Request::is('projects') || Request::is('projects/*') ? 'active' : '' }}"

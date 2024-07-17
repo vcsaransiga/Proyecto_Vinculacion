@@ -202,7 +202,6 @@
                 </div>
             </div>
         </div>
-        <x-app.footer />
     </main>
 
     <!-- Create Kardex Modal -->

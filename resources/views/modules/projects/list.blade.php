@@ -24,7 +24,7 @@
                                 <div class="col-6">
                                     <h5 class="">Proyectos UEPS</h5>
                                 </div>
-                                @role('administrador')
+                                @role('rector')
                                     <div class="col-6 text-end">
                                         <button type="button" class="btn btn-dark btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#createProjectModal">

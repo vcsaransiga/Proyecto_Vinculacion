@@ -17,27 +17,28 @@ class RolesAndPermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // create permissions
-        Permission::create(['name' => 'crear']);
-        Permission::create(['name' => 'leer']);
-        Permission::create(['name' => 'actualizar']);
-        Permission::create(['name' => 'eliminar']);
-        Permission::create(['name' => 'reportar']);
-        Permission::create(['name' => 'ver auditorias']);
-        Permission::create(['name' => 'ver proyectos']);
-        Permission::create(['name' => 'crear proyectos']);
-        Permission::create(['name' => 'editar proyectos']);
-        Permission::create(['name' => 'eliminar proyectos']);
-        Permission::create(['name' => 'reportar proyectos']);
+        // Create permissions
+        $permissions = [
+            'crear', 'leer', 'actualizar', 'eliminar', 'reportar',
+            'ver auditorias', 'ver proyectos', 'crear proyectos',
+            'editar proyectos', 'eliminar proyectos', 'reportar proyectos'
+        ];
 
-        // create roles and assign created permissions
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
+
+        // Create roles and assign created permissions
         $roleAdmin = Role::create(['name' => 'administrador']);
-        $roleAdmin->givePermissionTo(['crear', 'leer', 'actualizar', 'eliminar', 'reportar']);
+        $roleAdmin->givePermissionTo(['crear', 'leer', 'actualizar', 'eliminar', 'reportar', 'ver proyectos', 'reportar proyectos']);
 
         $roleAuditor = Role::create(['name' => 'auditor']);
         $roleAuditor->givePermissionTo(['leer', 'reportar', 'ver auditorias']);
 
         $roleCoordinador = Role::create(['name' => 'coordinador']);
-        $roleCoordinador->givePermissionTo(['ver proyectos', 'editar proyectos', 'editar proyectos', 'eliminar proyectos', 'reportar proyectos']);
+        $roleCoordinador->givePermissionTo(['leer', 'reportar', 'ver proyectos', 'reportar proyectos']);
+
+        $roleRector = Role::create(['name' => 'rector']);
+        $roleRector->givePermissionTo(['leer', 'reportar', 'crear proyectos', 'editar proyectos', 'eliminar proyectos', 'reportar proyectos']);
     }
 }
