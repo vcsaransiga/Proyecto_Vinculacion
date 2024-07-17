@@ -154,28 +154,6 @@
                                                 </a>
                                             </div>
                                         </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            <div class="tw-flex tw-items-center">
-                                                Curso
-                                                <a
-                                                    href="?sort=course&direction={{ $sortField === 'course' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
-                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
-                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
-                                                        viewBox="0 0 24 24">
-                                                </a>
-                                            </div>
-                                        </th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">
-                                            <div class="tw-flex tw-items-center">
-                                                Horas
-                                                <a
-                                                    href="?sort=hours&direction={{ $sortField === 'hours' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
-                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
-                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
-                                                        viewBox="0 0 24 24">
-                                                </a>
-                                            </div>
-                                        </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Módulos</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
                                             <div class="tw-flex tw-items-center">
@@ -209,8 +187,6 @@
                                             <td class="tw-px-6 tw-py-4">{{ $student->card_id }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $student->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $student->last_name }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $student->course }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $student->hours }}</td>
                                             <td class="tw-px-6 tw-py-4">
                                                 <button type="button"
                                                     class="tw-focus:tw-outline-none tw-text-white tw-bg-green-700 hover:tw-bg-green-800 tw-focus:tw-ring-4 tw-focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-green-600 dark:hover:tw-bg-green-700 dark:tw-focus:tw-ring-green-800"
@@ -234,8 +210,6 @@
                                                     data-student-card_id="{{ $student->card_id }}"
                                                     data-student-name="{{ $student->name }}"
                                                     data-student-last_name="{{ $student->last_name }}"
-                                                    data-student-course="{{ $student->course }}"
-                                                    data-student-hours="{{ $student->hours }}"
                                                     data-student-status="{{ $student->status }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -347,15 +321,6 @@
                             <input type="text" class="form-control" id="last_name" name="last_name">
                         </div>
                         <div class="mb-3">
-                            <label for="course" class="form-label">Curso</label>
-                            <input type="text" class="form-control" id="course" name="course">
-                        </div>
-                        <div class="mb-3">
-                            <label for="hours" class="form-label">Horas</label>
-                            <input type="number" class="form-control" id="hours" name="hours"
-                                step="any">
-                        </div>
-                        <div class="mb-3">
                             <label for="status" class="form-label">Estado</label>
                             <select class="form-control" id="status" name="status" required>
                                 <option value="1">Activo</option>
@@ -397,15 +362,6 @@
                             <input type="text" class="form-control" id="edit_last_name" name="last_name">
                         </div>
                         <div class="mb-3">
-                            <label for="edit_course" class="form-label">Curso</label>
-                            <input type="text" class="form-control" id="edit_course" name="course">
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_hours" class="form-label">Horas</label>
-                            <input type="number" class="form-control" id="edit_hours" name="hours"
-                                step="any">
-                        </div>
-                        <div class="mb-3">
                             <label for="edit_status" class="form-label">Estado</label>
                             <select class="form-control" id="edit_status" name="status" required>
                                 <option value="1">Activo</option>
@@ -431,8 +387,6 @@
             var studentCardId = button.getAttribute('data-student-card_id');
             var studentName = button.getAttribute('data-student-name');
             var studentLastName = button.getAttribute('data-student-last_name');
-            var studentCourse = button.getAttribute('data-student-course');
-            var studentHours = button.getAttribute('data-student-hours');
             var studentStatus = button.getAttribute('data-student-status');
 
             var modalForm = editStudentModal.querySelector('form');
@@ -441,15 +395,11 @@
             var modalCardIdInput = editStudentModal.querySelector('#edit_card_id');
             var modalNameInput = editStudentModal.querySelector('#edit_name');
             var modalLastNameInput = editStudentModal.querySelector('#edit_last_name');
-            var modalCourseInput = editStudentModal.querySelector('#edit_course');
-            var modalHoursInput = editStudentModal.querySelector('#edit_hours');
             var modalStatusInput = editStudentModal.querySelector('#edit_status');
 
             modalCardIdInput.value = studentCardId;
             modalNameInput.value = studentName;
             modalLastNameInput.value = studentLastName;
-            modalCourseInput.value = studentCourse;
-            modalHoursInput.value = studentHours;
             modalStatusInput.value = studentStatus;
         });
     });

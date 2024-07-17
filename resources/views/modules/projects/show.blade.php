@@ -22,10 +22,12 @@
                                 class="btn btn-dark btn-primary mr-3">
                                 <i class="fas fa-file-text me-2"></i> Reporte
                             </a>
-                            <button type="button" class="btn btn-dark btn-primary mr-3" data-bs-toggle="modal"
-                                data-bs-target="#editProjectModal" data-project="{{ json_encode($project) }}">
-                                <i class="fas fa-pencil me-2"></i> Editar proyecto
-                            </button>
+                            @role('administrador')
+                                <button type="button" class="btn btn-dark btn-primary mr-3" data-bs-toggle="modal"
+                                    data-bs-target="#editProjectModal" data-project="{{ json_encode($project) }}">
+                                    <i class="fas fa-pencil me-2"></i> Editar proyecto
+                                </button>
+                            @endrole
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -129,10 +131,12 @@
                                                     onclick="filterTasks('Pendiente')">Pendientes</a>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-success mr-3" data-bs-toggle="modal"
-                                            data-bs-target="#createTaskModal">
-                                            <i class="fas fa-plus me-2"></i> Agregar tarea
-                                        </button>
+                                        @role('administrador')
+                                            <button type="button" class="btn btn-success mr-3" data-bs-toggle="modal"
+                                                data-bs-target="#createTaskModal">
+                                                <i class="fas fa-plus me-2"></i> Agregar tarea
+                                            </button>
+                                        @endrole
 
                                     </div>
                                     <div class="container">
@@ -208,12 +212,13 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
+                                                        <th>Fecha</th>
                                                         <th>ID</th>
                                                         <th>Operacion</th>
                                                         <th>Bodega</th>
                                                         <th>Item</th>
                                                         <th>Detalle</th>
-                                                        <th>Fecha</th>
+
                                                         <th>Cantidad</th>
                                                         <th>Precio</th>
                                                         <th>Balance</th>
@@ -222,15 +227,13 @@
                                                 <tbody>
                                                     @foreach ($project->kardex as $kardex)
                                                         <tr>
+                                                            <td>{{ \Carbon\Carbon::parse($kardex->date)->format('d-m-Y') }}
+                                                            </td>
                                                             <td>{{ $kardex->id_kardex }}</td>
                                                             <td>{{ $kardex->operationType->name }}</td>
                                                             <td>{{ $kardex->warehouse->name }}</td>
                                                             <td>{{ $kardex->item->name }}</td>
                                                             <td>{{ $kardex->detail }}</td>
-                                                            <td>{{ \Carbon\Carbon::parse($kardex->date)->format('d-m-Y') }}
-                                                            </td>
-
-
                                                             <td>{{ $kardex->quantity }}</td>
                                                             <td>${{ $kardex->price }}</td>
                                                             <td>${{ $kardex->balance }}</td>

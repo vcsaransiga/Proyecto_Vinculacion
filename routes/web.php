@@ -130,7 +130,6 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::view('/info', 'info')->name('info');
 
         // Usuarios
         Route::resource('/info/users', UserController::class);
@@ -197,6 +196,18 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
         Route::delete('/info/selected-operations', [OperationTypeController::class, 'deleteAll'])->name('operation.delete');
         Route::get('/operations/pdf', [OperationTypeController::class, 'generatePDF'])->name('operations.pdf');
         Route::get('/operations/export-excel', [OperationTypeController::class, 'exportExcel'])->name('operations.download-excel');
+    });
+
+    // Rutas de auditor
+    Route::group(['middleware' => ['role:auditor']], function () {
+        Route::get('/audits', [AuditController::class, 'index'])->name('audits.index');
+        Route::get('/audits/pdf', [AuditController::class, 'generatePDF'])->name('audits.pdf');
+    });
+
+    Route::group(['middleware' => ['role:administrador|coordinador']], function () {
+
+
+        Route::view('/info', 'info')->name('info');
 
         // Proyectos
         Route::resource('/info/projects', ProjectController::class);
@@ -229,18 +240,11 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
         Route::get('/kardex/export-excel', [KardexController::class, 'exportExcel'])->name('kardex.download-excel');
     });
 
-    // Rutas de auditor
-    Route::group(['middleware' => ['role:auditor']], function () {
-        Route::get('/audits', [AuditController::class, 'index'])->name('audits.index');
-        Route::get('/audits/pdf', [AuditController::class, 'generatePDF'])->name('audits.pdf');
-    });
-
-
     // Rutas de coordinador
     Route::group(['middleware' => ['role:coordinador']], function () {
-        Route::get('/projects', [ProjectController::class, 'list'])->name('projects.list');
-        Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
-        Route::get('projects/export-individual/{id}', [ProjectController::class, 'exportIndividualExcel'])->name('projects.exportIndividualExcel');
+        // Route::get('/projects', [ProjectController::class, 'list'])->name('projects.list');
+        // Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
+        // Route::get('projects/export-individual/{id}', [ProjectController::class, 'exportIndividualExcel'])->name('projects.exportIndividualExcel');
     });
 
     // Rutas compartidas

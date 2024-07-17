@@ -27,7 +27,6 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Curso</th>
-                <th scope="col">Horas</th>
             </tr>
         </thead>
         <tbody>
@@ -37,8 +36,6 @@
                     <td scope="row">{{ $student->card_id }}</td>
                     <td scope="row">{{ $student->name }}</td>
                     <td scope="row">{{ $student->last_name }}</td>
-                    <td scope="row">{{ $student->course }}</td>
-                    <td scope="row">{{ $student->hours }}</td>
                 </tr>
             @endforeach
         </tbody>

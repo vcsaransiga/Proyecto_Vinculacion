@@ -57,7 +57,8 @@
                         <span class="nav-link-text ms-1">Panel de Control</span>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
+            @endrole
+            {{-- <li class="nav-item">
                     <a class="nav-link  {{ is_current_route('tables') ? 'active' : '' }}" href="{{ route('tables') }}">
                         <div
                             class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
@@ -86,6 +87,7 @@
                         <span class="nav-link-text ms-1">Tablas</span>
                     </a>
                 </li> --}}
+            @role('administrador|coordinador')
                 <li class="nav-item">
                     <a class="nav-link 
                 {{ Request::is('info') || Request::is('info/*') ? 'active' : '' }}"

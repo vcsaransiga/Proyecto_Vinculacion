@@ -98,13 +98,13 @@
                                                     class="tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
                                             </div>
                                         </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">Fecha</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">ID</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Operación</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Almacén</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Proyecto</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Ítem</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Detalle</th>
-                                        <th scope="col" class="tw-px-6 tw-py-3">Fecha</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Cantidad</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Precio</th>
                                         <th scope="col" class="tw-px-6 tw-py-3">Balance</th>
@@ -121,13 +121,14 @@
                                                         class="checkbox_ids tw-w-4 tw-h-4 tw-text-blue-600 tw-bg-gray-100 tw-border-gray-300 tw-rounded focus:tw-ring-blue-500 dark:focus:tw-ring-blue-600 dark:tw-ring-offset-gray-800 dark:focus:tw-ring-offset-gray-800 focus:tw-ring-2 dark:tw-bg-gray-700 dark:tw-border-gray-600">
                                                 </div>
                                             </td>
+                                            <td class="tw-px-6 tw-py-4">
+                                                {{ \Carbon\Carbon::parse($entry->date)->format('d/m/Y') }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->id_kardex }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->operationType->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->warehouse->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->project->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->item->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->detail }}</td>
-                                            <td class="tw-px-6 tw-py-4">{{ $entry->date }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->quantity }}</td>
                                             <td class="tw-px-6 tw-py-4">${{ number_format($entry->price, 2) }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $entry->balance }}</td>
