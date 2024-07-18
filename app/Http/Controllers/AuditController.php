@@ -20,6 +20,15 @@ class AuditController extends Controller
         return view('modules.audits.index', compact('audits', 'users', 'roles'));
     }
 
+    public function charts()
+    {
+        $audits = Audit::all();
+        $users = User::all();
+        $roles = Role::all();
+        return view('modules.audits.charts', compact('audits', 'users', 'roles'));
+    }
+
+
     public function generatePDF()
     {
         $audits = Audit::all();
