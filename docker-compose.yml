@@ -1,0 +1,87 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ueps-app
+    container_name: ueps-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    networks:
+      - app-network
+    ports:
+      - "9000:9000"
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_KEY=${APP_KEY}
+      - APP_URL=http://localhost
+      - LOG_CHANNEL=stack
+      - LOG_DEPRECATIONS_CHANNEL=null
+      - LOG_LEVEL=debug
+      - DB_CONNECTION=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=uep_db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - BROADCAST_DRIVER=log
+      - CACHE_DRIVER=file
+      - FILESYSTEM_DISK=local
+      - QUEUE_CONNECTION=sync
+      - SESSION_DRIVER=file
+      - SESSION_LIFETIME=15
+      - MEMCACHED_HOST=127.0.0.1
+      - REDIS_HOST=127.0.0.1
+      - REDIS_PASSWORD=null
+      - REDIS_PORT=6379
+      - MAIL_MAILER=smtp
+      - MAIL_HOST=sandbox.smtp.mailtrap.io
+      - MAIL_PORT=2525
+      - MAIL_USERNAME=a594e5f7024e5f
+      - MAIL_PASSWORD=b9ffce6aed33ef
+      - MAIL_ENCRYPTION=tls
+      - MAIL_FROM_ADDRESS=melanierubi.mu@gmail.com
+      - MAIL_FROM_NAME=${APP_NAME}
+      - AWS_ACCESS_KEY_ID=
+      - AWS_SECRET_ACCESS_KEY=
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_BUCKET=
+      - AWS_USE_PATH_STYLE_ENDPOINT=false
+      - PUSHER_APP_ID=
+      - PUSHER_APP_KEY=
+      - PUSHER_APP_SECRET=
+      - PUSHER_HOST=
+      - PUSHER_PORT=443
+      - PUSHER_SCHEME=https
+      - PUSHER_APP_CLUSTER=mt1
+      - VITE_APP_NAME=${APP_NAME}
+      - VITE_PUSHER_APP_KEY=${PUSHER_APP_KEY}
+      - VITE_PUSHER_HOST=${PUSHER_HOST}
+      - VITE_PUSHER_PORT=${PUSHER_PORT}
+      - VITE_PUSHER_SCHEME=${PUSHER_SCHEME}
+      - VITE_PUSHER_APP_CLUSTER=${PUSHER_APP_CLUSTER}
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: uep_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
