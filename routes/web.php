@@ -277,6 +277,7 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
     // Rutas de auditor
     Route::group(['middleware' => ['role:auditor']], function () {
         Route::get('/audits', [AuditController::class, 'index'])->name('audits.index');
+        Route::get('/audits/charts', [AuditController::class, 'charts'])->name('audits.charts');
         Route::get('/audits/pdf', [AuditController::class, 'generatePDF'])->name('audits.pdf');
     });
 
