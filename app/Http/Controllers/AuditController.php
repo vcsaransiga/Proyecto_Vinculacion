@@ -8,6 +8,10 @@ use App\Models\Audit;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+use App\Exports\AuditsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+
 
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
@@ -75,5 +79,11 @@ class AuditController extends Controller
         $pdfName = "Registros Auditoría - {$date}.pdf";
 
         return $pdf->download($pdfName);
+    }
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Registros_Auditoria_{$date}.xlsx";
+        return Excel::download(new AuditsExport, $excelName);
     }
 }
