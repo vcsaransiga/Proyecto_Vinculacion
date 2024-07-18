@@ -16,8 +16,8 @@ class OperationTypeSeeder extends Seeder
         DB::table('operations_type')->insert([
             ['name' => 'Entrada', 'mov_type' => 'IN'],
             ['name' => 'Salida', 'mov_type' => 'OUT'],
-            ['name' => 'Transferencia', 'mov_type' => 'TRANSFER'],
-            ['name' => 'Ajuste', 'mov_type' => 'ADJUST'],
+            ['name' => 'Entrada Transferencia', 'mov_type' => 'IN_TRANSFER'],
+            ['name' => 'Salida Transferencia', 'mov_type' => 'OUT_TRANSFER'],
         ]);
     }
 }

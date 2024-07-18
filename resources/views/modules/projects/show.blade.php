@@ -194,7 +194,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div id="kardex-content" class="tab-pane contents">
                                     <div class="d-flex justify-content-end ">
                                         @role('rector|jefe de proyecto')
@@ -211,6 +210,11 @@
                                             </div>
                                         </div>
                                     @else
+                                        @php
+                                            $kardexEntries = $project->kardex->sortBy('date');
+                                            $currentDate = null;
+                                            $rowspan = 0;
+                                        @endphp
                                         <div class="table-responsive">
                                             <table class="table table-striped">
                                                 <thead>
@@ -221,17 +225,28 @@
                                                         <th>Bodega</th>
                                                         <th>Item</th>
                                                         <th>Detalle</th>
-
                                                         <th>Cantidad</th>
                                                         <th>Precio</th>
                                                         <th>Balance</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($project->kardex as $kardex)
+                                                    @foreach ($kardexEntries as $kardex)
+                                                        @php
+                                                            if ($currentDate != $kardex->date) {
+                                                                $rowspan = $kardexEntries
+                                                                    ->where('date', $kardex->date)
+                                                                    ->count();
+                                                                $currentDate = $kardex->date;
+                                                            }
+                                                        @endphp
                                                         <tr>
-                                                            <td>{{ \Carbon\Carbon::parse($kardex->date)->format('d-m-Y') }}
-                                                            </td>
+                                                            @if ($rowspan > 0)
+                                                                <td rowspan="{{ $rowspan }}">
+                                                                    {{ \Carbon\Carbon::parse($kardex->date)->format('d-m-Y') }}
+                                                                </td>
+                                                                @php $rowspan = 0; @endphp
+                                                            @endif
                                                             <td>{{ $kardex->id_kardex }}</td>
                                                             <td>{{ $kardex->operationType->name }}</td>
                                                             <td>{{ $kardex->warehouse->name }}</td>
@@ -239,7 +254,7 @@
                                                             <td>{{ $kardex->detail }}</td>
                                                             <td>{{ $kardex->quantity }}</td>
                                                             <td>${{ $kardex->price }}</td>
-                                                            <td>${{ $kardex->balance }}</td>
+                                                            <td>{{ $kardex->balance }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
