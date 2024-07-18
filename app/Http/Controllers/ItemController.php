@@ -176,18 +176,22 @@ class ItemController extends Controller
     {
         $items = Item::all();
         $date = date('d/m/Y H:i:s');
-
+    
         $data = [
             'title' => 'Registros de Ítems',
             'date' => $date,
             'items' => $items
         ];
-
+    
         $pdf = PDF::loadView('modules.items.pdf', $data);
-        $pdfName = "Ítems - {$date}.pdf";
-
+    
+        // Formatear la fecha para que no contenga caracteres no permitidos en el nombre del archivo
+        $formattedDate = date('Y-m-d_H-i-s');
+        $pdfName = "Items_{$formattedDate}.pdf";
+    
         return $pdf->download($pdfName);
     }
+    
 
     // public function exportExcel()
     // {

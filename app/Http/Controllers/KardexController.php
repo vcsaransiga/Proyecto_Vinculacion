@@ -139,20 +139,23 @@ class KardexController extends Controller
 
     public function generatePDF()
     {
-        $kardexEntries = Kardex::all();
+        // Ordena los registros por fecha en orden descendente
+        $kardexEntries = Kardex::orderBy('date', 'desc')->get();
         $date = date('d/m/Y H:i:s');
-
+    
         $data = [
             'title' => 'Registros de kardex',
             'date' => $date,
             'kardexEntries' => $kardexEntries
         ];
-
-        $pdf = PDF::loadView('modules.kardex.pdf', $data);
+    
+        $pdf = PDF::loadView('modules.kardex.pdf', $data)
+            ->setPaper('a4', 'landscape');
         $pdfName = "Kardex - {$date}.pdf";
-
+    
         return $pdf->download($pdfName);
     }
+    
 
     // public function exportExcel()
     // {

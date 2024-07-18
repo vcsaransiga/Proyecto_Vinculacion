@@ -129,7 +129,8 @@ class TaskController extends Controller
             'tasks' => $tasks
         ];
 
-        $pdf = PDF::loadView('modules.tasks.pdf', $data);
+        $pdf = PDF::loadView('modules.tasks.pdf', $data)
+              ->setPaper('a4', 'landscape'); // Configurar el formato horizontal
         $pdfName = "Tareas - {$date}.pdf";
 
         return $pdf->download($pdfName);
