@@ -38,54 +38,52 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
             'status' => 'required|boolean',
-            'password' => 'required|string',
-            'roles' => 'nullable|array',
-            'roles.*' => 'exists:roles,name',
+            'roles' => 'required|array',
         ], [
             'name.required' => 'El nombre es obligatorio',
-            'name.min' => 'El nombre debe tener al menos 3 caracteres',
-            'name.max' => 'El nombre no puede tener más de 255 caracteres',
             'last_name.required' => 'El apellido es obligatorio',
-            'last_name.min' => 'El apellido debe tener al menos 3 caracteres',
-            'last_name.max' => 'El apellido no puede tener más de 255 caracteres',
             'email.required' => 'El correo electrónico es obligatorio',
             'email.email' => 'Debe ser una dirección de correo electrónico válida',
-            'email.max' => 'El correo electrónico no puede tener más de 255 caracteres',
             'email.unique' => 'El correo electrónico ya está registrado',
             'password.required' => 'La contraseña es obligatoria',
-            'password.min' => 'La contraseña debe tener al menos 7 caracteres',
-            'password.max' => 'La contraseña no puede tener más de 255 caracteres',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres',
+            'password.confirmed' => 'La confirmación de la contraseña no coincide',
+            'status.required' => 'El estado es obligatorio',
+            'roles.required' => 'Debes seleccionar al menos un rol',
         ]);
-
+    
+        // Crea el usuario
         $user = User::create($request->all());
-
-        if ($request->has('roles')) {
-            $user->assignRole($request->roles);
-        }
-
+        $user->assignRole($request->roles);
+    
         return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
     }
 
     public function update(Request $request, User $user)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'last_name' => 'nullable|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'telephone' => 'nullable|string|max:255',
-            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'status' => 'nullable|boolean',
-            'roles' => 'nullable|array',
-            'roles.*' => 'exists:roles,name',
-        ]);
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        'status' => 'required|boolean',
+        'roles' => 'required|array',
+    ], [
+        'name.required' => 'El nombre es obligatorio',
+        'last_name.required' => 'El apellido es obligatorio',
+        'email.required' => 'El correo electrónico es obligatorio',
+        'email.email' => 'Debe ser una dirección de correo electrónico válida',
+        'email.unique' => 'El correo electrónico ya está registrado',
+        'status.required' => 'El estado es obligatorio',
+        'roles.required' => 'Debes seleccionar al menos un rol',
+    ]);
 
-        $user->update($request->all());
-        $user->syncRoles($request->roles);
+    $user->update($request->all());
+    $user->syncRoles($request->roles);
 
-        return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente.');
+    return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente.');
     }
-
 
     public function search(Request $request)
     {
