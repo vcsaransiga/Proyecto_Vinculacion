@@ -3,25 +3,35 @@
         <x-app.navbar />
         <div class="px-5 py-4 container-fluid">
             <div class="container">
-                <div class="row">
-                    <div class="col border">
-                        <canvas id="eventChart"></canvas>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="eventChart"></canvas>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col border d-flex align-items-center">
-                        <canvas id="modelChart"></canvas>
-
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="modelChart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col border">
-                        <canvas id="userChart"></canvas>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <canvas id="userChart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 </x-app-layout>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
