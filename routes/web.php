@@ -279,6 +279,7 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
         Route::get('/audits', [AuditController::class, 'index'])->name('audits.index');
         Route::get('/audits/charts', [AuditController::class, 'charts'])->name('audits.charts');
         Route::get('/audits/pdf', [AuditController::class, 'generatePDF'])->name('audits.pdf');
+        Route::get('/audits/export-excel', [AuditController::class, 'exportExcel'])->name('audits.download-excel');
     });
 
     // Route::group(['middleware' => ['role:administrador|coordinador']], function () {
