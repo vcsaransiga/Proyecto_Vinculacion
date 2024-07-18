@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ItemExport;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -29,18 +30,31 @@ class ItemController extends Controller
         $sortField = $request->input('sort', 'created_at');
         $sortDirection = $request->input('direction', 'asc');
 
-        $items = Item::orderBy($sortField, $sortDirection)->get();
+        /** @var \App\Models\User */
+        $user = Auth::user();
+
+        if ($user->hasRole('jefe de proyecto')) {
+            $responsible = Responsible::where('id_user', $user->id)->first();
+
+            if ($responsible) {
+                $projectIds = Project::where('id_responsible', $responsible->id_responsible)->pluck('id_pro');
+                $items = Item::whereIn('id_pro', $projectIds)->orderBy($sortField, $sortDirection)->get();
+                $projects = Project::whereIn('id_pro', $projectIds)->get();
+            } else {
+                $items = collect(); // Empty collection if no responsible found
+                $projects = collect(); // Empty collection if no responsible found
+            }
+        } else {
+            $items = Item::orderBy($sortField, $sortDirection)->get();
+            $projectIds = $items->pluck('id_pro')->unique();
+            $projects = Project::whereIn('id_pro', $projectIds)->get();
+        }
 
         $categories = CategoryItem::all();
         $units = MeasurementUnit::all();
-        $projectIds = $items->pluck('id_pro')->unique();
-
-        $projects = Project::whereIn('id_pro', $projectIds)->get();
-
 
         return view('modules.items.index', compact('items', 'categories', 'units', 'projects', 'sortField', 'sortDirection'));
     }
-
 
 
     public function list()
