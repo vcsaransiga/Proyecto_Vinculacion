@@ -268,7 +268,6 @@
                 </div>
             </div>
         </div>
-        <x-app.footer />
     </main>
 
     <!-- Create User Modal -->

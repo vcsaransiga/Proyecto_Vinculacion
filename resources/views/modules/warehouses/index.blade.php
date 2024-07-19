@@ -209,7 +209,6 @@
                 </div>
             </div>
         </div>
-        <x-app.footer />
     </main>
 
     <!-- Create Warehouse Modal -->
