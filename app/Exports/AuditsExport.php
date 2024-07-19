@@ -2,51 +2,37 @@
 
 namespace App\Exports;
 
-use App\Models\User;
+use App\Models\Audit;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class UserExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
+class AuditsExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
 {
-    /**
-     * Retrieve all users.
-     *
-     * @return \Illuminate\Support\Collection
-     */
     public function collection()
     {
-        return User::all(['id', 'name', 'last_name', 'email', 'telephone', 'status']);
+        return Audit::select('id', 'user_id', 'event', 'auditable_type', 'auditable_id', 'old_values', 'new_values', 'created_at')->get();
     }
 
-    /**
-     * Define the headings for the Excel sheet.
-     *
-     * @return array
-     */
     public function headings(): array
     {
         return [
-            'ID Usuario',
-            'Nombre',
-            'Apellido',
-            'Correo Electrónico',
-            'Teléfono',
-            'Estado',
+            'ID',
+            'ID de Usuario',
+            'Evento',
+            'Tipo de Audit',
+            'ID de Auditado',
+            'Valores Anteriores',
+            'Nuevos Valores',
+            'Fecha de Creación',
         ];
     }
 
-    /**
-     * Apply styles to the worksheet.
-     *
-     * @param Worksheet $sheet
-     * @return array
-     */
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:F1')->applyFromArray([
+        $sheet->getStyle('A1:H1')->applyFromArray([
             'font' => [
                 'bold' => true,
             ],
@@ -57,7 +43,7 @@ class UserExport implements FromCollection, WithHeadings, WithStyles, ShouldAuto
             ],
         ]);
 
-        $sheet->getStyle('A2:F' . $sheet->getHighestRow())->applyFromArray([
+        $sheet->getStyle('A2:H' . $sheet->getHighestRow())->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,

@@ -42,61 +42,69 @@
                             <div class="content">
                                 <div class="container">
                                     <div class="row" id="project-list">
-                                        @foreach ($projects as $project)
-                                            <div class="col-xs-10 col-sm-3 mb-4 project-item">
-                                                <div class="card">
-                                                    <a class="img-card"
-                                                        href="{{ route('projects.show', $project->id_pro) }}">
+                                        @if ($projects->isEmpty())
+                                            <div class="alert alert-warning" role="alert">
+                                                No tienes proyectos asignados.
+                                            </div>
+                                        @else
+                                            @foreach ($projects as $project)
+                                                <div class="col-xs-10 col-sm-3 mb-4 project-item">
+                                                    <div class="card">
+                                                        <a class="img-card"
+                                                            href="{{ route('projects.show', $project->id_pro) }}">
 
-                                                        @if (is_null($project->image))
-                                                            <img src="../assets/img/projects/default.png" />
-                                                        @else
-                                                            {{-- <img src="{{ asset('storage/' . $project->image }} )"/> --}}
-                                                            <img src="{{ asset('storage/' . $project->image) }}">
-                                                        @endif
+                                                            @if (is_null($project->image))
+                                                                <img src="../assets/img/projects/default.png" />
+                                                            @else
+                                                                {{-- <img src="{{ asset('storage/' . $project->image }} )"/> --}}
+                                                                <img src="{{ asset('storage/' . $project->image) }}">
+                                                            @endif
 
-                                                    </a>
-                                                    <div class="card-content">
-                                                        <h4 class="card-title">
-                                                            <a href="{{ route('projects.show', $project->id_pro) }}">
-                                                                {{ $project->name }}
-                                                            </a>
-                                                        </h4>
-                                                        <p class="text-sm">
-                                                            <strong>Responsable:
-                                                            </strong>{{ $project->responsible->name }}
-                                                            {{ $project->responsible->last_name }}
-                                                        </p>
-                                                        <p class="text-sm">
-                                                            <strong>Módulos: </strong>
-                                                            @foreach ($project->modules as $module)
-                                                                {{ $module->name }}@if (!$loop->last)
-                                                                    ,
-                                                                @endif
-                                                            @endforeach
-                                                        </p>
-                                                        <p class="text-sm">
-                                                            <strong>Estado: </strong>{{ ucfirst($project->status) }}
-                                                        </p>
-                                                        <p class="text-sm">
-                                                            <strong>Presupuesto:
-                                                            </strong>${{ number_format($project->budget, 2) }}
-                                                        </p>
-                                                    </div>
-                                                    <div class="px-3 pb-3">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: {{ $project->progress }}%"
-                                                                aria-valuenow="{{ $project->progress }}"
-                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </a>
+                                                        <div class="card-content">
+                                                            <h4 class="card-title">
+                                                                <a
+                                                                    href="{{ route('projects.show', $project->id_pro) }}">
+                                                                    {{ $project->name }}
+                                                                </a>
+                                                            </h4>
+                                                            <p class="text-sm">
+                                                                <strong>Responsable:
+                                                                </strong>{{ $project->responsible->name }}
+                                                                {{ $project->responsible->last_name }}
+                                                            </p>
+                                                            <p class="text-sm">
+                                                                <strong>Módulos: </strong>
+                                                                @foreach ($project->modules as $module)
+                                                                    {{ $module->name }}@if (!$loop->last)
+                                                                        ,
+                                                                    @endif
+                                                                @endforeach
+                                                            </p>
+                                                            <p class="text-sm">
+                                                                <strong>Estado:
+                                                                </strong>{{ ucfirst($project->status) }}
+                                                            </p>
+                                                            <p class="text-sm">
+                                                                <strong>Presupuesto:
+                                                                </strong>${{ number_format($project->budget, 2) }}
+                                                            </p>
                                                         </div>
-                                                        <div class="mt-3">
-                                                            <span class="text1">{{ $project->progress }}%</span>
+                                                        <div class="px-3 pb-3">
+                                                            <div class="progress">
+                                                                <div class="progress-bar" role="progressbar"
+                                                                    style="width: {{ $project->progress }}%"
+                                                                    aria-valuenow="{{ $project->progress }}"
+                                                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                            <div class="mt-3">
+                                                                <span class="text1">{{ $project->progress }}%</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>

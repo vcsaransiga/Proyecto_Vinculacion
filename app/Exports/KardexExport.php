@@ -2,23 +2,23 @@
 
 namespace App\Exports;
 
-use App\Models\User;
+use App\Models\Kardex;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class UserExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
+class KardexExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
 {
     /**
-     * Retrieve all users.
+     * Retrieve all Kardex entries.
      *
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return User::all(['id', 'name', 'last_name', 'email', 'telephone', 'status']);
+        return Kardex::all(['id_kardex', 'id_ope', 'id_ware', 'id_pro', 'id_item', 'detail', 'date', 'quantity', 'price', 'balance']);
     }
 
     /**
@@ -29,12 +29,16 @@ class UserExport implements FromCollection, WithHeadings, WithStyles, ShouldAuto
     public function headings(): array
     {
         return [
-            'ID Usuario',
-            'Nombre',
-            'Apellido',
-            'Correo Electrónico',
-            'Teléfono',
-            'Estado',
+            'ID Kardex',
+            'ID Operación',
+            'ID Bodega',
+            'ID Proyecto',
+            'ID Ítem',
+            'Detalle',
+            'Fecha',
+            'Cantidad',
+            'Precio',
+            'Balance',
         ];
     }
 
@@ -46,7 +50,7 @@ class UserExport implements FromCollection, WithHeadings, WithStyles, ShouldAuto
      */
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:F1')->applyFromArray([
+        $sheet->getStyle('A1:J1')->applyFromArray([
             'font' => [
                 'bold' => true,
             ],
@@ -57,7 +61,7 @@ class UserExport implements FromCollection, WithHeadings, WithStyles, ShouldAuto
             ],
         ]);
 
-        $sheet->getStyle('A2:F' . $sheet->getHighestRow())->applyFromArray([
+        $sheet->getStyle('A2:J' . $sheet->getHighestRow())->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,

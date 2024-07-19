@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ItemExport;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ItemController extends Controller
 {
@@ -29,18 +31,31 @@ class ItemController extends Controller
         $sortField = $request->input('sort', 'created_at');
         $sortDirection = $request->input('direction', 'asc');
 
-        $items = Item::orderBy($sortField, $sortDirection)->get();
+        /** @var \App\Models\User */
+        $user = Auth::user();
+
+        if ($user->hasRole('jefe de proyecto')) {
+            $responsible = Responsible::where('id_user', $user->id)->first();
+
+            if ($responsible) {
+                $projectIds = Project::where('id_responsible', $responsible->id_responsible)->pluck('id_pro');
+                $items = Item::whereIn('id_pro', $projectIds)->orderBy($sortField, $sortDirection)->get();
+                $projects = Project::whereIn('id_pro', $projectIds)->get();
+            } else {
+                $items = collect(); // Empty collection if no responsible found
+                $projects = collect(); // Empty collection if no responsible found
+            }
+        } else {
+            $items = Item::orderBy($sortField, $sortDirection)->get();
+            $projectIds = $items->pluck('id_pro')->unique();
+            $projects = Project::whereIn('id_pro', $projectIds)->get();
+        }
 
         $categories = CategoryItem::all();
         $units = MeasurementUnit::all();
-        $projectIds = $items->pluck('id_pro')->unique();
-
-        $projects = Project::whereIn('id_pro', $projectIds)->get();
-
 
         return view('modules.items.index', compact('items', 'categories', 'units', 'projects', 'sortField', 'sortDirection'));
     }
-
 
 
     public function list()
@@ -58,6 +73,7 @@ class ItemController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
+            'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
         ]);
 
@@ -73,6 +89,7 @@ class ItemController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'date' => $request->date,
+            'price' => $request->price,
             'stock' => $request->stock,
         ]);
 
@@ -102,15 +119,23 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'id_catitem' => 'required|string|max:255',
             'id_unit' => 'required|string|max:255',
             'id_pro' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
+            'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
         ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors()->all();
+            $errorMessage = implode('<br>', $errors);
+            return redirect()->back()->with('error', $errorMessage);
+        }
+
 
         $item->update([
             'id_catitem' => $request->id_catitem,
@@ -119,6 +144,7 @@ class ItemController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'date' => $request->date,
+            'price' => $request->price,
             'stock' => $request->stock,
         ]);
 
@@ -149,7 +175,7 @@ class ItemController extends Controller
         $item = Item::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('items.index')->with('success', 'Ítem eliminado correctamente.');
+        return redirect()->back()->with('success', 'Ítem eliminado correctamente.');
     }
 
     public function getTags($id)
@@ -170,15 +196,19 @@ class ItemController extends Controller
         ];
 
         $pdf = PDF::loadView('modules.items.pdf', $data);
-        $pdfName = "Ítems - {$date}.pdf";
+
+        // Formatear la fecha para que no contenga caracteres no permitidos en el nombre del archivo
+        $formattedDate = date('Y-m-d_H-i-s');
+        $pdfName = "Items_{$formattedDate}.pdf";
 
         return $pdf->download($pdfName);
     }
 
-    // public function exportExcel()
-    // {
-    //     $date = date('d-m-Y H:i:s');
-    //     $excelName = "Ítems {$date}.xlsx";
-    //     return Excel::download(new ItemExport, $excelName);
-    // }
+
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Ítems {$date}.xlsx";
+        return Excel::download(new ItemExport, $excelName);
+    }
 }

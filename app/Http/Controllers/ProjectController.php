@@ -18,6 +18,9 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProjectExport;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class ProjectController extends Controller
 {
@@ -26,12 +29,23 @@ class ProjectController extends Controller
         $sortField = $request->input('sort', 'id_pro');
         $sortDirection = $request->input('direction', 'asc');
 
-        $projects = Project::with('responsible')
-            ->orderBy($sortField, $sortDirection)
-            ->get();
+        /** @var \App\Models\User */
+        $user = Auth::user();
 
+        if ($user->hasRole('jefe de proyecto')) {
+            $responsible = Responsible::where('id_user', $user->id)->first();
+            $projects = Project::with('responsible')
+                ->where('id_responsible', $responsible->id_responsible)
+                ->orderBy($sortField, $sortDirection)
+                ->get();
+        } else {
+            // Lógica para otros roles
+            $projects = Project::with('responsible')
+                ->orderBy($sortField, $sortDirection)
+                ->get();
+        }
 
-        $responsibles = Responsible::where('status', true) //solo responsables activos y con una cuenta de usuario
+        $responsibles = Responsible::where('status', true)
             ->whereNotNull('id_user')
             ->get();
 
@@ -40,16 +54,36 @@ class ProjectController extends Controller
         return view('modules.projects.index', compact('projects', 'responsibles', 'modules', 'sortField', 'sortDirection'));
     }
 
-
     public function list()
     {
         $projects = Project::with('responsible')->get();
+
+        /** @var \App\Models\User */
+        $user = Auth::user();
+
+        if ($user->hasRole('jefe de proyecto')) {
+            $responsible = Responsible::where('id_user', $user->id)->first();
+
+            if ($responsible) {
+                $projects = Project::with('responsible')
+                    ->where('id_responsible', $responsible->id_responsible)
+                    ->get();
+            } else {
+                // Manejo de la situación cuando el usuario no está registrado en 'responsibles'
+                Auth::logout();
+                return redirect('/sign-in')->with('error', 'No estás registrado como responsable. Contacta con un administrador para que así se te puedan asignar proyectos.');
+            }
+        } else {
+            // Lógica para otros roles
+            $projects = Project::with('responsible')->get();
+        }
 
         $responsibles = Responsible::where('status', true)
             ->whereNotNull('id_user')
             ->get();
 
         $modules = Module::where('status', true)->get();
+
         return view('modules.projects.list', compact('projects', 'responsibles', 'modules'));
     }
 
@@ -158,6 +192,7 @@ class ProjectController extends Controller
 
         return view('modules.projects.show', compact('project', 'responsibles', 'modules', 'items', 'categoriesItem', 'units', 'operationTypes', 'warehouses'));
     }
+
     public function edit($id)
     {
         $project = Project::findOrFail($id);
