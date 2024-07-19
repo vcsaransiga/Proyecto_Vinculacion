@@ -538,14 +538,10 @@
         var cedula = document.getElementById('card_id').value.trim();
         var messageElement = document.getElementById('validationMessage');
 
-        if (validarCedula(cedula)) {
-            messageElement.textContent = 'La cédula es válida.';
-            messageElement.className = 'form-text text-success';
-        } else {
+        if (!validarCedula(cedula)) {
             messageElement.textContent = 'La cédula es inválida.';
             messageElement.className = 'form-text text-danger';
-        
-    }});
+        } });
 </script>
 
 
