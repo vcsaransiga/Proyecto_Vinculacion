@@ -134,7 +134,7 @@ class KardexController extends Controller
         $kardex = Kardex::findOrFail($id);
         $kardex->delete();
 
-        return redirect()->route('kardex.index')->with('success', 'Entrada de kardex eliminada exitosamente.');
+        return redirect()->back()->with('success', 'Entrada de kardex eliminada exitosamente.');
     }
 
     public function generatePDF()
@@ -142,20 +142,20 @@ class KardexController extends Controller
         // Ordena los registros por fecha en orden descendente
         $kardexEntries = Kardex::orderBy('date', 'desc')->get();
         $date = date('d/m/Y H:i:s');
-    
+
         $data = [
             'title' => 'Registros de kardex',
             'date' => $date,
             'kardexEntries' => $kardexEntries
         ];
-    
+
         $pdf = PDF::loadView('modules.kardex.pdf', $data)
             ->setPaper('a4', 'landscape');
         $pdfName = "Kardex - {$date}.pdf";
-    
+
         return $pdf->download($pdfName);
     }
-    
+
 
     // public function exportExcel()
     // {

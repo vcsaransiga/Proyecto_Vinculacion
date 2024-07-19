@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ItemExport;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ItemController extends Controller
 {
@@ -118,7 +119,7 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'id_catitem' => 'required|string|max:255',
             'id_unit' => 'required|string|max:255',
             'id_pro' => 'required|string|max:255',
@@ -128,6 +129,13 @@ class ItemController extends Controller
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
         ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors()->all();
+            $errorMessage = implode('<br>', $errors);
+            return redirect()->back()->with('error', $errorMessage);
+        }
+
 
         $item->update([
             'id_catitem' => $request->id_catitem,
@@ -167,7 +175,7 @@ class ItemController extends Controller
         $item = Item::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('items.index')->with('success', 'Ítem eliminado correctamente.');
+        return redirect()->back()->with('success', 'Ítem eliminado correctamente.');
     }
 
     public function getTags($id)
