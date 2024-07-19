@@ -228,6 +228,9 @@
                                                         <th>Cantidad</th>
                                                         <th>Precio</th>
                                                         <th>Balance</th>
+                                                        @role('rector|jefe de proyecto')
+                                                            <th>Acciones</th>
+                                                        @endrole
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -255,6 +258,26 @@
                                                             <td>{{ $kardex->quantity }}</td>
                                                             <td>${{ $kardex->price }}</td>
                                                             <td>{{ $kardex->balance }}</td>
+                                                            @role('rector|jefe de proyecto')
+                                                                <td>
+                                                                    <button type="button"
+                                                                        class="btn btn-warning pl-3 pr-2"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#editKardexModal"
+                                                                        data-kardex="{{ json_encode($kardex) }}">
+                                                                        <i class="fas fa-pencil me-2"></i>
+                                                                    </button>
+                                                                    <form
+                                                                        action="{{ route('kardex.destroy', $kardex->id_kardex) }}"
+                                                                        method="POST" style="display:inline;">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger pl-3 pr-2"> <i
+                                                                                class="fas fa-trash me-2"></i></button>
+                                                                    </form>
+                                                                </td>
+                                                            @endrole
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -283,24 +306,29 @@
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
+                                                        <th>Nombre</th>
                                                         <th>Categoría</th>
                                                         <th>Unidad</th>
-                                                        <th>Nombre</th>
                                                         <th>Fecha</th>
+                                                        <th>Precio</th>
                                                         <th>Stock</th>
                                                         <th>Etiquetas</th>
+                                                        @role('rector|jefe de proyecto')
+                                                            <th>Acciones</th>
+                                                        @endrole
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($project->items as $item)
                                                         <tr>
                                                             <td>{{ $item->id_item }}</td>
+                                                            <td>{{ $item->name }}</td>
                                                             <td>{{ $item->category->name }}</td>
                                                             <td>{{ $item->unit->name }}</td>
-                                                            <td>{{ $item->name }}</td>
                                                             <td>{{ \Carbon\Carbon::parse($item->date)->format('d-m-Y') }}
-                                                            <td>{{ $item->stock }}</td>
                                                             </td>
+                                                            <td>${{ $item->price }}</td>
+                                                            <td>{{ $item->stock }}</td>
                                                             <td>
                                                                 <div class="tw-flex tw-flex-wrap tw-gap-1">
                                                                     @foreach ($item->tags as $tag)
@@ -311,6 +339,34 @@
                                                                     @endforeach
                                                                 </div>
                                                             </td>
+                                                            @role('rector|jefe de proyecto')
+                                                                <td>
+                                                                    <button type="button"
+                                                                        class="btn btn-warning pl-3 pr-2"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#editItemModal"
+                                                                        data-item-id="{{ $item->id_item }}"
+                                                                        data-item-name="{{ $item->name }}"
+                                                                        data-item-description="{{ $item->description }}"
+                                                                        data-item-date="{{ $item->date }}"
+                                                                        data-item-category="{{ $item->id_catitem }}"
+                                                                        data-item-unit="{{ $item->id_unit }}"
+                                                                        data-item-price="{{ $item->price }}"
+                                                                        data-item-stock="{{ $item->stock }}">
+                                                                        <i class="fas fa-pencil me-2"></i>
+                                                                    </button>
+                                                                    <form
+                                                                        action="{{ route('items.destroy', $item->id_item) }}"
+                                                                        method="POST" style="display:inline;">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger pl-3 pr-2">
+                                                                            <i class="fas fa-trash me-2"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                </td>
+                                                            @endrole
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -617,6 +673,10 @@
                             <input type="date" class="form-control" id="date" name="date" required>
                         </div>
                         <div class="mb-3">
+                            <label for="price" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="price" name="price" step="any" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="stock" class="form-label">Stock</label>
                             <input type="number" class="form-control" id="stock" name="stock" required>
                         </div>
@@ -630,6 +690,82 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Item Modal -->
+    <div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editItemModalLabel">Editar ítem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editItemForm" method="POST" action="">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="edit_id_catitem" class="form-label">Categoría</label>
+                                <select class="form-control" id="edit_id_catitem" name="id_catitem" required>
+                                    @foreach ($categoriesItem as $category)
+                                        <option value="{{ $category->id_catitem }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#createCategoryItemModal">Agregar Categoría</button>
+                            </div>
+                        </div>
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="edit_id_unit" class="form-label">Unidad de Medida</label>
+                                <select class="form-control" id="edit_id_unit" name="id_unit" required>
+                                    @foreach ($units as $unit)
+                                        <option value="{{ $unit->id_unit }}">{{ $unit->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#createUnitModal">Agregar Unidad</button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="id_pro" value="{{ $project->id_pro }}">
+                        <div class="mb-3">
+                            <label for="edit_name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="edit_name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_description" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="edit_description" name="description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_date" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="edit_date" name="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_price" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="edit_price" name="price" step="any" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_stock" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="edit_stock" name="stock" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tags" class="form-label">Etiquetas</label>
+                            <div id="SelectBoxEdit" style="width: 100%;"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Create Kardex Modal -->
     <div class="modal fade" id="createKardexModal" tabindex="-1" aria-labelledby="createKardexModalLabel"
         aria-hidden="true">
@@ -697,6 +833,83 @@
                             <input type="number" class="form-control" id="balance" name="balance" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Kardex Modal -->
+    <div class="modal fade" id="editKardexModal" tabindex="-1" aria-labelledby="editKardexModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editKardexModalLabel">Editar Entrada de Kardex</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editKardexForm" method="POST" action="">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3 d-flex">
+                            <div class="me-2">
+                                <label for="edit_id_ope" class="form-label">Tipo de Operación</label>
+                                <select class="form-control" id="edit_id_ope" name="id_ope" required>
+                                    @foreach ($operationTypes as $operationType)
+                                        <option value="{{ $operationType->id_ope }}">
+                                            {{ $operationType->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="pt-4">
+                                <a href="{{ route('operations.index') }}" class="btn btn-info">Agregar Tipo de
+                                    Operación</a>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_id_ware" class="form-label">Almacén</label>
+                            <select class="form-control" id="edit_id_ware" name="id_ware" required>
+                                @foreach ($warehouses as $warehouse)
+                                    <option value="{{ $warehouse->id_ware }}">
+                                        {{ $warehouse->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <input type="hidden" name="id_pro" value="{{ $project->id_pro }}">
+                        <div class="mb-3">
+                            <label for="edit_id_item" class="form-label">Ítem</label>
+                            <select class="form-control" id="edit_id_item" name="id_item" required>
+                                @foreach ($items as $item)
+                                    <option value="{{ $item->id_item }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_detail" class="form-label">Detalle</label>
+                            <textarea class="form-control" id="edit_detail" name="detail" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_date" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="edit_date" name="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_quantity" class="form-label">Cantidad</label>
+                            <input type="number" class="form-control" id="edit_quantity" name="quantity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_price" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="edit_price" name="price"
+                                step="any" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_balance" class="form-label">Balance</label>
+                            <input type="number" class="form-control" id="edit_balance" name="balance" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
             </div>
@@ -817,6 +1030,74 @@
             modalEndDateInput.value = task.end_date;
             modalPercentageInput.value = task.percentage;
             modalStatusInput.value = task.status;
+        });
+
+
+        var editKardexModal = document.getElementById('editKardexModal');
+        editKardexModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var kardex = JSON.parse(button.getAttribute('data-kardex'));
+
+            var modalForm = editKardexModal.querySelector('form');
+            modalForm.action = '/kardex/' + kardex.id_kardex;
+
+            modalForm.querySelector('#edit_kardex_operation').value = kardex.operation_type_id;
+            modalForm.querySelector('#edit_kardex_warehouse').value = kardex.warehouse_id;
+            modalForm.querySelector('#edit_kardex_item').value = kardex.item_id;
+            modalForm.querySelector('#edit_kardex_detail').value = kardex.detail;
+            modalForm.querySelector('#edit_kardex_quantity').value = kardex.quantity;
+            modalForm.querySelector('#edit_kardex_price').value = kardex.price;
+            modalForm.querySelector('#edit_kardex_date').value = kardex.date;
+        });
+
+        var editItemModal = document.getElementById('editItemModal');
+        editItemModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var itemId = button.getAttribute('data-item-id');
+            var itemName = button.getAttribute('data-item-name');
+            var itemDescription = button.getAttribute('data-item-description');
+            var itemDate = button.getAttribute('data-item-date');
+            var itemCategory = button.getAttribute('data-item-category');
+            var itemUnit = button.getAttribute('data-item-unit');
+            var itemPrice = button.getAttribute('data-item-price');
+            var itemStock = button.getAttribute('data-item-stock');
+
+            var modalForm = editItemModal.querySelector('form');
+            modalForm.action = '/info/items/' + itemId;
+
+            var modalNameInput = editItemModal.querySelector('#edit_name');
+            var modalDescriptionInput = editItemModal.querySelector('#edit_description');
+            var modalDateInput = editItemModal.querySelector('#edit_date');
+            var modalCategoryInput = editItemModal.querySelector('#edit_id_catitem');
+            var modalUnitInput = editItemModal.querySelector('#edit_id_unit');
+            var modalPriceInput = editItemModal.querySelector('#edit_price');
+            var modalStockInput = editItemModal.querySelector('#edit_stock');
+
+            modalNameInput.value = itemName;
+            modalDescriptionInput.value = itemDescription;
+            modalDateInput.value = itemDate;
+            modalCategoryInput.value = itemCategory;
+            modalUnitInput.value = itemUnit;
+            modalPriceInput.value = itemPrice;
+            modalStockInput.value = itemStock;
+
+            $.ajax({
+                url: '/items/' + itemId + '/tags',
+                method: 'GET',
+                success: function(data) {
+                    $('#SelectBoxEdit').selectit({
+                        fieldname: 'tags[]',
+                        values: data.tags
+                    });
+                }
+            });
+        });
+
+        // ocultar tags
+        editItemModal.addEventListener('hidden.bs.modal', function(event) {
+            console.log("HOLA!");
+            $('#SelectBoxEdit').empty();
+
         });
 
         const menu = document.getElementById('menu');

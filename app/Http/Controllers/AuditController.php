@@ -58,10 +58,17 @@ class AuditController extends Controller
 
         $modelNames = $modifiedModels->pluck('auditable_type');
         $modelCounts = $modifiedModels->pluck('count');
-
-        return view('modules.audits.charts', compact('eventCountsData', 'userNames', 'userCounts', 'modelNames', 'modelCounts'));
+        $users = User::all();
+        return view('modules.audits.charts', compact('eventCountsData', 'userNames', 'userCounts', 'modelNames', 'modelCounts', 'users'));
     }
 
+
+    public function getUserActivity($userId)
+    {
+        $activityCount = Audit::where('user_id', $userId)->count();
+
+        return response()->json(['count' => $activityCount]);
+    }
 
     public function generatePDF()
     {

@@ -134,7 +134,7 @@ class KardexController extends Controller
         $kardex = Kardex::findOrFail($id);
         $kardex->delete();
 
-        return redirect()->route('kardex.index')->with('success', 'Entrada de kardex eliminada exitosamente.');
+        return redirect()->back()->with('success', 'Entrada de kardex eliminada exitosamente.');
     }
 
     public function generatePDF()
@@ -157,10 +157,10 @@ class KardexController extends Controller
     }
 
 
-    public function exportExcel()
-    {
-        $date = date('d-m-Y H:i:s');
-        $excelName = "Kardex {$date}.xlsx";
-        return Excel::download(new KardexExport, $excelName);
-    }
+    // public function exportExcel()
+    // {
+    //     $date = date('d-m-Y H:i:s');
+    //     $excelName = "Kardex {$date}.xlsx";
+    //     return Excel::download(new KardexExport, $excelName);
+    // }
 }
