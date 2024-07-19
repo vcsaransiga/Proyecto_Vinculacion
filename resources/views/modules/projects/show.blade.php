@@ -811,7 +811,7 @@
                         <div class="mb-3">
                             <label for="id_item" class="form-label">Ítem</label>
                             <select class="form-control" id="id_item" name="id_item" required>
-                                @foreach ($items as $item)
+                                @foreach ($project->items as $item)
                                     <option value="{{ $item->id_item }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
