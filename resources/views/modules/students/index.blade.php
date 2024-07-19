@@ -225,7 +225,8 @@
                                                         data-student-card_id="{{ $student->card_id }}"
                                                         data-student-name="{{ $student->name }}"
                                                         data-student-last_name="{{ $student->last_name }}"
-                                                        data-student-status="{{ $student->status }}">
+                                                        data-student-status="{{ $student->status }}"
+                                                        data-student-modules="{{ $student->modules->pluck('id_mod') }}">
                                                         <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" fill="currentColor"
@@ -285,7 +286,6 @@
                 </div>
             </div>
         </div>
-        <x-app.footer />
     </main>
 
     <!-- Modal modules-->
@@ -328,6 +328,7 @@
                             <label for="card_id" class="form-label">Cédula</label>
                             <input type="text" class="form-control" id="card_id" name="card_id" required>
                         </div>
+                        <div id="validationMessage"></div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -342,6 +343,18 @@
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modules" class="form-label">Módulos:</label>
+                            @foreach ($modules as $module)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $module->id_mod }}"
+                                        id="module{{ $module->id_mod }}" name="modules[]">
+                                    <label class="form-check-label" for="module{{ $module->id_mod }}">
+                                        {{ $module->name }}
+                                    </label>
+                                </div>
+                            @endforeach
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -384,6 +397,18 @@
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="edit_modules" class="form-label">Módulos:</label>
+                            @foreach ($modules as $module)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $module->id_mod }}"
+                                        id="edit_module{{ $module->id_mod }}" name="modules[]">
+                                    <label class="form-check-label" for="edit_module{{ $module->id_mod }}">
+                                        {{ $module->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
@@ -395,28 +420,41 @@
 </x-app-layout>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var editStudentModal = document.getElementById('editStudentModal');
-        editStudentModal.addEventListener('show.bs.modal', function(event) {
-            var button = event.relatedTarget;
-            var studentId = button.getAttribute('data-student-id');
-            var studentCardId = button.getAttribute('data-student-card_id');
-            var studentName = button.getAttribute('data-student-name');
-            var studentLastName = button.getAttribute('data-student-last_name');
-            var studentStatus = button.getAttribute('data-student-status');
+    var editStudentModal = document.getElementById('editStudentModal');
+    editStudentModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        var studentId = button.getAttribute('data-student-id');
+        var studentCardId = button.getAttribute('data-student-card_id');
+        var studentName = button.getAttribute('data-student-name');
+        var studentLastName = button.getAttribute('data-student-last_name');
+        var studentStatus = button.getAttribute('data-student-status');
+        var studentModules = JSON.parse(button.getAttribute('data-student-modules'));
 
-            var modalForm = editStudentModal.querySelector('form');
-            modalForm.action = '/info/students/' + studentId;
+        var modalForm = editStudentModal.querySelector('form');
+        modalForm.action = '/info/students/' + studentId;
 
-            var modalCardIdInput = editStudentModal.querySelector('#edit_card_id');
-            var modalNameInput = editStudentModal.querySelector('#edit_name');
-            var modalLastNameInput = editStudentModal.querySelector('#edit_last_name');
-            var modalStatusInput = editStudentModal.querySelector('#edit_status');
+        var modalCardIdInput = editStudentModal.querySelector('#edit_card_id');
+        var modalNameInput = editStudentModal.querySelector('#edit_name');
+        var modalLastNameInput = editStudentModal.querySelector('#edit_last_name');
+        var modalStatusInput = editStudentModal.querySelector('#edit_status');
 
-            modalCardIdInput.value = studentCardId;
-            modalNameInput.value = studentName;
-            modalLastNameInput.value = studentLastName;
-            modalStatusInput.value = studentStatus;
+        modalCardIdInput.value = studentCardId;
+        modalNameInput.value = studentName;
+        modalLastNameInput.value = studentLastName;
+        modalStatusInput.value = studentStatus;
+
+        // Desmarcar todos los checkboxes primero
+        editStudentModal.querySelectorAll('input[name="modules[]"]').forEach(function(checkbox) {
+            checkbox.checked = false;
+        });
+
+        // Marcar los checkboxes de los módulos del estudiante
+        studentModules.forEach(function(moduleId) {
+            var checkbox = editStudentModal.querySelector('input[name="modules[]"][value="' + moduleId +
+                '"]');
+            if (checkbox) {
+                checkbox.checked = true;
+            }
         });
     });
 </script>
@@ -458,6 +496,53 @@
     });
 </script>
 
+<script>
+    function validarCedula(cedula) {
+        if (cedula.length !== 10 || isNaN(cedula)) return false;
+
+        var digito_region = parseInt(cedula.substring(0, 2), 10);
+        if (digito_region < 1 || digito_region > 24) return false;
+
+        var ultimo_digito = parseInt(cedula.substring(9, 10), 10);
+
+        var pares = parseInt(cedula.substring(1, 2), 10) +
+                    parseInt(cedula.substring(3, 4), 10) +
+                    parseInt(cedula.substring(5, 6), 10) +
+                    parseInt(cedula.substring(7, 8), 10);
+
+        var numero1 = parseInt(cedula.substring(0, 1), 10) * 2;
+        if (numero1 > 9) { numero1 -= 9; }
+        var numero3 = parseInt(cedula.substring(2, 3), 10) * 2;
+        if (numero3 > 9) { numero3 -= 9; }
+        var numero5 = parseInt(cedula.substring(4, 5), 10) * 2;
+        if (numero5 > 9) { numero5 -= 9; }
+        var numero7 = parseInt(cedula.substring(6, 7), 10) * 2;
+        if (numero7 > 9) { numero7 -= 9; }
+        var numero9 = parseInt(cedula.substring(8, 9), 10) * 2;
+        if (numero9 > 9) { numero9 -= 9; }
+
+        var impares = numero1 + numero3 + numero5 + numero7 + numero9;
+        var suma_total = pares + impares;
+
+        var primer_digito_suma = String(suma_total).substring(0, 1);
+        var decena = (parseInt(primer_digito_suma, 10) + 1) * 10;
+        var digito_validador = decena - suma_total;
+        if (digito_validador === 10) { digito_validador = 0; }
+
+        return digito_validador === ultimo_digito;
+    }
+
+        document.getElementById('createStudentForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Evita el envío del formulario
+
+        var cedula = document.getElementById('card_id').value.trim();
+        var messageElement = document.getElementById('validationMessage');
+
+        if (!validarCedula(cedula)) {
+            messageElement.textContent = 'La cédula es inválida.';
+            messageElement.className = 'form-text text-danger';
+        } });
+</script>
 
 
 

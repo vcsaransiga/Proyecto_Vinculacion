@@ -5,7 +5,7 @@
         </div>
         <x-app.navbar />
         <div class="px-5 py-4 container-fluid ">
-            <form action="{{ route('profile.update', auth()->user()->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('profile.update', auth()->user()->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mt-5 mb-5 mt-lg-9 row justify-content-center">
@@ -18,11 +18,6 @@
                                         <img class="w-100 h-100 object-fit-cover border-radius-lg shadow-sm"
                                             src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('storage/profile_photos/default.jpg') }}"
                                             id="profileImage" style="cursor:pointer;">
-                                        <input type="file" name="profile_photo" id="profilePhotoInput"
-                                            style="display:none;">
-                                        @error('profile_photo')
-                                            <span class="text-danger text-sm">{{ $message }}</span>
-                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-auto col-8 my-auto">
@@ -39,7 +34,6 @@
                                         </p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -62,10 +56,9 @@
                     <div class="col-lg-9 col-12 ">
                         <div class="card " id="basic-info">
                             <div class="card-header">
-                                <h5>Informacion Basica</h5>
+                                <h5>Información Básica</h5>
                             </div>
                             <div class="pt-0 card-body">
-
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="name">Nombre</label>
@@ -76,17 +69,14 @@
                                         @enderror
                                     </div>
                                     <div class="col-6">
-                                        <label for="email">Correo Electronico</label>
+                                        <label for="email">Correo Electrónico</label>
                                         <input type="email" name="email" id="email" readonly
                                             value="{{ old('email', auth()->user()->email) }}" class="form-control">
-                                        @error('email')
-                                            <span class="text-danger text-sm">{{ $message }}</span>
-                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <label for="location">Apellido</label>
+                                        <label for="last_name">Apellido</label>
                                         <input type="text" name="last_name" id="last_name"
                                             value="{{ old('last_name', auth()->user()->last_name) }}"
                                             class="form-control">
@@ -94,9 +84,8 @@
                                             <span class="text-danger text-sm">{{ $message }}</span>
                                         @enderror
                                     </div>
-
                                     <div class="col-6">
-                                        <label for="phone">Telefono</label>
+                                        <label for="phone">Teléfono</label>
                                         <input type="text" name="phone" id="phone"
                                             value="{{ old('phone', auth()->user()->phone) }}" class="form-control">
                                         @error('phone')
@@ -105,7 +94,7 @@
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <label for="about">Sobre Mi</label>
+                                    <label for="about">Sobre Mí</label>
                                     <textarea name="about" id="about" rows="5" class="form-control">{{ old('about', auth()->user()->about) }}</textarea>
                                     @error('about')
                                         <span class="text-danger text-sm">{{ $message }}</span>
@@ -115,23 +104,14 @@
                                     <input class="form-check-input" type="checkbox" id="two_factor_enabled"
                                         name="two_factor_enabled"
                                         {{ auth()->user()->two_factor_enabled ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="two_factor_enabled">Activar Autenticación de
-                                        Dos Factores</label>
+                                    <label class="form-check-label" for="two_factor_enabled">Activar Autenticación de Dos Factores</label>
                                 </div>
-                                <button type="submit" class="mt-6 mb-0 btn btn-white btn-sm float-end">Guardar
-                                    Cambios</button>
+                                <button type="submit" class="mt-6 mb-0 btn btn-white btn-sm float-end">Guardar Cambios</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-        </div>
     </main>
 </x-app-layout>
-
-<script>
-    document.getElementById('profileImage').onclick = function() {
-        document.getElementById('profilePhotoInput').click();
-    };
-</script>

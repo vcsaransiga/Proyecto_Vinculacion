@@ -24,7 +24,9 @@
                             </a>
                             @role('rector|jefe de proyecto')
                                 <button type="button" class="btn btn-dark btn-primary mr-3" data-bs-toggle="modal"
-                                    data-bs-target="#editProjectModal" data-project="{{ json_encode($project) }}">
+                                    data-bs-target="#editProjectModal"
+                                    data-project-modules="{{ $project->modules->pluck('id_mod') }}"
+                                    data-project="{{ json_encode($project) }}">
                                     <i class="fas fa-pencil me-2"></i> Editar proyecto
                                 </button>
                             @endrole
@@ -674,7 +676,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="price" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="price" name="price" step="any" required>
+                            <input type="number" class="form-control" id="price" name="price" step="any"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="stock" class="form-label">Stock</label>
@@ -748,7 +751,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit_price" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="edit_price" name="price" step="any" required>
+                            <input type="number" class="form-control" id="edit_price" name="price"
+                                step="any" required>
                         </div>
                         <div class="mb-3">
                             <label for="edit_stock" class="form-label">Stock</label>
@@ -966,6 +970,7 @@
         editProjectModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
             var project = JSON.parse(button.getAttribute('data-project'));
+            var projectModules = JSON.parse(button.getAttribute('data-project-modules'));
 
             var modalForm = editProjectModal.querySelector('form');
             modalForm.action = '/info/projects/' + project.id_pro;
@@ -988,14 +993,19 @@
             modalEndDateInput.value = project.end_date;
             modalBudgetInput.value = project.budget;
 
-            var moduleCheckboxes = modalForm.querySelectorAll('input[name="modules[]"]');
-            moduleCheckboxes.forEach(function(checkbox) {
-                checkbox.checked = false; // Deselect all checkboxes
-                project.modules.forEach(function(mod) {
-                    if (mod.id_mod == checkbox.value) {
-                        checkbox.checked = true;
-                    }
-                });
+            // Desmarcar todos los checkboxes primero
+            editProjectModal.querySelectorAll('input[name="modules[]"]').forEach(function(checkbox) {
+                checkbox.checked = false;
+            });
+
+            // Marcar los checkboxes de los módulos del proyecto
+            projectModules.forEach(function(moduleId) {
+                var checkbox = editProjectModal.querySelector(
+                    'input[name="modules[]"][value="' + moduleId +
+                    '"]');
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
             });
 
             var statusSelect = modalForm.querySelector('#edit_status');

@@ -293,7 +293,8 @@
                                                             data-project-progress="{{ $project->progress }}"
                                                             data-project-start_date="{{ $project->start_date }}"
                                                             data-project-end_date="{{ $project->end_date }}"
-                                                            data-project-budget="{{ $project->budget }}">
+                                                            data-project-budget="{{ $project->budget }}"
+                                                            data-project-modules="{{ $project->modules->pluck('id_mod') }}">
                                                             <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                                 width="24" height="24" fill="currentColor"
@@ -547,6 +548,7 @@
             var projectStartDate = button.getAttribute('data-project-start_date');
             var projectEndDate = button.getAttribute('data-project-end_date');
             var projectBudget = button.getAttribute('data-project-budget');
+            var projectModules = JSON.parse(button.getAttribute('data-project-modules'));
 
             var modalForm = editProjectModal.querySelector('form');
             modalForm.action = '/info/projects/' + projectId;
@@ -568,6 +570,22 @@
             modalStartDateInput.value = projectStartDate;
             modalEndDateInput.value = projectEndDate;
             modalBudgetInput.value = projectBudget;
+
+
+            // Desmarcar todos los checkboxes primero
+            editProjectModal.querySelectorAll('input[name="modules[]"]').forEach(function(checkbox) {
+                checkbox.checked = false;
+            });
+
+            // Marcar los checkboxes de los módulos del proyecto
+            projectModules.forEach(function(moduleId) {
+                var checkbox = editProjectModal.querySelector(
+                    'input[name="modules[]"][value="' + moduleId +
+                    '"]');
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+            });
         });
 
         // Toggle description visibility
