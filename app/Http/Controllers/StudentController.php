@@ -23,7 +23,7 @@ class StudentController extends Controller
             $sortField = 'id_stud';
         }
 
-        $students = Student::orderBy($sortField, $sortDirection)->paginate(10);
+        $students = Student::orderBy($sortField, $sortDirection);
 
         return view('modules.students.index', compact('students', 'sortField', 'sortDirection'));
     }
