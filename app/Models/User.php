@@ -11,6 +11,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 use App\Notifications\VerifyEmailNotification;
 use App\Notifications\ResetPasswordNotification;
+use Spatie\Permission\Models\Role;
 
 
 
@@ -70,5 +71,10 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id', 'role_id');
     }
 }
