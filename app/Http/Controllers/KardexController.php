@@ -156,11 +156,10 @@ class KardexController extends Controller
         return $pdf->download($pdfName);
     }
 
-
-    // public function exportExcel()
-    // {
-    //     $date = date('d-m-Y H:i:s');
-    //     $excelName = "Kardex {$date}.xlsx";
-    //     return Excel::download(new KardexExport, $excelName);
-    // }
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Kardex {$date}.xlsx";
+        return Excel::download(new KardexExport, $excelName);
+    }
 }
