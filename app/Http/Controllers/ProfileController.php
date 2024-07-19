@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use PragmaRX\Google2FA\Google2FA;
 
 class ProfileController extends Controller
@@ -18,23 +17,28 @@ class ProfileController extends Controller
 
     public function update(Request $request, User $user)
     {
+        Log::info('Datos de la solicitud para actualización de perfil:', $request->all());
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'last_name' => 'nullable|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'status' => 'nullable|boolean',
-            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'last_name' => 'required|string|max:255',
+            'phone' => ['nullable', 'regex:/^09[0-9]{8}$/'],
+            'about' => 'nullable|string|max:1000',
+        ], [
+            'name.required' => 'El nombre es obligatorio',
+            'name.string' => 'El nombre debe ser una cadena de caracteres',
+            'name.max' => 'El nombre no puede tener más de 255 caracteres',
+            'last_name.required' => 'El apellido es obligatorio',
+            'last_name.string' => 'El apellido debe ser una cadena de caracteres',
+            'last_name.max' => 'El apellido no puede tener más de 255 caracteres',
+            'phone.regex' => 'El número de teléfono debe ser un número ecuatoriano válido y comenzar con 09',
+            'about.string' => 'La descripción debe ser una cadena de caracteres',
+            'about.max' => 'La descripción no puede tener más de 1000 caracteres',
         ]);
 
-        $data = $request->except('profile_photo');
+        Log::info('Validación pasada para actualización de perfil');
 
-        if ($request->hasFile('profile_photo')) {
-            // Borrar la imagen anterior si existe
-            if ($user->profile_photo) {
-                Storage::delete('public/profile_photos/' . $user->profile_photo);
-            }
-            $data['profile_photo'] = $request->file('profile_photo')->store('users', 'public/profile_photos');
-        }
+        $data = $request->only('name', 'last_name', 'phone', 'about');
 
         // Actualizar la opción de autenticación de dos factores
         if ($request->has('two_factor_enabled')) {
@@ -46,6 +50,8 @@ class ProfileController extends Controller
         }
 
         $user->update($data);
+
+        Log::info('Perfil actualizado para el usuario', ['user_id' => $user->id]);
 
         return back()->with('success', 'Tu perfil ha sido actualizado.');
     }

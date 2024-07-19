@@ -23,6 +23,20 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email|max:255',
+            'password' => 'required|min:7|max:255',
+        ], [
+            'email.required' => 'El correo electrónico es obligatorio',
+            'email.email' => 'Debe ser una dirección de correo electrónico válida',
+            'email.max' => 'El correo electrónico no puede tener más de 255 caracteres',
+            'password.required' => 'La contraseña es obligatoria',
+            'password.min' => 'La contraseña debe tener al menos 7 caracteres',
+            'password.max' => 'La contraseña no puede tener más de 255 caracteres',
+        ]);
+
+         
+
         $credentials = $request->only('email', 'password');
         $rememberMe = $request->rememberMe ? true : false;
 
@@ -43,16 +57,6 @@ class LoginController extends Controller
             } else {
                 $redirectTo = '/';
             }
-
-            // // Verificar si el usuario tiene roles específicos
-            // if ($user->hasRole('administrador')) {
-            //     $redirectTo = '/dashboard';
-            // } elseif ($user->hasRole('auditor')) {
-            //     $redirectTo = '/audits';
-            // } else {
-            //     Auth::logout();
-            //     return redirect('/sign-in')->with('error', 'No tiene los permisos necesarios para acceder al sistema.');
-            // }
 
             if ($user->two_factor_enabled) {
                 $token = (new Google2FA)->generateSecretKey();
@@ -93,7 +97,9 @@ class LoginController extends Controller
 
     public function login2FA(Request $request, User $user)
     {
-        $request->validate(['code_verification' => 'required']);
+        $request->validate(['code_verification' => 'required'], [
+            'code_verification.required' => 'El código de verificación es obligatorio',
+        ]);
 
         logger()->info('User token_login:', ['token_login' => $user->token_login]);
         logger()->info('User entered code:', ['code_verification' => $request->code_verification]);
