@@ -21,6 +21,34 @@
                                     <p class="mb-0" style="color:#4a59a4!important;">O inicia sesión con tus
                                         credenciales</p>
                                 </div>
+                                <div class="text-center">
+                                    @if (session('status'))
+                                        <div class="mb-4 font-medium text-sm text-green-600">
+                                            {{ session('status') }}
+                                        </div>
+                                    @endif
+                                    @if (session('success'))
+                                        <div class="alert alert-success text-sm" role="alert">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
+                                    @if (session('error'))
+                                        <div class="alert alert-danger text-sm" role="alert">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
+                                    @error('message')
+                                        <div class="alert alert-danger text-sm" role="alert">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    @if (session('retry_after'))
+                                        <div id="countdown" class="alert alert-danger text-sm" role="alert">
+                                            Inténtalo de nuevo en <span
+                                                id="seconds">{{ session('retry_after') }}</span> segundos.
+                                        </div>
+                                    @endif
+                                </div>
                                 <div class="card-body">
                                     <form role="form" class="text-start" id="login-form" method="POST"
                                         action="{{ route('sign-in') }}">
@@ -30,9 +58,6 @@
                                             <input type="email" id="email" name="email" class="form-control"
                                                 placeholder="Ingresa tu Correo Electrónico" value="{{ old('email') }}"
                                                 aria-label="Email" aria-describedby="email-addon">
-                                            @error('email')
-                                                <span class="text-danger text-sm">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <label style="color:#4a59a4!important;">Contraseña</label>
                                         <div class="mb-3">
@@ -48,15 +73,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            @error('password')
-                                                <span class="text-danger text-sm">{{ $message }}</span>
-                                            @enderror
                                         </div>
-                                        @if ($errors->has('message'))
-                                            <div class="alert alert-danger text-sm" role="alert">
-                                                {{ $errors->first('message') }}
-                                            </div>
-                                        @endif
                                         <div class="d-flex align-items-center">
                                             <a href="{{ route('password.request') }}"
                                                 class="text-xs font-weight-bold ms-auto"
