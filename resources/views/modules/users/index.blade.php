@@ -27,11 +27,11 @@
                                         {{ session('success') }}
                                     </div>
                                 @endif
-                                @if (session('error'))
+                                {{-- @if (session('error'))
                                     <div class="alert alert-danger" role="alert" id="alert">
                                         {{ session('error') }}
                                     </div>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
 
