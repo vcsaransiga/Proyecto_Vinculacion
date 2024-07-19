@@ -25,19 +25,20 @@ class UserController extends Controller
         return view('modules.users.index', compact('users', 'roles', 'sortField', 'sortDirection'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/u',
+            'last_name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/u',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'status' => 'required|boolean',
             'roles' => 'required|array',
         ], [
             'name.required' => 'El nombre es obligatorio',
+            'name.regex' => 'El nombre no puede contener números',
             'last_name.required' => 'El apellido es obligatorio',
+            'last_name.regex' => 'El apellido no puede contener números',
             'email.required' => 'El correo electrónico es obligatorio',
             'email.email' => 'Debe ser una dirección de correo electrónico válida',
             'email.unique' => 'El correo electrónico ya está registrado',
@@ -54,6 +55,7 @@ class UserController extends Controller
     
         return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
     }
+    
 
     public function update(Request $request, User $user)
     {

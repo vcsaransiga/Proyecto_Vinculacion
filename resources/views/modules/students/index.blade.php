@@ -326,17 +326,35 @@
                         @csrf
                         <div class="mb-3">
                             <label for="card_id" class="form-label">Cédula</label>
-                            <input type="text" class="form-control" id="card_id" name="card_id" required>
+                            <input type="text" class="form-control" id="card_id" name="card_id" 
+                                   pattern="\d{10}" maxlength="10" 
+                                   title="La cédula debe tener exactamente 10 dígitos" required>
                         </div>
-                        <div id="validationMessage"></div>
+                        
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" name="name" 
+                                   pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ ]+" 
+                                   title="Solo se permiten letras" required>
                         </div>
+                        
                         <div class="mb-3">
                             <label for="last_name" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name">
+                            <input type="text" class="form-control" id="last_name" name="last_name" 
+                                   pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ ]+" 
+                                   title="Solo se permiten letras" required>
                         </div>
+                        
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Estado</label>
+                            <select class="form-control" id="status" name="status" required>
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
+                        
+                        <div id="validationMessage" class="text-danger"></div>
+                        
                         <div class="mb-3">
                             <label for="status" class="form-label">Estado</label>
                             <select class="form-control" id="status" name="status" required>
