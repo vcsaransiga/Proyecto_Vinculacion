@@ -72,6 +72,7 @@ class ItemController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
+            'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
         ]);
 
@@ -87,6 +88,7 @@ class ItemController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'date' => $request->date,
+            'price' => $request->price,
             'stock' => $request->stock,
         ]);
 
@@ -123,6 +125,7 @@ class ItemController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
+            'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
         ]);
 
@@ -133,6 +136,7 @@ class ItemController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'date' => $request->date,
+            'price' => $request->price,
             'stock' => $request->stock,
         ]);
 
@@ -176,22 +180,22 @@ class ItemController extends Controller
     {
         $items = Item::all();
         $date = date('d/m/Y H:i:s');
-    
+
         $data = [
             'title' => 'Registros de Ítems',
             'date' => $date,
             'items' => $items
         ];
-    
+
         $pdf = PDF::loadView('modules.items.pdf', $data);
-    
+
         // Formatear la fecha para que no contenga caracteres no permitidos en el nombre del archivo
         $formattedDate = date('Y-m-d_H-i-s');
         $pdfName = "Items_{$formattedDate}.pdf";
-    
+
         return $pdf->download($pdfName);
     }
-    
+
 
     // public function exportExcel()
     // {

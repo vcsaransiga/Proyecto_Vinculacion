@@ -66,6 +66,16 @@ class ResponsibleSeeder extends Seeder
             'role' => 'Sales Manager',
             'status' => false,
         ]);
-        
+
+        Responsible::create([
+            'id_responsible' => 'RESP-06',
+            'id_user' => '6',
+            'card_id' => '5678901234',
+            'name' => 'Alec',
+            'last_name' => 'Thompson',
+            'area' => 'Agricultura',
+            'role' => 'Docente',
+            'status' => true,
+        ]);
     }
 }

@@ -29,7 +29,7 @@ class ProjectSeeder extends Seeder
         ]);
 
         Project::create([
-            'id_pro' => 'PROJ-002',
+            'id_pro' => 'PROJ-0002',
             'id_responsible' => 'RESP-03',
             'name' => 'Cuyes',
             'description' => 'Proyecto de crianza de cuyes',
@@ -56,7 +56,7 @@ class ProjectSeeder extends Seeder
 
         Project::create([
             'id_pro' => 'PROJ-0004',
-            'id_responsible' => 'RESP-02',
+            'id_responsible' => 'RESP-06',
             'name' => 'Abonos',
             'description' => 'Proyecto de producción de abonos orgánicos',
             'status' => 'cancelled',
@@ -72,11 +72,24 @@ class ProjectSeeder extends Seeder
             'id_responsible' => 'RESP-05',
             'name' => 'Lacteos',
             'description' => 'Proyecto de producción de lácteos',
-            'status' => 'completed',
+            'status' => 'in_progress',
             'progress' => 65.25,
             'start_date' => '2022-11-10',
             'end_date' => '2024-12-10',
             'budget' => 150000.00,
+            // 'image' => 'assets/img/projects/bovinos.jpg',
+        ]);
+
+        Project::create([
+            'id_pro' => 'PROJ-0006',
+            'id_responsible' => 'RESP-06',
+            'name' => 'Abejas',
+            'description' => 'Proyecto de polinización',
+            'status' => 'in_progress',
+            'progress' => 10,
+            'start_date' => '2023-11-10',
+            'end_date' => '2024-12-10',
+            'budget' => 1500.00,
             // 'image' => 'assets/img/projects/bovinos.jpg',
         ]);
     }

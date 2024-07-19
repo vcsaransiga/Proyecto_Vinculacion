@@ -88,7 +88,7 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                             <a class="dropdown-item" href="{{ route('audits.pdf') }}"
                                                 id="pdf">PDF</a>
-                                            <a class="dropdown-item" href="#" id="xls">Excel</a>
+                                            <a class="dropdown-item" href="{{ route('audits.download-excel') }}" id="xls">Excel</a>
                                         </div>
                                     </div>
                                 </div>

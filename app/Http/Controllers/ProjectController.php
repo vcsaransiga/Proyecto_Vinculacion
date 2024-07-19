@@ -58,19 +58,24 @@ class ProjectController extends Controller
     {
         $projects = Project::with('responsible')->get();
 
-
         /** @var \App\Models\User */
         $user = Auth::user();
 
         if ($user->hasRole('jefe de proyecto')) {
             $responsible = Responsible::where('id_user', $user->id)->first();
-            $projects = Project::with('responsible')
-                ->where('id_responsible', $responsible->id_responsible)
-                ->get();
+
+            if ($responsible) {
+                $projects = Project::with('responsible')
+                    ->where('id_responsible', $responsible->id_responsible)
+                    ->get();
+            } else {
+                // Manejo de la situación cuando el usuario no está registrado en 'responsibles'
+                Auth::logout();
+                return redirect('/sign-in')->with('error', 'No estás registrado como responsable. Contacta con un administrador para que así se te puedan asignar proyectos.');
+            }
         } else {
             // Lógica para otros roles
-            $projects = Project::with('responsible')
-                ->get();
+            $projects = Project::with('responsible')->get();
         }
 
         $responsibles = Responsible::where('status', true)
@@ -78,6 +83,7 @@ class ProjectController extends Controller
             ->get();
 
         $modules = Module::where('status', true)->get();
+
         return view('modules.projects.list', compact('projects', 'responsibles', 'modules'));
     }
 
@@ -186,6 +192,7 @@ class ProjectController extends Controller
 
         return view('modules.projects.show', compact('project', 'responsibles', 'modules', 'items', 'categoriesItem', 'units', 'operationTypes', 'warehouses'));
     }
+
     public function edit($id)
     {
         $project = Project::findOrFail($id);
