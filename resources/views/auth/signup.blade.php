@@ -15,15 +15,17 @@
                         <div class="col-md-6">
                             <div class="position-absolute w-40 top-0 start-0 h-100 d-md-block d-none">
                                 <div class="oblique-image position-absolute d-flex fixed-top ms-auto h-100 z-index-0 bg-cover me-n8"
-                                    style="background-image:url('../assets/img/logoVertical.png'); background-position:center; background-size:100%; background-repeat: no-repeat;" >
+                                    style="background-image:url('../assets/img/logoVertical.png'); background-position:center; background-size:100%; background-repeat: no-repeat;">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 d-flex flex-column mx-auto">
                             <div class="card card-plain mt-8">
                                 <div class="card-header pb-0 text-left bg-transparent">
-                                    <h3 class="font-weight-black text-dark display-6" style="color:#4a59a4!important;">Registrate Aqui!</h3>
-                                    <p class="mb-0" style="color:#4a59a4!important;">Encantado de Conocerte! Por favor Ingresa tus datos.</p>
+                                    <h3 class="font-weight-black text-dark display-6" style="color:#4a59a4!important;">
+                                        Registrate Aqui!</h3>
+                                    <p class="mb-0" style="color:#4a59a4!important;">Encantado de Conocerte! Por favor
+                                        Ingresa tus datos.</p>
                                 </div>
                                 <div class="card-body">
                                     <form role="form" method="POST" action="sign-up">
@@ -55,7 +57,7 @@
                                                 <span class="text-danger text-sm">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <label style="color:#4a59a4!important;">Contraseña</label>
+                                        {{-- <label style="color:#4a59a4!important;">Contraseña</label>
                                         <div class="mb-3">
                                             <input type="password" id="password" name="password" class="form-control"
                                                 placeholder="Crea una contraseña" aria-label="Password"
@@ -63,17 +65,36 @@
                                             @error('password')
                                                 <span class="text-danger text-sm">{{ $message }}</span>
                                             @enderror
+                                        </div> --}}
+                                        <label style="color:#4a59a4!important;">Contraseña</label>
+                                        <div class="mb-3">
+                                            <div class="input-group">
+                                                <input type="password" id="password" name="password"
+                                                    value="{{ old('password') ? old('password') : '' }}"
+                                                    class="form-control" placeholder="Crea una contraseña"
+                                                    aria-label="Password" aria-describedby="password-addon">
+                                                @error('password')
+                                                    <span class="text-danger text-sm">{{ $message }}</span>
+                                                @enderror
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary mb-0" type="button"
+                                                        id="togglePassword">
+                                                        <i class="fas fa-eye" id="toggleIcon"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit"
-                                                class="btn btn-dark w-100 mt-4 mb-3"  style="background-color:#84be51!important; border-color:#84be51; ">Registrarse</button>
+                                            <button type="submit" class="btn btn-dark w-100 mt-4 mb-3"
+                                                style="background-color:#84be51!important; border-color:#84be51; ">Registrarse</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-xs mx-auto" style="color:#4a59a4!important;">
                                         Ya tienes una cuenta?
-                                        <a href="{{ route('sign-in') }}" class="text-dark font-weight-bold" style="color:#4a59a4!important;">Inicia Sesion</a>
+                                        <a href="{{ route('sign-in') }}" class="text-dark font-weight-bold"
+                                            style="color:#4a59a4!important;">Inicia Sesion</a>
                                     </p>
                                 </div>
                             </div>
@@ -83,5 +104,21 @@
             </div>
         </section>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#password');
+            const toggleIcon = document.querySelector('#toggleIcon');
 
+            togglePassword.addEventListener('click', function(e) {
+                // Cambiar el tipo de input
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+
+                // Cambiar el icono
+                toggleIcon.classList.toggle('fa-eye');
+                toggleIcon.classList.toggle('fa-eye-slash');
+            });
+        });
+    </script>
 </x-guest-layout>

@@ -44,7 +44,8 @@
                                     @enderror
                                     @if (session('retry_after'))
                                         <div id="countdown" class="alert alert-danger text-sm" role="alert">
-                                            Inténtalo de nuevo en <span id="seconds">{{ session('retry_after') }}</span> segundos.
+                                            Inténtalo de nuevo en <span
+                                                id="seconds">{{ session('retry_after') }}</span> segundos.
                                         </div>
                                     @endif
                                     {{-- @error('attempts')
@@ -54,35 +55,55 @@
                                     @enderror --}}
                                 </div>
                                 <div class="card-body">
-                                    <form role="form" class="text-start" id="login-form" method="POST" action="sign-in">
+                                    <form role="form" class="text-start" id="login-form" method="POST"
+                                        action="sign-in">
                                         @csrf
                                         <label style="color:#4a59a4!important;">Correo Electronico</label>
                                         <div class="mb-3">
-                                            <input type="email" id="email" name="email" class="form-control" placeholder="Ingresa tu Correo Electronico" value="{{ old('email') ? old('email') : '' }}" aria-label="Email" aria-describedby="email-addon">
+                                            <input type="email" id="email" name="email" class="form-control"
+                                                placeholder="Ingresa tu Correo Electronico"
+                                                value="{{ old('email') ? old('email') : '' }}" aria-label="Email"
+                                                aria-describedby="email-addon">
                                         </div>
                                         <label style="color:#4a59a4!important;">Contraseña</label>
                                         <div class="mb-3">
-                                            <input type="password" id="password" name="password" value="{{ old('password') ? old('password') : '' }}" class="form-control" placeholder="Contraseña" aria-label="Password" aria-describedby="password-addon">
+                                            <div class="input-group">
+                                                <input type="password" id="password" name="password"
+                                                    value="{{ old('password') ? old('password') : '' }}"
+                                                    class="form-control" placeholder="Contraseña" aria-label="Password"
+                                                    aria-describedby="password-addon">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary mb-0" type="button"
+                                                        id="togglePassword">
+                                                        <i class="fas fa-eye" id="toggleIcon"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <a href="{{ route('password.request') }}" class="text-xs font-weight-bold ms-auto" style="color:#4a59a4!important;">Olvide mi contraseña</a>
+                                            <a href="{{ route('password.request') }}"
+                                                class="text-xs font-weight-bold ms-auto"
+                                                style="color:#4a59a4!important;">Olvide mi contraseña</a>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-dark w-100 mt-4 mb-3" style="background-color:#84be51!important; border-color:#84be51;">Iniciar Sesion</button>
+                                            <button type="submit" class="btn btn-dark w-100 mt-4 mb-3"
+                                                style="background-color:#84be51!important; border-color:#84be51;">Iniciar
+                                                Sesion</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-xs mx-auto" style="color:#4a59a4!important;">
                                         No tienes una cuenta Aun?
-                                        <a href="{{ route('sign-up') }}" class="text-dark font-weight-bold" style="color:#4a59a4!important;">Registrarse Ahora </a>
+                                        <a href="{{ route('sign-up') }}" class="text-dark font-weight-bold"
+                                            style="color:#4a59a4!important;">Registrarse Ahora </a>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-center">
                             <div class="text-center">
-                                <img src="../assets/img/logoVertical.png" alt="Logo UEPS">
+                                <img src="../assets/img/logoVertical.png" class="mt-4" alt="Logo UEPS">
                             </div>
                         </div>
                     </div>
@@ -105,6 +126,24 @@
                     }
                 }, 1000);
             }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#password');
+            const toggleIcon = document.querySelector('#toggleIcon');
+
+            togglePassword.addEventListener('click', function(e) {
+                // Cambiar el tipo de input
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+
+                // Cambiar el icono
+                toggleIcon.classList.toggle('fa-eye');
+                toggleIcon.classList.toggle('fa-eye-slash');
+            });
         });
     </script>
 </x-guest-layout>
