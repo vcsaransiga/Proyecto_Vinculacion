@@ -58,6 +58,9 @@
                                             <input type="email" id="email" name="email" class="form-control"
                                                 placeholder="Ingresa tu Correo Electrónico" value="{{ old('email') }}"
                                                 aria-label="Email" aria-describedby="email-addon">
+                                            @error('email')
+                                                <span class="text-danger text-sm">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <label style="color:#4a59a4!important;">Contraseña</label>
                                         <div class="mb-3">
@@ -72,7 +75,15 @@
                                                         <i class="fas fa-eye" id="toggleIcon"></i>
                                                     </button>
                                                 </div>
+                                                @error('password')
+                                                    <span class="text-danger text-sm">{{ $message }}</span>
+                                                @enderror
                                             </div>
+                                            @if ($errors->has('message'))
+                                                <div class="alert alert-danger text-sm" role="alert">
+                                                    {{ $errors->first('message') }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <a href="{{ route('password.request') }}"
@@ -100,6 +111,7 @@
                                 <img src="../assets/img/logoVertical.png" alt="Logo UEPS">
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
