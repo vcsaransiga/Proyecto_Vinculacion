@@ -458,6 +458,54 @@
 
 
 <script>
+    function validarCedula(cedula) {
+        if (cedula.length !== 10 || isNaN(cedula)) return false;
+
+        var digito_region = parseInt(cedula.substring(0, 2), 10);
+        if (digito_region < 1 || digito_region > 24) return false;
+
+        var ultimo_digito = parseInt(cedula.substring(9, 10), 10);
+
+        var pares = parseInt(cedula.substring(1, 2), 10) +
+                    parseInt(cedula.substring(3, 4), 10) +
+                    parseInt(cedula.substring(5, 6), 10) +
+                    parseInt(cedula.substring(7, 8), 10);
+
+        var numero1 = parseInt(cedula.substring(0, 1), 10) * 2;
+        if (numero1 > 9) { numero1 -= 9; }
+        var numero3 = parseInt(cedula.substring(2, 3), 10) * 2;
+        if (numero3 > 9) { numero3 -= 9; }
+        var numero5 = parseInt(cedula.substring(4, 5), 10) * 2;
+        if (numero5 > 9) { numero5 -= 9; }
+        var numero7 = parseInt(cedula.substring(6, 7), 10) * 2;
+        if (numero7 > 9) { numero7 -= 9; }
+        var numero9 = parseInt(cedula.substring(8, 9), 10) * 2;
+        if (numero9 > 9) { numero9 -= 9; }
+
+        var impares = numero1 + numero3 + numero5 + numero7 + numero9;
+        var suma_total = pares + impares;
+
+        var primer_digito_suma = String(suma_total).substring(0, 1);
+        var decena = (parseInt(primer_digito_suma, 10) + 1) * 10;
+        var digito_validador = decena - suma_total;
+        if (digito_validador === 10) { digito_validador = 0; }
+
+        return digito_validador === ultimo_digito;
+    }
+
+        document.getElementById('createResponsibleForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Evita el envío del formulario
+
+        var cedula = document.getElementById('card_id').value.trim();
+        var messageElement = document.getElementById('validationMessage');
+
+        if (!validarCedula(cedula)) {
+            messageElement.textContent = 'La cédula es inválida.';
+            messageElement.className = 'form-text text-danger';
+        } });
+</script>
+
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         const totalRecords = {{ $responsibles->count() }};
         const tableId = 'table-responsibles';
