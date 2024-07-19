@@ -32,11 +32,11 @@
                                             {{ session('success') }}
                                         </div>
                                     @endif
-                                    @if (session('error'))
+                                    {{-- @if (session('error'))
                                         <div class="alert alert-danger text-sm" role="alert">
                                             {{ session('error') }}
                                         </div>
-                                    @endif
+                                    @endif --}}
                                     @error('message')
                                         <div class="alert alert-danger text-sm" role="alert">
                                             {{ $message }}
