@@ -41,40 +41,49 @@ use App\Models\Student;
             </div>
             <hr class="my-0">
             <div class="row">
-                @if(isset($projects) && count($projects) > 0)
-                <div class="position-relative overflow-hidden">
-                    <div class="swiper mySwiper mt-4 mb-2">
-                        <div class="swiper-wrapper">
-                            @foreach ($projects as $project)
-                            <div class="swiper-slide">
-                                <div>
-                                    <div class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
-                                        @php
-                                        $imageUrl = $project->image ? asset('storage/' . $project->image) : asset('storage/default.jpg');
-                                    @endphp
-                                    <div class="full-background bg-cover" style="background-image: url('{{ $imageUrl }}')"></div>
-                                        <div class="card-body text-start px-3 py-0 w-100">
-                                            <div class="row mt-12">
-                                                <div class="col-sm-3 mt-auto">
-                                                    <h4 class="text-dark font-weight-bolder" style="color: white !important;">#{{ $loop->iteration }}</h4>
-                                                    <p class="text-dark opacity-6 text-xs font-weight-bolder mb-0" style="color: white !important;">Nombre del Proyecto</p>
-                                                    <h5 class="text-dark font-weight-bolder" style="color: white !important;">{{ $project->name }}</h5>
-                                                </div> 
+                @if (isset($projects) && count($projects) > 0)
+                    <div class="position-relative overflow-hidden">
+                        <div class="swiper mySwiper mt-4 mb-2">
+                            <div class="swiper-wrapper">
+                                @foreach ($projects as $project)
+                                    <div class="swiper-slide">
+                                        <div>
+                                            <div
+                                                class="card card-background shadow-none border-radius-xl card-background-after-none align-items-start mb-0">
+                                                @php
+                                                    $imageUrl = $project->image
+                                                        ? asset('storage/' . $project->image)
+                                                        : asset('storage/default.jpg');
+                                                @endphp
+                                                <div class="full-background bg-cover"
+                                                    style="background-image: url('{{ $imageUrl }}')"></div>
+                                                <div class="card-body text-start px-3 py-0 w-100">
+                                                    <div class="row mt-12">
+                                                        <div class="col-sm-3 mt-auto">
+                                                            <h4 class="text-dark font-weight-bolder"
+                                                                style="color: white !important;">#{{ $loop->iteration }}
+                                                            </h4>
+                                                            <p class="text-dark opacity-6 text-xs font-weight-bolder mb-0"
+                                                                style="color: white !important;">Nombre del Proyecto</p>
+                                                            <h5 class="text-dark font-weight-bolder"
+                                                                style="color: white !important;">{{ $project->name }}
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
-                            @endforeach
                         </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
                     </div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
                 @else
-                <p class="font-weight-bold mb-0">Aún no se ha añadido ningún proyecto</p>
+                    <p class="font-weight-bold mb-0">Aún no se ha añadido ningún proyecto</p>
                 @endif
-                
+
             </div>
             <div class="row my-4">
                 <div class="col-xl-3 col-sm-6 mb-xl-0">
@@ -82,15 +91,18 @@ use App\Models\Student;
                         <div class="card-body text-start p-3 w-100">
                             <div
                                 class="icon icon-shape icon-sm bg-dark text-white text-center border-radius-sm d-flex align-items-center justify-content-center mb-3">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M3 4.75A2.75 2.75 0 015.75 2h3.086a2.75 2.75 0 012.06.96L11.682 4h6.568A2.75 2.75 0 0121 6.75v10.5A2.75 2.75 0 0118.25 20H5.75A2.75 2.75 0 013 17.25V4.75zM5.75 3.5A1.25 1.25 0 004.5 4.75v12.5c0 .69.56 1.25 1.25 1.25h12.5c.69 0 1.25-.56 1.25-1.25V6.75c0-.69-.56-1.25-1.25-1.25H11a1.25 1.25 0 01-.94-.44L8.75 3.5H5.75z" clip-rule="evenodd"/>
-                                </svg>                                
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M3 4.75A2.75 2.75 0 015.75 2h3.086a2.75 2.75 0 012.06.96L11.682 4h6.568A2.75 2.75 0 0121 6.75v10.5A2.75 2.75 0 0118.25 20H5.75A2.75 2.75 0 013 17.25V4.75zM5.75 3.5A1.25 1.25 0 004.5 4.75v12.5c0 .69.56 1.25 1.25 1.25h12.5c.69 0 1.25-.56 1.25-1.25V6.75c0-.69-.56-1.25-1.25-1.25H11a1.25 1.25 0 01-.94-.44L8.75 3.5H5.75z"
+                                        clip-rule="evenodd" />
+                                </svg>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Proyectos</p>
-                                        <h4 class="mb-2 font-weight-bold">{{Project::count();}}</h4>
+                                        <h4 class="mb-2 font-weight-bold">{{ Project::count() }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -102,15 +114,18 @@ use App\Models\Student;
                         <div class="card-body text-start p-3 w-100">
                             <div
                                 class="icon icon-shape icon-sm bg-dark text-white text-center border-radius-sm d-flex align-items-center justify-content-center mb-3">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h16a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V3zm2 2h14v14H5V5zm2.293 6.293a1 1 0 011.414 0l1.586 1.586 3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                </svg>                                
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M3 3a1 1 0 011-1h16a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V3zm2 2h14v14H5V5zm2.293 6.293a1 1 0 011.414 0l1.586 1.586 3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-2.293-2.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Tareas</p>
-                                        <h4 class="mb-2 font-weight-bold">{{Task::count();}}</h4>
+                                        <h4 class="mb-2 font-weight-bold">{{ Task::count() }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -122,16 +137,21 @@ use App\Models\Student;
                         <div class="card-body text-start p-3 w-100">
                             <div
                                 class="icon icon-shape icon-sm bg-dark text-white text-center border-radius-sm d-flex align-items-center justify-content-center mb-3">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M12 2a5 5 0 100 10 5 5 0 000-10zm-3 5a3 3 0 116 0 3 3 0 01-6 0z" clip-rule="evenodd"/>
-                                    <path fill-rule="evenodd" d="M12 12a7 7 0 00-7 7 .75.75 0 001.5 0 5.5 5.5 0 0111 0 .75.75 0 001.5 0 7 7 0 00-7-7z" clip-rule="evenodd"/>
-                                </svg>                         
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M12 2a5 5 0 100 10 5 5 0 000-10zm-3 5a3 3 0 116 0 3 3 0 01-6 0z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd"
+                                        d="M12 12a7 7 0 00-7 7 .75.75 0 001.5 0 5.5 5.5 0 0111 0 .75.75 0 001.5 0 7 7 0 00-7-7z"
+                                        clip-rule="evenodd" />
+                                </svg>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Usuarios</p>
-                                        <h4 class="mb-2 font-weight-bold">{{User::count();}}</h4>
+                                        <h4 class="mb-2 font-weight-bold">{{ User::count() }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -143,15 +163,18 @@ use App\Models\Student;
                         <div class="card-body text-start p-3 w-100">
                             <div
                                 class="icon icon-shape icon-sm bg-dark text-white text-center border-radius-sm d-flex align-items-center justify-content-center mb-3">
-                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M12 2L1 7l11 5 11-5-11-5zm0 2.236L18.764 7 12 9.764 5.236 7 12 4.236zM4.5 9.5l-2.236 1.118L12 16.5l9.736-5.882L19.5 9.5l-7.5 3.882L4.5 9.5zM12 18l-8.5 4v-3.5l8.5-3.5 8.5 3.5V22L12 18z" clip-rule="evenodd"/>
-                                </svg>                                                           
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M12 2L1 7l11 5 11-5-11-5zm0 2.236L18.764 7 12 9.764 5.236 7 12 4.236zM4.5 9.5l-2.236 1.118L12 16.5l9.736-5.882L19.5 9.5l-7.5 3.882L4.5 9.5zM12 18l-8.5 4v-3.5l8.5-3.5 8.5 3.5V22L12 18z"
+                                        clip-rule="evenodd" />
+                                </svg>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="w-100">
                                         <p class="text-sm text-secondary mb-1">Estudiantes</p>
-                                        <h4 class="mb-2 font-weight-bold">{{Student::count();}}</h4>
+                                        <h4 class="mb-2 font-weight-bold">{{ Student::count() }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -160,8 +183,8 @@ use App\Models\Student;
                 </div>
             </div>
             <div class="row my-2">
-                
-                <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
+
+                <div class="col-lg-6 col-md-8 mb-md-0 mb-4">
                     <div class="card shadow-xs border h-100">
                         <div class="card-header pb-0">
                             <h6 class="font-weight-semibold text-lg mb-0">Avance Por Proyecto</h6>
@@ -178,18 +201,18 @@ use App\Models\Student;
                                 <label class="btn btn-white px-3 mb-0" for="btnradio3">7 días</label>
                             </div> --}}
                         </div>
-                        <div class="card-body py-3" >
+                        <div class="card-body py-3">
                             <div class="chart mb-3" style="width: 100%; height:100%; ">
                                 <div style="width: 90%; height:100%; margin: auto;">
                                     <canvas id="projectProgressChart"></canvas>
                                 </div>
-                            
+
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         var ctx = document.getElementById('projectProgressChart').getContext('2d');
                                         var projectNames = @json($projects->pluck('name')).slice(0, 6);
                                         var projectProgress = @json($projects->pluck('progress')).slice(0, 6);
-                                    
+
                                         var chart = new Chart(ctx, {
                                             type: 'bar', // Puedes cambiar el tipo de gráfico aquí
                                             data: {
@@ -212,12 +235,12 @@ use App\Models\Student;
                                             }
                                         });
                                     });
-                                    </script>
-                                                               </div>
+                                </script>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <div class="card shadow-xs border">
                         <div class="card-header border-bottom pb-0">
                             <div class="d-sm-flex align-items-center mb-3">
@@ -225,9 +248,9 @@ use App\Models\Student;
                                     <h6 class="font-weight-semibold text-lg mb-0">Tareas Recientes</h6>
                                     <p class="text-sm mb-sm-0 mb-2">Estas son las tareas recientes</p>
                                 </div>
-                                
+
                             </div>
-                           
+
                         </div>
                         <div class="card-body px-0 py-0">
                             <div class="table-responsive p-0">
@@ -238,14 +261,15 @@ use App\Models\Student;
                                                 Tarea</th>
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
                                                 Avance</th>
-                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">Fecha
+                                            <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
+                                                Fecha
                                             </th>
                                             <th class="text-secondary text-xs font-weight-semibold opacity-7 ps-2">
                                                 Proyecto</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($tasks as $task)
+                                        @foreach ($tasks as $task)
                                             <tr>
                                                 <td>
                                                     <div class="d-flex px-2">
@@ -255,17 +279,20 @@ use App\Models\Student;
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <p class="text-sm font-weight-normal mb-0">{{ $task->percentage }}</p>
+                                                    <p class="text-sm font-weight-normal mb-0">{{ $task->percentage }}
+                                                    </p>
                                                 </td>
                                                 <td>
-                                                    <span class="text-sm font-weight-normal">{{ $task->end_date }}</span>
+                                                    <span
+                                                        class="text-sm font-weight-normal">{{ $task->end_date }}</span>
                                                 </td>
                                                 <td class="align-middle">
                                                     <div class="ms-2">
-                                                        <p class="text-dark text-sm mb-0">{{ $task->project->name }}</p>
+                                                        <p class="text-dark text-sm mb-0">{{ $task->project->name }}
+                                                        </p>
                                                     </div>
                                                 </td>
-                                                
+
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -274,7 +301,7 @@ use App\Models\Student;
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
     </main>
 
     <script src="{{ asset('js/breadcrumbs.js') }}"></script>
