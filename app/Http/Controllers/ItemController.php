@@ -197,10 +197,10 @@ class ItemController extends Controller
     }
 
 
-    // public function exportExcel()
-    // {
-    //     $date = date('d-m-Y H:i:s');
-    //     $excelName = "Ítems {$date}.xlsx";
-    //     return Excel::download(new ItemExport, $excelName);
-    // }
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Ítems {$date}.xlsx";
+        return Excel::download(new ItemExport, $excelName);
+    }
 }

@@ -130,16 +130,16 @@ class TaskController extends Controller
         ];
 
         $pdf = PDF::loadView('modules.tasks.pdf', $data)
-              ->setPaper('a4', 'landscape'); // Configurar el formato horizontal
+            ->setPaper('a4', 'landscape'); // Configurar el formato horizontal
         $pdfName = "Tareas - {$date}.pdf";
 
         return $pdf->download($pdfName);
     }
 
-    // public function exportExcel()
-    // {
-    //     $date = date('d-m-Y H:i:s');
-    //     $excelName = "Tareas {$date}.xlsx";
-    //     return Excel::download(new TaskExport, $excelName);
-    // }
+    public function exportExcel()
+    {
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Tareas {$date}.xlsx";
+        return Excel::download(new TaskExport, $excelName);
+    }
 }

@@ -178,17 +178,17 @@ use App\Models\Student;
                                 <label class="btn btn-white px-3 mb-0" for="btnradio3">7 días</label>
                             </div> --}}
                         </div>
-                        <div class="card-body py-3">
-                            <div class="chart mb-2">
-                                <div style="width: 80%; margin: auto;">
+                        <div class="card-body py-3" >
+                            <div class="chart mb-3" style="width: 100%; height:100%; ">
+                                <div style="width: 90%; height:100%; margin: auto;">
                                     <canvas id="projectProgressChart"></canvas>
                                 </div>
                             
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         var ctx = document.getElementById('projectProgressChart').getContext('2d');
-                                        var projectNames = @json($projects->pluck('name')).slice(0, 5);
-                                        var projectProgress = @json($projects->pluck('progress')).slice(0, 5);
+                                        var projectNames = @json($projects->pluck('name')).slice(0, 6);
+                                        var projectProgress = @json($projects->pluck('progress')).slice(0, 6);
                                     
                                         var chart = new Chart(ctx, {
                                             type: 'bar', // Puedes cambiar el tipo de gráfico aquí
