@@ -399,7 +399,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit user form
         var editUserModal = document.getElementById('editUserModal');
         editUserModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
@@ -416,7 +415,6 @@
             var modalLastNameInput = editUserModal.querySelector('#edit_last_name');
             var modalEmailInput = editUserModal.querySelector('#edit_email');
             var modalStatusInput = editUserModal.querySelector('#edit_status');
-            var modalRolesInput = editUserModal.querySelector('#edit_roles');
 
             modalNameInput.value = userName;
             modalLastNameInput.value = userLastName;
@@ -424,7 +422,8 @@
             modalStatusInput.value = userStatus;
 
             // Limpiar los roles seleccionados
-            modalRolesInput.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+            editUserModal.querySelectorAll('input[type="checkbox"][name="roles[]"]').forEach(function(
+                checkbox) {
                 checkbox.checked = false;
             });
 
@@ -433,7 +432,9 @@
                 .then(response => response.json())
                 .then(data => {
                     data.roles.forEach(function(role) {
-                        var roleCheckbox = document.getElementById('edit_role_' + role.id);
+                        var roleCheckbox = editUserModal.querySelector(
+                            'input[type="checkbox"][name="roles[]"][value="' + role +
+                            '"]');
                         if (roleCheckbox) {
                             roleCheckbox.checked = true;
                         }

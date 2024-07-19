@@ -71,4 +71,9 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    public function getUserRoles(User $user)
+    {
+        return response()->json(['roles' => $user->roles->pluck('name')->toArray()]);
+    }
 }
