@@ -326,35 +326,26 @@
                         @csrf
                         <div class="mb-3">
                             <label for="card_id" class="form-label">Cédula</label>
-                            <input type="text" class="form-control" id="card_id" name="card_id" 
-                                   pattern="\d{10}" maxlength="10" 
-                                   title="La cédula debe tener exactamente 10 dígitos" required>
+                            <input type="text" class="form-control" id="card_id" name="card_id"
+                                pattern="\d{10}" maxlength="10" title="La cédula debe tener exactamente 10 dígitos"
+                                required>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" name="name" 
-                                   pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ ]+" 
-                                   title="Solo se permiten letras" required>
+                            <input type="text" class="form-control" id="name" name="name"
+                                pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ ]+" title="Solo se permiten letras" required>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="last_name" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" 
-                                   pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ ]+" 
-                                   title="Solo se permiten letras" required>
+                            <input type="text" class="form-control" id="last_name" name="last_name"
+                                pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ ]+" title="Solo se permiten letras" required>
                         </div>
-                        
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Estado</label>
-                            <select class="form-control" id="status" name="status" required>
-                                <option value="1">Activo</option>
-                                <option value="0">Inactivo</option>
-                            </select>
-                        </div>
-                        
+
+
                         <div id="validationMessage" class="text-danger"></div>
-                        
+
                         <div class="mb-3">
                             <label for="status" class="form-label">Estado</label>
                             <select class="form-control" id="status" name="status" required>
@@ -524,20 +515,30 @@
         var ultimo_digito = parseInt(cedula.substring(9, 10), 10);
 
         var pares = parseInt(cedula.substring(1, 2), 10) +
-                    parseInt(cedula.substring(3, 4), 10) +
-                    parseInt(cedula.substring(5, 6), 10) +
-                    parseInt(cedula.substring(7, 8), 10);
+            parseInt(cedula.substring(3, 4), 10) +
+            parseInt(cedula.substring(5, 6), 10) +
+            parseInt(cedula.substring(7, 8), 10);
 
         var numero1 = parseInt(cedula.substring(0, 1), 10) * 2;
-        if (numero1 > 9) { numero1 -= 9; }
+        if (numero1 > 9) {
+            numero1 -= 9;
+        }
         var numero3 = parseInt(cedula.substring(2, 3), 10) * 2;
-        if (numero3 > 9) { numero3 -= 9; }
+        if (numero3 > 9) {
+            numero3 -= 9;
+        }
         var numero5 = parseInt(cedula.substring(4, 5), 10) * 2;
-        if (numero5 > 9) { numero5 -= 9; }
+        if (numero5 > 9) {
+            numero5 -= 9;
+        }
         var numero7 = parseInt(cedula.substring(6, 7), 10) * 2;
-        if (numero7 > 9) { numero7 -= 9; }
+        if (numero7 > 9) {
+            numero7 -= 9;
+        }
         var numero9 = parseInt(cedula.substring(8, 9), 10) * 2;
-        if (numero9 > 9) { numero9 -= 9; }
+        if (numero9 > 9) {
+            numero9 -= 9;
+        }
 
         var impares = numero1 + numero3 + numero5 + numero7 + numero9;
         var suma_total = pares + impares;
@@ -545,12 +546,14 @@
         var primer_digito_suma = String(suma_total).substring(0, 1);
         var decena = (parseInt(primer_digito_suma, 10) + 1) * 10;
         var digito_validador = decena - suma_total;
-        if (digito_validador === 10) { digito_validador = 0; }
+        if (digito_validador === 10) {
+            digito_validador = 0;
+        }
 
         return digito_validador === ultimo_digito;
     }
 
-    document.getElementById('createStudentForm').addEventListener('submit', function (event) {
+    document.getElementById('createStudentForm').addEventListener('submit', function(event) {
         var cedula = document.getElementById('card_id').value.trim();
         var messageElement = document.getElementById('validationMessage');
 
