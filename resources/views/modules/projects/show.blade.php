@@ -644,7 +644,8 @@
                             </div>
                             <div class="pt-4">
                                 <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                    data-bs-target="#createCategoryItemModal">Agregar Categoría</button>
+                                    data-bs-target="#createCategoryItemModal">Agregar
+                                    Categoría</button>
                             </div>
                         </div>
                         <div class="mb-3 d-flex">
@@ -914,6 +915,62 @@
                             <input type="number" class="form-control" id="edit_balance" name="balance" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Category Item Modal -->
+    <div class="modal fade" id="createCategoryItemModal" tabindex="-1"
+        aria-labelledby="createCategoryItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createCategoryItemModalLabel">Agregar categoría de ítem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createCategoryItemForm" method="POST" action="{{ route('categories_items.store') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Unit Modal -->
+    <div class="modal fade" id="createUnitModal" tabindex="-1" aria-labelledby="createUnitModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createUnitModalLabel">Agregar unidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="background-color: red"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createUnitForm" method="POST" action="{{ route('measurement_units.store') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="symbol" class="form-label">Unidad de medida</label>
+                            <input type="text" class="form-control" id="symbol" name="symbol" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
             </div>
