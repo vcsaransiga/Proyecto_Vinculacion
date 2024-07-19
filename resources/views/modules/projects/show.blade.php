@@ -381,7 +381,7 @@
                                     <p class="text-center">{{ $project->description }}</p>
                                 </div>
 
-                                <div id="recursos-content" class="tab-pane contents">
+                                {{-- <div id="recursos-content" class="tab-pane contents">
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
@@ -411,7 +411,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

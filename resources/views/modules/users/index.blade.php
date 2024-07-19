@@ -27,11 +27,11 @@
                                         {{ session('success') }}
                                     </div>
                                 @endif
-                                {{-- @if (session('error'))
+                                @if (session('error'))
                                     <div class="alert alert-danger" role="alert" id="alert">
                                         {{ session('error') }}
                                     </div>
-                                @endif --}}
+                                @endif
                             </div>
                         </div>
 
@@ -55,7 +55,7 @@
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
 
                                 <div class="d-flex flex-row justify-content-start">
-                                    {{-- <div class="dropdown mr-3">
+                                    <div class="dropdown mr-3">
                                         <button class="btn btn-info dropdown-toggle" type="button"
                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -66,7 +66,7 @@
                                                 id="deactivateSelected">Desactivar</a>
                                             <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="dropdown">
                                         <button class="btn btn-info dropdown-toggle" type="button"
                                             id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
