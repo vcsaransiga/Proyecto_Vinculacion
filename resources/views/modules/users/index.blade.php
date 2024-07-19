@@ -198,8 +198,7 @@
                                                     data-user-name="{{ $user->name }}"
                                                     data-user-last_name="{{ $user->last_name }}"
                                                     data-user-email="{{ $user->email }}"
-                                                    data-user-status="{{ $user->status }}"
-                                                    data-user-roles="{{ json_encode($user->roles->pluck('name')) }}">
+                                                    data-user-status="{{ $user->status }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="currentColor"
@@ -400,7 +399,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Logic to populate and handle the edit user form
         var editUserModal = document.getElementById('editUserModal');
         editUserModal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget;
@@ -409,8 +407,6 @@
             var userLastName = button.getAttribute('data-user-last_name');
             var userEmail = button.getAttribute('data-user-email');
             var userStatus = button.getAttribute('data-user-status');
-            var userRoles = JSON.parse(button.getAttribute('data-user-roles'));
-            console.log("ROLES" + userRoles);
 
             var modalForm = editUserModal.querySelector('form');
             modalForm.action = '/info/users/' + userId;
@@ -419,26 +415,31 @@
             var modalLastNameInput = editUserModal.querySelector('#edit_last_name');
             var modalEmailInput = editUserModal.querySelector('#edit_email');
             var modalStatusInput = editUserModal.querySelector('#edit_status');
-            var modalRolesInput = editUserModal.querySelector('#edit_roles');
 
             modalNameInput.value = userName;
             modalLastNameInput.value = userLastName;
             modalEmailInput.value = userEmail;
             modalStatusInput.value = userStatus;
 
-            // Desmarcar todos los checkboxes primero
-            editUserModal.querySelectorAll('input[name="roles[]"]').forEach(function(checkbox) {
+            // Limpiar los roles seleccionados
+            editUserModal.querySelectorAll('input[type="checkbox"][name="roles[]"]').forEach(function(
+                checkbox) {
                 checkbox.checked = false;
             });
 
-            // Marcar los checkboxes de los roles del usuario
-            userRoles.forEach(function(roleName) {
-                var checkbox = editUserModal.querySelector('input[name="roles[]"][value="' +
-                    roleName + '"]');
-                if (checkbox) {
-                    checkbox.checked = true;
-                }
-            });
+            // Obtener y marcar los roles del usuario
+            fetch('/info/users/' + userId + '/roles')
+                .then(response => response.json())
+                .then(data => {
+                    data.roles.forEach(function(role) {
+                        var roleCheckbox = editUserModal.querySelector(
+                            'input[type="checkbox"][name="roles[]"][value="' + role +
+                            '"]');
+                        if (roleCheckbox) {
+                            roleCheckbox.checked = true;
+                        }
+                    });
+                });
         });
     });
 

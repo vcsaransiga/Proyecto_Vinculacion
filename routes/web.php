@@ -322,6 +322,7 @@ Route::group(['middleware' => ['auth', 'verified', '2fa']], function () {
 
     // Rutas compartidas
     Route::get('/info/users/{user}/roles', [UserController::class, 'getUserRoles']);
+    Route::get('/users/{user}/roles', [UserController::class, 'getUserRoles'])->name('users.roles');
     Route::get('/profile', [ProfileController::class, 'index'])->name('users.profile')->middleware(['auth']);
     Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
 
