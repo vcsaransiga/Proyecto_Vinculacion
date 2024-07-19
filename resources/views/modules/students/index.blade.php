@@ -532,8 +532,8 @@
         return digito_validador === ultimo_digito;
     }
 
-    document.getElementById('cedulaForm').addEventListener('submit', function (event) {
-        var cedula = document.getElementById('cedula').value.trim();
+    document.getElementById('createStudentForm').addEventListener('submit', function (event) {
+        var cedula = document.getElementById('card_id').value.trim();
         var messageElement = document.getElementById('validationMessage');
 
         if (!validarCedula(cedula)) {
