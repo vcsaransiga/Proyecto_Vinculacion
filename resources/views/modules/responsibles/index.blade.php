@@ -320,6 +320,7 @@
                             <label for="card_id" class="form-label">Cédula</label>
                             <input type="text" class="form-control" id="card_id" name="card_id" required>
                         </div>
+                        <div id="validationMessage"></div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="name" name="name" required>
