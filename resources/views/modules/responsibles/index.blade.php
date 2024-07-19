@@ -494,16 +494,19 @@
         return digito_validador === ultimo_digito;
     }
 
-        document.getElementById('createResponsibleForm').addEventListener('submit', function (event) {
-        event.preventDefault(); // Evita el envío del formulario
-
+    document.getElementById('createResponsibleForm').addEventListener('submit', function (event) {
         var cedula = document.getElementById('card_id').value.trim();
         var messageElement = document.getElementById('validationMessage');
 
         if (!validarCedula(cedula)) {
+            event.preventDefault(); // Evita el envío del formulario si la cédula es inválida
             messageElement.textContent = 'La cédula es inválida.';
             messageElement.className = 'form-text text-danger';
-        } });
+        } else {
+            messageElement.textContent = ''; // Limpia el mensaje de error si la cédula es válida
+            messageElement.className = 'form-text text-muted';
+        }
+    });
 </script>
 
 <script>
