@@ -42,13 +42,14 @@ class ItemController extends Controller
                 $items = Item::whereIn('id_pro', $projectIds)->orderBy($sortField, $sortDirection)->get();
                 $projects = Project::whereIn('id_pro', $projectIds)->get();
             } else {
-                $items = collect(); // Empty collection if no responsible found
-                $projects = collect(); // Empty collection if no responsible found
+                $items = Item::all();
+                $projects = Project::all();
             }
         } else {
-            $items = Item::orderBy($sortField, $sortDirection)->get();
+            // $items = Item::orderBy($sortField, $sortDirection)->get();
+            $items = Item::all();
+            $projects = Project::all();
             $projectIds = $items->pluck('id_pro')->unique();
-            $projects = Project::whereIn('id_pro', $projectIds)->get();
         }
 
         $categories = CategoryItem::all();

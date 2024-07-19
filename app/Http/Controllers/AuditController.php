@@ -9,9 +9,9 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use App\Exports\AuditsExport;
+use App\Exports\DateAuditExport;
+use App\Exports\UsersAuditExport;
 use Maatwebsite\Excel\Facades\Excel;
-
-
 
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
@@ -92,5 +92,26 @@ class AuditController extends Controller
         $date = date('d-m-Y H:i:s');
         $excelName = "Registros_Auditoria_{$date}.xlsx";
         return Excel::download(new AuditsExport, $excelName);
+    }
+
+    public function exportUserExcel(Request $request)
+    {
+        $userId = $request->input('user_id');
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Registros_Usuario_{$userId} {$date}.xlsx";
+        return Excel::download(new UsersAuditExport($userId), $excelName);
+    }
+
+    public function exportByDate(Request $request)
+    {
+        $date = $request->input('date');
+        $audits = Audit::whereDate('created_at', $date)->get();
+
+        if ($audits->isEmpty()) {
+            // return redirect()->route('audits.index')->with(['error' => 'No hay registros de auditoría para la fecha seleccionada.']);
+            return redirect()->route('audits.index')->with('error', 'No hay registros de auditoría para la fecha seleccionada.');
+        }
+
+        return Excel::download(new DateAuditExport($date), 'Reporte Auditoria_' . $date . '.xlsx');
     }
 }

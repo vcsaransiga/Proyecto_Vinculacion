@@ -79,7 +79,7 @@
                                             <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
                                         </div>
                                     </div>
-                                    <div class="dropdown">
+                                    <div class="dropdown mr-3">
                                         <button class="btn btn-info dropdown-toggle" type="button"
                                             id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -88,7 +88,21 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                             <a class="dropdown-item" href="{{ route('audits.pdf') }}"
                                                 id="pdf">PDF</a>
-                                            <a class="dropdown-item" href="{{ route('audits.download-excel') }}" id="xls">Excel</a>
+                                            <a class="dropdown-item" href="{{ route('audits.download-excel') }}"
+                                                id="xls">Excel</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-info dropdown-toggle" type="button"
+                                            id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Reporte
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                            <a class="dropdown-item"data-toggle="modal" data-target="#exportModal"
+                                                id="userReport">Usuario</a>
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#dateModal"
+                                                id="dateReport">Fecha</a>
                                         </div>
                                     </div>
                                 </div>
@@ -201,6 +215,59 @@
                             <div id="newValues" class="json-view rounded bg-success p-2"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Reporte -->
+    <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Exportar Reporte de Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="exportForm" action="{{ route('audits.download-user-excel') }}" method="GET">
+                        <div class="form-group">
+                            <label for="userSelect">Selecciona un Usuario</label>
+                            <select class="form-control" id="userSelect" name="user_id">
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->email }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Exportar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para seleccionar la fecha -->
+    <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dateModalLabel">Exportar Reporte por Fecha</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="dateForm" action="{{ route('audits.export-by-date') }}" method="GET">
+                        <div class="form-group">
+                            <label for="dateSelect">Selecciona una Fecha</label>
+                            <input type="date" class="form-control" id="dateSelect" name="date" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Exportar</button>
+                    </form>
                 </div>
             </div>
         </div>
