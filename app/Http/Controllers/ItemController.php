@@ -46,9 +46,10 @@ class ItemController extends Controller
                 $projects = Project::all();
             }
         } else {
-            $items = Item::orderBy($sortField, $sortDirection)->get();
+            // $items = Item::orderBy($sortField, $sortDirection)->get();
+            $items = Item::all();
+            $projects = Project::all();
             $projectIds = $items->pluck('id_pro')->unique();
-            $projects = Project::whereIn('id_pro', $projectIds)->get();
         }
 
         $categories = CategoryItem::all();
