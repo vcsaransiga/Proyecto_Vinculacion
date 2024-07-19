@@ -68,6 +68,19 @@
                                             </div>
                                         </div>
                                     @endrole
+                                    
+                                    <div class="dropdown">
+                                        <button class="btn btn-info dropdown-toggle" type="button"
+                                            id="sortDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Ordenar por
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="sortDropdownMenuButton">
+                                            <a class="dropdown-item" href="?sort=created_at&direction=desc">Nuevos</a>
+                                            <a class="dropdown-item" href="?sort=created_at&direction=asc">Antiguos</a>
+
+                                        </div>
+                                    </div>
                                     <div class="dropdown">
                                         <button class="btn btn-info dropdown-toggle" type="button"
                                             id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
@@ -79,18 +92,6 @@
                                                 id="excel">PDF</a>
                                             <a class="dropdown-item" href="{{ route('items.download-excel') }}"
                                                 id="xls">Excel</a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <button class="btn btn-info dropdown-toggle" type="button"
-                                            id="sortDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Ordenar por
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="sortDropdownMenuButton">
-                                            <a class="dropdown-item" href="?sort=created_at&direction=desc">Nuevos</a>
-                                            <a class="dropdown-item" href="?sort=created_at&direction=asc">Antiguos</a>
-
                                         </div>
                                     </div>
                                 </div>

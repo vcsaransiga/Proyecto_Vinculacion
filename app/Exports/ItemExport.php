@@ -18,7 +18,7 @@ class ItemExport implements FromCollection, WithHeadings, WithStyles, ShouldAuto
      */
     public function collection()
     {
-        return Item::with('categoryItem', 'measurementUnit', 'project')->get(['id_item', 'name', 'description', 'date', 'stock', 'id_catitem', 'id_unit', 'id_pro']);
+        return Item::all(['id_item', 'id_catitem', 'id_unit', 'id_pro', 'name', 'description', 'date', 'stock']);
     }
 
     /**
@@ -30,13 +30,13 @@ class ItemExport implements FromCollection, WithHeadings, WithStyles, ShouldAuto
     {
         return [
             'ID Ítem',
+            'ID Categoría',
+            'ID Unidad',
+            'ID Proyecto',
             'Nombre',
             'Descripción',
             'Fecha',
             'Stock',
-            'Categoría',
-            'Unidad de Medida',
-            'Proyecto'
         ];
     }
 
