@@ -198,7 +198,8 @@
                                                     data-user-name="{{ $user->name }}"
                                                     data-user-last_name="{{ $user->last_name }}"
                                                     data-user-email="{{ $user->email }}"
-                                                    data-user-status="{{ $user->status }}">
+                                                    data-user-status="{{ $user->status }}"
+                                                    data-user-roles="{{ json_encode($user->roles->pluck('name')) }}">
                                                     <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" fill="currentColor"
@@ -408,6 +409,8 @@
             var userLastName = button.getAttribute('data-user-last_name');
             var userEmail = button.getAttribute('data-user-email');
             var userStatus = button.getAttribute('data-user-status');
+            var userRoles = JSON.parse(button.getAttribute('data-user-roles'));
+            console.log("ROLES" + userRoles);
 
             var modalForm = editUserModal.querySelector('form');
             modalForm.action = '/info/users/' + userId;
@@ -423,22 +426,19 @@
             modalEmailInput.value = userEmail;
             modalStatusInput.value = userStatus;
 
-            // Limpiar los roles seleccionados
-            modalRolesInput.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+            // Desmarcar todos los checkboxes primero
+            editUserModal.querySelectorAll('input[name="roles[]"]').forEach(function(checkbox) {
                 checkbox.checked = false;
             });
 
-            // Obtener y marcar los roles del usuario
-            fetch('/info/users/' + userId + '/roles')
-                .then(response => response.json())
-                .then(data => {
-                    data.roles.forEach(function(role) {
-                        var roleCheckbox = document.getElementById('edit_role_' + role.id);
-                        if (roleCheckbox) {
-                            roleCheckbox.checked = true;
-                        }
-                    });
-                });
+            // Marcar los checkboxes de los roles del usuario
+            userRoles.forEach(function(roleName) {
+                var checkbox = editUserModal.querySelector('input[name="roles[]"][value="' +
+                    roleName + '"]');
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+            });
         });
     });
 
