@@ -9,9 +9,8 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use App\Exports\AuditsExport;
+use App\Exports\UsersAuditExport;
 use Maatwebsite\Excel\Facades\Excel;
-
-
 
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
@@ -92,5 +91,13 @@ class AuditController extends Controller
         $date = date('d-m-Y H:i:s');
         $excelName = "Registros_Auditoria_{$date}.xlsx";
         return Excel::download(new AuditsExport, $excelName);
+    }
+
+    public function exportUserExcel(Request $request)
+    {
+        $userId = $request->input('user_id');
+        $date = date('d-m-Y H:i:s');
+        $excelName = "Registros_Usuario_{$userId} {$date}.xlsx";
+        return Excel::download(new UsersAuditExport($userId), $excelName);
     }
 }
