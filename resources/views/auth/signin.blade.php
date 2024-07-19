@@ -78,12 +78,13 @@
 
                                             </div>
 
-                                            @if ($errors->has('message'))
-                                                <div class="alert alert-danger text-sm" role="alert">
-                                                    {{ $errors->first('message') }}
-                                                </div>
-                                            @endif
+
                                         </div>
+                                        @if ($errors->has('message'))
+                                            <div class="alert alert-danger text-sm" role="alert">
+                                                {{ $errors->first('message') }}
+                                            </div>
+                                        @endif
                                         @error('password')
                                             <span class="text-danger text-sm">{{ $message }}</span>
                                         @enderror

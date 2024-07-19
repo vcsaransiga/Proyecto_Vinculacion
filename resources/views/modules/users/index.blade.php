@@ -55,7 +55,7 @@
                                 class="tw-flex tw-items-center tw-justify-between tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
 
                                 <div class="d-flex flex-row justify-content-start">
-                                    <div class="dropdown mr-3">
+                                    {{-- <div class="dropdown mr-3">
                                         <button class="btn btn-info dropdown-toggle" type="button"
                                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -66,7 +66,7 @@
                                                 id="deactivateSelected">Desactivar</a>
                                             <a class="dropdown-item" href="#" id="deleteSelected">Eliminar</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="dropdown">
                                         <button class="btn btn-info dropdown-toggle" type="button"
                                             id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
@@ -285,13 +285,15 @@
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" name="name" pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ ]+" title="Solo se permiten letras" required>
+                            <input type="text" class="form-control" id="name" name="name"
+                                pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ ]+" title="Solo se permiten letras" required>
                         </div>
                         <div class="mb-3">
                             <label for="last_name" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ ]+" title="Solo se permiten letras" required>
+                            <input type="text" class="form-control" id="last_name" name="last_name"
+                                pattern="[A-Za-záéíóúÁÉÍÓÚñÑüÜ ]+" title="Solo se permiten letras" required>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required>
