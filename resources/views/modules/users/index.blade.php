@@ -115,6 +115,17 @@
                                         </th>
                                         <th scope="col" class="tw-px-6 tw-py-3">
                                             <div class="tw-flex tw-items-center">
+                                                ID
+                                                <a
+                                                    href="?sort=id&direction={{ $sortField === 'id' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
+                                                    <img class="tw-w-5 tw-h-5 tw-ms-1.5" aria-hidden="true"
+                                                        src="{{ asset('assets/img/logos/up-down.svg') }}"
+                                                        viewBox="0 0 24 24">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th scope="col" class="tw-px-6 tw-py-3">
+                                            <div class="tw-flex tw-items-center">
                                                 Nombre
                                                 <a
                                                     href="?sort=name&direction={{ $sortField === 'name' && $sortDirection === 'asc' ? 'desc' : 'asc' }}">
@@ -173,6 +184,7 @@
                                                         value="{{ $user->id }}">
                                                 </div>
                                             </td>
+                                            <td class="tw-px-6 tw-py-4">{{ $user->id }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $user->name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $user->last_name }}</td>
                                             <td class="tw-px-6 tw-py-4">{{ $user->email }}</td>
