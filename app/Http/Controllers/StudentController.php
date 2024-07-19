@@ -6,6 +6,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use App\Models\Module;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentsExport;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -24,8 +25,9 @@ class StudentController extends Controller
         }
 
         $students = Student::orderBy($sortField, $sortDirection)->get();
+        $modules = Module::where('status', true)->get(); // Solo módulos activos
 
-        return view('modules.students.index', compact('students', 'sortField', 'sortDirection'));
+        return view('modules.students.index', compact('students', 'modules', 'sortField', 'sortDirection'));
     }
 
     public function store(Request $request)
@@ -57,7 +59,7 @@ class StudentController extends Controller
             }
         } while ($exists);
 
-        Student::create([
+        $student = Student::create([
             'id_stud' => $newId,
             'card_id' => $request->card_id,
             'name' => $request->name,
@@ -65,12 +67,17 @@ class StudentController extends Controller
             'status' => $request->status,
         ]);
 
+        // Sincronizar módulos seleccionados
+        $student->modules()->sync($request->modules);
+
         return redirect()->route('students.index')->with('success', 'Estudiante agregado correctamente.');
     }
 
 
     public function update(Request $request, $id_stud)
     {
+        $student = Student::findOrFail($id_stud);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'card_id' => 'required|string|max:10',
@@ -78,8 +85,11 @@ class StudentController extends Controller
             'status' => 'required|boolean',
         ]);
 
-        $student = Student::findOrFail($id_stud);
+
         $student->update($request->all());
+
+        // Sincronizar módulos seleccionados
+        $student->modules()->sync($request->modules);
 
         return redirect()->route('students.index')->with('success', 'Estudiante actualizado correctamente.');
     }

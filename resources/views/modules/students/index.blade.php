@@ -225,7 +225,8 @@
                                                         data-student-card_id="{{ $student->card_id }}"
                                                         data-student-name="{{ $student->name }}"
                                                         data-student-last_name="{{ $student->last_name }}"
-                                                        data-student-status="{{ $student->status }}">
+                                                        data-student-status="{{ $student->status }}"
+                                                        data-student-modules="{{ $student->modules->pluck('id_mod') }}">
                                                         <svg class="tw-w-6 tw-h-6 tw-text-gray-800 dark:tw-text-white"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" fill="currentColor"
@@ -342,6 +343,18 @@
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="modules" class="form-label">Módulos:</label>
+                            @foreach ($modules as $module)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $module->id_mod }}"
+                                        id="module{{ $module->id_mod }}" name="modules[]">
+                                    <label class="form-check-label" for="module{{ $module->id_mod }}">
+                                        {{ $module->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
                 </div>
@@ -383,6 +396,18 @@
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="edit_modules" class="form-label">Módulos:</label>
+                            @foreach ($modules as $module)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $module->id_mod }}"
+                                        id="edit_module{{ $module->id_mod }}" name="modules[]">
+                                    <label class="form-check-label" for="edit_module{{ $module->id_mod }}">
+                                        {{ $module->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
@@ -394,28 +419,41 @@
 </x-app-layout>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var editStudentModal = document.getElementById('editStudentModal');
-        editStudentModal.addEventListener('show.bs.modal', function(event) {
-            var button = event.relatedTarget;
-            var studentId = button.getAttribute('data-student-id');
-            var studentCardId = button.getAttribute('data-student-card_id');
-            var studentName = button.getAttribute('data-student-name');
-            var studentLastName = button.getAttribute('data-student-last_name');
-            var studentStatus = button.getAttribute('data-student-status');
+    var editStudentModal = document.getElementById('editStudentModal');
+    editStudentModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        var studentId = button.getAttribute('data-student-id');
+        var studentCardId = button.getAttribute('data-student-card_id');
+        var studentName = button.getAttribute('data-student-name');
+        var studentLastName = button.getAttribute('data-student-last_name');
+        var studentStatus = button.getAttribute('data-student-status');
+        var studentModules = JSON.parse(button.getAttribute('data-student-modules'));
 
-            var modalForm = editStudentModal.querySelector('form');
-            modalForm.action = '/info/students/' + studentId;
+        var modalForm = editStudentModal.querySelector('form');
+        modalForm.action = '/info/students/' + studentId;
 
-            var modalCardIdInput = editStudentModal.querySelector('#edit_card_id');
-            var modalNameInput = editStudentModal.querySelector('#edit_name');
-            var modalLastNameInput = editStudentModal.querySelector('#edit_last_name');
-            var modalStatusInput = editStudentModal.querySelector('#edit_status');
+        var modalCardIdInput = editStudentModal.querySelector('#edit_card_id');
+        var modalNameInput = editStudentModal.querySelector('#edit_name');
+        var modalLastNameInput = editStudentModal.querySelector('#edit_last_name');
+        var modalStatusInput = editStudentModal.querySelector('#edit_status');
 
-            modalCardIdInput.value = studentCardId;
-            modalNameInput.value = studentName;
-            modalLastNameInput.value = studentLastName;
-            modalStatusInput.value = studentStatus;
+        modalCardIdInput.value = studentCardId;
+        modalNameInput.value = studentName;
+        modalLastNameInput.value = studentLastName;
+        modalStatusInput.value = studentStatus;
+
+        // Desmarcar todos los checkboxes primero
+        editStudentModal.querySelectorAll('input[name="modules[]"]').forEach(function(checkbox) {
+            checkbox.checked = false;
+        });
+
+        // Marcar los checkboxes de los módulos del estudiante
+        studentModules.forEach(function(moduleId) {
+            var checkbox = editStudentModal.querySelector('input[name="modules[]"][value="' + moduleId +
+                '"]');
+            if (checkbox) {
+                checkbox.checked = true;
+            }
         });
     });
 </script>
