@@ -101,7 +101,7 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                             <a class="dropdown-item"data-toggle="modal" data-target="#exportModal"
                                                 id="userReport">Usuario</a>
-                                            <a class="dropdown-item" href="{{ route('audits.download-excel') }}"
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#dateModal"
                                                 id="dateReport">Fecha</a>
                                         </div>
                                     </div>
@@ -241,6 +241,30 @@
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Exportar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para seleccionar la fecha -->
+    <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dateModalLabel">Exportar Reporte por Fecha</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="dateForm" action="{{ route('audits.export-by-date') }}" method="GET">
+                        <div class="form-group">
+                            <label for="dateSelect">Selecciona una Fecha</label>
+                            <input type="date" class="form-control" id="dateSelect" name="date" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Exportar</button>
                     </form>
