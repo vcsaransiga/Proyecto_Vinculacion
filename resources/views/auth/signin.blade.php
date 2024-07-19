@@ -63,7 +63,7 @@
                                             @enderror
                                         </div>
                                         <label style="color:#4a59a4!important;">Contraseña</label>
-                                        <div class="mb-3">
+                                        <div class="mb-3 d-flex">
                                             <div class="input-group">
                                                 <input type="password" id="password" name="password"
                                                     value="{{ old('password') ? old('password') : '' }}"
@@ -75,16 +75,18 @@
                                                         <i class="fas fa-eye" id="toggleIcon"></i>
                                                     </button>
                                                 </div>
-                                                @error('password')
-                                                    <span class="text-danger text-sm">{{ $message }}</span>
-                                                @enderror
+
                                             </div>
+
                                             @if ($errors->has('message'))
                                                 <div class="alert alert-danger text-sm" role="alert">
                                                     {{ $errors->first('message') }}
                                                 </div>
                                             @endif
                                         </div>
+                                        @error('password')
+                                            <span class="text-danger text-sm">{{ $message }}</span>
+                                        @enderror
                                         <div class="d-flex align-items-center">
                                             <a href="{{ route('password.request') }}"
                                                 class="text-xs font-weight-bold ms-auto"
@@ -95,6 +97,7 @@
                                                 style="background-color:#84be51!important; border-color:#84be51;">Iniciar
                                                 Sesión</button>
                                         </div>
+
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
