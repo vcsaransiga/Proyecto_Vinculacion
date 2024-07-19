@@ -532,7 +532,7 @@
         return digito_validador === ultimo_digito;
     }
 
-    document.getElementById('createStudentForm').addEventListener('submit', function (event) {
+        document.getElementById('createStudentForm').addEventListener('submit', function (event) {
         event.preventDefault(); // Evita el envío del formulario
 
         var cedula = document.getElementById('card_id').value.trim();
@@ -545,7 +545,7 @@
             messageElement.textContent = 'La cédula es inválida.';
             messageElement.className = 'form-text text-danger';
         
-    });
+    }});
 </script>
 
 
