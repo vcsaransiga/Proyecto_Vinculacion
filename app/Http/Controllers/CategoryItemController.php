@@ -34,7 +34,7 @@ class CategoryItemController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->back()->with('success', 'Unidad de medida creada correctamente.');
+        return redirect()->back()->with('success', 'Categoría de item creada correctamente.');
     }
 
     public function update(Request $request, $id_catitem)
@@ -47,7 +47,7 @@ class CategoryItemController extends Controller
         $categoryItem = CategoryItem::findOrFail($id_catitem);
         $categoryItem->update($request->all());
 
-        return redirect()->route('categories_items.index')->with('success', 'Categoría de artículo actualizada correctamente.');
+        return redirect()->route('categories_items.index')->with('success', 'Categoría de item  actualizada correctamente.');
     }
 
     public function search(Request $request)
